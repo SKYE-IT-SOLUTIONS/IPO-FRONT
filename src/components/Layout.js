@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-    height: 5vh;
+    height: 10vh;
+    background-color:red;
 `;
 
 export const Main = styled.main`
-    min-height: 90vh;
+    min-height: 80vh;
     padding:8px;//add later
     display: flex;
     align-items: center;
