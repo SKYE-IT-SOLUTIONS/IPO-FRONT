@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from "styled-components";
 
-
 import { ThemeContext } from '../contexts/ThemeContext';
 import {Container,Row,Col,twitter,insta,fb,whatsapp,linkedin,youtube } from './CommonComponents'
 
@@ -25,7 +24,6 @@ export default function FooterContent() {
         padding:10px
     `
     
-
     return (
         <div>
             <Container style={{...containerStyle}}>
