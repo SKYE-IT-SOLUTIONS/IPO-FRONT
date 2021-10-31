@@ -6,7 +6,7 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-    min-height: 80vh;
+    min-height: 74vh;
     padding:8px;//add later
     display: flex;
     align-items: center;
@@ -15,7 +15,5 @@ export const Main = styled.main`
 
 export const Footer = styled.footer`
     display: flex;
-    justify-content: center;
-    padding: 1em;
-    border-top: 1px solid #ccc;
+    flex-direction:column;
 `;
