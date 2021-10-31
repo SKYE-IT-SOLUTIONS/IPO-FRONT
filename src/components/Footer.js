@@ -14,6 +14,13 @@ import {
   youtube,
 } from "./CommonComponents";
 
+const IconImage = styled.img`
+width:40px;
+height:40px;
+padding:10px;
+cursor: pointer;
+`
+
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
@@ -36,12 +43,6 @@ export default function FooterContent() {
     const footer = {
         fontFamily:`${fonts.general}`
     }
-    const IconImage = styled.img`
-        width:40px;
-        height:40px;
-        padding:10px;
-        cursor: pointer;
-    `
     
     return (
         <div style={{...footer}}>
