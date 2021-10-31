@@ -6,16 +6,18 @@ import {Container,Row,Col,twitter,insta,fb,whatsapp,linkedin,youtube } from './C
 
 export default function FooterContent() {
 
-    const { theme, light, dark } = useContext(ThemeContext);
+    const { theme, light, dark, fonts } = useContext(ThemeContext);
+    const them = theme ? light : dark;
 
     const contentRowStyle = {
-        background:`${theme ? light.f_c_bg : dark.f_c_bg}`,paddingTop:"10px",paddingBottom:"10px",fontWeight:"bold"
+        background:`${them.f_c_bg}`,paddingTop:"10px",paddingBottom:"10px",fontWeight:"bold", color:them.copyright
     }
     const iconRowStyle = {
-        background:`${theme ? light.f_ic_bg : dark.f_ic_bg}`
+        background:`${them.f_ic_bg}`,
     }
 
     const containerStyle = {
+        fontFamily:fonts.general,
         textAlign:"center",
     }
     const IconImage = styled.img`
@@ -40,7 +42,7 @@ export default function FooterContent() {
                     </Col>
                 </Row>
                 <Row  style={{...contentRowStyle}}>
-                    &copy; {new Date().getFullYear()} Copyright: <a style={{textDecoration:"none",color:"black"}}  href=" "> All rights reserved, Industrial Placement Office, Faculty of Agriculture, University of Ruhuna.</a>
+                    &copy; {new Date().getFullYear()} Copyright: <a style={{textDecoration:"none",color:them.syntax}}  href=" "> All rights reserved, Industrial Placement Office, Faculty of Agriculture, University of Ruhuna.</a>
                 </Row>
             </Container>
         </div>

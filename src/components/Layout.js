@@ -6,7 +6,7 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-    min-height: 74vh;
+    min-height: 79vh;
     padding:8px;//add later
     display: flex;
     align-items: center;
