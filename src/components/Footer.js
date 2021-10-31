@@ -11,7 +11,7 @@ export default function FooterContent() {
     const them = theme ? light : dark;
 
     const contentRowStyle = {
-        background:`${them.f_c_bg}`,paddingTop:"10px",paddingBottom:"10px",fontWeight:"bold", color:them.copyright
+        background:`${them.f_c_bg}`,padding:"10px",fontWeight:"bold", color:them.copyright
     }
     const iconRowStyle = {
         background:`${them.f_ic_bg}`,
@@ -24,10 +24,10 @@ export default function FooterContent() {
     const IconImage = styled.img`
         width:24px;
         height:24px;
-        padding:10px
+        padding:10px;
+        cursor: pointer;
     `
     
-
     return (
         <div>
             <Container style={{...containerStyle}}>
