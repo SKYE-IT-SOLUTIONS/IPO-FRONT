@@ -1,3 +1,3 @@
-export const signinUser= ({data})=>{
-    
+export const signInUser= ({data})=>{
+
 } 
