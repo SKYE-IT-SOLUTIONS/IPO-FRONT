@@ -19,6 +19,8 @@ export default function FooterContent() {
   const them = theme ? light : dark;
 
   const contentRowStyle = {
+    flexDirection:"row",
+    justifyContent:"center",
     background: `${them.f_c_bg}`,
     padding : "10px",
     fontWeight: "bold",
@@ -26,23 +28,24 @@ export default function FooterContent() {
   };
   
   const iconRowStyle = {
+        flexDirection:"row",
+        justifyContent:"center",
         background:`${them.f_ic_bg}`,
     }
 
-    const containerStyle = {
-        fontFamily:fonts.general,
-        textAlign:"center",
+    const footer = {
+        fontFamily:`${fonts.general}`
     }
     const IconImage = styled.img`
-        width:24px;
-        height:24px;
+        width:40px;
+        height:40px;
         padding:10px;
         cursor: pointer;
     `
     
     return (
-        <div>
-            <Container style={{...containerStyle}}>
+        <div style={{...footer}}>
+            <Container fluid>
                 <Row>
                     <Col>
                         <Row style={{...iconRowStyle}}>
@@ -55,9 +58,9 @@ export default function FooterContent() {
                         </Row>
                     </Col>
                 </Row>
-                <Row  style={{...contentRowStyle}}>
-                    &copy; {new Date().getFullYear()} Copyright: <a style={{textDecoration:"none",color:them.syntax}}  href=" "> All rights reserved, Industrial Placement Office, Faculty of Agriculture, University of Ruhuna.</a>
-                </Row>
+            </Container>
+            <Container fluid style={{...contentRowStyle}}>
+                &copy; {new Date().getFullYear()} Copyright: <a style={{textDecoration:"none",color:them.syntax}}  href=" "> All rights reserved, Industrial Placement Office, Faculty of Agriculture, University of Ruhuna.</a>
             </Container>
         </div>
     )
