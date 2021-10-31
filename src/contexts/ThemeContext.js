@@ -9,6 +9,7 @@ function ThemeContextProvider(props) {
   const dark = { syntax: "#fff", ui: "#333", bg: "#555", color: "blue", f_ic_bg:"#212529", f_c_bg:"#000", copyright:"#ffffff99" };
   const fonts = { general:"'Quicksand',sans-serif" };
 
+
   const toggleTheme = () => {
     setisLightTheme(!isLightTheme);
   };
@@ -19,7 +20,7 @@ function ThemeContextProvider(props) {
         theme: isLightTheme,
         light: light,
         dark: dark,
-        fonts: fonts,
+        fonts:fonts,
         toggleTheme: toggleTheme,
       }}
     >

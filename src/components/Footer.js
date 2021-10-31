@@ -1,19 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-
-import { ThemeContext } from '../contexts/ThemeContext';
-import {Container,Row,Col,twitter,insta,fb,whatsapp,linkedin,youtube } from './CommonComponents'
+import { ThemeContext } from "../contexts/ThemeContext";
+import {
+  Container,
+  Row,
+  Col,
+  twitter,
+  insta,
+  fb,
+  whatsapp,
+  linkedin,
+  youtube,
+} from "./CommonComponents";
 
 export default function FooterContent() {
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const them = theme ? light : dark;
 
-    const { theme, light, dark, fonts } = useContext(ThemeContext);
-    const them = theme ? light : dark;
-
-    const contentRowStyle = {
-        background:`${them.f_c_bg}`,padding:"10px",fontWeight:"bold", color:them.copyright
-    }
-    const iconRowStyle = {
+  const contentRowStyle = {
+    background: `${them.f_c_bg}`,
+    padding : "10px",
+    fontWeight: "bold",
+    color: them.copyright,
+  };
+  
+  const iconRowStyle = {
         background:`${them.f_ic_bg}`,
     }
 
