@@ -10,7 +10,7 @@ export const getRequest = async (uri) => {
    } catch (error) {
       return {
          data: null,
-         error: error,
+         error: error.response ? error.response:error,
       };
    }
 };
@@ -26,7 +26,7 @@ export const putRequest = async (uri, data) => {
    } catch (error) {
       return {
          data: null,
-         error: error,
+         error: error.response ? error.response:error,
       };
    }
 };
@@ -42,7 +42,7 @@ export const deleteRequest = async (uri) => {
    } catch (error) {
       return {
          data: null,
-         error: error,
+         error: error.response ? error.response:error,
       };
    }
 };
@@ -58,7 +58,7 @@ export const postRequest = async (uri, data) => {
    } catch (error) {
       return {
          data: null,
-         error: error,
+         error: error.response ? error.response:error ,
       };
    }
 };
@@ -66,7 +66,6 @@ export const postRequest = async (uri, data) => {
 export const authRequest = async (config) => {
    try {
       let response = await axios(config);
-
       return {
          data: response,
          error: null,
@@ -74,7 +73,11 @@ export const authRequest = async (config) => {
    } catch (error) {
       return {
          data: null,
-         error: error,
+         error: error.response ? error.response:error,
       };
    }
 };
+
+export const getErrorMessage = (error) => {
+   return error.data ? error.data.fieldsErrors[0].userMessage : error.message;
+}

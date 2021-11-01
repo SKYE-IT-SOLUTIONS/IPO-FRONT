@@ -1,44 +1,59 @@
-import { authRequest } from "./utils";
-import { getAccessToken,getRefreshToken,setAccessToken,getUserId, setRefreshToken } from './tokensAPI'
+import { authRequest, getErrorMessage, postRequest } from "./utils";
+import { getAccessToken,setAccessToken,getUserId, setRefreshToken, setUserId, refreshAccessToken } from './tokensAPI'
 
 
 const LOGIN_URL = "/auth/signin";
 const LOGOUT_URL = "/auth/logout";
 const ACCESS_URL = "/auth/access";
-const REFRESH_URL = "/auth/refresh";
+const REFRESH_URL = "/auth/refreshtoken";
 
-export const loginIn= (data) => {
-    authRequest(LOGIN_URL, data)
+var result = { status: false, error: null};//global variable declared
+
+export const loginIn= async (credentials) => {
+    // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
+    await postRequest(LOGIN_URL,credentials).then(({data,error}) => {
+        if(!error){
+            const {token, refreshToken,id} = data.data;
+            setAccessToken(token);
+            setRefreshToken(refreshToken);
+            setUserId(id)
+            console.log("login success")
+            result =  {status:true, error:null};
+        }else{
+            result = {status:false, error:getErrorMessage(error)};
+        }
+      }).catch(error=>{
+        console.log("error "+error)
+        result = {status:false, error:getErrorMessage(error)};
+      });
+      return result;
 };
 
-export const logOut = (id) =>{
-    console.log("onLogout Triggered");
+export const logOut = async (id) =>{
     const userId = getUserId("userid")
-    console.log(userId)
     var config = {
         method: 'POST',
         url: LOGOUT_URL+`/${userId}`,
       };
-    authRequest(config)
+    await authRequest(config)
       .then(({data,error}) => {
         if (!error && data.status === 200) {
             console.log("logged out");
             setAccessToken(null);
             setRefreshToken(null);
-            return {status:true, error:null};
+            setUserId(null);
+            result =  {status:true, error:null};
         }else{
-            console.log("error "+error)
-            return {status:false, error:error};
+            result = {status:false, error:getErrorMessage(error)};
         }
       })
       .catch((error) => {
-        console.log(error);
-        return {status:false, error:error};
-      });
+        result = {status:false, error:getErrorMessage(error)};
+    });
+    return result;
 };
 
-export const isUser = () => {
-    var result = { user: false, error: null};
+export const isUser = async () => {
     var config = {
               method: "POST",
               url:ACCESS_URL,
@@ -48,9 +63,7 @@ export const isUser = () => {
               },
             };
 
-    authRequest(config).then( ({data,error}) => {
-        
-        console.log("response " +data)
+    await authRequest(config).then(async({data,error}) => { 
 
         if(!error){
             if(data.status === 200){
@@ -60,40 +73,27 @@ export const isUser = () => {
             }
 
         }else{
-            console.log()
-            if(parseInt(error.message.slice(-3,)) === 401){
-                console.log("Access Token Expired")
-                var d = JSON.stringify({
-                    "refreshToken": getRefreshToken()
-                  });
-                  
-                var config = {
-                method: 'POST',
-                url: REFRESH_URL,
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                data : d
-                };
-                authRequest(config)
-                    .then(({data}) =>{
-                        const { accessToken } = data.data;
-                        setAccessToken(accessToken);
-                        isUser();
-                    }).catch((error)=>{
-                        result = { status: false, error: error };
-                    })
+            if(error.status === 401){
+                // console.log("Access Token Expired")
+                const { status, error } = await refreshAccessToken(REFRESH_URL,postRequest);
+                if(status){
+                    result = await isUser()
+                }else{
+                    result = { status:status, error:getErrorMessage(error) };
+                }
+            }else{
+                result = { status:false, error:getErrorMessage(error) };
             }
         }
     }
     ).catch((error) =>{
         console.log("error " +error)
-        result = { status: false, error: error };
-    }).finally(() =>{
-        console.log(result)
-        return result;
+        result = { status: false, error: getErrorMessage(error) };
     })
+    return result;
+}//must await for the result
+
+export const testing = async() =>{
+    result = await logOut();
+    console.log(result)
 }
-
-
-
