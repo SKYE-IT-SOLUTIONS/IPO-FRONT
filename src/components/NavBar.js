@@ -119,7 +119,7 @@ function NavBar() {
       id="bg-custom-2"
       variant="dark"
       expand="md"
-      navColr={current_theme.ui}
+      navColor={current_theme.ui}
       navFont={fonts.general}
     >
       <Container fluid>
