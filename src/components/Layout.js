@@ -2,12 +2,8 @@ import styled from "styled-components";
 
 
 export const Header = styled.header`
-<<<<<<< HEAD
-    min-height: 10vh;
-=======
     height: 10vh;
     // background:red;
->>>>>>> main
 `;
 
 export const Main = styled.main`
