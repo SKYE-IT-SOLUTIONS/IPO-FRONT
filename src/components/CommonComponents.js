@@ -2,6 +2,7 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Navbar from "react-bootstrap/Navbar";
 
 //assets
 import twitter from "../assets/twitter.png" ;
@@ -12,5 +13,5 @@ import linkedin from "../assets/linkedin.png" ;
 import youtube from "../assets/youtube.png" ;
 
 
-export  {Container,Row,Col};
+export  {Container,Row,Col,Navbar};
 export {twitter,insta,fb,whatsapp,linkedin,youtube};

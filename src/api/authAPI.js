@@ -94,6 +94,6 @@ export const isUser = async () => {
 }//must await for the result
 
 export const testing = async() =>{
-    result = await loginIn({username:"supun97", password:"qweasdzxc"});
+    result = await logOut({username:"supun97",password:"qweasdzxc"});
     console.log(result)
 }

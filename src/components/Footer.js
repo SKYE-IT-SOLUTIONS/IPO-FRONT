@@ -15,15 +15,15 @@ import {
 } from "./CommonComponents";
 
 const IconImage = styled.img`
-width:40px;
-height:40px;
-padding:10px;
-cursor: pointer;
+    width:40px;
+    height:40px;
+    padding:10px;
+    cursor: pointer;
 `
 
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const them = theme ? light : dark;
+  const them = theme ? light.footer : dark.footer;
 
   const contentRowStyle = {
     flexDirection:"row",
