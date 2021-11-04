@@ -88,9 +88,9 @@ const CustomDiv = styled.div`
 const AnimatedText = styled.span`
   font-weight: 700;
   text-align: center;
-  font-family: Hack, sans-serif;
+  font-family: ${({ fontsAnim }) => fontsAnim};
   text-transform: uppercase;
-  background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+  background: ${({ bg }) => bg};
   letter-spacing: 5px;
   -webkit-background-clip: text;
   background-clip: text;
@@ -160,11 +160,8 @@ export default function TopLogoBar() {
             </table>
           </div>
           <div>
-            <AnimatedText>
+            <AnimatedText bg={them.topNavAnim} fontsAnim={fonts.topLogAnim}>
               <span>Faculty Of Agriculture</span>
-            {/* </AnimatedText>
-         
-            <AnimatedText> */}
                <br />
               <span>University Of Ruhuna</span>
             </AnimatedText>
