@@ -37,7 +37,6 @@ const NotFound = () => {
         style={{ padding: "auto", height: "450px" }}
         src={NoFound}
       />
-      <Title fontFamily={fonts.general}>404!</Title>
       <Subtitle color={them.syntax} fontFamily={fonts.general}>
         The page you are look in for doesn't exist.
       </Subtitle>

@@ -119,8 +119,8 @@ function NavBar() {
       id="bg-custom-2"
       variant="dark"
       expand="md"
-      navcolr={current_theme.ui}
-      navfont={fonts.general}
+      navColr={current_theme.ui}
+      navFont={fonts.general}
     >
       <Container fluid>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

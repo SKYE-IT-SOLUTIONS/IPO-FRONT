@@ -1,6 +1,6 @@
 // third party imports
 import React from "react";
-import NavBar from "./components/NavBar"
+import NavBar from "./components/NavBar";
 
 //in app imports-presentational
 import { Header, Main, Footer } from "./components/Layout";
@@ -12,24 +12,25 @@ import AuthContextProvider from "./contexts/AuthContext";
 import { testing } from "./api/authAPI";
 import Button from "@restart/ui/esm/Button";
 import NotFound from "./containers/404";
+import TopLogoBar from "./components/TopLogoBar";
 
 function App() {
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
         <Header>
-          <NavBar/>
+          <TopLogoBar />
+          <NavBar />
         </Header>
         <Main>
-          {/* <Button onClick={testing}>Pressed</Button>
-          <NotFound/> */}
+          <Button onClick={testing}>Pressed</Button>
+          <NotFound />
         </Main>
         <Footer>
-          <FooterContent/>
+          <FooterContent />
         </Footer>
       </ThemeContextProvider>
     </AuthContextProvider>
-    
   );
 }
 
