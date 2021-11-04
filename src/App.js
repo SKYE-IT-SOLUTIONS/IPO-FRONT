@@ -12,6 +12,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import { testing } from "./api/authAPI";
 import Button from "@restart/ui/esm/Button";
 import NotFound from "./containers/404";
+import TopLogoBar from "./components/TopLogoBar";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     <AuthContextProvider>
       <ThemeContextProvider>
         <Header>
+        <TopLogoBar/>
         </Header>
         <Main>
           <Button onClick={testing}>Pressed</Button>
