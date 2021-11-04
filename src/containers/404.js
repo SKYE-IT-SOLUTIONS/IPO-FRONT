@@ -25,16 +25,21 @@ const Subtitle = styled.div`
   margin-top: 0;
 `;
 
+const StyledImg =styled.img`
+  padding: auto;
+   height: 450px;
+   width: 100%
+`
+
 const NotFound = () => {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
 
   return (
     <FluidContainer>
-      <img
+      <StyledImg
         alt=""
         className="mt-4"
-        style={{ padding: "auto", height: "450px" }}
         src={NoFound}
       />
       <Subtitle color={them.syntax} fontFamily={fonts.general}>
