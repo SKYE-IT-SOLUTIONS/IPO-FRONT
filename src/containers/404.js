@@ -27,8 +27,8 @@ const Subtitle = styled.div`
 
 const StyledImg =styled.img`
   padding: auto;
-   height: 450px;
-   width: 100%
+  height: 450px;
+  width: 100%
 `
 
 const NotFound = () => {
