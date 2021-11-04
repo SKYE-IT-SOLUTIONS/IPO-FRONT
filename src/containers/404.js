@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useContext } from "react";
 
-import NoFound from "../assets/404-Illustration.png";
+import NoFound from "../assets/404 Error.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const FluidContainer = styled.div`
@@ -25,19 +25,23 @@ const Subtitle = styled.div`
   margin-top: 0;
 `;
 
+const StyledImg =styled.img`
+  padding: auto;
+   height: 450px;
+   width: 100%
+`
+
 const NotFound = () => {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
 
   return (
     <FluidContainer>
-      <img
+      <StyledImg
         alt=""
         className="mt-4"
-        style={{ padding: "auto", height: "300px" }}
         src={NoFound}
       />
-      <Title fontFamily={fonts.general}>404!</Title>
       <Subtitle color={them.syntax} fontFamily={fonts.general}>
         The page you are look in for doesn't exist.
       </Subtitle>
