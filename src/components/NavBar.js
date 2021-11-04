@@ -10,8 +10,8 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const CustomNavBar = styled(Navbar)`
-  background: ${({ navcolr }) => navcolr};
-  font-family: ${({ navfont }) => navfont};
+  background: ${({ navColr }) => navColr};
+  font-family: ${({ navFont }) => navFont};
 `;
 
 const NavTitle = styled.span`
@@ -119,8 +119,8 @@ function NavBar() {
       id="bg-custom-2"
       variant="dark"
       expand="md"
-      navcolr={current_theme.ui}
-      navfont={fonts.general}
+      navColr={current_theme.ui}
+      navFont={fonts.general}
     >
       <Container fluid>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

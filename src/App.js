@@ -21,8 +21,8 @@ function App() {
           <NavBar/>
         </Header>
         <Main>
-          {/* <Button onClick={testing}>Pressed</Button>
-          <NotFound/> */}
+          <Button onClick={testing}>Pressed</Button>
+          <NotFound/>
         </Main>
         <Footer>
           <FooterContent/>
