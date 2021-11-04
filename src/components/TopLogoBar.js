@@ -90,7 +90,7 @@ const AnimatedText = styled.span`
   text-align: center;
   font-family: Hack, sans-serif;
   text-transform: uppercase;
-  background: linear-gradient(30deg, #000, #fff, #000);
+  background: linear-gradient(30deg, #000, #8e9eab, #eef2f3);
   letter-spacing: 5px;
   -webkit-background-clip: text;
   background-clip: text;
