@@ -10,8 +10,8 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const CustomNavBar = styled(Navbar)`
-  background: ${({ navcolr }) => navcolr};
-  font-family: ${({ navfont }) => navfont};
+  background: ${({ navColor }) => navColor};
+  font-family: ${({ navFont }) => navFont};
 `;
 
 const NavTitle = styled.span`
