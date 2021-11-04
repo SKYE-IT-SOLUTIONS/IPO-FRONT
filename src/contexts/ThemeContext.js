@@ -5,8 +5,8 @@ export const ThemeContext = createContext();
 function ThemeContextProvider(props) {
   const [isLightTheme, setisLightTheme] = useState(true);
 
-  const light = { syntax: "#000", ui: "#ddd", bg: "#eee", color: "red", f_ic_bg:"yellow", f_c_bg:"green", copyright:"#333" };//footer_icon_bg,footer_content_bg
-  const dark = { syntax: "#fff", ui: "#333", bg: "#555", color: "blue", f_ic_bg:"#212529", f_c_bg:"#000", copyright:"#ffffff99" };
+  const light = { syntax: "#fff", ui: "linear-gradient(to right, #000428, #004e92)", bg: "#eee", color: "red", f_ic_bg:"#212529", f_c_bg:"#000", copyright:"#ffffff99" };//footer_icon_bg,footer_content_bg
+  const dark = { syntax: "#fff", ui: "linear-gradient(to right, #000428, #004e92)", bg: "#555", color: "blue", f_ic_bg:"#212529", f_c_bg:"#000", copyright:"#ffffff99" };
   const fonts = { general:"'Quicksand',sans-serif" };
 
 

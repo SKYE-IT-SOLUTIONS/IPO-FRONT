@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useContext } from "react";
 
-import NoFound from "../assets/404-Illustration.png";
+import NoFound from "../assets/404 Error.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const FluidContainer = styled.div`
@@ -34,7 +34,7 @@ const NotFound = () => {
       <img
         alt=""
         className="mt-4"
-        style={{ padding: "auto", height: "300px" }}
+        style={{ padding: "auto", height: "450px" }}
         src={NoFound}
       />
       <Title fontFamily={fonts.general}>404!</Title>
