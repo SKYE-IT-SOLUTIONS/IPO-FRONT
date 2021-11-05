@@ -13,9 +13,9 @@ import ThemeContextProvider from "./contexts/ThemeContext";
 import AuthContextProvider from "./contexts/AuthContext";
 // import { testing } from "./api/authAPI";
 // import Button from "@restart/ui/esm/Button";
-import NotFound from "./containers/404";
 import TopLogoBar from "./components/TopLogoBar";
 import ContactUs from "./components/ContactUs";
+import NewsList from "./components/NewsList";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
         </Header>
         <Main>
           {/* <Button onClick={testing}>Pressed</Button> */}
-          <NotFound />
+          <NewsList/>
 
           <Container fluid>
             <Row>

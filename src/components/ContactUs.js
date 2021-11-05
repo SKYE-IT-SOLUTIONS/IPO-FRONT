@@ -32,24 +32,24 @@ const ContainerDiv = styled(Col)`
   color: white;
   /* width: 100%; */
   @media only screen and (min-width: 1400px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   @media (min-width: 1200px) and (max-width: 1400px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   @media (min-width: 992px) and (max-width: 1200px) {
-    font-size: 10px;
+    font-size: 12px;
   }
   @media (min-width: 768px) and (max-width: 992px) {
     font-size: 10px;
   }
   @media (min-width: 576px) and (max-width: 768px) {
-    font-size: 12px;
+    font-size: 10px;
   }
   @media (max-width: 576px) {
-    font-size: 8px;
+    font-size: 12px;
   }
 `;
 
