@@ -5,7 +5,6 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import {
   Container,
   Row,
-  Col,
   twitter,
   insta,
   fb,
@@ -15,57 +14,71 @@ import {
 } from "./CommonComponents";
 
 const IconImage = styled.img`
-    width:40px;
-    height:40px;
-    padding:10px;
-    cursor: pointer;
-`
-const CustomCol = styled(Col)`
-    
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+`;
+const FooterWrapper = styled.div`
+  font-family: ${({ font }) => font};
+  background-color: ${({ bg }) => bg};
+
+  @media (min-width: 500px){
+      font-size: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 0.8rem;
+  }
+`;
+const IconRow = styled(Row)`
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
+const Copyright = styled(Container)`
+  background: ${({ bg }) => bg};
+  padding: 10px;
+  font-weight: bold;
+  color: ${({ fcolor }) => fcolor};
+  & > a {
+    color: ${({ fccolor }) => fccolor};
+    text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.footer : dark.footer;
 
-  const contentRowStyle = {
-    flexDirection:"row",
-    justifyContent:"center",
-    background: `${them.f_c_bg}`,
-    padding : "10px",
-    fontWeight: "bold",
-    color: them.copyright,
-  };
-  
-  const iconRowStyle = {
-        flexDirection:"row",
-        justifyContent:"center",
-        background:`${them.f_ic_bg}`,
-    }
-
-    const footer = {
-        fontFamily:`${fonts.general}`
-    }
-    
-    return (
-        <div style={{...footer}}>
-            <Container fluid>
-                <Row>
-                    <CustomCol>
-                        <Row style={{...iconRowStyle}}>
-                        <IconImage src={twitter} alt=" "/>
-                        <IconImage src={insta} alt=" "/>
-                        <IconImage src={fb} alt=" " />
-                        <IconImage src={whatsapp} alt=" " />
-                        <IconImage src={linkedin} alt=" "/>
-                        <IconImage src={youtube} alt=" "/>
-                        </Row>
-                    </CustomCol>
-                </Row>
-            </Container>
-            <Container fluid style={{...contentRowStyle}}>
-                &copy; {new Date().getFullYear()} Copyright: <a style={{textDecoration:"none",color:them.syntax}}  href=" "> All rights reserved, Industrial Placement Office, Faculty of Agriculture, University of Ruhuna.</a>
-            </Container>
-        </div>
-    )
+  return (
+    <FooterWrapper font={fonts.general} bg={them.f_ic_bg}>
+      <Container fluid>
+        <IconRow>
+          <IconImage src={twitter} alt=" " />
+          <IconImage src={insta} alt=" " />
+          <IconImage src={fb} alt=" " />
+          <IconImage src={whatsapp} alt=" " />
+          <IconImage src={linkedin} alt=" " />
+          <IconImage src={youtube} alt=" " />
+        </IconRow>
+      </Container>
+      <Copyright
+        fluid
+        bg={them.f_c_bg}
+        fcolor={them.copyright}
+        fccolor={them.syntax}
+      >
+        &copy; {new Date().getFullYear()} Copyright:{" "}
+        <a href=" ">
+          {" "}
+          All rights reserved, Industrial Placement Office, Faculty of
+          Agriculture, University of Ruhuna.
+        </a>
+      </Copyright>
+    </FooterWrapper>
+  );
 }
