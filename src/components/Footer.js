@@ -45,7 +45,7 @@ const Copyright = styled(Container)`
     color: ${({ fccolor }) => fccolor};
     text-decoration: none;
     :hover {
-      text-decoration: underline;
+      cursor: pointer;
     }
   }
 `;
@@ -73,11 +73,13 @@ export default function FooterContent() {
         fccolor={them.syntax}
       >
         &copy; {new Date().getFullYear()} Copyright:{" "}
+        All rights reserved, 
         <a href=" ">
           {" "}
-          All rights reserved, Industrial Placement Office, Faculty of
+          Industrial Placement Office, Faculty of
           Agriculture, University of Ruhuna.
-        </a>
+        </a><br/>
+        Developed By: <a href=" ">SKYE IT SOLUTIONS</a>
       </Copyright>
     </FooterWrapper>
   );

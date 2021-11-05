@@ -26,14 +26,13 @@ function App() {
           <NavBar />
         </Header>
         <Main>
-          {/* <Button onClick={testing}>Pressed</Button> */}
           <NewsList/>
 
-          <Container fluid>
+          {/* <Container fluid>
             <Row>
               <ContactUs />
             </Row>
-          </Container>
+          </Container> */}
         </Main>
         <Footer>
           <FooterContent />

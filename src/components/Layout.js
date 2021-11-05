@@ -16,6 +16,5 @@ export const Main = styled.main`
 `;
 
 export const Footer = styled.footer`
-    bottom:0;
     text-align:center;
 `;
