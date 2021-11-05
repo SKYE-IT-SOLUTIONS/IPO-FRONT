@@ -20,6 +20,9 @@ const IconImage = styled.img`
     padding:10px;
     cursor: pointer;
 `
+const CustomCol = styled(Col)`
+    
+`;
 
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
@@ -48,7 +51,7 @@ export default function FooterContent() {
         <div style={{...footer}}>
             <Container fluid>
                 <Row>
-                    <Col>
+                    <CustomCol>
                         <Row style={{...iconRowStyle}}>
                         <IconImage src={twitter} alt=" "/>
                         <IconImage src={insta} alt=" "/>
@@ -57,7 +60,7 @@ export default function FooterContent() {
                         <IconImage src={linkedin} alt=" "/>
                         <IconImage src={youtube} alt=" "/>
                         </Row>
-                    </Col>
+                    </CustomCol>
                 </Row>
             </Container>
             <Container fluid style={{...contentRowStyle}}>

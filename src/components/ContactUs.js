@@ -1,6 +1,7 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useContext} from "react";
 import styled from "styled-components";
 import { Col } from "./CommonComponents";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const ContactHeader = styled.div`
   display: flex;
@@ -26,7 +27,8 @@ const ContainerDiv = styled(Col)`
   display: "flex";
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(to right, #141e30, #243b55);
+  background: ${({bg}) => bg};
+  font-family: ${({font}) => font.general};
   color: white;
   /* width: 100%; */
   @media only screen and (min-width: 1400px) {
@@ -64,7 +66,11 @@ const arrayMap = (data,index,ob) => {
 }
 
 function ContactUs(props) {
- const [keyArray, setKeyArray] = useState(null)
+
+ const [keyArray, setKeyArray] = useState(null);
+ const { theme, light, dark, fonts } = useContext(ThemeContext);
+ const them = theme ? light : dark;
+
   const contactData ={
     "Address":<>Industrial Placement Office <br />Dean's Office <br />Faculty of Agricultur<br />University of Ruhuna <br />Mapalana, Kamburupitiya <br />Sri Lanka</>,
     "Telephone":"+94(0)41 229 2200 Ext 361",
@@ -80,7 +86,7 @@ function ContactUs(props) {
   }, [])
 
   return (
-    <ContainerDiv md="4" sm="6">
+    <ContainerDiv bg={them.ui} font={fonts} md="4" sm="6">
       <ContactHeader>Contact Us</ContactHeader>
 
       {keyArray ? keyArray.map((data,index) => {

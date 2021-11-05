@@ -145,7 +145,9 @@ export default function TopLogoBar() {
             <table>
               <thead>
                 <tr>
+                  <td>
                   <IconImage alt="" src={logo} />
+                  </td>
                   <th>
                     <TopTitle className="text">
                       Industrial Placement Office (IPO)
