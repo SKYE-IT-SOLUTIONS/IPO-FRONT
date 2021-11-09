@@ -22,7 +22,6 @@ const IconImage = styled.img`
 const FooterWrapper = styled.div`
   font-family: ${({ font }) => font};
   background-color: ${({ bg }) => bg};
-
   @media (min-width: 500px){
       font-size: 1rem;
   }

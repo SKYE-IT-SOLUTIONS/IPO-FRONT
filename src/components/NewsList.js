@@ -23,7 +23,7 @@ function NewsList() {
     <Container fluid>
       <Row>
         <NewsCard news={news1}/>
-        <NewsCard news={news2}/>
+        {/* <NewsCard news={news2}/> */}
       </Row>
     </Container>
   );
