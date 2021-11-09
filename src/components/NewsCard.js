@@ -66,7 +66,7 @@ function NewsCard({news}) {
   }
 
   return (
-    <NewsDiv md={2}>
+    <NewsDiv md={4} sm={4} lg={3} xl={3} xxl={2} xs={10}>
       <NewsCardView font={fonts}>
         <NewsImg image={news.url}/>
         <Card.Body>

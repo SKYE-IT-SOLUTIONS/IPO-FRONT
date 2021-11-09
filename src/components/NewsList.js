@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Row } from "./CommonComponents";
+import { Container } from "./CommonComponents";
 import NewsCard from "./NewsCard";
+import Pagination from "./Pagination";
 
 function NewsList() {
   const news1 = {
@@ -21,10 +22,16 @@ function NewsList() {
 
   return (
     <Container fluid>
-      <Row>
+      {/* <Row>
         <NewsCard news={news1}/>
-        {/* <NewsCard news={news2}/> */}
-      </Row>
+        <NewsCard news={news2}/>
+      </Row> */}
+      <Pagination
+        data={[news1, news2,news2, news1,news1, news2,news1]}
+        RenderComponent={NewsCard}
+        title="Posts"
+        pageLimit={1}
+        dataLimit={6}/>
     </Container>
   );
 }
