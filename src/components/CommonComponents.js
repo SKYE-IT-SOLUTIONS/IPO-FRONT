@@ -24,7 +24,7 @@ export const CustomBttn = styled.button`
   border-radius : 20px;
   font-weight : bolder;
   padding : 5px 25px ;
-  border: solid;
+  border:1px solid black;
   text-align : center;
 
   ${props => props.cancle && css`
@@ -34,4 +34,16 @@ export const CustomBttn = styled.button`
   ${props => props.apply && css`
     background : linear-gradient(to left, #41295a, #2f0743);
   `}
+`
+
+export const Lable = styled.label`
+  color : black;
+  padding-top : 5px;
+  padding-bottom : 10px;
+`
+export const Input = styled.input`
+  border-radius : 5px;
+  border : 2px solid;
+  padding : 5px;
+  width : 300px;
 `

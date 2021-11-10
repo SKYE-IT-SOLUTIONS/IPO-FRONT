@@ -15,6 +15,7 @@ import NotFound from "./containers/404";
 import TopLogoBar from "./components/TopLogoBar";
 import NewsCard from "./components/NewsCard";
 import NewsList from "./components/NewsList";
+import JobList from "./components/JobList";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Main>
           {/* <Button onClick={testing}>Pressed</Button> */}
           <NewsList/>
+          <JobList/>
           <NotFound />
         </Main>
         <Footer>
