@@ -15,7 +15,8 @@ import AuthContextProvider from "./contexts/AuthContext";
 // import Button from "@restart/ui/esm/Button";
 import TopLogoBar from "./components/TopLogoBar";
 // import ContactUs from "./components/ContactUs";
-import NewsList from "./components/NewsList";
+//import NewsList from "./components/NewsList";
+import SideNav from "./components/SideNav";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <NavBar />
         </Header>
         <Main>
-          <NewsList/>
+        <SideNav/>
+          {/*<NewsList/>*/}
 
           {/* <Container fluid>
             <Row>
