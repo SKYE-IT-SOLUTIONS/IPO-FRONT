@@ -5,17 +5,7 @@ import NoFound from "../assets/404 Error.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const FluidContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 1em;
-`;
-
-const Title = styled.h1`
-  font-family: ${({ fontFamily }) => fontFamily};
-  font-size: 4.5em;
-  margin-bottom: 0;
 `;
 
 const Subtitle = styled.div`
@@ -27,7 +17,7 @@ const Subtitle = styled.div`
 
 const StyledImg =styled.img`
   padding: auto;
-  height: 450px;
+  height: auto;
   width: 100%
 `
 
@@ -39,7 +29,6 @@ const NotFound = () => {
     <FluidContainer>
       <StyledImg
         alt=""
-        className="mt-4"
         src={NoFound}
       />
       <Subtitle color={them.syntax} fontFamily={fonts.general}>

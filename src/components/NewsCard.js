@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
-import { CustomBttn } from "./CommonComponents";
+import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Col} from './CommonComponents'
 
 const NewsDiv = styled(Col)`
-  &: hover {
+  :hover {
     transform: scale(1.05);
     transition-delay : 100ms;
   } ;
@@ -41,7 +41,7 @@ const NewsContent = styled(Card.Text)`
   min-height : 90px;
 `;
 
-const NewsButton = styled(CustomBttn)`
+const NewsButton = styled(CustomButton)`
   margin: 0px 0px 10px 0px;
   font-size: 12px;
 `;

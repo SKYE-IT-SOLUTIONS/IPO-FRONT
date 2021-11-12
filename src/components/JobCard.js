@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
-import { CustomBttn } from "./CommonComponents";
+import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Col } from "./CommonComponents";
@@ -47,7 +47,7 @@ const JobTitle = styled(Card.Title)`
   min-height : 60px;
 `;
 
-const JobButton = styled(CustomBttn)`
+const JobButton = styled(CustomButton)`
   margin: 0px 0px 10px 0px;
   font-size: 12px;
 `;

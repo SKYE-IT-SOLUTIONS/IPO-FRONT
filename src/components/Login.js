@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import loginPic from "../assets/login.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { Input, Lable, CustomBttn } from "./CommonComponents";
+import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 
 const LoginBody = styled(Modal.Body)`
@@ -39,7 +39,7 @@ const LogInput = styled(Input)`
   width: 100%;
 `;
 
-const LoginBttn = styled(CustomBttn)`
+const LoginBttn = styled(CustomButton)`
   background: #41295a;
   border-radius: 5px;
   margin-top: 13px;
