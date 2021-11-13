@@ -16,6 +16,8 @@ import AuthContextProvider from "./contexts/AuthContext";
 import TopLogoBar from "./components/TopLogoBar";
 // import ContactUs from "./components/ContactUs";
 import NewsList from "./components/NewsList";
+import ImageSlider from "./components/ImageSlider";
+import Mover from "./components/Mover";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <NavBar />
         </Header>
         <Main>
+          <ImageSlider/>
+          <Mover/>
           <NewsList/>
 
           {/* <Container fluid>
