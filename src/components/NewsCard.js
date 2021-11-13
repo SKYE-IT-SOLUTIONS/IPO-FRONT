@@ -3,21 +3,18 @@ import Card from "react-bootstrap/Card";
 import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import  {Col} from './CommonComponents'
+import {Col} from './CommonComponents'
 
 const NewsDiv = styled(Col)`
   :hover {
     transform: scale(1.05);
     transition-delay : 100ms;
-  } 
+  } ;
+  padding-top : 10px;
   display : flex;
-  flex-direction : row;
-  justify-content : center;
-
 `;
 
 const NewsCardView = styled(Card)`
-  width: 18rem;
   font-family: ${({ font }) => font.general};
   border-radius : 15px;
   background: linear-gradient(to right, #ece9e6, #ffffff);
@@ -33,7 +30,6 @@ const NewsImg = styled.div`
 `;
 
 const NewsTitle = styled(Card.Title)`
-  text-align: justify;
   font-family: ${({ font }) => font};
   font-size: 16px;
 `;
@@ -51,9 +47,10 @@ const NewsButton = styled(CustomButton)`
 `;
 
 const NewsFooter = styled.span`
-  font-size: 12px;
+  font-size: 10px;
   position : absolute ;
-  bottom : 10px;
+  bottom : 6px;
+  left : 18px ;
 `;
 
 function NewsCard({news}) {
@@ -80,9 +77,7 @@ function NewsCard({news}) {
             }
           </NewsContent>
           <NewsButton apply> Read </NewsButton>
-          <Card.Footer>
             <NewsFooter> Last updated {news.time} ago </NewsFooter>
-          </Card.Footer>
         </Card.Body>
       </NewsCardView>
     </NewsDiv>
