@@ -7,16 +7,16 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const ImageTag = styled.img`
-    display:block;
-    width:100%;
-    position:relative;
-    object-fit: cover;
-    height:350px;
-    z-index: -1;
-    `;
+  display: block;
+  width: 100%;
+  position: relative;
+  object-fit: cover;
+  height: 350px;
+  z-index: -1;
+`;
 const Himage = styled.div`
-    width: 100%;
-` ;
+  width: 100%;
+`;
 const AnimatedText = styled.span`
   font-weight: 800;
   font-family: sans-serif;
@@ -29,13 +29,13 @@ const AnimatedText = styled.span`
   -webkit-text-fill-color: transparent;
   background-repeat: no-repeat;
   animation: text 10s infinite;
-  
+
   text-align: center;
   position: absolute;
-  top: 64%;
+  top: 75%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  width:100%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   @keyframes text {
     0% {
       color: black;
@@ -73,57 +73,48 @@ const AnimatedText = styled.span`
   }
 `;
 
-function ImageSlider(){
-    const { theme, light, dark, fonts } = useContext(ThemeContext);
+function ImageSlider() {
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
 
-    const current_theme = theme ? light : dark;
- 
-    return(
-      
-        <Himage>
-        <Carousel indicators="" slide="" touch="true" controls="">
-          
-          <Carousel.Item>
-            <ImageTag
-              src="https://images.unsplash.com/photo-1594686948539-2709857f7066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-              alt="Second slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <ImageTag 
-              src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <ImageTag
-              src="https://images.unsplash.com/photo-1506377872008-6645d9d29ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <ImageTag
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-        </Carousel>
-        <animation>
-        <AnimatedText>
-           <span>Welcome to IPO</span>
-         {/* </AnimatedText>
+  const current_theme = theme ? light : dark;
+
+  return (
+    <Himage>
+      <Carousel indicators="" slide="" touch="true" controls="">
+        <Carousel.Item>
+          <ImageTag
+            src="https://images.unsplash.com/photo-1594686948539-2709857f7066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            alt="Second slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <ImageTag
+            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <ImageTag
+            src="https://images.unsplash.com/photo-1506377872008-6645d9d29ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <ImageTag
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+      </Carousel>
+      <AnimatedText>
+        <span>Welcome to IPO</span>
+        {/* </AnimatedText>
       
          <AnimatedText> */}
-            <br />
-           
-         </AnimatedText>
-        </animation>
-        
-        </Himage>
-         
-         
-       
-    );
+        <br />
+      </AnimatedText>
+    </Himage>
+  );
 }
 
 export default ImageSlider;
