@@ -8,6 +8,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
+import Login from "./Login";
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};
@@ -41,6 +42,7 @@ const LoginTag = styled.span`
 
 function NavBar() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const [modalShow, setModalShow] = React.useState(false);
 
   const current_theme = theme ? light : dark;
 
@@ -279,12 +281,17 @@ function NavBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href=" ">
-              <LoginTag>Log In</LoginTag>
+            <Nav.Link>
+              <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <Login
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+      
     </CustomNavBar>
   );
 }

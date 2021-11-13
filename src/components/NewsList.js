@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 
 function NewsList() {
   const news1 = {
-    title: "Eminem Terrified As Daughter Begins Dating Man Raised On His Music",
+    title: "Eminem Terrified As Daughteraaaaaaaaaa Begins Dating Man Raised On His Music Raised On His Mu",
     content:
       "Triller, a budding competitor to popular short - video app TikTok, is in discussions with blank - check acquisition companies about a merger which would take the US social media ompanies about a merger which would take the US social media.",
     time: "4 min",
@@ -13,7 +13,7 @@ function NewsList() {
   };
 
   const news2 = {
-    title: "Eminem Terrified As Daughter Begins Dating Man Raised On His Music",
+    title: "Eminem Terrified As Daughter Begins Dating Man Raised On His Music ",
     content:
       "Triller, a budding competitor to popular short - video app TikTok.",
     time: "4 min",

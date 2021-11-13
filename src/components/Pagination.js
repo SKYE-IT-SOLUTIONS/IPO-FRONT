@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
-import { Row } from "./CommonComponents";
+import { Row,Icon } from "./CommonComponents";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 
