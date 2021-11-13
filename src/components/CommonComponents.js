@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Navbar from "react-bootstrap/Navbar";
 import styled, { css } from 'styled-components'
+import { Icon } from "@iconify/react";
 
 //assets
 import twitter from "../assets/twitter.png" ;
@@ -15,7 +16,7 @@ import youtube from "../assets/youtube.png" ;
 import logo from '../assets/logo.png'
 
 
-export  {Container,Row,Col,Navbar};
+export  {Container,Row,Col,Navbar,Icon};
 export {twitter,insta,fb,whatsapp,linkedin,youtube,logo };
 
 export const CustomButton = styled.button`
