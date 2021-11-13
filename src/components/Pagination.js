@@ -6,6 +6,9 @@ import Button from "react-bootstrap/Button";
 const PageData = styled(Row)`
   width: 100%;
   padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
 `;
 
 const Paging = styled.div`
@@ -85,7 +88,7 @@ function Pagination({ data, RenderComponent, pageLimit, dataLimit }) {
         setdatalimit(3);
         setPages(Math.ceil(data.length / 3));
       } else if (window.innerWidth > 576 && window.innerWidth <= 768) {
-        setdatalimit(3);
+        setdatalimit(2);
         setPages(Math.ceil(data.length / 3));
       } else {
         setdatalimit(1);

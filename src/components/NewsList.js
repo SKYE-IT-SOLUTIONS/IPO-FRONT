@@ -27,7 +27,7 @@ function NewsList() {
         <NewsCard news={news2}/>
       </Row> */}
       <Pagination
-        data={[news1, news2,news2, news1,news1, news2,news1]}
+        data={[news1, news2,news2, news1,news1, news2,news1,news2,news1]}
         RenderComponent={NewsCard}
         title="Posts"
         pageLimit={1}
