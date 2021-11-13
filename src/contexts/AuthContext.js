@@ -17,7 +17,6 @@ export default function AuthContextProvider(props) {
             const {status, error} = await isUser();
             setUserLogged(status);
             setUserError(error);
-
         }
         fetchUser();
     }, [])
