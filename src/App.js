@@ -18,6 +18,9 @@ import ContactUs from "./components/ContactUs";
 import NewsList from "./components/NewsList";
 import JobList from "./components/JobList";
 import Subscription from "./components/Subscription";
+// import ContactUs from "./components/ContactUs";
+//import NewsList from "./components/NewsList";
+// import SideNav from "./components/SideNav";
 
 function App() {
   return (
