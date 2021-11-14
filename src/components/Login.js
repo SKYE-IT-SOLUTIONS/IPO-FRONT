@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
-import loginPic from "../assets/login.svg";
+//import loginPic from "../assets/login.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
