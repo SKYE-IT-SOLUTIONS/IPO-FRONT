@@ -20,8 +20,10 @@ import ImageSlider from "./components/ImageSlider";
 import Mover from "./components/Mover";
 import JobList from "./components/JobList";
 import Subscription from "./components/Subscription";
+// import Status from "./components/Status";
 
 function App() {
+
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
