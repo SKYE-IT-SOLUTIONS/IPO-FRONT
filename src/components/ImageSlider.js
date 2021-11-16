@@ -13,6 +13,27 @@ const ImageTag = styled.img`
     object-fit: cover;
     height:350px;
     z-index: -1;
+  @media only screen and (min-width: 1160px) {
+    height:350px;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1160px) {
+    height:300px;
+  }
+
+  @media (min-width: 700px) and (max-width: 1024px) {
+    height:250px;
+  }
+  @media (min-width: 500px) and (max-width: 700px) {
+    height:200px;
+  }
+  @media (min-width: 300px) and (max-width: 500px) {
+    height:150px;
+  }
+  @media (max-width: 300px) {
+    height:100px;
+    
+  }
     `;
 const Himage = styled.div`
     width: 100%;
@@ -22,17 +43,15 @@ const AnimatedText = styled.span`
   font-family: sans-serif;
   text-transform: uppercase;
   background: white;
-  letter-spacing: 8px;
+  letter-spacing: 6px;
   margin-bottom: 20px;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-repeat: no-repeat;
   animation: text 10s infinite;
-  
   text-align: center;
   position: absolute;
-  top: 64%;
   left: 50%;
   transform: translate(-50%,-50%);
   width:100%;
@@ -42,11 +61,11 @@ const AnimatedText = styled.span`
       margin-bottom: -40px;
     }
     30% {
-      letter-spacing: 30px;
+      letter-spacing: 20px;
       margin-bottom: -40px;
     }
-    85% {
-      letter-spacing: 8px;
+    65% {
+      letter-spacing: 6px;
       margin-bottom: -40px;
     }
   }
@@ -55,21 +74,21 @@ const AnimatedText = styled.span`
   }
 
   @media (min-width: 1024px) and (max-width: 1160px) {
-    font-size: 40px;
+    font-size: 45px;
   }
 
   @media (min-width: 700px) and (max-width: 1024px) {
-    font-size: 30px;
+    font-size: 35px;
   }
   @media (min-width: 500px) and (max-width: 700px) {
-    font-size: 20px;
+    font-size: 25px;
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    font-size: 15px;
+    font-size: 20px;
   }
-  @media (max-width: 700px) {
-    font-size: 10px;
-    visibility: hidden;
+  @media (max-width: 300px) {
+    font-size: 12px;
+    
   }
 `;
 
@@ -108,17 +127,13 @@ function ImageSlider(){
             />
           </Carousel.Item>
         </Carousel>
-        <animation>
+       
         <AnimatedText>
            <span>Welcome to IPO</span>
          {/* </AnimatedText>
-      
          <AnimatedText> */}
             <br />
-           
-         </AnimatedText>
-        </animation>
-        
+        </AnimatedText>
         </Himage>
          
          
