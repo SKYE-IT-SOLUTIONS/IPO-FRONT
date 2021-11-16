@@ -71,7 +71,7 @@ function Mover(){
         <Moverdiv> 
             <MoverNav bg={current_theme.ui} defaultActiveKey="/"  >
             <Moveritem>
-                <MoverNavlink href="/" onClick={()=>{setIndex(0)}} >Home</MoverNavlink>
+                <MoverNavlink onClick={()=>{setIndex(0)}} >Home</MoverNavlink>
             </Moveritem>
             <Moveritem>
                 <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}>Vision</MoverNavlink>
