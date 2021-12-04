@@ -45,8 +45,9 @@ const LoginBttn = styled(CustomButton)`
 `;
 
 function Login(props) {
-  const { fonts } = useContext(ThemeContext)
-  const [error, seterror] = useState(null)
+  const { fonts } = useContext(ThemeContext);
+  const [error, seterror] = useState(null);
+  console.log(seterror);
 
   return (
     <Modal

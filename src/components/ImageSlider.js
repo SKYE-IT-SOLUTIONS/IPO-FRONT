@@ -1,5 +1,5 @@
 // third party imports
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import { Carousel } from "react-bootstrap";
 
 //in app imports-presentational
@@ -74,9 +74,10 @@ const AnimatedText = styled.span`
 `;
 
 function ImageSlider() {
-  const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const { theme, light, dark } = useContext(ThemeContext);
 
   const current_theme = theme ? light : dark;
+  console.log(current_theme);
 
   return (
     <Himage>

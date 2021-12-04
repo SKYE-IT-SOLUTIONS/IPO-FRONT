@@ -9,7 +9,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import Row from 'react-bootstrap/Row'
 import  {Col} from './CommonComponents';
 import { CustomButton } from "./CommonComponents";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 
 const Moverdiv = styled.div`
     width:100%;
@@ -62,7 +62,7 @@ const MoreButton = styled(CustomButton)`
 `;
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
-
+    console.log(fonts);
     const current_theme = theme ? light : dark;
     const [Index,setIndex]=useState(0);
     const [open, setOpen] = useState(false);

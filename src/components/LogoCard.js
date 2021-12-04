@@ -30,7 +30,6 @@ border-radius: 15px;
 
 
 export default function LogoCard({ img }) {
-
     return (
       <CustomLogo md={4} sm={4} lg={3} xl={3} xxl={2} xs={10}>
         <CustomCard >
