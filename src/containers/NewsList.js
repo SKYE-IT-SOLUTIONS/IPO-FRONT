@@ -1,7 +1,7 @@
 import React from "react";
-import { Container } from "./CommonComponents";
-import NewsCard from "./NewsCard";
-import Pagination from "./Pagination";
+import { Container } from "../components/CommonComponents";
+import NewsCard from "../components/NewsCard";
+import Pagination from "../components/Pagination";
 
 function NewsList() {
   const news1 = {
