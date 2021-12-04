@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Row from 'react-bootstrap/Row'
 import  {Col} from './CommonComponents';
+// import { Icon } from "@iconify/react";
 import { CustomButton,Icon } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
@@ -160,7 +161,7 @@ const MoverIcon = styled(Icon)`
 
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
-
+    console.log(fonts);
     const current_theme = theme ? light : dark;
     const [Index,setIndex]=useState(0);
     const [open, setOpen] = useState(false);

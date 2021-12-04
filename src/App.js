@@ -14,17 +14,17 @@ import AuthContextProvider from "./contexts/AuthContext";
 // import { testing } from "./api/authAPI";
 // import Button from "@restart/ui/esm/Button";
 import TopLogoBar from "./components/TopLogoBar";
-import ContactUs from "./components/ContactUs";
-import NewsList from "./components/NewsList";
-import ImageSlider from "./components/ImageSlider";
-import Mover from "./components/Mover";
+// import ContactUs from "./components/ContactUs";
+// import NewsList from "./components/NewsList";
+// import ImageSlider from "./components/ImageSlider";
+// import Mover from "./components/Mover";
 // import JobList from "./components/JobList";
-import Subscription from "./components/Subscription";
+// import Subscription from "./components/Subscription";
+// import LogoCard from "./components/LogoCard";
 // import Status from "./components/Status";
 import PostJob from "./components/PostJob";
 
 function App() {
-
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
