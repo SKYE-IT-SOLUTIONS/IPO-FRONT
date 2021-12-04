@@ -1,7 +1,6 @@
 // third party imports
 import React from "react";
 import NavBar from "./components/NavBar";
-
 //in app imports-presentational
 import { Header, Main, Footer } from "./components/Layout";
 // import { Container, Row } from "./components/CommonComponents";
@@ -22,6 +21,7 @@ import Mover from "./components/Mover";
 import Subscription from "./components/Subscription";
 // import Status from "./components/Status";
 import PostJob from "./components/PostJob";
+import AddJobPost from "./components/AddJobPost";
 
 function App() {
 
@@ -34,7 +34,8 @@ function App() {
         </Header>
         <Main>
 
-          <PostJob/>
+          {/* <PostJob/> */}
+          <AddJobPost/>
 
           {/* <ImageSlider/>
           <Mover/>

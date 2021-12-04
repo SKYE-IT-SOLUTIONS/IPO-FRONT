@@ -70,7 +70,7 @@ const SalaryValue = styled.p`
   padding-left: 10px;
 `;
 const Date = styled.span`
-  color: #db2a2a;
+  color:  #ff0f0f;
 `;
 
 const data = {
@@ -150,8 +150,8 @@ function PostJob() {
                 <>
                   <h4>Specifications</h4>
                   <ul>
-                    {data.specifications.map((value) => (
-                      <li>{value}</li>
+                    {data.specifications.map((value,index) => (
+                      <li key={index}>{value}</li>
                     ))}
                   </ul>
                 </>
@@ -161,8 +161,8 @@ function PostJob() {
                 <>
                   <h4>Qualifications</h4>
                   <ul>
-                    {data.qualifications.map((value) => (
-                      <li>{value}</li>
+                    {data.qualifications.map((value,index) => (
+                      <li key={index}>{value}</li>
                     ))}
                   </ul>
                 </>
@@ -172,8 +172,8 @@ function PostJob() {
                 <>
                   <h4>Experience</h4>
                   <ul>
-                    {data.experience.map((value) => (
-                      <li>{value}</li>
+                    {data.experience.map((value,index) => (
+                      <li key={index}>{value}</li>
                     ))}
                   </ul>
                 </>
