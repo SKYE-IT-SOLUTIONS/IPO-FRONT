@@ -20,6 +20,7 @@ import ImageSlider from "./components/ImageSlider";
 import Mover from "./components/Mover";
 // import JobList from "./components/JobList";
 import Subscription from "./components/Subscription";
+import LogoCard from "./components/LogoCard";
 // import Status from "./components/Status";
 
 function App() {
@@ -40,6 +41,15 @@ function App() {
           <NewsList />
           <JobList />
           {/* <NotFound /> */}
+          <Container>
+          <Row style={{justifyContent:"center"}}>
+          <LogoCard/>
+          <LogoCard/>
+          <LogoCard/>
+          <LogoCard/>
+          <LogoCard/>
+          </Row>
+          </Container>
           <Container fluid>
             <Row>
               <ContactUs />
