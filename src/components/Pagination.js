@@ -74,7 +74,6 @@ function Pagination({ data, RenderComponent, pageLimit, dataLimit }) {
 
   useEffect(() => {
     function handleResize() {
-      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
       if (window.innerWidth > 1400) {
         setdatalimit(6);
         setPages(Math.ceil(data.length / 6));

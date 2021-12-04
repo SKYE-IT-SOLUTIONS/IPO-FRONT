@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {vision} from "./CommonComponents";
 import  {Row,Col,Container} from './CommonComponents';
-import Visionimg from '../assets/Visionimagee.jpg'
+import Missionimg from '../assets/Mission.svg'
 
 const Mdiv=styled(Row)`
     font-family:${({fontFamily})=> fontFamily};
@@ -27,7 +27,8 @@ const Title=styled.h1`
 `;
 const Para=styled.p`
     text-align: center; 
-    margin-top: 20px; 
+    margin-top: 20px;
+    margin-left:10px;
     font-weight: 1000;
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
@@ -59,7 +60,7 @@ const Image =styled("img")`
         visibility: hidden;
     }
 `;
-function Vision(){
+function Mission(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
 
     const current_theme = theme ? light : dark;
@@ -69,7 +70,7 @@ function Vision(){
             <Container>
                 <Row> <Col lg={4} md={2} sm={2} xs={2}></Col>
                     <Col lg={5} md={7} sm={10} xs={10}>
-                    <Title>Vision</Title>
+                    <Title>Mission</Title>
                         <Para>
                             Ultimately, a paragraph is a sentence or group of
                             sentences that support one main idea. In this handout, we
@@ -77,8 +78,8 @@ function Vision(){
                             controls what happens in the rest of the paragraph.
                         </Para>
                     </Col>
-                    <Col lg={3} md={3}>
-                        <Image src={Visionimg} ></Image>
+                    <Col lg={3} md={3} sm={0}  xs={0}>
+                        <Image src={Missionimg}></Image>
                     </Col>
                 </Row>
             </Container>
@@ -88,4 +89,4 @@ function Vision(){
         </Mdiv>
     );
 }
-export default Vision;
+export default Mission;

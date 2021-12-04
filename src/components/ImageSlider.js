@@ -36,8 +36,8 @@ const ImageTag = styled.img`
   }
     `;
 const Himage = styled.div`
-    width: 100%;
-` ;
+  width: 100%;
+`;
 const AnimatedText = styled.span`
   font-weight: 800;
   font-family: sans-serif;
@@ -50,11 +50,13 @@ const AnimatedText = styled.span`
   -webkit-text-fill-color: transparent;
   background-repeat: no-repeat;
   animation: text 10s infinite;
+
   text-align: center;
   position: absolute;
+  
   left: 50%;
-  transform: translate(-50%,-50%);
-  width:100%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   @keyframes text {
     0% {
       color: black;
@@ -71,29 +73,35 @@ const AnimatedText = styled.span`
   }
   @media only screen and (min-width: 1160px) {
     font-size: 50px;
+    top: 65%;
   }
 
   @media (min-width: 1024px) and (max-width: 1160px) {
     font-size: 45px;
+    top: 57%;
   }
 
   @media (min-width: 700px) and (max-width: 1024px) {
     font-size: 35px;
+    top: 50%;
   }
   @media (min-width: 500px) and (max-width: 700px) {
     font-size: 25px;
+    top: 43%;
   }
   @media (min-width: 300px) and (max-width: 500px) {
     font-size: 20px;
+    top: 37%;
   }
   @media (max-width: 300px) {
     font-size: 12px;
+    top: 10%;
     
   }
 `;
 
-function ImageSlider(){
-    const { theme, light, dark, fonts } = useContext(ThemeContext);
+function ImageSlider() {
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
 
     const current_theme = theme ? light : dark;
  

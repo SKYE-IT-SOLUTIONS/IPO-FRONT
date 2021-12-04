@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row'
 import  {Col} from './CommonComponents';
 import { CustomButton,Icon } from "./CommonComponents";
 import Vision from "./Vision";
+import Mission from "./Mission";
 
 const Moverdiv = styled.div`
     width:100%;
@@ -234,7 +235,7 @@ function Mover(){
                 <Vision/>
             </div>
             <div hidden={Index !== 2}>
-                content3
+                <Mission/>
             </div>
         </Moverdiv>
         
