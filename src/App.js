@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 
 //in app imports-presentational
 import { Header, Main, Footer } from "./components/Layout";
-import { Container, Row } from "./components/CommonComponents";
+// import { Container, Row } from "./components/CommonComponents";
 
 import FooterContent from "./components/Footer";
 
@@ -18,9 +18,10 @@ import ContactUs from "./components/ContactUs";
 import NewsList from "./components/NewsList";
 import ImageSlider from "./components/ImageSlider";
 import Mover from "./components/Mover";
-import JobList from "./components/JobList";
+// import JobList from "./components/JobList";
 import Subscription from "./components/Subscription";
 // import Status from "./components/Status";
+import PostJob from "./components/PostJob";
 
 function App() {
 
@@ -32,21 +33,24 @@ function App() {
           <NavBar />
         </Header>
         <Main>
-          <ImageSlider/>
+
+          <PostJob/>
+
+          {/* <ImageSlider/>
           <Mover/>
-          <NewsList/>
+          <NewsList/> */}
 
           {/* <Container fluid>
           <NewsList />
           <JobList />
           {/* <NotFound /> */}
-          <Container fluid>
+          {/* <Container fluid>
             <Row>
               <ContactUs />
               <Subscription/>
               <ContactUs />
             </Row>
-          </Container>
+          </Container> */}
         </Main>
         <Footer>
           <FooterContent />
