@@ -34,11 +34,11 @@ function App() {
         </Header>
         <Main>
 
-          <PostJob/>
+          {/* <PostJob/> */}
 
-          {/* <ImageSlider/>
+          <ImageSlider/>
           <Mover/>
-          <NewsList/> */}
+          <NewsList/>
 
           {/* <Container fluid>
           <NewsList />

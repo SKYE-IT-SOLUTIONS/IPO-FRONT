@@ -73,29 +73,32 @@ const AnimatedText = styled.span`
   }
   @media only screen and (min-width: 1160px) {
     font-size: 50px;
-    top: 65%;
+    top: 475px;
   }
 
   @media (min-width: 1024px) and (max-width: 1160px) {
     font-size: 45px;
-    top: 57%;
+    top: 423px;
   }
 
-  @media (min-width: 700px) and (max-width: 1024px) {
+  @media (min-width: 767px) and (max-width: 1024px) {
     font-size: 35px;
-    top: 50%;
+    top: 394px;
   }
-  @media (min-width: 500px) and (max-width: 700px) {
+  @media (min-width: 500px) and (max-width: 767px) {
     font-size: 25px;
-    top: 43%;
+    top: 320px;
+    visibility: hidden;
   }
   @media (min-width: 300px) and (max-width: 500px) {
     font-size: 20px;
-    top: 37%;
+    top: 270px;
+    visibility: hidden;
   }
   @media (max-width: 300px) {
-    font-size: 12px;
-    top: 10%;
+    font-size: 8px;
+    top:220px;
+    visibility: hidden;
     
   }
 `;
