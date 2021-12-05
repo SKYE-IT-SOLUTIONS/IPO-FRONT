@@ -17,21 +17,20 @@ const JobContainer = styled(Container)`
 
 const TitleDiv = styled.div`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   padding: 20px 0;
-
-`
-
-const Logo = styled.div`
-  background-image: url("https://images.unsplash.com/photo-1555596899-d634257b55bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-  background-position: center;
-  background-repeat: no;
-  background-size: cover;
-  height: 55px;
-  width: 55px;
-  border-radius: 50px;
-  border: 2px solid black;
 `;
+
+// const Logo = styled.div`
+//   background-image: url("https://images.unsplash.com/photo-1555596899-d634257b55bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+//   background-position: center;
+//   background-repeat: no;
+//   background-size: cover;
+//   height: 55px;
+//   width: 55px;
+//   border-radius: 50px;
+//   border: 2px solid black;
+// `;
 
 const Title = styled.h4`
   padding-bottom: 10px;
@@ -47,13 +46,13 @@ const ApplyImage = styled.div`
   background-size: cover;
 `;
 
-const Table = styled.table`
-  margin: 25px auto;
-`;
+// const Table = styled.table`
+//   margin: 25px auto;
+// `;
 
-const Td = styled.td`
-  padding: 0 10px;
-`;
+// const Td = styled.td`
+//   padding: 0 10px;
+// `;
 
 const SalaryDiv = styled.div`
   border: 2px solid black;
@@ -114,161 +113,200 @@ function AddJobPost() {
   const [title, setTitle] = useState("Enter Job Title");
   const [position, setPosition] = useState("Enter Job Position");
   const [decription, setDecription] = useState("Enter Description");
-  
-  const [specList, setspecList] = useState([]);
+
+  const [specList, setSpecList] = useState([]);
   const [specification, setSpecification] = useState("Enter Job Specification");
 
-  const [qlfList, setqlfList] = useState([]);
+  const [qlfList, setQlfList] = useState([]);
   const [qualification, setQualification] = useState("Enter Job Qualification");
-  
-  const [expList, setexpList] = useState([]);
+
+  const [expList, setExpList] = useState([]);
   const [experience, setExperience] = useState("Enter Experience");
-  
-  const [salary, setSalary] = useState(0)
-  const [date, setDate] = useState(null)
+
+  const [salary, setSalary] = useState(0);
+  const [date, setDate] = useState(null);
 
   return (
     <JobContainer font={fonts}>
-          <TitleDiv><CustomInput
-                  type="text"
-                  value={title}
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                /></TitleDiv>
-          
-          <Position>
-            <Title>Job Position : </Title>{" "}
-            <PositionInput
-              type="text"
-              value={position}
-              onChange={(e) => {
-                setPosition(e.target.value);
-              }}
-            />
-          </Position>
+      <TitleDiv>
+        <CustomInput
+          type="text"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+      </TitleDiv>
 
-          <TextArea
-            rows="4"
-            value={decription}
-            onChange={(e) => {
-              setDecription(e.target.value);
-            }}
-          />
-          <Row style={{ paddingTop: "15px" }}>
-            <Col md={6}>
-              <ApplyImage image={JobPhoto} />
+      <Position>
+        <Title>Job Position : </Title>{" "}
+        <PositionInput
+          type="text"
+          value={position}
+          onChange={(e) => {
+            setPosition(e.target.value);
+          }}
+        />
+      </Position>
 
-              <SalaryDiv>
-                <table>
-                  <tr>
-                    <td rowSpan={2}>
-                      <Icon icon="emojione:money-bag" height="60" />
-                    </td>
-                    <td>
-                      <Salary>Salary</Salary>
-                      <SalaryInput type="text" value={salary} onChange={(e) => {
-                        setSalary(e.target.value)
-                      }}/>
-                    </td>
-                  </tr>
-                </table>
-              </SalaryDiv>
-            </Col>
-            <Col>
+      <TextArea
+        rows="4"
+        value={decription}
+        onChange={(e) => {
+          setDecription(e.target.value);
+        }}
+      />
+      <Row style={{ paddingTop: "15px" }}>
+        <Col md={6}>
+          <ApplyImage image={JobPhoto} />
 
-              <h4>Specifications</h4>
-              <ul>
-                {specList && specList.map((value, index) => (
-                  <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setspecList(specList.filter((val)=> val !== value))
-                  }}/></li>
-                ))}
-                <li>
-                  <ExtraInput
+          <SalaryDiv>
+            <table>
+              <tr>
+                <td rowSpan={2}>
+                  <Icon icon="emojione:money-bag" height="60" />
+                </td>
+                <td>
+                  <Salary>Salary</Salary>
+                  <SalaryInput
                     type="text"
-                    value={specification}
+                    value={salary}
                     onChange={(e) => {
-                      setSpecification(e.target.value);
+                      setSalary(e.target.value);
                     }}
-                  />{" "}
+                  />
+                </td>
+              </tr>
+            </table>
+          </SalaryDiv>
+        </Col>
+        <Col>
+          <h4>Specifications</h4>
+          <ul>
+            {specList &&
+              specList.map((value, index) => (
+                <li key={index}>
+                  {value}{" "}
                   <Icon
-                    icon="akar-icons:circle-plus-fill"
+                    icon="ic:round-cancel"
+                    style={{ marginLeft: "5px" }}
+                    color="red"
                     height="20"
-                    color="#001e62"
                     onClick={() => {
-                        setspecList([...specList,specification])
-                        setSpecification("Enter Job Specification")
+                      setSpecList(specList.filter((_, ind) => ind !== index));
                     }}
                   />
                 </li>
-              </ul>
+              ))}
+            <li>
+              <ExtraInput
+                type="text"
+                value={specification}
+                onChange={(e) => {
+                  setSpecification(e.target.value);
+                }}
+              />{" "}
+              <Icon
+                icon="akar-icons:circle-plus-fill"
+                height="20"
+                color="#001e62"
+                onClick={() => {
+                  setSpecList([...specList, specification]);
+                  setSpecification("Enter Job Specification");
+                }}
+              />
+            </li>
+          </ul>
 
-              <h4>Qualifications</h4>
-              <ul>
-                {qlfList && qlfList.map((value, index) => (
-                  <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setqlfList(qlfList.filter((val)=> val !== value))
-                  }}/></li>
-                ))}
-                <li>
-                  <ExtraInput
-                    type="text"
-                    value={qualification}
-                    onChange={(e) => {
-                      setQualification(e.target.value);
-                    }}
-                  />{" "}
+          <h4>Qualifications</h4>
+          <ul>
+            {qlfList &&
+              qlfList.map((value, index) => (
+                <li key={index}>
+                  {value}{" "}
                   <Icon
-                    icon="akar-icons:circle-plus-fill"
+                    icon="ic:round-cancel"
+                    style={{ marginLeft: "5px" }}
+                    color="red"
                     height="20"
-                    color="#001e62"
                     onClick={() => {
-                        setqlfList([...qlfList,qualification])
-                        setQualification("Enter Job Qualification")
+                      setQlfList(qlfList.filter((_, ind) => ind !== index));
                     }}
                   />
                 </li>
-              </ul>
+              ))}
+            <li>
+              <ExtraInput
+                type="text"
+                value={qualification}
+                onChange={(e) => {
+                  setQualification(e.target.value);
+                }}
+              />{" "}
+              <Icon
+                icon="akar-icons:circle-plus-fill"
+                height="20"
+                color="#001e62"
+                onClick={() => {
+                  setQlfList([...qlfList, qualification]);
+                  setQualification("Enter Job Qualification");
+                }}
+              />
+            </li>
+          </ul>
 
-              <h4>Experience</h4>
-              <ul>
-                {expList && expList.map((value, index) => (
-                  <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setexpList(expList.filter((val)=> val !== value))
-                  }}/></li>
-                ))}
-                <li>
-                  <ExtraInput
-                    type="text"
-                    value={experience}
-                    onChange={(e) => {
-                      setExperience(e.target.value);
-                    }}
-                  />{" "}
+          <h4>Experience</h4>
+          <ul>
+            {expList &&
+              expList.map((value, index) => (
+                <li key={index}>
+                  {value}{" "}
                   <Icon
-                    icon="akar-icons:circle-plus-fill"
+                    icon="ic:round-cancel"
+                    style={{ marginLeft: "5px" }}
+                    color="red"
                     height="20"
-                    color="#001e62"
                     onClick={() => {
-                        setexpList([...expList,experience])
-                        setExperience("Enter Experience")
+                      setExpList(expList.filter((_, ind) => ind !== index));
                     }}
                   />
                 </li>
-              </ul>
-
-            </Col>
-          </Row>
-          <div style={{ textAlign: "right" }}>
-            <CustomButton apply>Apply</CustomButton>
-          </div>
-          <h6>
-            Application Deadline : <DateInput type="date" value={date} onChange={(e) => {
-              setDate(e.target.value)
-              console.log(e.target.value)
-            }}/>
-          </h6>
+              ))}
+            <li>
+              <ExtraInput
+                type="text"
+                value={experience}
+                onChange={(e) => {
+                  setExperience(e.target.value);
+                }}
+              />{" "}
+              <Icon
+                icon="akar-icons:circle-plus-fill"
+                height="20"
+                color="#001e62"
+                onClick={() => {
+                  setExpList([...expList, experience]);
+                  setExperience("Enter Experience");
+                }}
+              />
+            </li>
+          </ul>
+        </Col>
+      </Row>
+      <div style={{ textAlign: "right" }}>
+        <CustomButton apply>Apply</CustomButton>
+      </div>
+      <h6>
+        Application Deadline :{" "}
+        <DateInput
+          type="date"
+          value={date}
+          onChange={(e) => {
+            setDate(e.target.value);
+            console.log(e.target.value);
+          }}
+        />
+      </h6>
     </JobContainer>
   );
 }
