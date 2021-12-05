@@ -16,37 +16,70 @@ const Vdiv=styled(Col)`
     
     background-size: 100%;
     background-Image: url("https://i.pinimg.com/originals/bc/27/d8/bc27d86f17734a148728f5be2a0b0aa0.jpg");
-    height: 350px;
     opacity: 1;
     object-fit: cover;
+    @media only screen and (min-width: 700px) {
+        height: 350px;
+    }
+    @media (min-width: 500px) and (max-width: 700px) {
+        height: 250px;
+    }
+    @media (min-width: 400px) and (max-width: 500px) {
+        height: 220px;
+    }
+    @media (min-width: 200px) and (max-width: 400px) {
+        height: 220px;
+    }
+    @media (max-width: 200px) {
+        height: 200px;
+    }
 `;
 const Title=styled.h1`
     text-align: center;
-    margin-top: 70px;
     font-weight: 1000;
+    @media only screen and (min-width: 700px) {
+        margin-top: 70px;
+    }
+    @media (min-width: 500px) and (max-width: 700px) {
+        margin-top: 50px;
+    }
+    @media (min-width: 300px) and (max-width: 500px) {
+        margin-top: 40px;
+    }
+    @media (min-width: 200px) and (max-width: 400px) {
+        margin-top: 25px;
+    }
+    @media (max-width: 200px) {
+        margin-top: 20px;
+    }
 `;
 const Para=styled.p`
     text-align: center; 
-    margin-top: 20px; 
     font-weight: 1000;
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
+        margin-top: 20px;
     }
     @media (min-width: 1024px) and (max-width: 1160px) {
         font-size: 15px;
+        margin-top: 20px;
     }
 
     @media (min-width: 700px) and (max-width: 1024px) {
         font-size: 14px;
+        margin-top: 20px;
     }
     @media (min-width: 500px) and (max-width: 700px) {
         font-size: 13px;
+        margin-top: 15px;
     }
     @media (min-width: 300px) and (max-width: 500px) {
         font-size: 12px;
+        margin-top: 10px;
     }
     @media (max-width: 300px) {
-        font-size: 11px;
+        font-size: 8px;
+        margin-top: 8px;
     }
 `;
 const Image =styled("img")`

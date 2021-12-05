@@ -70,7 +70,7 @@ const SalaryValue = styled.p`
   padding-left: 10px;
 `;
 const Date = styled.span`
-  color: #db2a2a;
+  color:  #ff0f0f;
 `;
 
 const data = {

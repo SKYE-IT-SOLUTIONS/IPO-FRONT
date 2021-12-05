@@ -1,7 +1,6 @@
 // third party imports
 import React from "react";
 import NavBar from "./components/NavBar";
-
 //in app imports-presentational
 import { Header, Main, Footer } from "./components/Layout";
 // import { Container, Row } from "./components/CommonComponents";
@@ -15,14 +14,22 @@ import AuthContextProvider from "./contexts/AuthContext";
 // import Button from "@restart/ui/esm/Button";
 import TopLogoBar from "./components/TopLogoBar";
 // import ContactUs from "./components/ContactUs";
+<<<<<<< HEAD
 import NewsList from "./containers/NewsList";
 import ImageSlider from "./components/ImageSlider";
 import Mover from "./components/Mover";
+=======
+// import NewsList from "./containers/NewsList";
+// import ImageSlider from "./components/ImageSlider";
+// import Mover from "./components/Mover";
+>>>>>>> 96c33fd716bf95da67953e2de1744412b68c05c7
 // import JobList from "./components/JobList";
 // import Subscription from "./components/Subscription";
 // import LogoCard from "./components/LogoCard";
 // import Status from "./components/Status";
 import PostJob from "./components/PostJob";
+import AddJobPost from "./components/AddJobPost";
+
 
 function App() {
   return (
@@ -35,6 +42,7 @@ function App() {
         <Main>
 
           {/* <PostJob/> */}
+          <AddJobPost/>
 
           <ImageSlider/>
           <Mover/>
