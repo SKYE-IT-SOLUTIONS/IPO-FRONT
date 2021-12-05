@@ -15,9 +15,9 @@ import AuthContextProvider from "./contexts/AuthContext";
 // import Button from "@restart/ui/esm/Button";
 import TopLogoBar from "./components/TopLogoBar";
 // import ContactUs from "./components/ContactUs";
-// import NewsList from "./components/NewsList";
-// import ImageSlider from "./components/ImageSlider";
-// import Mover from "./components/Mover";
+import NewsList from "./containers/NewsList";
+import ImageSlider from "./components/ImageSlider";
+import Mover from "./components/Mover";
 // import JobList from "./components/JobList";
 // import Subscription from "./components/Subscription";
 // import LogoCard from "./components/LogoCard";
@@ -34,11 +34,11 @@ function App() {
         </Header>
         <Main>
 
-          <PostJob/>
+          {/* <PostJob/> */}
 
-          {/* <ImageSlider/>
+          <ImageSlider/>
           <Mover/>
-          <NewsList/> */}
+          <NewsList/>
 
           {/* <Container fluid>
           <NewsList />
