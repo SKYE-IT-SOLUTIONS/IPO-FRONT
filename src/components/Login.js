@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
-import UserServices from "../services/UserServices";
+import AuthServices from "../services/AuthServices";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -47,11 +47,12 @@ const LoginButton = styled(CustomButton)`
 
 function Login(props) {
   const { fonts } = useContext(ThemeContext);
-  const [error, seterror] = useState(null);
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = new UserServices();
-  console.log(seterror);
+
+  const user = new AuthServices();
+  console.log(setError);
 
   return (
     <Modal
@@ -74,10 +75,7 @@ function Login(props) {
           </tr>
         </table>
         <Lable>Email</Lable>
-        <LogInput
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <LogInput value={email} onChange={(e) => setEmail(e.target.value)} />
         {error != null && <Error>Email Format is wrong</Error>}
         <Lable>Password</Lable>
         <LogInput
@@ -86,7 +84,13 @@ function Login(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error != null && <Error>Password Format wrong</Error>}
-        <LoginButton onClick={(email, password) => {user.handleLogin({username:email, password:password})}}>Log In</LoginButton>
+        <LoginButton
+          onClick={(email, password) => {
+            user.handleLogin({ username: email, password: password });
+          }}
+        >
+          Log In
+        </LoginButton>
         <table>
           <tr>
             <td>
