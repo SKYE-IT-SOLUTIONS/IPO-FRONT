@@ -49,7 +49,7 @@ export const onSubmit = async (data, DATA_URL) => {
 export const onUpdate = async (id, data, DATA_URL) => {
   var config = {
     method: "PUT",
-    url: DATA_URL + "/" + id,
+    url: DATA_URL + `/${id}`,
     headers: {
       Authorization: `Bearer ${getAccessToken()}`,
       "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export const onUpdate = async (id, data, DATA_URL) => {
 export const onDelete = async (id, DATA_URL) => {
   var config = {
     method: "DELETE",
-    url: DATA_URL + "/" + id,
+    url: DATA_URL + `/${id}`,
     headers: {
       Authorization: `Bearer ${getAccessToken()}`,
       "Content-Type": "application/json",
