@@ -19,7 +19,11 @@ const TitleDiv = styled.div`
   display: flex;
   justify-content:center;
   padding: 20px 0;
-
+`
+const RequirementTitle = styled.h4`
+  @media (max-width: 1040px){
+    font-size: 18px;
+  }
 `
 
 const Logo = styled.div`
@@ -34,8 +38,11 @@ const Logo = styled.div`
 `;
 
 const Title = styled.h4`
-  padding-bottom: 10px;
   padding-right: 5px;
+
+  @media (max-width: 1040px){
+    font-size: 18px;
+  }
 `;
 
 const ApplyImage = styled.div`
@@ -45,6 +52,17 @@ const ApplyImage = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin: auto;
+
+  @media (min-width: 768px) and (max-width: 1040px){
+    height: 360px;
+    width: 360px;
+  }
+
+  @media (max-width: 768px){
+   
+    width: 90%;
+  }
 `;
 
 const Table = styled.table`
@@ -70,31 +88,56 @@ const Salary = styled.p`
   margin-bottom: 0;
   padding-left: 10px;
   padding-top: 8px;
+
+  @media (min-width: 768px) and (max-width: 1040px){
+    font-size: 14px;
+  }
 `;
 
 const CustomInput = styled(Input)`
   width: 50%;
+
+  @media (max-width: 1040px){
+    font-size: 13px;
+    width: 80%;
+  }
 `;
 
 const DateInput = styled(Input)`
   width: 30%;
+
+  @media (min-width: 768px) and (max-width: 1040px){
+    font-size: 13px;
+  }
 `;
 
 const SalaryInput = styled(Input)`
   width: 90%;
   margin-left: 10px;
   color: #ff0f0f;
+
+  @media (max-width: 1040px){
+    font-size: 13px;
+  }
 `;
 
 const PositionInput = styled(Input)`
   width: 40%;
   height: 37px;
+
+  @media  (max-width: 1040px){
+    font-size: 13px;
+  }
 `;
 const TextArea = styled.textarea`
   width: 100%;
   border-radius: 5px;
   border: 2px solid black;
   padding: 5px;
+
+  @media (min-width: 768px) and (max-width: 1040px){
+    font-size: 13px;
+  }
 `;
 
 const ExtraInput = styled.input`
@@ -102,29 +145,50 @@ const ExtraInput = styled.input`
   border-radius: 5px;
   border: 2px solid black;
   padding: 1px;
+
+  @media (min-width: 1041px) and (max-width: 1200px){
+    width: 90%;
+
+  }
+
+  /* @media (min-width: 576px) and (max-width: 1040px){
+    width: 85%;
+    font-size: 13px;
+  } */
+
+  @media (max-width: 1040px){
+    width: 85%;
+    font-size: 13px;
+  }
+
+  /* @media (min-width: 576px) and (max-width: 765px){
+    width: 85%;
+    font-size: 13px;
+  } */
 `;
 
 const Position = styled.div`
   display: flex;
   flex-direction: row;
+  padding-bottom: 15px;
 `;
 
 function AddJobPost() {
   const { fonts } = useContext(ThemeContext);
-  const [title, setTitle] = useState("Enter Job Title");
-  const [position, setPosition] = useState("Enter Job Position");
-  const [decription, setDecription] = useState("Enter Description");
+  const [title, setTitle] = useState(null);
+  const [position, setPosition] = useState(null);
+  const [decription, setDecription] = useState(null);
   
-  const [specList, setspecList] = useState([]);
-  const [specification, setSpecification] = useState("Enter Job Specification");
+  const [specList, setSpecList] = useState([]);
+  const [specification, setSpecification] = useState(null);
 
-  const [qlfList, setqlfList] = useState([]);
-  const [qualification, setQualification] = useState("Enter Job Qualification");
+  const [qlfList, setQlfList] = useState([]);
+  const [qualification, setQualification] = useState(null);
   
-  const [expList, setexpList] = useState([]);
-  const [experience, setExperience] = useState("Enter Experience");
+  const [expList, setExpList] = useState([]);
+  const [experience, setExperience] = useState(null);
   
-  const [salary, setSalary] = useState(0)
+  const [salary, setSalary] = useState(null)
   const [date, setDate] = useState(null)
 
   return (
@@ -132,6 +196,7 @@ function AddJobPost() {
           <TitleDiv><CustomInput
                   type="text"
                   value={title}
+                  placeholder="Enter Job Title"
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
@@ -142,6 +207,7 @@ function AddJobPost() {
             <PositionInput
               type="text"
               value={position}
+              placeholder="Enter Job Position"
               onChange={(e) => {
                 setPosition(e.target.value);
               }}
@@ -151,12 +217,13 @@ function AddJobPost() {
           <TextArea
             rows="4"
             value={decription}
+            placeholder="Enter Description"
             onChange={(e) => {
               setDecription(e.target.value);
             }}
           />
-          <Row style={{ paddingTop: "15px" }}>
-            <Col md={6}>
+          <Row style={{ padding: "15px 0" }}>
+            <Col md={6} sm={12}>
               <ApplyImage image={JobPhoto} />
 
               <SalaryDiv>
@@ -167,7 +234,7 @@ function AddJobPost() {
                     </td>
                     <td>
                       <Salary>Salary</Salary>
-                      <SalaryInput type="text" value={salary} onChange={(e) => {
+                      <SalaryInput type="text" placeholder="0" value={salary} onChange={(e) => {
                         setSalary(e.target.value)
                       }}/>
                     </td>
@@ -175,19 +242,20 @@ function AddJobPost() {
                 </table>
               </SalaryDiv>
             </Col>
-            <Col>
+            <Col md={6} sm={12}>
 
-              <h4>Specifications</h4>
+              <RequirementTitle>Specifications</RequirementTitle>
               <ul>
                 {specList && specList.map((value, index) => (
                   <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setspecList(specList.filter((val)=> val !== value))
+                    setSpecList(specList.filter((_,ind)=> ind !== index))
                   }}/></li>
                 ))}
                 <li>
                   <ExtraInput
                     type="text"
                     value={specification}
+                    placeholder="Enter Job Specification"
                     onChange={(e) => {
                       setSpecification(e.target.value);
                     }}
@@ -197,24 +265,27 @@ function AddJobPost() {
                     height="20"
                     color="#001e62"
                     onClick={() => {
-                        setspecList([...specList,specification])
-                        setSpecification("Enter Job Specification")
+                      if(specification !== null  && specification !== ""){
+                        setSpecList([...specList,specification])
+                        setSpecification("")
+                      }
                     }}
                   />
                 </li>
               </ul>
 
-              <h4>Qualifications</h4>
+              <RequirementTitle>Qualifications</RequirementTitle>
               <ul>
                 {qlfList && qlfList.map((value, index) => (
                   <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setqlfList(qlfList.filter((val)=> val !== value))
+                    setQlfList(qlfList.filter((_,ind)=> ind !== index))
                   }}/></li>
                 ))}
                 <li>
                   <ExtraInput
                     type="text"
                     value={qualification}
+                    placeholder="Enter Job Qualification"
                     onChange={(e) => {
                       setQualification(e.target.value);
                     }}
@@ -224,24 +295,27 @@ function AddJobPost() {
                     height="20"
                     color="#001e62"
                     onClick={() => {
-                        setqlfList([...qlfList,qualification])
-                        setQualification("Enter Job Qualification")
+                      if(qualification !== null  && qualification !== ""){
+                        setQlfList([...qlfList,qualification])
+                        setQualification("")
+                      }
                     }}
                   />
                 </li>
               </ul>
 
-              <h4>Experience</h4>
+              <RequirementTitle>Experience</RequirementTitle>
               <ul>
                 {expList && expList.map((value, index) => (
                   <li key={index}>{value}  <Icon icon="ic:round-cancel" style={{marginLeft:"5px"}} color="red" height="20" onClick={() => {
-                    setexpList(expList.filter((val)=> val !== value))
+                    setExpList(expList.filter((_,ind)=> ind !== index))
                   }}/></li>
                 ))}
                 <li>
                   <ExtraInput
                     type="text"
                     value={experience}
+                    placeholder="Enter Experience"
                     onChange={(e) => {
                       setExperience(e.target.value);
                     }}
@@ -251,8 +325,10 @@ function AddJobPost() {
                     height="20"
                     color="#001e62"
                     onClick={() => {
-                        setexpList([...expList,experience])
-                        setExperience("Enter Experience")
+                      if(experience !== null  && experience !== ""){
+                        setExpList([...expList,experience])
+                        setExperience("")
+                      }
                     }}
                   />
                 </li>
@@ -260,15 +336,15 @@ function AddJobPost() {
 
             </Col>
           </Row>
-          <div style={{ textAlign: "right" }}>
-            <CustomButton apply>Apply</CustomButton>
-          </div>
           <h6>
             Application Deadline : <DateInput type="date" value={date} onChange={(e) => {
               setDate(e.target.value)
               console.log(e.target.value)
             }}/>
           </h6>
+          <div style={{ textAlign: "right" }}>
+            <CustomButton submit>Submit</CustomButton>
+          </div>
     </JobContainer>
   );
 }
