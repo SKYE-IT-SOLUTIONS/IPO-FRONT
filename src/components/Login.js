@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
-import UserServices from "../services/UserServices";
+import AuthServices from "../services/AuthServices";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -47,10 +47,10 @@ const LoginButton = styled(CustomButton)`
 
 function Login(props) {
   const { fonts } = useContext(ThemeContext);
-  const [error, seterror] = useState(null);
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = new UserServices();
+  const user = new AuthServices();
   // console.log(seterror);
 
   return (
@@ -76,10 +76,7 @@ function Login(props) {
           </tbody>
         </table>
         <Lable>Email</Lable>
-        <LogInput
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <LogInput value={email} onChange={(e) => setEmail(e.target.value)} />
         {error != null && <Error>Email Format is wrong</Error>}
         <Lable>Password</Lable>
         <LogInput
