@@ -7,8 +7,9 @@ export default class AuthServices {
     console.log(error);
     if (status) {
       setIsAuthenticated(true);
+      return {status:status,error:error};
     } else {
-      alert(error);
+      return {status:status,error:error};
     }
   };
   handleLogout = async (setIsAuthenticated) => {
