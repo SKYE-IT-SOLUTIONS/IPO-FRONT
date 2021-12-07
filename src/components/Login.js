@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useNavigate  } from 'react-router-dom';
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
@@ -40,19 +41,25 @@ const LogInput = styled(Input)`
 `;
 
 const LoginButton = styled(CustomButton)`
-  background: #41295a;
+  background: ${({ bgColor }) => bgColor};
   border-radius: 5px;
   margin-top: 13px;
 `;
 
 function Login(props) {
-  const { fonts } = useContext(ThemeContext);
-  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState("");
+  const [passwordError, setError] = useState(null);
+  const [isLoading, setisLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(null);
+
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const them = theme ? light.button : dark.button;
+
+  const navigate = useNavigate();
 
   const user = new AuthServices();
-  console.log(setError);
 
   return (
     <Modal
@@ -75,22 +82,37 @@ function Login(props) {
           </tr>
         </table>
         <Lable>Email</Lable>
-        <LogInput value={email} onChange={(e) => setEmail(e.target.value)} />
-        {error != null && <Error>Email Format is wrong</Error>}
+        <LogInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        {emailError != null && <Error>Email Format is wrong</Error>}
         <Lable>Password</Lable>
         <LogInput
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error != null && <Error>Password Format wrong</Error>}
+        {passwordError != null && <Error>Password Format wrong</Error>}
         <LoginButton
-          onClick={(email, password) => {
-            user.handleLogin({ username: email, password: password });
+          disabled={isLoading}
+          bgColor={!isLoading ? them.enable : them.disable}
+          onClick={async () => {
+            setLoadingError(null);
+            setisLoading(true);
+            const { status, error } = await user.handleLogin({
+              username: email,
+              password: password,
+            });
+            setisLoading(false);
+            if (status) {
+              console.log(props);
+              navigate("/dashboard");
+            } else {
+              setLoadingError(error);
+            }
           }}
         >
           Log In
         </LoginButton>
+        {loadingError != null && <Error>{loadingError}</Error>}
         <table>
           <tr>
             <td>
