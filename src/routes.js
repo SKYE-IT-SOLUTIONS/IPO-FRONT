@@ -36,8 +36,6 @@ const routes = (isAuthenticated) => [
         { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
         { path: 'register', element:"" },
         { path: 'delivery', element: "" },
-        { path: 'terms', element: "" },
-        { path: 'payments/:requestId', element: "" },
       ]
     }
   ];
