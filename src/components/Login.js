@@ -70,6 +70,7 @@ function Login(props) {
     >
       <LoginBody fonts={fonts}>
         <table>
+          <tbody>
           <tr>
             <TableIconCol>
               {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
@@ -80,6 +81,7 @@ function Login(props) {
               <h1>Log In</h1>
             </td>
           </tr>
+          </tbody>
         </table>
         <Lable>Email</Lable>
         <LogInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -114,6 +116,7 @@ function Login(props) {
         </LoginButton>
         {loadingError != null && <Error>{loadingError}</Error>}
         <table>
+          <tbody>
           <tr>
             <td>
               <ForgetPassword>Forget Password</ForgetPassword>
@@ -122,6 +125,7 @@ function Login(props) {
               <SignUp>Don't have an account? Sign Up</SignUp>
             </td>
           </tr>
+          </tbody>
         </table>
       </LoginBody>
     </Modal>
