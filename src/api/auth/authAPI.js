@@ -1,4 +1,4 @@
-import { authRequest, getErrorMessage, postRequest } from "./utils";
+import { authRequest, getErrorMessage, postRequest } from "../utils";
 import { getAccessToken,setAccessToken,getUserId, setRefreshToken, setUserId, refreshAccessToken } from './tokensAPI'
 
 
@@ -10,6 +10,7 @@ const REFRESH_URL = "/auth/refreshtoken";
 var result = { status: false, error: null};//global variable declared
 
 export const loginIn= async (credentials) => {
+    console.log("loginIn");
     // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
     await postRequest(LOGIN_URL,credentials).then(({data,error}) => {
         if(!error){
@@ -26,6 +27,7 @@ export const loginIn= async (credentials) => {
         console.log("error "+error)
         result = {status:false, error:getErrorMessage(error)};
       });
+      console.log(result);
       return result;
 };
 

@@ -107,6 +107,7 @@ function ImageSlider() {
   const { theme, light, dark } = useContext(ThemeContext);
 
     const current_theme = theme ? light : dark;
+    console.log(current_theme)
  
     return(
       

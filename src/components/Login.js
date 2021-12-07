@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
+import UserServices from "../services/UserServices";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -38,7 +39,7 @@ const LogInput = styled(Input)`
   width: 100%;
 `;
 
-const LoginBttn = styled(CustomButton)`
+const LoginButton = styled(CustomButton)`
   background: #41295a;
   border-radius: 5px;
   margin-top: 13px;
@@ -47,7 +48,10 @@ const LoginBttn = styled(CustomButton)`
 function Login(props) {
   const { fonts } = useContext(ThemeContext);
   const [error, seterror] = useState(null);
-  console.log(seterror);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const user = new UserServices();
+  // console.log(seterror);
 
   return (
     <Modal
@@ -58,25 +62,35 @@ function Login(props) {
     >
       <LoginBody fonts={fonts}>
         <table>
+          <tbody>
           <tr>
             <TableIconCol>
-            {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
-            <Icon  icon="teenyicons:lock-circle-solid" height="40" />
+              {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
+              <Icon icon="teenyicons:lock-circle-solid" height="40" />
             </TableIconCol>
             <td style={{ textAlign: "left" }}>
               {" "}
               <h1>Log In</h1>
             </td>
           </tr>
+          </tbody>
         </table>
         <Lable>Email</Lable>
-        <LogInput type="email" />
+        <LogInput
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         {error != null && <Error>Email Format is wrong</Error>}
         <Lable>Password</Lable>
-        <LogInput type="password" />
+        <LogInput
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         {error != null && <Error>Password Format wrong</Error>}
-        <LoginBttn>Log In</LoginBttn>
+        <LoginButton onClick={() => {user.handleLogin({username:email, password:password})}}>Log In</LoginButton>
         <table>
+          <tbody>
           <tr>
             <td>
               <ForgetPassword>Forget Password</ForgetPassword>
@@ -85,6 +99,7 @@ function Login(props) {
               <SignUp>Don't have an account? Sign Up</SignUp>
             </td>
           </tr>
+          </tbody>
         </table>
       </LoginBody>
     </Modal>

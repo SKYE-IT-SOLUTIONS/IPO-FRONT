@@ -1,4 +1,4 @@
-import { Cookies } from "../shared/cookies";
+import { Cookies } from "../../shared/cookies";
 
 export const getAccessToken = () =>{
     const token = Cookies.get("access")
