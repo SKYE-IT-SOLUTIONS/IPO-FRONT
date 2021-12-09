@@ -10,7 +10,7 @@ import AddNewsPost from './components/AddNewsPost';
 const routes = (isAuthenticated) => [
     {
       path: '/admin',
-      element: isAuthenticated ? "" : <Navigate to='/login' />,
+      element: isAuthenticated ? <h1>UserLogged</h1> : <Navigate to='/login' />,
       children: [
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
@@ -30,7 +30,7 @@ const routes = (isAuthenticated) => [
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },{
-      path: '/',
+      path: '/ass',
       element: <h1>Hello</h1>,
       children: [
         { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
