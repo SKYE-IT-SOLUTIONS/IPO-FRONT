@@ -6,6 +6,7 @@ import { useNavigate  } from 'react-router-dom';
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -55,6 +56,7 @@ function Login(props) {
   const [loadingError, setLoadingError] = useState(null);
 
   const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const {setIsAuthenticated} = useContext(AuthContext)
   const them = theme ? light.button : dark.button;
 
   const navigate = useNavigate();
@@ -102,11 +104,12 @@ function Login(props) {
             const { status, error } = await user.handleLogin({
               username: email,
               password: password,
-            });
+            },setIsAuthenticated);
             setisLoading(false);
+            if(status){props.onHide()}
             if (status) {
               console.log(props);
-              navigate("/dashboard");
+              navigate("admin");
             } else {
               setLoadingError(error);
             }
