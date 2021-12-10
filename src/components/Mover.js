@@ -12,6 +12,9 @@ import  {Col} from './CommonComponents';
 import { CustomButton,Icon } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 
 const Moverdiv = styled.div`
     width:100%;
@@ -23,38 +26,43 @@ background-image: ${({ bg }) => bg};
 const Moveritem = styled(Nav.Item)`
     width:33.33%;
     text-align: center;
+    
+    @media (min-width: 500px) and (max-width: 767px) {
+        height: 50px;
+    }
+    @media (min-width: 300px) and (max-width: 500px) {
+        height: 40px;
+    }
+    @media (max-width: 300px) {
+        height: 30px;
+    }
 `;
 const MoverNavlink = styled(Nav.Link)`
     padding-top: 60px;
     height: 100px;
     color: white;
-    font-size: 15px;
-    @media only screen and (min-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
+    @media only screen and (min-width: 1024px) {
+        padding-top: 30px;
+        height: 80px;
+        font-size: 15px;
     }
-
-    @media (min-width: 1024px) and (max-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
-    }
-
-    @media (min-width: 700px) and (max-width: 1024px) {
-        padding-top: 40px;
-        height: 90px;
-    }
-    @media (min-width: 500px) and (max-width: 700px) {
+    @media (min-width: 767px) and (max-width: 1024px) {
         padding-top: 35px;
         height: 80px;
-        font-size: 9px;
+        font-size: 12px;
+    }
+    @media (min-width: 500px) and (max-width: 767px) {
+        padding-top: 8px;
+        height: 80px;
+        font-size: 10px;
     }
     @media (min-width: 300px) and (max-width: 500px) {
-        padding-top: 32px;
+        padding-top: 5px;
         height: 70px;
         font-size: 7px;
     }
     @media (max-width: 300px) {
-        padding-top: 20px;
+        padding-top: 0px;
         height: 50px;
         font-size: 6px;
     }
@@ -62,6 +70,7 @@ const MoverNavlink = styled(Nav.Link)`
 const Maindiv=styled.div`
     margin: 10px;
     font-family:${({fontFamily})=> fontFamily};
+    
 `;
 const Welcomep=styled.h1`
     font-family: 'Gluten', cursive;
@@ -87,10 +96,10 @@ const Welcomep=styled.h1`
     }
 `;
 const Contentdiv= styled(Row)`
-
+    
 `;
 const Imagediv=styled(Col)`
-
+    
 `;
 const Image = styled.img`
     float: right;
@@ -122,9 +131,10 @@ const Image = styled.img`
    
 `;
 const Paradiv=styled(Col)`
-
+   
 `;
 const Pdiv=styled.div`
+    
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
     }
@@ -170,13 +180,13 @@ function Mover(){
         <Moverdiv> 
             <MoverNav bg={current_theme.ui} defaultActiveKey="/"  >
             <Moveritem >
-                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}} ><MoverIcon icon= "openmoji:overview"/><br/>OverView</MoverNavlink>
+                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}}><DashboardIcon fontSize="small"/><br/>OverView</MoverNavlink>
             </Moveritem>
             <Moveritem>
-                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><MoverIcon icon= "bi:eye-fill"/><br/>Vision</MoverNavlink>
+                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><VisibilityIcon fontSize="small"/><br/>Vision</MoverNavlink>
             </Moveritem>
             <Moveritem>
-            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><MoverIcon icon= "ant-design:aim-outlined"/><br/>Mission</MoverNavlink>
+            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><TrackChangesIcon fontSize="small"/><br/>Mission</MoverNavlink>
             </Moveritem>
             </MoverNav>
             <div hidden={Index !== 0}>
@@ -191,6 +201,7 @@ function Mover(){
                     {/* Map Section */}
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
+                  
                       <Pdiv>
                             University of Ruhuna which is envisaged to enhance the
                             relationships with external organizations, Industries and
@@ -210,9 +221,9 @@ function Mover(){
                             controls what happens in the rest of the paragraph.  
                       </Pdiv>    
                   </Paradiv>
-                  <br />
+                 
                 <Collapse in={open}>
-                  <Pdiv>
+                  <Pdiv><br/>
                       From its inception in year 2004, it has been engaged in
                       various activities which involves different fields and
                       different people in the field of Agriculture. The office
@@ -220,7 +231,7 @@ function Mover(){
                       supervision of Dean, Faculty of Agriculture. Having
                       fruitful relationships is all that matters in our
                       services. Therefore, for us, you are important than
-                      anything else. Please feel free to contact us.
+                      anything else. Please feel free to contact us.<br/>
                   </Pdiv>
                 </Collapse>
                 <MoreButton apply onClick={() => {
