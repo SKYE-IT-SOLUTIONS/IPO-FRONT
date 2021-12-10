@@ -1,45 +1,17 @@
 // third party imports
 import React from "react";
-import NavBar from "./components/NavBar";
-
+import { useRoutes } from "react-router-dom";
 //in app imports-presentational
-import { Header, Main, Footer } from "./components/Layout";
-//import { Container, Row } from "./components/CommonComponents";
-
-import FooterContent from "./components/Footer";
+import routes from "./routes";
 
 //in app imports-logical
 import ThemeContextProvider from "./contexts/ThemeContext";
-import AuthContextProvider from "./contexts/AuthContext";
-// import { testing } from "./api/authAPI";
-// import Button from "@restart/ui/esm/Button";
-import TopLogoBar from "./components/TopLogoBar"; /*
-import ContactUs from "./components/ContactUs";
-import NewsList from "./components/NewsList";
-import JobList from "./components/JobList";
-import Subscription from "./components/Subscription";*/
-// import ContactUs from "./components/ContactUs";
-//import NewsList from "./components/NewsList";
-//import SideNav from "./components/SideNav";
-import Dashboard from "./containers/Dashboard";
 
 function App() {
-  return (
-    <AuthContextProvider>
-      <ThemeContextProvider>
-        <Header>
-          <TopLogoBar />
-          <NavBar />
-        </Header>
-        <Main>
-        <Dashboard/>
-        </Main>
-        <Footer>
-          <FooterContent />
-        </Footer>
-      </ThemeContextProvider>
-    </AuthContextProvider>
-  );
+
+  const routing = useRoutes(routes(true));
+
+  return <ThemeContextProvider>{routing}</ThemeContextProvider>;
 }
 
 export default App;

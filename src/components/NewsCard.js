@@ -18,6 +18,7 @@ const NewsCardView = styled(Card)`
   font-family: ${({ font }) => font.general};
   border-radius : 15px;
   background: linear-gradient(to right, #ece9e6, #ffffff);
+  
 `;
 
 const NewsImg = styled.div`
@@ -63,7 +64,7 @@ function NewsCard({news}) {
   }
 
   return (
-    <NewsDiv md={4} sm={4} lg={3} xl={3} xxl={2} xs={10}>
+    <NewsDiv md={4} sm={6} lg={3} xl={3} xxl={2} xs={10}>
       <NewsCardView font={fonts}>
         <NewsImg image={news.url}/>
         <Card.Body>

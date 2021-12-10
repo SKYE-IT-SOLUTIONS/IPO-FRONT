@@ -14,10 +14,11 @@ import whatsapp from "../assets/whatsapp.png";
 import linkedin from "../assets/linkedin.png";
 import youtube from "../assets/youtube.png";
 import logo from "../assets/logo.png";
+import vision from "../assets/vision.jpg";
 
 
 export  {Container,Row,Col,Navbar,Icon};
-export {twitter,insta,fb,whatsapp,linkedin,youtube,logo };
+export {twitter,insta,fb,whatsapp,linkedin,youtube,logo,vision };
 
 export const CustomButton = styled.button`
   background: linear-gradient(to right, #000428, #004e92);
@@ -56,5 +57,4 @@ export const Input = styled.input`
   border-radius: 5px;
   border: 2px solid black;
   padding: 5px;
-  width: 300px;
 `;
