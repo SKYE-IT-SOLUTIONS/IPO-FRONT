@@ -49,8 +49,8 @@ const LoginButton = styled(CustomButton)`
 `;
 
 function Login(props) {
-  const [email, setEmail] = useState("");
-  const [emailInfo, setEmailInfo] = useState({ error: null, status: false });
+  const [username, setUsername] = useState("");
+  const [usernameInfo, setUsernameInfo] = useState({ error: null, status: false });
 
   const [password, setPassword] = useState("");
   const [passwordInfo, setPasswordInfo] = useState({error: null,status: false});
@@ -88,23 +88,23 @@ function Login(props) {
             </tr>
           </tbody>
         </table>
-        <Lable>Email</Lable>
+        <Lable>Username</Lable>
         <LogInput
-          type="email"
-          value={email}
+          type="text"
+          value={username}
           onChange={(e) => {
-            setEmail(e.target.value);
-            setEmailInfo(Simple_Validator(e.target.value));
+            setUsername(e.target.value);
+            setUsernameInfo(Simple_Validator(e.target.value,"Username"));
           }}
         />
-        {emailInfo.error != null && <Error>{emailInfo.error}</Error>}
+        {usernameInfo.error != null && <Error>{usernameInfo.error}</Error>}
         <Lable>Password</Lable>
         <LogInput
           type="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            setPasswordInfo(Simple_Validator(e.target.value));
+            setPasswordInfo(Simple_Validator(e.target.value,"Password"));
           }}
         />
         {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}
@@ -112,11 +112,11 @@ function Login(props) {
           disabled={isLoading}
           bgColor={!isLoading ? them.enable : them.disable}
           onClick={async () => {
-            if (emailInfo.status && passwordInfo.status) {
+            if (usernameInfo.status && passwordInfo.status) {
               setSubmitError(null);
               setisLoading(true);
               const { status, error } = await user.handleLogin(
-                {username: email,password: password,},
+                {username: username,password: password,},
                 setIsAuthenticated
               );
               setisLoading(false);
