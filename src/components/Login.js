@@ -2,8 +2,11 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useNavigate  } from 'react-router-dom';
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
+import AuthServices from "../services/AuthServices";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -38,16 +41,27 @@ const LogInput = styled(Input)`
   width: 100%;
 `;
 
-const LoginBttn = styled(CustomButton)`
-  background: #41295a;
+const LoginButton = styled(CustomButton)`
+  background: ${({ bgColor }) => bgColor};
   border-radius: 5px;
   margin-top: 13px;
 `;
 
 function Login(props) {
-  const { fonts } = useContext(ThemeContext);
-  const [error, seterror] = useState(null);
-  console.log(seterror);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(null);
+  const [password, setPassword] = useState("");
+  const [passwordError, setError] = useState(null);
+  const [isLoading, setisLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(null);
+
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const {setIsAuthenticated} = useContext(AuthContext)
+  const them = theme ? light.button : dark.button;
+
+  const navigate = useNavigate();
+
+  const user = new AuthServices();
 
   return (
     <Modal
@@ -58,25 +72,54 @@ function Login(props) {
     >
       <LoginBody fonts={fonts}>
         <table>
+          <tbody>
           <tr>
             <TableIconCol>
-            {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
-            <Icon  icon="teenyicons:lock-circle-solid" height="40" />
+              {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
+              <Icon icon="teenyicons:lock-circle-solid" height="40" />
             </TableIconCol>
             <td style={{ textAlign: "left" }}>
               {" "}
               <h1>Log In</h1>
             </td>
           </tr>
+          </tbody>
         </table>
         <Lable>Email</Lable>
-        <LogInput type="email" />
-        {error != null && <Error>Email Format is wrong</Error>}
+        <LogInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        {emailError != null && <Error>Email Format is wrong</Error>}
         <Lable>Password</Lable>
-        <LogInput type="password" />
-        {error != null && <Error>Password Format wrong</Error>}
-        <LoginBttn>Log In</LoginBttn>
+        <LogInput
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {passwordError != null && <Error>Password Format wrong</Error>}
+        <LoginButton
+          disabled={isLoading}
+          bgColor={!isLoading ? them.enable : them.disable}
+          onClick={async () => {
+            setLoadingError(null);
+            setisLoading(true);
+            const { status, error } = await user.handleLogin({
+              username: email,
+              password: password,
+            },setIsAuthenticated);
+            setisLoading(false);
+            if(status){props.onHide()}
+            if (status) {
+              console.log(props);
+              navigate("admin");
+            } else {
+              setLoadingError(error);
+            }
+          }}
+        >
+          Log In
+        </LoginButton>
+        {loadingError != null && <Error>{loadingError}</Error>}
         <table>
+          <tbody>
           <tr>
             <td>
               <ForgetPassword>Forget Password</ForgetPassword>
@@ -85,6 +128,7 @@ function Login(props) {
               <SignUp>Don't have an account? Sign Up</SignUp>
             </td>
           </tr>
+          </tbody>
         </table>
       </LoginBody>
     </Modal>

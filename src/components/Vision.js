@@ -1,10 +1,10 @@
 // third party imports
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 //in app imports-presentational
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import {vision} from "./CommonComponents";
+// import {vision} from "./CommonComponents";
 import  {Row,Col,Container} from './CommonComponents';
 import Visionimg from '../assets/Visionimagee.jpg'
 
@@ -96,6 +96,7 @@ function Vision(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
 
     const current_theme = theme ? light : dark;
+    console.log(current_theme)
     return(
         <Mdiv fontFamily={fonts.general}>
             <Vdiv >

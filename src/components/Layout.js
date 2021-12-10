@@ -12,7 +12,7 @@ export const Main = styled.main`
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
 `;
 
 export const Footer = styled.footer`

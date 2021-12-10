@@ -12,7 +12,18 @@ const JobContainer = styled(Container)`
     text-align: center;
     justify-content: center; */
   font-family: ${({ font }) => font.general};
-  margin: 10px 0;
+  padding: 0 20px;
+
+  @media (max-width: 600px) {
+    padding: 10px 20px;
+  }
+`;
+
+const RequirementTitle = styled.h4`
+  padding-top: 10px;
+  @media (max-width: 1040px) {
+    font-size: 18px;
+  }
 `;
 
 const Logo = styled.div`
@@ -26,8 +37,26 @@ const Logo = styled.div`
   border: 2px solid black;
 `;
 
+const MainTitle = styled.h2`
+  @media (max-width: 1040px) {
+    font-size: 25px;
+  }
+`;
+
 const Title = styled.h4`
   padding-bottom: 10px;
+
+  @media (max-width: 1040px) {
+    font-size: 20px;
+  }
+`;
+
+const Description = styled.p`
+  text-align: justify;
+
+  @media (max-width: 1040px) {
+    font-size: 15px;
+  }
 `
 
 const ApplyImage = styled.div`
@@ -37,13 +66,24 @@ const ApplyImage = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin: auto;
+
+  @media (min-width: 768px) and (max-width: 1040px) {
+    height: 360px;
+    width: 360px;
+  }
+
+  @media (max-width: 768px) {
+    height: 360px;
+    width: 360px;
+  }
 `;
 
 const Table = styled.table`
   margin: 25px auto;
 `;
 
-const Td = styled.td`
+const Td = styled.th`
   padding: 0 10px;
 `;
 
@@ -62,16 +102,34 @@ const Salary = styled.p`
   margin-bottom: 0;
   padding-left: 10px;
   padding-top: 8px;
+
+  @media (min-width: 768px) and (max-width: 1040px) {
+    font-size: 14px;
+  }
 `;
 
 const SalaryValue = styled.p`
   color: #ff0f0f;
   margin-top: 0;
   padding-left: 10px;
+
+  @media (max-width: 1040px) {
+    font-size: 13px;
+  }
 `;
 const Date = styled.span`
-  color: #db2a2a;
+  color: #ff0f0f;
 `;
+
+const List = styled.li`
+  font-size: 15px;
+`
+
+const Deadline = styled.h6`
+   @media (max-width: 1040px) {
+    font-size: 15px;
+  }
+`
 
 const data = {
   title: "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
@@ -116,42 +174,46 @@ function PostJob() {
       {data && (
         <>
           <Table>
-            <tr>
-              <Td>
-                <Logo></Logo>
-              </Td>
-              <Td>
-                <h2>{data.title}</h2>
-              </Td>
-            </tr>
+            <tbody>
+              <tr>
+                <Td>
+                  <Logo></Logo>
+                </Td>
+                <Td>
+                  <MainTitle>{data.title}</MainTitle>
+                </Td>
+              </tr>
+            </tbody>
           </Table>
           <Title>Job Position : {data.position}</Title>
-          <p>{data.description}</p>
-          <Row  style={{paddingTop :"15px"}}>
-            <Col md={6}>
+          <Description>{data.description}</Description>
+          <Row style={{ paddingTop: "15px" }}>
+            <Col md={6} sm={12}>
               <ApplyImage image={JobPhoto} />
 
               <SalaryDiv>
                 <table>
-                  <tr>
-                    <td rowSpan={2}>
-                      <Icon icon="emojione:money-bag" height="60" />
-                    </td>
-                    <td>
-                      <Salary>Salary</Salary>
-                      <SalaryValue>Rs.{data.salary}/=</SalaryValue>
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td rowSpan={2}>
+                        <Icon icon="emojione:money-bag" height="60" />
+                      </td>
+                      <td>
+                        <Salary>Salary</Salary>
+                        <SalaryValue>Rs.{data.salary}/=</SalaryValue>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </SalaryDiv>
             </Col>
-            <Col>
+            <Col md={6} sm={12}>
               {data.specifications && (
                 <>
-                  <h4>Specifications</h4>
+                  <RequirementTitle>Specifications</RequirementTitle>
                   <ul>
-                    {data.specifications.map((value,index) => (
-                      <li key={index}>{value}</li>
+                    {data.specifications.map((value, index) => (
+                      <List key={index}>{value}</List>
                     ))}
                   </ul>
                 </>
@@ -159,10 +221,10 @@ function PostJob() {
 
               {data.qualifications && (
                 <>
-                  <h4>Qualifications</h4>
+                  <RequirementTitle>Qualifications</RequirementTitle>
                   <ul>
-                    {data.qualifications.map((value,index) => (
-                      <li key={index}>{value}</li>
+                    {data.qualifications.map((value, index) => (
+                      <List key={index}>{value}</List>
                     ))}
                   </ul>
                 </>
@@ -170,10 +232,10 @@ function PostJob() {
 
               {data.experience && (
                 <>
-                  <h4>Experience</h4>
+                  <RequirementTitle>Experience</RequirementTitle>
                   <ul>
-                    {data.experience.map((value,index) => (
-                      <li key={index}>{value}</li>
+                    {data.experience.map((value, index) => (
+                      <List key={index}>{value}</List>
                     ))}
                   </ul>
                 </>
@@ -183,9 +245,9 @@ function PostJob() {
           <div style={{ textAlign: "right" }}>
             <CustomButton apply>Apply</CustomButton>
           </div>
-          <h6>
+          <Deadline>
             Application Deadline : <Date>{data.date}</Date>
-          </h6>
+          </Deadline>
         </>
       )}
     </JobContainer>

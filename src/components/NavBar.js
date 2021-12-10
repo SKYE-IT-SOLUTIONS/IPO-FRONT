@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
+import { useNavigate  } from 'react-router-dom';
 //in app imports-presentational
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
@@ -40,9 +40,11 @@ const LoginTag = styled.span`
   font-size: 16px;
 `;
 
-function NavBar() {
+function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const [modalShow, setModalShow] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const current_theme = theme ? light : dark;
 
@@ -136,6 +138,7 @@ function NavBar() {
               onMouseLeave={() => hideDropdown("Home")}
               onClick={() => {
                 console.log("This is Home");
+                navigate("/home");
               }}
             >
               <DropItems href="/#VandM" id="bg-custom-3">
@@ -288,6 +291,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Container>
       <Login
+        history={props.history}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
