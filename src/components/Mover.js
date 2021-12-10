@@ -26,38 +26,43 @@ background-image: ${({ bg }) => bg};
 const Moveritem = styled(Nav.Item)`
     width:33.33%;
     text-align: center;
+    
+    @media (min-width: 500px) and (max-width: 767px) {
+        height: 50px;
+    }
+    @media (min-width: 300px) and (max-width: 500px) {
+        height: 40px;
+    }
+    @media (max-width: 300px) {
+        height: 30px;
+    }
 `;
 const MoverNavlink = styled(Nav.Link)`
     padding-top: 60px;
     height: 100px;
     color: white;
-    font-size: 15px;
-    @media only screen and (min-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
+    @media only screen and (min-width: 1024px) {
+        padding-top: 30px;
+        height: 80px;
+        font-size: 15px;
     }
-
-    @media (min-width: 1024px) and (max-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
-    }
-
-    @media (min-width: 700px) and (max-width: 1024px) {
-        padding-top: 40px;
-        height: 90px;
-    }
-    @media (min-width: 500px) and (max-width: 700px) {
+    @media (min-width: 767px) and (max-width: 1024px) {
         padding-top: 35px;
         height: 80px;
-        font-size: 9px;
+        font-size: 12px;
+    }
+    @media (min-width: 500px) and (max-width: 767px) {
+        padding-top: 8px;
+        height: 80px;
+        font-size: 10px;
     }
     @media (min-width: 300px) and (max-width: 500px) {
-        padding-top: 32px;
+        padding-top: 5px;
         height: 70px;
         font-size: 7px;
     }
     @media (max-width: 300px) {
-        padding-top: 20px;
+        padding-top: 0px;
         height: 50px;
         font-size: 6px;
     }
@@ -166,7 +171,7 @@ const MoverIcon = styled(Icon)`
 
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
-    console.log(fonts);
+    // console.log(fonts);
     const current_theme = theme ? light : dark;
     const [Index,setIndex]=useState(0);
     const [open, setOpen] = useState(false);
@@ -175,13 +180,13 @@ function Mover(){
         <Moverdiv> 
             <MoverNav bg={current_theme.ui} defaultActiveKey="/"  >
             <Moveritem >
-                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}}><DashboardIcon /><br/>OverView</MoverNavlink>
+                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}}><DashboardIcon fontSize="small"/><br/>OverView</MoverNavlink>
             </Moveritem>
             <Moveritem>
-                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><VisibilityIcon /><br/>Vision</MoverNavlink>
+                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><VisibilityIcon fontSize="small"/><br/>Vision</MoverNavlink>
             </Moveritem>
             <Moveritem>
-            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><TrackChangesIcon /><br/>Mission</MoverNavlink>
+            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><TrackChangesIcon fontSize="small"/><br/>Mission</MoverNavlink>
             </Moveritem>
             </MoverNav>
             <div hidden={Index !== 0}>
