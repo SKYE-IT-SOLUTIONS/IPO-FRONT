@@ -12,6 +12,9 @@ import  {Col} from './CommonComponents';
 import { CustomButton,Icon } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 
 const Moverdiv = styled.div`
     width:100%;
@@ -62,6 +65,7 @@ const MoverNavlink = styled(Nav.Link)`
 const Maindiv=styled.div`
     margin: 10px;
     font-family:${({fontFamily})=> fontFamily};
+    
 `;
 const Welcomep=styled.h1`
     font-family: 'Gluten', cursive;
@@ -87,10 +91,10 @@ const Welcomep=styled.h1`
     }
 `;
 const Contentdiv= styled(Row)`
-
+    
 `;
 const Imagediv=styled(Col)`
-
+    
 `;
 const Image = styled.img`
     float: right;
@@ -122,9 +126,11 @@ const Image = styled.img`
    
 `;
 const Paradiv=styled(Col)`
-
+    background-Color:#A9A9A9;
 `;
 const Pdiv=styled.div`
+    background-Color:#A9A9A9;
+    margin: 10px;
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
     }
@@ -170,13 +176,13 @@ function Mover(){
         <Moverdiv> 
             <MoverNav bg={current_theme.ui} defaultActiveKey="/"  >
             <Moveritem >
-                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}} ><MoverIcon icon= "openmoji:overview"/><br/>OverView</MoverNavlink>
+                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}}><DashboardIcon /><br/>OverView</MoverNavlink>
             </Moveritem>
             <Moveritem>
-                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><MoverIcon icon= "bi:eye-fill"/><br/>Vision</MoverNavlink>
+                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><VisibilityIcon /><br/>Vision</MoverNavlink>
             </Moveritem>
             <Moveritem>
-            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><MoverIcon icon= "ant-design:aim-outlined"/><br/>Mission</MoverNavlink>
+            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><TrackChangesIcon /><br/>Mission</MoverNavlink>
             </Moveritem>
             </MoverNav>
             <div hidden={Index !== 0}>
@@ -191,7 +197,8 @@ function Mover(){
                     {/* Map Section */}
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
-                      <Pdiv>
+                  
+                      <Pdiv><br/>
                             University of Ruhuna which is envisaged to enhance the
                             relationships with external organizations, Industries and
                             community in view of expanding the scope of the Faculty
@@ -210,7 +217,7 @@ function Mover(){
                             controls what happens in the rest of the paragraph.  
                       </Pdiv>    
                   </Paradiv>
-                  <br />
+                 
                 <Collapse in={open}>
                   <Pdiv>
                       From its inception in year 2004, it has been engaged in
