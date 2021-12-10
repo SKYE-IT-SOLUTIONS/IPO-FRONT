@@ -39,12 +39,14 @@ const NewsContent = styled(Card.Text)`
   text-align: justify;
   font-size: 12px;
   margin-bottom: 8px;
-  min-height : 90px;
+  height : 120px;
 `;
 
 const NewsButton = styled(CustomButton)`
   margin: 0px 0px 10px 0px;
   font-size: 12px;
+  position: absolute;
+  bottom: 20px;
 `;
 
 const NewsFooter = styled.span`
