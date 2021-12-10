@@ -126,11 +126,10 @@ const Image = styled.img`
    
 `;
 const Paradiv=styled(Col)`
-    background-Color:#A9A9A9;
+   
 `;
 const Pdiv=styled.div`
-    background-Color:#A9A9A9;
-    margin: 10px;
+    
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
     }
@@ -198,7 +197,7 @@ function Mover(){
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
                   
-                      <Pdiv><br/>
+                      <Pdiv>
                             University of Ruhuna which is envisaged to enhance the
                             relationships with external organizations, Industries and
                             community in view of expanding the scope of the Faculty
@@ -219,7 +218,7 @@ function Mover(){
                   </Paradiv>
                  
                 <Collapse in={open}>
-                  <Pdiv>
+                  <Pdiv><br/>
                       From its inception in year 2004, it has been engaged in
                       various activities which involves different fields and
                       different people in the field of Agriculture. The office
@@ -227,7 +226,7 @@ function Mover(){
                       supervision of Dean, Faculty of Agriculture. Having
                       fruitful relationships is all that matters in our
                       services. Therefore, for us, you are important than
-                      anything else. Please feel free to contact us.
+                      anything else. Please feel free to contact us.<br/>
                   </Pdiv>
                 </Collapse>
                 <MoreButton apply onClick={() => {

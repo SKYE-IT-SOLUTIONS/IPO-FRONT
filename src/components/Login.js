@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
 import { AuthContext } from "../contexts/AuthContext";
+import { Simple_Validator} from "../services/ValidationService";
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -49,14 +50,16 @@ const LoginButton = styled(CustomButton)`
 
 function Login(props) {
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(null);
+  const [emailInfo, setEmailInfo] = useState({ error: null, status: false });
+
   const [password, setPassword] = useState("");
-  const [passwordError, setError] = useState(null);
+  const [passwordInfo, setPasswordInfo] = useState({error: null,status: false});
+
   const [isLoading, setisLoading] = useState(false);
-  const [loadingError, setLoadingError] = useState(null);
+  const [submitError, setSubmitError] = useState(null);
 
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const {setIsAuthenticated} = useContext(AuthContext)
+  const { setIsAuthenticated } = useContext(AuthContext);
   const them = theme ? light.button : dark.button;
 
   const navigate = useNavigate();
@@ -73,61 +76,75 @@ function Login(props) {
       <LoginBody fonts={fonts}>
         <table>
           <tbody>
-          <tr>
-            <TableIconCol>
-              {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
-              <Icon icon="teenyicons:lock-circle-solid" height="40" />
-            </TableIconCol>
-            <td style={{ textAlign: "left" }}>
-              {" "}
-              <h1>Log In</h1>
-            </td>
-          </tr>
+            <tr>
+              <TableIconCol>
+                {/* <Icon icon="bi:shield-lock-fill" height="40" /> */}
+                <Icon icon="teenyicons:lock-circle-solid" height="40" />
+              </TableIconCol>
+              <td style={{ textAlign: "left" }}>
+                {" "}
+                <h1>Log In</h1>
+              </td>
+            </tr>
           </tbody>
         </table>
         <Lable>Email</Lable>
-        <LogInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        {emailError != null && <Error>Email Format is wrong</Error>}
+        <LogInput
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setEmailInfo(Simple_Validator(e.target.value,"email"));
+          }}
+        />
+        {emailInfo.error != null && <Error>{emailInfo.error}</Error>}
         <Lable>Password</Lable>
         <LogInput
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setPasswordInfo(Simple_Validator(e.target.value,"password"));
+          }}
         />
-        {passwordError != null && <Error>Password Format wrong</Error>}
+        {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}
         <LoginButton
           disabled={isLoading}
           bgColor={!isLoading ? them.enable : them.disable}
           onClick={async () => {
-            setLoadingError(null);
-            setisLoading(true);
-            const { status, error } = await user.handleLogin({
-              username: email,
-              password: password,
-            },setIsAuthenticated);
-            setisLoading(false);
-            if(status){props.onHide()}
-            if (status) {
-              console.log(props);
-              navigate("admin");
-            } else {
-              setLoadingError(error);
+            if (emailInfo.status && passwordInfo.status) {
+              setSubmitError(null);
+              setisLoading(true);
+              const { status, error } = await user.handleLogin(
+                {username: email,password: password,},
+                setIsAuthenticated
+              );
+              setisLoading(false);
+              if (status) {
+                props.onHide();
+              }
+              if (status) {
+                console.log(props);
+                navigate("admin");
+              } else {
+                setSubmitError(error);
+              }
             }
           }}
         >
           Log In
         </LoginButton>
-        {loadingError != null && <Error>{loadingError}</Error>}
+        {submitError != null && <Error>{submitError}</Error>}
         <table>
           <tbody>
-          <tr>
-            <td>
-              <ForgetPassword>Forget Password</ForgetPassword>
-            </td>
-            <td style={{ textAlign: "right" }}>
-              <SignUp>Don't have an account? Sign Up</SignUp>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <ForgetPassword>Forget Password</ForgetPassword>
+              </td>
+              <td style={{ textAlign: "right" }}>
+                <SignUp>Don't have an account? Sign Up</SignUp>
+              </td>
+            </tr>
           </tbody>
         </table>
       </LoginBody>
