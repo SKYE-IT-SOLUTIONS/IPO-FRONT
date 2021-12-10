@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes} from "styled-components";
 
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  position: relative;
+  position: absolute;
   height: 81vh;
   width: 100%;
   overflow: hidden;
 `;
 const SideNavBarContainer = styled.div`
-  position: relative;
+  position: absolute;
   left: 0;
   height: 100%;
   width: ${(props) => (props.active ? "240px" : "82px")};
@@ -123,7 +123,6 @@ const SubMenu = styled.ul`
   transition: height 0.5s;
   display: ${(props) => (props.active ? "208px" : "none")};
 `;
-
 const SubMenuItem = styled.li`
   position: relative;
   text-align: left;
@@ -142,7 +141,6 @@ const SubMenuItem = styled.li`
     color: #11101d;
   }
 `;
-
 const ArrowDown = keyframes`
   0% {
     transform: translate(505%, 0%) rotate(0deg);
@@ -178,7 +176,6 @@ const ArrowDown = keyframes`
     transform: translate(505%, 0%) rotate(90deg);
   }
 `;
-
 const ArrowUp = keyframes`
 0% {
     transform: translate(505%, 0%) rotate(90deg);
@@ -225,51 +222,50 @@ const SubMenuDropDownArrow = styled.i`
 const SideNav = () => {
   const [active, setActive] = useState(true);
   const [homeExpand, setHomeExpand] = useState(false);
-  const [homeExpandArrow, setHomeExpandArrow] = useState(true);
   return (
     <React.Fragment>
-      {/*<Root />*/}
       <Body>
         <SideNavBarContainer active={active}>
           <NavHeder active={active}>
-            <NavHeaderIcon className="bx bxl-c-plus-plus"></NavHeaderIcon>
-            <NavHeaderName>CodingLab</NavHeaderName>
+            <NavHeaderIcon className="bx bxs-dashboard"></NavHeaderIcon>
+            <NavHeaderName>Dashboard</NavHeaderName>
           </NavHeder>
           <MenuIcon
             className="bx bx-menu"
             active={active}
             onClick={() => {
               setActive(!active);
-              if(homeExpand){
-                setHomeExpand(!homeExpand)
+              if (homeExpand) {
+                setHomeExpand(!homeExpand);
               }
-
             }}
           ></MenuIcon>
 
           <NavBody>
             <NavListItem>
-              <NavListLink active={active} onClick={() => active ? setHomeExpand(!homeExpand) : ""}>
-                <NavListItemIcon className="bx bx-grid-alt"></NavListItemIcon>
+              <NavListLink
+                active={active}
+                onClick={() => (active ? setHomeExpand(!homeExpand) : "")}
+              >
+                <NavListItemIcon className="bx bx-home"></NavListItemIcon>
                 <NavListItemName active={active}>Home</NavListItemName>
                 <SubMenuDropDownArrow
                   className="bx bx-right-arrow"
                   active={active}
                   expand={homeExpand}
-                  expandArrow={homeExpandArrow}
                 ></SubMenuDropDownArrow>
               </NavListLink>
               <NavListItemTooltip active={active}>Home</NavListItemTooltip>
-              <SubMenu expand={homeExpand} active={active}>
-                <SubMenuItem>Home</SubMenuItem>
-                <SubMenuItem>Related Links</SubMenuItem>
-                <SubMenuItem>Student Services</SubMenuItem>
-                <SubMenuItem>Industrial Relationship</SubMenuItem>
-              </SubMenu>
+                <SubMenu expand={homeExpand} active={active}>
+                  <SubMenuItem>Home</SubMenuItem>
+                  <SubMenuItem>Related Links</SubMenuItem>
+                  <SubMenuItem>Student Services</SubMenuItem>
+                  <SubMenuItem>Industrial Relationship</SubMenuItem>
+                </SubMenu>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink active={active} >
+              <NavListLink active={active}>
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
                 <NavListItemName active={active}>User</NavListItemName>
               </NavListLink>

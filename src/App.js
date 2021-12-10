@@ -13,14 +13,15 @@ import ThemeContextProvider from "./contexts/ThemeContext";
 import AuthContextProvider from "./contexts/AuthContext";
 // import { testing } from "./api/authAPI";
 // import Button from "@restart/ui/esm/Button";
-import TopLogoBar from "./components/TopLogoBar";/*
+import TopLogoBar from "./components/TopLogoBar"; /*
 import ContactUs from "./components/ContactUs";
 import NewsList from "./components/NewsList";
 import JobList from "./components/JobList";
 import Subscription from "./components/Subscription";*/
 // import ContactUs from "./components/ContactUs";
 //import NewsList from "./components/NewsList";
- import SideNav from "./components/SideNav";
+//import SideNav from "./components/SideNav";
+import Dashboard from "./containers/Dashboard";
 
 function App() {
   return (
@@ -31,17 +32,7 @@ function App() {
           <NavBar />
         </Header>
         <Main>
-          <SideNav/>
-          {/*<NewsList />
-          <JobList />
-          <NotFound /> 
-          <Container fluid>
-            <Row>
-              <ContactUs />
-              <Subscription/>
-              <ContactUs />
-            </Row>
-          </Container>*/}
+        <Dashboard/>
         </Main>
         <Footer>
           <FooterContent />
