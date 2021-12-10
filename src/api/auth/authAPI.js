@@ -7,7 +7,12 @@ import {
   setUserId,
   refreshAccessToken,
 } from "./tokensAPI";
-import {LOGIN_URL, LOGOUT_URL, ACCESS_URL, REFRESH_URL} from "../../config/urls";
+import {
+  LOGIN_URL,
+  LOGOUT_URL,
+  ACCESS_URL,
+  REFRESH_URL,
+} from "../../config/urls";
 
 var result = { status: false, error: null }; //global variable declared
 
@@ -59,11 +64,15 @@ export const logOut = async () => {
 };
 
 export const isUser = async () => {
+  const access = await getAccessToken();
+  if (access === "") {
+    return { status: false, error: "Access Token Not Found" };
+  }
   var config = {
     method: "POST",
     url: ACCESS_URL,
     headers: {
-      Authorization: `Bearer ${getAccessToken()}`,
+      Authorization: `Bearer ${access}`,
       "Content-Type": "application/json",
     },
   };
