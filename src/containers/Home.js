@@ -12,7 +12,7 @@ export default function Home() {
         <TopLogoBar />
         <NavBar />
       </Header>
-      <Main>
+      <Main dashboard={true}>
         <Outlet />
       </Main>
       <Footer>

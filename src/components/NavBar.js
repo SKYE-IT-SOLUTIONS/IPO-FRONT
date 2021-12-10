@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 //in app imports-presentational
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
@@ -285,6 +285,16 @@ function NavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link>
+              <LoginTag onClick={() => navigate("/home")}>
+                Home
+              </LoginTag>
+            </Nav.Link>
+            <Nav.Link>
+              <LoginTag onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </LoginTag>
+            </Nav.Link>
+            <Nav.Link>
               <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
             </Nav.Link>
           </Nav>
@@ -295,7 +305,6 @@ function NavBar(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      
     </CustomNavBar>
   );
 }

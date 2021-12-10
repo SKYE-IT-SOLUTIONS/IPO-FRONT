@@ -6,6 +6,7 @@ import AddJobPost from './components/AddJobPost';
 import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
+import Dashboard from './containers/Dashboard/index';
 
 const routes = (isAuthenticated) => [
     {
@@ -27,6 +28,7 @@ const routes = (isAuthenticated) => [
         { path: '/jobPost', element: <PostJob/> },
         { path: '/news', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
+        { path: '/dashboard', element: <Dashboard/> },
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },{
