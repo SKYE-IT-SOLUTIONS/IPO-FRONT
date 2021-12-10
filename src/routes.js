@@ -6,11 +6,18 @@ import AddJobPost from './components/AddJobPost';
 import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
+import { isUser } from './api/auth/authAPI';
 
-const routes = (isAuthenticated) => [
+const auth = async () => {
+  const {status, error} = await isUser();
+  console.log(error);
+  return status;
+};
+
+const routes = () => [
     {
       path: '/admin',
-      element: isAuthenticated ? <h1>UserLogged</h1> : <Navigate to='/login' />,
+      element: auth() ? <h1>UserLogged</h1> : <Navigate to='/login' />,
       children: [
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
@@ -33,7 +40,7 @@ const routes = (isAuthenticated) => [
       path: '/ass',
       element: <h1>Hello</h1>,
       children: [
-        { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
+        { path: 'login', element: auth() ? <Navigate to='/' /> : <Navigate to='/404' /> },
         { path: 'register', element:"" },
         { path: 'delivery', element: "" },
       ]
