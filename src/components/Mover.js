@@ -161,7 +161,7 @@ const MoverIcon = styled(Icon)`
 
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
-    console.log(fonts);
+    // console.log(fonts);
     const current_theme = theme ? light : dark;
     const [Index,setIndex]=useState(0);
     const [open, setOpen] = useState(false);

@@ -94,10 +94,11 @@ const Image =styled("img")`
     }
 `;
 function Mission(){
-    const { theme, light, dark, fonts } = useContext(ThemeContext);
+    //theme, light, dark,
+    const { fonts } = useContext(ThemeContext);
 
-    const current_theme = theme ? light : dark;
-    console.log(current_theme)
+    // const current_theme = theme ? light : dark;
+    // console.log(current_theme)
     return(
         <Mdiv fontFamily={fonts.general}>
             <Vdiv >

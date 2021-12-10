@@ -104,10 +104,10 @@ const AnimatedText = styled.span`
 `;
 
 function ImageSlider() {
-  const { theme, light, dark } = useContext(ThemeContext);
+  // const { theme, light, dark } = useContext(ThemeContext);
 
-    const current_theme = theme ? light : dark;
-    console.log(current_theme)
+  //   const current_theme = theme ? light : dark;
+  //   console.log(current_theme)
  
     return(
       
