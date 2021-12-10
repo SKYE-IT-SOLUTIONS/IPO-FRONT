@@ -94,7 +94,7 @@ function Login(props) {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            setEmailInfo(Simple_Validator("Email",e.target.value));
+            setEmailInfo(Simple_Validator(e.target.value,"Email"));
           }}
         />
         {emailInfo.error != null && <Error>{emailInfo.error}</Error>}
@@ -104,7 +104,7 @@ function Login(props) {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            setPasswordInfo(Simple_Validator("Password",e.target.value));
+            setPasswordInfo(Simple_Validator(e.target.value,"Password"));
           }}
         />
         {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}

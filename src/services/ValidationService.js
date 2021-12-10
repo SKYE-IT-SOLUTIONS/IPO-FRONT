@@ -1,4 +1,4 @@
-export const Validator = (input_type, input, pattern) => {
+export const Validator = (input, pattern,input_type = "") => {
   let error = null;
   let status = false;
 
@@ -15,7 +15,7 @@ export const Validator = (input_type, input, pattern) => {
   return { error: error, status: status };
 };
 
-export const Simple_Validator = (input_type = "", input) => {
+export const Simple_Validator = (input,input_type = "") => {
   let error = null;
   let status = false;
 
