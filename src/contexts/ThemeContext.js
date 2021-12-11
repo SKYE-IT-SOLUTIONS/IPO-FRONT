@@ -6,7 +6,7 @@ function ThemeContextProvider(props) {
   const [isLightTheme, setisLightTheme] = useState(false);
 
   const light = { syntax: "#000", ui: "linear-gradient(to right, #000428, #004e92)", bg: "#eee", color: "red", footer:{syntax:"#000",f_ic_bg:"yellow", f_c_bg:"green", copyright:"#333"},button:{enable:"red",disable:"grey"} };//footer_icon_bg,footer_content_bg
-  const dark = { syntax: "#000", ui: "linear-gradient(to right, #000428, #004e92)", bg: "#555", color: "blue", footer:{syntax:"#fff",f_ic_bg:"#212529", f_c_bg:"rgba(0,0,0,0.2)", copyright:"#ffffff99"},button:{enable:"red",disable:"grey"} };
+  const dark = { syntax: "#000", ui: "linear-gradient(to right, #000428, #004e92)", bg: "#555", color: "blue", footer:{syntax:"#fff",f_ic_bg:"#212529", f_c_bg:"rgba(0,0,0,0.2)", copyright:"#ffffff99"},button:{enable:"green",disable:"grey"} };
   const fonts = { general:"'Quicksand',sans-serif",address:"time new roman",topLogo:'"Lora", serif',title:"'Righteous', cursive" };
 
 
