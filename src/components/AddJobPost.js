@@ -222,7 +222,7 @@ function AddJobPost() {
           }}
         />
       </Position>
-      {!positionInfo.status  && <Error>{positionInfo.error}</Error>}
+      {!positionInfo.status  && <Error style={{paddingLeft:"12%"}}>{positionInfo.error}</Error>}
 
       <TextArea
         rows="4"
