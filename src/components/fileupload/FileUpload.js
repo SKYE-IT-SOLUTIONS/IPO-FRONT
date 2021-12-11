@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {
   FileUploadContainer,
   FormField,
@@ -10,8 +11,11 @@ import {
   PreviewList,
   FileMetaData,
   RemoveFileIcon,
-  InputLabel
+  Fileuploadbtn
+  
+ 
 } from "./FileUpload.Styles";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const KILO_BYTES_PER_BYTE = 1000;
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
@@ -71,10 +75,9 @@ const FileUpload = ({
   return (
     <>
       <FileUploadContainer>
-        <InputLabel>{label}</InputLabel>
         <DragDropText>Drag and drop your files anywhere or</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
-          {/* <i className="fas fa-file-upload" /> */}
+           <Fileuploadbtn /> 
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </UploadFileBtn>
         <FormField
@@ -87,7 +90,7 @@ const FileUpload = ({
         />
       </FileUploadContainer>
       <FilePreviewContainer>
-        <span style={{color: '#7e827f'}}>Preview</span>
+        <span>Preview</span>
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
             let file = files[fileName];
@@ -106,9 +109,9 @@ const FileUpload = ({
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
                       <RemoveFileIcon
-                        className="fas fa-trash-alt"
+                        
                         onClick={() => removeFile(fileName)}
-                      />
+                      ><DeleteIcon/></RemoveFileIcon>
                     </aside>
                   </FileMetaData>
                 </div>

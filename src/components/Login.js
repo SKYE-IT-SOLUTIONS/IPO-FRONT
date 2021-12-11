@@ -120,6 +120,7 @@ function Login(props) {
                 setIsAuthenticated
               );
               setisLoading(false);
+
               if (status) {
                 props.onHide();
               }
