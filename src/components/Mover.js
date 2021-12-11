@@ -68,9 +68,10 @@ const MoverNavlink = styled(Nav.Link)`
     }
 `;
 const Maindiv=styled.div`
-    margin: 10px;
+    /* margin: 10px; */
     font-family:${({fontFamily})=> fontFamily};
-    
+    background: linear-gradient(to right, #8e9eab, #eef2f3);
+    padding:20px 10px;
 `;
 const Welcomep=styled.h1`
     font-family: 'Gluten', cursive;
@@ -96,10 +97,11 @@ const Welcomep=styled.h1`
     }
 `;
 const Contentdiv= styled(Row)`
-    
+    margin:0;
 `;
 const Imagediv=styled(Col)`
-    
+    position:absoulte;
+    z-index:99;
 `;
 const Image = styled.img`
     float: right;
@@ -198,7 +200,7 @@ function Mover(){
                     src="https://images.unsplash.com/photo-1498079022511-d15614cb1c02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
                     fluid
                     />
-                    {/* Map Section */}
+                    
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
                   

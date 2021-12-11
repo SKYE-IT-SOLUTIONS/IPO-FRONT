@@ -11,6 +11,7 @@ import Missionimg from '../assets/Mission.svg'
 const Mdiv=styled(Row)`
     font-family:${({fontFamily})=> fontFamily};
     padding: 10px 10px 10px 20px;
+    margin:0;
 `;
 const Vdiv=styled(Col)`
     
