@@ -86,7 +86,7 @@ function ContactUs(props) {
   }, [])
 
   return (
-    <ContainerDiv bg={them.ui} font={fonts} md="4" sm="6">
+    <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
       <ContactHeader>Contact Us</ContactHeader>
 
       {keyArray ? keyArray.map((data,index) => {
