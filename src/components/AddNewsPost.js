@@ -7,6 +7,9 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import FileUpload from "./fileupload/FileUpload";
+
+
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -87,6 +90,13 @@ function AddNewsPost() {
   const { fonts } = useContext(ThemeContext);
   const [content, setContent] = useState("");
   const [contentList, setContentList] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [filesU, setFilesU] = useState({});
+
+  const uploadPackageImages = (files, requestId) =>null;
+    // packageService.packageImagesUpload(files, requestId);
+
+  const updateUploadedFiles = (files) => setFiles(files);
 
   return (
     <NewContainer font={fonts}>
@@ -97,7 +107,7 @@ function AddNewsPost() {
         <DetailCol md={6} sm={12}>
             <Title>Title</Title>
             <NewsInput type="text" placeholder="Enter News Title" />
-          <Collection>
+          {/* <Collection>
             <Title>Image</Title>
             <label htmlFor="contained-button-file">
               <InputImage
@@ -109,9 +119,17 @@ function AddNewsPost() {
                 Upload
               </Button>
             </label>
-            {/* <ImageInput type="file"/> */}
-          </Collection>
 
+          </Collection> */}
+          <FileUpload style={{ backgroundColor:'#ededed',}}
+                  accept=".jpg,.png,.jpeg"
+                  multiple
+                  label="News Image(s)"
+                  files={filesU}
+                  setFiles={setFilesU}
+                  updateFilesCb={updateUploadedFiles}
+                />
+            {/* <ImageInput type="file"/> */}
           <Title>Description</Title>
           <ul>
             {contentList && contentList.map((value,index) => ( 
