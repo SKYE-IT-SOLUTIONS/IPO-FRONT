@@ -30,22 +30,23 @@ const NewContainer = styled(Container)`
 const DetailCol = styled(Col)``;
 
 const ApplyImage = styled.div`
-  height: 512px;
-  width: 512px;
+  height: 80%;
+  width: 100%;
   background-image: url(${({ image }) => image});
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin: auto;
 
-  @media (min-width: 768px) and (max-width: 1040px) {
-    height: 360px;
-    width: 360px;
+  @media (min-width: 768px) {
+    height: 90%;
+    width: 100%;
+    margin-top:30px;
+    margin-left:-50px
   }
-
   @media (max-width: 768px) {
-    height: 360px;
-    width: 360px;
+    height: 300px;
+    width: 300px;
+    margin-top:-30px;  
   }
 `;
 
@@ -67,7 +68,6 @@ const OuterTextArea = styled.div`
 display: flex;
   flex-direction: row;
   padding-bottom: 20px;
-
 `
 
 const TextArea = styled.textarea`
@@ -75,7 +75,6 @@ const TextArea = styled.textarea`
   border-radius: 5px;
   border: 2px solid black;
   padding: 5px;
-
 `;
 
 const NewsButton = styled(CustomButton)`
@@ -101,14 +100,17 @@ function AddNewsPost() {
 
   const updateUploadedFiles = (files) => setFiles(files);
 
+
+
   return (
     <NewContainer font={fonts}>
       <Row>
-        <Col md={6} sm={12}>
+        <Col md={5} sm={12}>
           <ApplyImage image={newsImage} />
         </Col>
-        <DetailCol md={6} sm={12}>
+        <DetailCol md={7} sm={12}>
             <Title>Title</Title>
+            
             <NewsInput type="text" placeholder="Enter News Title" />
           {/* <Collection>
             <Title>Image</Title>
@@ -122,9 +124,9 @@ function AddNewsPost() {
                 Upload
               </Button>
             </label>
-
           </Collection> */}
-          <FileUpload style={{ backgroundColor:'#ededed',}}
+          <Title>Image</Title>
+          <FileUpload style={{ backgroundColor:'#ededed'}}
                   accept=".jpg,.png,.jpeg"
                   multiple
                   label="News Image(s)"
