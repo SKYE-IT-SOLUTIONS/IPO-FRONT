@@ -25,7 +25,7 @@ const routes = (isAuthenticated) => [
         { path: 'home', element: <HomeContent/> },
         { path: '/addJob', element: <AddJobPost/> },
         { path: '/jobPost', element: <PostJob/> },
-        { path: '/news', element: <NewsView/> },
+        { path: '/news/:id', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
         { path: '*', element: <Navigate to='/404' /> }
       ]

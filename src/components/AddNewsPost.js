@@ -98,6 +98,8 @@ function AddNewsPost() {
 
   const updateUploadedFiles = (files) => setFiles(files);
 
+
+
   return (
     <NewContainer font={fonts}>
       <Row>

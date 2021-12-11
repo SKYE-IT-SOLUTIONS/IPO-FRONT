@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import styled, { css } from 'styled-components'
 import { Icon } from "@iconify/react";
 
+
 //assets
 import twitter from "../assets/twitter.png";
 import insta from "../assets/instagram.png";
@@ -58,3 +59,4 @@ export const Input = styled.input`
   border: 2px solid black;
   padding: 5px;
 `;
+
