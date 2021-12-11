@@ -1,10 +1,10 @@
 import styled from "styled-components";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 export const FileUploadContainer = styled.section`
   position: relative;
-  margin: 25px 0 15px;
   border: 2px dotted black;
-  padding: 35px 20px;
+  padding: 10px 20px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -30,14 +30,6 @@ export const FormField = styled.input`
   }
 `;
 
-export const InputLabel = styled.label`
-  top: -21px;
-  
-  color: black;
-  left: 0;
-  position: absolute;
-`;
-
 export const DragDropText = styled.p`
   font-weight: bold;
   letter-spacing: 1px;
@@ -49,16 +41,14 @@ export const UploadFileBtn = styled.button`
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #652341;
+  border: 2px solid black;
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
-  padding: 1.1em 2.8em;
-  text-align: center;
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 6px;
-  color: #652341;
+  
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -67,7 +57,6 @@ export const UploadFileBtn = styled.button`
   width: 45%;
   display: flex;
   align-items: center;
-  padding-right: 0;
   justify-content: center;
 
   &:after {
@@ -79,25 +68,11 @@ export const UploadFileBtn = styled.button`
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    background: #652341;
+    background: linear-gradient(to top, #000000, #434343);
     z-index: -1;
     transition: width 250ms ease-in-out;
   }
 
-  i {
-    font-size: 22px;
-    margin-right: 5px;
-    border-right: 2px solid;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 
   @media only screen and (max-width: 500px) {
     width: 70%;
@@ -135,6 +110,12 @@ export const FilePreviewContainer = styled.article`
   span {
     font-size: 14px;
   }
+`;
+export const Fileuploadbtn =styled(CloudUploadIcon)`
+  font-size: 22px;
+    margin-right: 5px;
+    width: 20%;
+      
 `;
 
 export const PreviewList = styled.section`
