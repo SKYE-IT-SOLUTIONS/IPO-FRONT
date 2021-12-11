@@ -56,6 +56,7 @@ const NewsFooter = styled.span`
   left : 18px ;
 `;
 
+
 function NewsCard({news}) {
   const { fonts } = useContext(ThemeContext)
   const characters = 150
