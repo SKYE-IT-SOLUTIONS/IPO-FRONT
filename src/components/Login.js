@@ -111,6 +111,7 @@ function Login(props) {
         <LoginButton
           disabled={isLoading}
           bgColor={!isLoading ? them.enable : them.disable}
+          
           onClick={async () => {
             if (usernameInfo.status && passwordInfo.status) {
               setSubmitError(null);
@@ -120,6 +121,7 @@ function Login(props) {
                 setIsAuthenticated
               );
               setisLoading(false);
+
               if (status) {
                 props.onHide();
               }

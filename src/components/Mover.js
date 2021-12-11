@@ -131,7 +131,7 @@ const Image = styled.img`
    
 `;
 const Paradiv=styled(Col)`
-   
+  
 `;
 const Pdiv=styled.div`
     

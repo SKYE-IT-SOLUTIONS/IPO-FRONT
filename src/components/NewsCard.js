@@ -39,7 +39,7 @@ const NewsContent = styled(Card.Text)`
   text-align: justify;
   font-size: 12px;
   margin-bottom: 8px;
-  height : 120px;
+  height : 150px;
 `;
 
 const NewsButton = styled(CustomButton)`
