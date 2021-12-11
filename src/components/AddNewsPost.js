@@ -85,6 +85,9 @@ const Title = styled(Lable)`
 
 function AddNewsPost() {
   const { fonts } = useContext(ThemeContext);
+
+  // useS
+
   const [content, setContent] = useState("");
   const [contentList, setContentList] = useState([]);
 
@@ -96,7 +99,9 @@ function AddNewsPost() {
         </Col>
         <DetailCol md={6} sm={12}>
             <Title>Title</Title>
-            <NewsInput type="text" placeholder="Enter News Title" />
+            <NewsInput type="text" placeholder="Enter News Title" onChange={(e) => {
+
+            }}/>
           <Collection>
             <Title>Image</Title>
             <label htmlFor="contained-button-file">
@@ -144,7 +149,9 @@ function AddNewsPost() {
                 }}
               />
           </OuterTextArea>
-          <NewsButton submit>Submit</NewsButton>
+          <NewsButton submit onClick={()=>{
+            console.log("List  : ",contentList)
+          }}>Submit</NewsButton>
         </DetailCol>
       </Row>
     </NewContainer>
