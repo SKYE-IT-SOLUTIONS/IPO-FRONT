@@ -110,8 +110,7 @@ function Login(props) {
         {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}
         <LoginButton
           disabled={isLoading}
-          bgColor={!isLoading ? them.enable : them.disable}
-          
+          bgColor={!isLoading ? them.login : them.disable}
           onClick={async () => {
             if (usernameInfo.status && passwordInfo.status) {
               setSubmitError(null);
