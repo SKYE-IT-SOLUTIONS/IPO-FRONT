@@ -5,8 +5,6 @@ import newsImage from "../assets/News-cuate.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import FileUpload from "./fileupload/FileUpload";
 
 
@@ -167,9 +165,14 @@ function AddNewsPost() {
                 }}
               />
           </OuterTextArea>
-          <NewsButton submit onClick={()=>{
+          <div style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
+          <NewsButton style={{width:"20%"}} submit onClick={()=>{
+            console.log("List  : ",contentList)
+          }}>View</NewsButton>
+          <NewsButton style={{width:"20%"}}  submit onClick={()=>{
             console.log("List  : ",contentList)
           }}>Submit</NewsButton>
+          </div>
         </DetailCol>
       </Row>
     </NewContainer>
