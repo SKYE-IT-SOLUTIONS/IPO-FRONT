@@ -84,6 +84,9 @@ const Title = styled(Lable)`
 
 function AddNewsPost() {
   const { fonts } = useContext(ThemeContext);
+
+  // useS
+
   const [content, setContent] = useState("");
   const [contentList, setContentList] = useState([]);
   const [files, setFiles] = useState([]);
@@ -157,7 +160,9 @@ function AddNewsPost() {
                 }}
               />
           </OuterTextArea>
-          <NewsButton submit>Submit</NewsButton>
+          <NewsButton submit onClick={()=>{
+            console.log("List  : ",contentList)
+          }}>Submit</NewsButton>
         </DetailCol>
       </Row>
     </NewContainer>

@@ -5,6 +5,7 @@ import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { Simple_Validator } from "../services/ValidationService";
 
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -13,6 +14,8 @@ const JobContainer = styled(Container)`
 
 const TitleDiv = styled.div`
   display: flex;
+  flex-direction:column;
+  text-align:center;
   justify-content: center;
   padding: 20px 0;
 `;
@@ -93,6 +96,7 @@ const Salary = styled.p`
 
 const CustomInput = styled(Input)`
   width: 50%;
+  margin:auto;
 
   @media (max-width: 1040px) {
     font-size: 13px;
@@ -160,10 +164,21 @@ const Position = styled.div`
   padding-bottom: 15px;
 `;
 
+const Error = styled.p`
+  color: red;
+  font-size: 14px;
+  margin: 0px;
+  padding: 5px 0px;
+`;
+
 function AddJobPost() {
   const { fonts } = useContext(ThemeContext);
   const [title, setTitle] = useState("");
+  const [titleInfo, setTitleInfo] = useState({ error: null, status: false });
+
   const [position, setPosition] = useState("");
+  const [positionInfo, setPositionInfo] = useState({ error: null, status: false });
+
   const [decription, setDecription] = useState("");
 
   const [specList, setSpecList] = useState([]);
@@ -186,9 +201,12 @@ function AddJobPost() {
           value={title}
           placeholder="Enter Job Title"
           onChange={(e) => {
-            setTitle(e.target.value);
+            let val = e.target.value
+            setTitle(val)
+            setTitleInfo(Simple_Validator(val,"Title"))
           }}
         />
+        {!titleInfo.status && <Error>{titleInfo.error}</Error>}
       </TitleDiv>
 
       <Position>
@@ -198,10 +216,13 @@ function AddJobPost() {
           value={position}
           placeholder="Enter Job Position"
           onChange={(e) => {
-            setPosition(e.target.value);
+            let val = e.target.value
+            setPosition(val)
+            setPositionInfo(Simple_Validator(val,"Job Position"))
           }}
         />
       </Position>
+      {!positionInfo.status  && <Error>{positionInfo.error}</Error>}
 
       <TextArea
         rows="4"
