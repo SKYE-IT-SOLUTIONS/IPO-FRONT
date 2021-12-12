@@ -6,18 +6,12 @@ import routes from "./routes";
 
 //in app imports-logical
 import ThemeContextProvider from "./contexts/ThemeContext";
-import { isUser } from './api/auth/authAPI';
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function App() {
-
-  const routing = useRoutes(routes());
+  const  isUserLoggedIn  = useSelector(state => state.user.isUserLoggedIn);
+  const routing = useRoutes(routes(isUserLoggedIn));
   return <ThemeContextProvider>{routing}</ThemeContextProvider>;
 }
-const auth = async () => {
-  const {status, error} = await isUser();
-  console.log(error);
-  console.log("status "+ status);
-  return status;
-};
+
 export default App;
