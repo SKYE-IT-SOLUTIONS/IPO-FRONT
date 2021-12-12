@@ -4,25 +4,27 @@ import styled from "styled-components";
 import { Col } from "./CommonComponents";
 
 const CustomLogo = styled(Col)`
-margin-bottom: 30px;
   &: hover {
     transform: scale(1.2);
     transition-delay: 300ms;
   };
   padding-top : 10px;
   display : flex;
+  margin:auto;
+  margin-bottom: 30px;
 `;
 
 const CustomCard = styled(Card)`
   width: 18rem;
   border-radius: 15px;
   background: #E0EAFC;
+  margin:auto;
 `;
 
 const LogoImg = styled.div`
 border-radius: 15px;
   background-image: url(${({ image }) => image});
-  height: 200px;
+  height: 130px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

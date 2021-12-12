@@ -2,16 +2,16 @@ import React from "react";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
 
-const Spin = styled(Loader)`
-  position: fixed;
+const Spin = styled.div`
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transform: -webkit-translate(-50%, -50%);
     transform: -moz-translate(-50%, -50%);
     transform: -ms-translate(-50%, -50%);
-
-    
+    text-align: center;
+    /* background:red; */
 `
 
 function Spinner() {
@@ -30,9 +30,11 @@ function Spinner() {
   ];
 
   return (
-    <div>
-      <Spin type={types[9]} color="black" height="30%" width="30%"/>
-    </div>
+    <Spin>
+      <Loader type={types[9]} color="black" height="25%" width="25%"/>
+    </Spin>
+      
+
   );
 }
 
