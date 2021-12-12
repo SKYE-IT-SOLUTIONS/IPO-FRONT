@@ -8,6 +8,8 @@ import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
 import { AuthContext } from "../contexts/AuthContext";
 import { Simple_Validator} from "../services/ValidationService";
+import {useSelector,useDispatch} from 'react-redux'
+import { setUserId, setUserLoggedIn, setUserRole } from "../store/userSlice"
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -59,12 +61,17 @@ function Login(props) {
   const [submitError, setSubmitError] = useState(null);
 
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const { setIsAuthenticated } = useContext(AuthContext);
   const them = theme ? light.button : dark.button;
+
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
 
   const user = new AuthServices();
+
+  const handleLogin = async (e) => {
+    dispatch(setUserLoggedIn(true))
+  }
 
   return (
     <Modal
@@ -112,25 +119,26 @@ function Login(props) {
           disabled={isLoading}
           bgColor={!isLoading ? them.login : them.disable}
           onClick={async () => {
-            if (usernameInfo.status && passwordInfo.status) {
-              setSubmitError(null);
-              setisLoading(true);
-              const { status, error } = await user.handleLogin(
-                {username: username,password: password,},
-                setIsAuthenticated
-              );
-              setisLoading(false);
+            handleLogin()
+            // if (usernameInfo.status && passwordInfo.status) {
+            //   setSubmitError(null);
+            //   setisLoading(true);
+            //   const { status, error } = await user.handleLogin(
+            //     {username: username,password: password,},
+            //     setIsAuthenticated
+            //   );
+            //   setisLoading(false);
 
-              if (status) {
-                props.onHide();
-              }
-              if (status) {
-                console.log(props);
-                navigate("admin");
-              } else {
-                setSubmitError(error);
-              }
-            }
+            //   if (status) {
+            //     props.onHide();
+            //   }
+            //   if (status) {
+            //     console.log(props);
+            //     navigate("admin");
+            //   } else {
+            //     setSubmitError(error);
+            //   }
+            // }
           }}
         >
           Log In
