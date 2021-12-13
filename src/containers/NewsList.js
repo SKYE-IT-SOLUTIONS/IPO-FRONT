@@ -32,6 +32,7 @@ function NewsList() {
   const dataService = new DataService();
 
   const [newsList, setNewsList] = useState([])
+  const [newsLoaded, setNewsLoaded] = useState(false)
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -50,10 +51,11 @@ function NewsList() {
       const data = await fetch(" http://localhost:3005/news").then(res => res.json()).then(data => data).catch(e=>console.log(e));
       console.log(data)
       setNewsList(data)
+      setNewsLoaded(true)
     };
     fetchNews();
 
-  }, []);
+  }, [newsLoaded]);
 
   return (
     <Container fluid>
