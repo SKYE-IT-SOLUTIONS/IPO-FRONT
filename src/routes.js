@@ -9,6 +9,7 @@ import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
 import UploadImage from './test/UploadImage';
 import AdminLayout from './containers/AdminLayout';
+import Dashboard from './containers/Dashboard/index';
 
 const routes = (isAuthenticated) => [
     {
