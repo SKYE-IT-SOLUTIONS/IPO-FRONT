@@ -7,6 +7,7 @@ import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
+import UploadImage from './test/UploadImage';
 
 const routes = (isAuthenticated) => [
     {
@@ -29,12 +30,14 @@ const routes = (isAuthenticated) => [
         { path: '/news/:id', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
         { path: '/spinner', element: <Spinner/> },
+        { path: 'test', element:<UploadImage/> },
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },{
       path: '/ass',
       element: <h1>Hello</h1>,
       children: [
+        
         { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
         { path: 'register', element:"" },
         { path: 'delivery', element: "" },

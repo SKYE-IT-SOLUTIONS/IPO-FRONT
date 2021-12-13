@@ -26,14 +26,14 @@ export const loginIn = async (credentials) => {
         setRefreshToken(refreshToken);
         setUserId(id);
         console.log("login success");
-        result = { status: true, error: null };
+        result = { status: true,data: data.data, error: null };
       } else {
-        result = { status: false, error: getErrorMessage(error) };
+        result = { status: false,data: data.data, error: getErrorMessage(error) };
       }
     })
     .catch((error) => {
       console.log("error " + error);
-      result = { status: false, error: getErrorMessage(error) };
+      result = { status: false,data: null, error: getErrorMessage(error) };
     });
   console.log(result);
   return result;
@@ -52,13 +52,13 @@ export const logOut = async () => {
         setAccessToken(null);
         setRefreshToken(null);
         setUserId(null);
-        result = { status: true, error: null };
+        result = { status: true,data: data.data, error: null };
       } else {
-        result = { status: false, error: getErrorMessage(error) };
+        result = { status: false,data: data.data, error: getErrorMessage(error) };
       }
     })
     .catch((error) => {
-      result = { status: false, error: getErrorMessage(error) };
+      result = { status: false,data: null, error: getErrorMessage(error) };
     });
   return result;
 };
@@ -66,7 +66,7 @@ export const logOut = async () => {
 export const isUser = async () => {
   const access = await getAccessToken();
   if (access === "") {
-    return { status: false, error: "Access Token Not Found" };
+    return { status: false,data: null, error: "Access Token Not Found" };
   }
   var config = {
     method: "POST",
@@ -81,9 +81,9 @@ export const isUser = async () => {
     .then(async ({ data, error }) => {
       if (!error) {
         if (data.status === 200) {
-          result = { status: true, error: null };
+          result = { status: true,data: data.data, error: null };
         } else {
-          result = { status: false, error: "Undefined Status Code" };
+          result = { status: false,data: data.data, error: "Undefined Status Code" };
         }
       } else {
         if (error.status === 401) {
@@ -95,16 +95,16 @@ export const isUser = async () => {
           if (status) {
             result = await isUser();
           } else {
-            result = { status: status, error: getErrorMessage(error) };
+            result = { status: status,data: data.data, error: getErrorMessage(error) };
           }
         } else {
-          result = { status: false, error: getErrorMessage(error) };
+          result = { status: false,data: data.data, error: getErrorMessage(error) };
         }
       }
     })
     .catch((error) => {
       console.log("error " + error);
-      result = { status: false, error: getErrorMessage(error) };
+      result = { status: false,data: null, error: getErrorMessage(error) };
     });
   return result;
 }; //must await for the result
