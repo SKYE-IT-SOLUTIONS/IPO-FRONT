@@ -168,6 +168,7 @@ function AddNewsPost() {
           <NewsButton submit onClick={()=>{
             console.log("List  : ",contentList)
           }}>Submit</NewsButton>
+          
         </DetailCol>
       </Row>
     </NewContainer>
