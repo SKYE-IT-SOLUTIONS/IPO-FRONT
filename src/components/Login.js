@@ -7,9 +7,10 @@ import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
 import { AuthContext } from "../contexts/AuthContext";
-import { Simple_Validator} from "../services/ValidationService";
+import { Simple_Validator} from "../utils/validation";
 import {useSelector,useDispatch} from 'react-redux'
 import { setUserId, setUserLoggedIn, setUserRole } from "../store/userSlice"
+
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -70,7 +71,7 @@ function Login(props) {
   const user = new AuthServices();
 
   const handleLogin = async (e) => {
-    dispatch(setUserLoggedIn(true))
+    dispatch(setUserLoggedIn("NBSS"))
   }
 
   return (

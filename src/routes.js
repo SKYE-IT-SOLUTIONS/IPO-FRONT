@@ -28,6 +28,7 @@ const routes = (isAuthenticated) => [
         { path: '/addJob', element: <AddJobPost/> },
         { path: '/jobPost', element: <PostJob/> },
         { path: '/news/:id', element: <NewsView/> },
+        { path: '/news/preview', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
         { path: '/spinner', element: <Spinner/> },
         { path: 'test', element:<UploadImage/> },

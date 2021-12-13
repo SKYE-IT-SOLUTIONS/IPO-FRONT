@@ -14,7 +14,8 @@ const Title = styled.h3`
 const OuterDiv = styled.div`
     background : linear-gradient(to right, #000428, #004e92);
     width:100%;
-    padding-top : 10px;
+    padding-top : 20px;
+    padding-bottom : 30px;
 `
 
 const initialState = {

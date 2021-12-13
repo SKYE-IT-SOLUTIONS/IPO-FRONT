@@ -9,8 +9,9 @@ import ThemeContextProvider from "./contexts/ThemeContext";
 import { useSelector } from "react-redux";
 
 function App() {
-  const  isUserLoggedIn  = useSelector(state => state.user.isUserLoggedIn);
-  const routing = useRoutes(routes(isUserLoggedIn));
+  const  isUserLoggedIn  = useSelector(state => state.user.iuli);
+  console.log("State user ",useSelector(state => state.user))
+  const routing = useRoutes(routes(isUserLoggedIn === "NBSS" ? true : false ));
   return <ThemeContextProvider>{routing}</ThemeContextProvider>;
 }
 
