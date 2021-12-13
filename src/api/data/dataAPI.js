@@ -174,3 +174,26 @@ export const onGetAll = async (DATA_URL) => {
     });
   return result;
 };
+
+export const onGetOne = async (DATA_URL,id) => {
+  await getRequest(`${DATA_URL}/${id}`)
+    .then(async ({ data, error }) => {
+      if (!error) {
+        if (data.status === 200) {
+          result = { status: true, data: data.data, error: null };
+        } else {
+          result = {
+            status: false,
+            data: null,
+            error: getErrorMessage(error),
+          };
+        }
+      } else {
+        result = { status: false, data: null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      result = { status: false, data: null, error: getErrorMessage(error) };
+    });
+  return result;
+};
