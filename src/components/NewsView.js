@@ -5,9 +5,13 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { Container, Row, Col } from "./CommonComponents";
 import { useParams } from "react-router-dom";
 import DataService from "../services/DataService";
+<<<<<<< Updated upstream
 import Snackbar from "./CustomSnackBar";
 import { useSelector } from "react-redux";
 import Spinner from "./Spinner";
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> Stashed changes
 
 const NewContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -75,6 +79,7 @@ function NewsView() {
           setNewsData(data);
         } else {
           setError(error);
+          navigate("/404");
         }
       } else {
         setNewsData({
@@ -91,6 +96,7 @@ function NewsView() {
 
   const { fonts } = useContext(ThemeContext);
   return (
+<<<<<<< Updated upstream
     <>
       {isLoading ? (
         <Spinner />
@@ -125,6 +131,37 @@ function NewsView() {
             </>
           )}
         </NewContainer>
+=======
+    <NewContainer font={fonts}>
+      {newsData && (
+        <>
+          {isLoading ? <h1>Loading</h1> : <h1>Done</h1>}
+          <Row>
+            <Col md={6} sm={12}>
+              <Title>{newsData?.title}</Title>
+            </Col>
+            <Col md={6} sm={12}>
+              <Image src={newsData?.url} thumbnail />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {newsData?.description?.map((d,index) => {
+                return (
+                  <Content key={index} className="paragraph">
+                    {d}
+                  </Content>
+                );
+              })}
+            </Col>
+          </Row>{" "}
+          <Date font={fonts}>
+            {newsData.uploadTime !== ""
+              ? `Last updated - ${newsData.uploadTime}`
+              : ""}
+          </Date>
+        </>
+>>>>>>> Stashed changes
       )}
     </>
   );
