@@ -7,6 +7,7 @@ import { Input, Lable, CustomButton } from "./CommonComponents";
 import { subscribeIpo } from "../api/subAPI";
 import { Simple_Validator, Validator } from "../utils/validation";
 import { patternMail } from "../config/pattern";
+import CustomSnackBar from "./CustomSnackBar";
 
 const SubscriptDiv = styled(Col)`
   display: flex;
@@ -61,8 +62,18 @@ function Subscription() {
   const [email, setEmail] = useState("");
   const [emailInfo, setEmailInfo] = useState({ error: null, status: false });
 
-  const [isLoading, setisLoading] = useState(false)
-  const [submitError, setSubmitError] = useState(null)
+  const [isLoading, setisLoading] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
 
   return (
     <SubscriptDiv fonts={fonts} md={4} sm={12}>
@@ -95,13 +106,12 @@ function Subscription() {
       />
       {emailInfo !== null && <Error>{emailInfo.error}</Error>}
       <EmailInfo>We'll never share your email with anyone else.</EmailInfo>
-      {submitError != null && <Error>{submitError}</Error>}
       <SubBttn
         submit
-        disabled={isLoading}
+        disabled={isLoading || !nameInfo.status || !emailInfo.status}
         onClick={async () => {
-          setisLoading(true)
           if(nameInfo.status && emailInfo.status){
+            setisLoading(true)
             const {status,error} = await subscribeIpo({ name, email });
             if(status){
               setName("")
@@ -109,13 +119,15 @@ function Subscription() {
               setSubmitError(null)
             }else{
               setSubmitError(error)
+              setIsErrorMsgOpen(true)
             }
+            setisLoading(false)
           }
-          setisLoading(false)
         }}
       >
         SUBMIT
       </SubBttn>
+      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={submitError}/>
     </SubscriptDiv>
   );
 }
