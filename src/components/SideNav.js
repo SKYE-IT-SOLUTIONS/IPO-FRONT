@@ -1,24 +1,16 @@
 import React, { useState } from "react";
-import styled, { /*createGlobalStyle*/ } from "styled-components";
-
-/*const Root = createGlobalStyle`
- *{
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
-`;*/
+import styled from "styled-components";
 
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
   height: 81vh;
-  width: 100%;
+  width: 285px;
   overflow: hidden;
 `;
 const SideNavBarContainer = styled.div`
-  position:relative;
+  position: relative;
   left: 0;
   height: 100%;
   width: ${(props) => (props.active ? "240px" : "82px")};
@@ -58,7 +50,7 @@ const MenuIcon = styled.i`
 `;
 const NavBody = styled.ul`
   margin-top: 15px;
-  margin-left:${(props) => (props.active ? "15px" : "0px")};
+  margin-left: ${(props) => (props.active ? "15px" : "0px")};
   padding: 0px;
   align-items: center;
 `;
@@ -117,43 +109,16 @@ const NavListItemTooltip = styled.span`
     opacity: 1;
     top: 50%;
   }
-`;/*
-const Search = styled.i`
-  position: absolute;
-  z-index: 99;
-  color: #fff;
-  font-size: 22px;
-  bottom: 0;
-  transition: all 0.5s ease;
-  :hover {
-    background-color: #fff;
-    color: #1d1b31;
-  }
 `;
-const Input = styled.input`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 12px;
-  outline: none;
-  border: none;
-  background: #1d1b31;
-  padding-left: 50px;
-  font-size: 18px;
-  color: #fff;
-`;*/
 const SideNav = () => {
   const [active, setActive] = useState(true);
   return (
     <React.Fragment>
-      {/*<Root />*/}
       <Body>
         <SideNavBarContainer active={active}>
           <NavHeder active={active}>
-            <NavHeaderIcon className="bx bxl-c-plus-plus"></NavHeaderIcon>
-            <NavHeaderName>CodingLab</NavHeaderName>
+            <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
+            <NavHeaderName>Dashboard</NavHeaderName>
           </NavHeder>
           <MenuIcon
             className="bx bx-menu"
@@ -164,23 +129,23 @@ const SideNav = () => {
           <NavBody>
             <NavListItem>
               <NavListLink>
-                <NavListItemIcon className="bx bx-grid-alt"></NavListItemIcon>
-                <NavListItemName active={active}>Dashboard</NavListItemName>
+                <NavListItemIcon className="bx bx-home"></NavListItemIcon>
+                <NavListItemName active={active}>Home</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Dashboard</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Home</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
               <NavListLink>
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
-                <NavListItemName active={active}>User</NavListItemName>
+                <NavListItemName active={active}>Users</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>User</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Users</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
               <NavListLink>
-                <NavListItemIcon className="bx bx-chat"></NavListItemIcon>
+                <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>Messages</NavListItemName>
               </NavListLink>
               <NavListItemTooltip active={active}>Messages</NavListItemTooltip>
@@ -188,36 +153,18 @@ const SideNav = () => {
 
             <NavListItem>
               <NavListLink>
-                <NavListItemIcon className="bx bx-pie-chart-alt-2"></NavListItemIcon>
-                <NavListItemName active={active}>Analytics</NavListItemName>
+                <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
+                <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Analytics</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Jobs</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
               <NavListLink>
-                <NavListItemIcon className="bx bx-folder"></NavListItemIcon>
-                <NavListItemName active={active}>File Manager</NavListItemName>
+                <NavListItemIcon className="bx bx-detail"></NavListItemIcon>
+                <NavListItemName active={active}>Posts</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>
-                File Manager
-              </NavListItemTooltip>
-            </NavListItem>
-
-            <NavListItem>
-              <NavListLink>
-                <NavListItemIcon className="bx bx-cart-alt"></NavListItemIcon>
-                <NavListItemName active={active}>Order</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Order</NavListItemTooltip>
-            </NavListItem>
-
-            <NavListItem>
-              <NavListLink>
-                <NavListItemIcon className="bx bx-heart"></NavListItemIcon>
-                <NavListItemName active={active}>Saved</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Saved</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Post</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
