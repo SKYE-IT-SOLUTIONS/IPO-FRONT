@@ -5,7 +5,7 @@ import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { Simple_Validator } from "../services/ValidationService";
+import { Simple_Validator } from "../utils/validation";
 
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};

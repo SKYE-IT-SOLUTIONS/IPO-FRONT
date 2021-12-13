@@ -5,7 +5,7 @@ import { Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { subscribeIpo } from "../api/subAPI";
-import { Simple_Validator, Validator } from "../services/ValidationService";
+import { Simple_Validator, Validator } from "../utils/validation";
 import { patternMail } from "../config/pattern";
 
 const SubscriptDiv = styled(Col)`
