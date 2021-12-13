@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        title: "",
+        title: null,
         description: [],
-        image: "",
+        image: null,
     },
     reducers: {
         setNews: (state, action) => {
@@ -17,7 +17,10 @@ export const newsSlice = createSlice({
             state.title = action.payload;
         },
         setDescription: (state, action) => {
-            state.description = action.payload;
+            state.description = [...state.description,action.payload];
+        },
+        removeDescription: (state) => {
+            state.description = [];
         },
         setImage: (state, action) => {
             state.image = action.payload;
@@ -25,7 +28,7 @@ export const newsSlice = createSlice({
     }
 });
 
-export const { setNews, setTitle, setDescription, setImage } = newsSlice.actions;
+export const { setNews, setTitle, setDescription, setImage ,removeDescription } = newsSlice.actions;
 
 export default newsSlice.reducer;
 
