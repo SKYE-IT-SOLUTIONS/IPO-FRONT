@@ -2,20 +2,13 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate,Route } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
-<<<<<<< Updated upstream
-import { AuthContext } from "../contexts/AuthContext";
 import { Simple_Validator} from "../utils/validation";
-import {useSelector,useDispatch} from 'react-redux'
-=======
-import { Simple_Validator} from "../services/ValidationService";
 import {useDispatch} from 'react-redux'
->>>>>>> Stashed changes
 import { setUserId, setUserLoggedIn, setUserRole } from "../store/userSlice"
-import AddNewsPost from "./AddNewsPost";
 import CustomSnackBar from "./CustomSnackBar";
 
 
