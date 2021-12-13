@@ -1,6 +1,6 @@
 import NotFound from './containers/404';
 import { Navigate } from 'react-router-dom';
-import Home from './containers/Home';
+import MainLayout from './containers/MainLayout';
 import HomeContent from './containers/HomeContent';
 import AddJobPost from './components/AddJobPost';
 import PostJob from './components/PostJob'
@@ -8,33 +8,36 @@ import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
 import UploadImage from './test/UploadImage';
+import AdminLayout from './containers/AdminLayout';
 
 const routes = (isAuthenticated) => [
     {
-      path: '/admin',
-      element: isAuthenticated ? <h1>UserLogged{console.log("isAuthenticated "+ isAuthenticated)}</h1> : <Navigate to='/login' />,
+      path: '/',
+      element: <MainLayout/>,
       children: [
+        { path: '/', element: <HomeContent/> },
+        { path: '404', element: <NotFound /> },
+        { path: 'home', element: <HomeContent/> },
+        { path: 'addJob', element: <AddJobPost/> },
+        { path: 'job/:id', element: <PostJob/> },
+        { path: 'news/:id', element: <NewsView/> },
+        { path: 'news/preview', element: <NewsView/> },
+        { path: 'addNews', element: <AddNewsPost/> },
+        { path: 'spinner', element: <Spinner/> },
+        { path: 'test', element:<UploadImage/> },
+        { path: '*', element: <Navigate to='/404' /> }
+      ]
+    },
+    {
+      path: '/admin',
+      element: true ? <AdminLayout/> : <Navigate to='/login' />,
+      children: [
+        { path: 'dashboard', element: <h1>Admin Content</h1> },
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },
     {
-      path: '/',
-      element: <Home/>,
-      children: [
-        { path: '/', element: <HomeContent/> },
-        { path: '404', element: <NotFound /> },
-        { path: 'home', element: <HomeContent/> },
-        { path: '/addJob', element: <AddJobPost/> },
-        { path: '/job/:id', element: <PostJob/> },
-        { path: '/news/:id', element: <NewsView/> },
-        { path: '/news/preview', element: <NewsView/> },
-        { path: '/addnews', element: <AddNewsPost/> },
-        { path: '/spinner', element: <Spinner/> },
-        { path: 'test', element:<UploadImage/> },
-        { path: '*', element: <Navigate to='/404' /> }
-      ]
-    },{
       path: '/ass',
       element: <h1>Hello</h1>,
       children: [
