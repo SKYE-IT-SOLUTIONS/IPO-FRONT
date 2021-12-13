@@ -35,15 +35,21 @@ function NewsList() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    const fetchNews = async () => {
-      const {status, data, error} = await dataService.handleGetAllNews();
-      if(status){
-        setNewsList(data);
-      }else{
-        setError(error);
-        console.log(error);
-      }
+    // const fetchNews = async () => {
+    //   const {status, data, error} = await dataService.handleGetAllNews();
+    //   if(status){
+    //     setNewsList(data);
+    //   }else{
+    //     setError(error);
+    //     console.log(error);
+    //   }
       
+    // };
+    // fetchNews();
+    const fetchNews = async () => {//this is temporary for demostrate
+      const data = await fetch(" http://localhost:3005/news").then(res => res.json()).then(data => data).catch(e=>console.log(e));
+      console.log(data)
+      setNewsList(data)
     };
     fetchNews();
 
