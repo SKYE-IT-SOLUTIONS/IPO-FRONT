@@ -4,6 +4,7 @@ import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Col } from "./CommonComponents";
+import { useNavigate } from "react-router-dom";
 
 const JobDiv = styled(Col)`
   &: hover {
@@ -61,6 +62,7 @@ const JobFooter = styled.span`
 
 function JobCard({ news }) {
   const { fonts } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   return (
     <JobDiv md={4} sm={4} lg={3} xl={3} xxl={2} xs={10}>
@@ -71,7 +73,7 @@ function JobCard({ news }) {
         </Card.Body>
         <JobImg image={news.url} />
         <Card.Body>
-          <JobButton apply> Read </JobButton>
+          <JobButton apply onClick={()=>{navigate("/job/1")}}> Read </JobButton>
           <JobFooter> Last updated {news.time} ago </JobFooter>
         </Card.Body>
       </JobCardView>

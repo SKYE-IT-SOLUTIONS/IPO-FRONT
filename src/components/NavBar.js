@@ -1,15 +1,17 @@
 // third party imports
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 //in app imports-presentational
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Login from "./Login";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useSelector,useDispatch } from "react-redux"
+import {setUserLoggedIn } from "../store/userSlice"
 import Cookies from 'js-cookie'
 
 
@@ -50,8 +52,10 @@ const Nav1=styled(Nav)`
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const [modalShow, setModalShow] = React.useState(false);
+  const [isLogged, setisLogged] = useState(false)
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const current_theme = theme ? light : dark;
 
@@ -63,8 +67,15 @@ function NavBar(props) {
   const [showOSW, setShowOSW] = useState(false);
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
- 
-  const userLogged=false;
+
+  const userLogged = useSelector(state => state.user.iuli);
+
+
+  useEffect(() => {
+    setisLogged(userLogged === "NBSS")
+  }, [userLogged])
+  
+  // const userLogged=false;
   const icon = <AccountCircleIcon fontSize="inherit" style={{color:"white"}}/>;
   const showDropdown = (title) => {
     switch (title) {
@@ -294,7 +305,7 @@ function NavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link>
-              {userLogged ? (
+              {isLogged ? (
                   <Nav1>
                         <NavDropdown
                           align={{ lg: 'start' }}
@@ -316,10 +327,8 @@ function NavBar(props) {
                           <NavDropdown.Item
                             href="/" 
                             onClick={() => {
-                              // req.onLogout()
-                              Cookies.set("access",null)
-                              Cookies.set("refresh",null)
-                              props.change(false);
+                              dispatch(setUserLoggedIn("SSNB"))
+                              navigate("/")
                             }}
                           >Log Out
                           </NavDropdown.Item>
