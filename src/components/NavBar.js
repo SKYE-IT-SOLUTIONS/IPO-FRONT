@@ -298,7 +298,8 @@ function NavBar(props) {
                   <Nav1>
                         <NavDropdown
                           align={{ lg: 'start' }}
-                          
+                          drop="start"
+
                           title={icon}
                           show={showIcon}
                           onMouseEnter={() => showDropdown("Icon")}
