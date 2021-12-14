@@ -11,6 +11,7 @@ import {setTitle, setDescription, setImage , removeDescription} from '../store/n
 import { useDispatch ,useSelector } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
+import { Simple_Validator} from "../utils/validation";
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -86,14 +87,25 @@ const Title = styled(Lable)`
     padding-top: 15px;
 `
 
+const Error = styled.p`
+  color: red;
+  font-size: 13px;
+  margin: 0px;
+  padding: 5px 0px;
+`;
+
 function AddNewsPost() {
   const dispatch = useDispatch()
   let navigate = useNavigate();
 
   const { fonts } = useContext(ThemeContext);
   // useS
-  const [newtitle, setNewstitle] = useState("")
+  const [newTitle, setNewsTitle] = useState("")
+  const [titleInfo, setTitleInfo] = useState({ error: null, status: false });
+
   const [content, setContent] = useState("");
+  const [contentInfo, setContentInfo] = useState({error: null,status: false});
+
   const [contentList, setContentList] = useState([]);
 
   const [files, setFiles] = useState([]);
@@ -111,17 +123,19 @@ function AddNewsPost() {
   useEffect(() => {
     setIsLoading(true)
     if(storeTitle !== null || storeDescription.length !== 0 || storeDescription !== undefined){
-      setNewstitle(storeTitle)
+      setNewsTitle(storeTitle)
       setContentList(storeDescription)
     }
     setIsLoading(false)
   }, [])
 
   const updateUploadedFiles = async (files) => {
+    if(files.lenth !=0){
     setFiles(files)
     console.log(files[0])
     const dataUrl = await setImageBuffer(files[0])
     dispatch(setImage(dataUrl))
+  }
   };
   
   return (
@@ -135,10 +149,12 @@ function AddNewsPost() {
         <DetailCol md={7} sm={12}>
             <Title>Title</Title>
             
-            <NewsInput type="text" placeholder="Enter News Title" value={newtitle} onChange={(e) => {
-              setTitle(e.target.value)
+            <NewsInput type="text" placeholder="Enter News Title" value={newTitle} onChange={(e) => {
+              setNewsTitle(e.target.value)
               dispatch(setTitle(e.target.value))
+              setTitleInfo(Simple_Validator(e.target.value,"Title"));
             }}/>
+            {titleInfo.error != null && <Error>{titleInfo.error}</Error>}
           {/* <Collection>
             <Title>Image</Title>
             <label htmlFor="contained-button-file">
@@ -180,8 +196,10 @@ function AddNewsPost() {
             ))}
           </ul>
           <OuterTextArea>
+          
           <TextArea rows="4" value={content} placeholder="Enter Description" onChange={(e) => {
             setContent(e.target.value)
+            setContentInfo(Simple_Validator(e.target.value,"Description"))
           }}/>
           <Icon
                 icon="akar-icons:circle-plus-fill"
@@ -198,6 +216,8 @@ function AddNewsPost() {
                 }}
               />
           </OuterTextArea>
+          {contentInfo.error != null && <Error>{contentInfo.error}</Error>}
+
           <div style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
           <NewsButton style={{width:"20%"}} submit onClick={()=>{
             navigate('/news/preview');

@@ -9,6 +9,9 @@ import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Login from "./Login";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Cookies from 'js-cookie'
+
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};
@@ -40,6 +43,10 @@ const LoginTag = styled.span`
   font-size: 16px;
 `;
 
+const Nav1=styled(Nav)`
+  margin-Top:-20px;
+  margin-Right:100px;
+`;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const [modalShow, setModalShow] = React.useState(false);
@@ -56,7 +63,9 @@ function NavBar(props) {
   const [showOSW, setShowOSW] = useState(false);
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
-
+ 
+  const userLogged=false;
+  const icon = <AccountCircleIcon fontSize="inherit" style={{color:"white"}}/>;
   const showDropdown = (title) => {
     switch (title) {
       case "Home":
@@ -285,7 +294,39 @@ function NavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link>
-              <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              {userLogged ? (
+                  <Nav1>
+                        <NavDropdown
+                          align={{ lg: 'start' }}
+                          
+                          title={icon}
+                          show={showIcon}
+                          onMouseEnter={() => showDropdown("Icon")}
+                          onMouseLeave={() => hideDropdown("Icon")}
+                          onClick={() => {
+                            console.log("show");
+                          }}
+                          
+                        >
+                          <NavDropdown.Item href="/dashboard">
+                              Dashboard
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item
+                            href="/" 
+                            onClick={() => {
+                              // req.onLogout()
+                              Cookies.set("access",null)
+                              Cookies.set("refresh",null)
+                              props.change(false);
+                            }}
+                          >Log Out
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav1>):(
+               <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              )
+            }
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -295,7 +336,6 @@ function NavBar(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      
     </CustomNavBar>
   );
 }
