@@ -290,7 +290,7 @@ function NavBar(props) {
               </LoginTag>
             </Nav.Link>
             <Nav.Link>
-              <LoginTag onClick={() => navigate("/dashboard")}>
+              <LoginTag onClick={() => navigate("admin/dashboard")}>
                 Dashboard
               </LoginTag>
             </Nav.Link>

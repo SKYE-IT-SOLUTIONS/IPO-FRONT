@@ -48,10 +48,11 @@ function NewsList() {
     // };
     // fetchNews();
     const fetchNews = async () => {//this is temporary for demostrate
-      const data = await fetch(" http://localhost:3005/news").then(res => res.json()).then(data => data).catch(e=>console.log(e));
-      console.log(data)
-      setNewsList(data)
-      setNewsLoaded(true)
+      await fetch(" http://localhost:3005/news").then(res => res.json()).then(data => {
+        console.log(data)
+        setNewsList(data)
+        setNewsLoaded(true)
+      }).catch(e=>console.log(e));
     };
     fetchNews();
 

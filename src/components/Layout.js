@@ -6,7 +6,7 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  min-height: 81vh;
+  min-height: 76vh;
   /* padding:8px;//add later */
   display: ${(props) => (props.dashboard === false ? "flex" : "")};
   align-items: ${(props) => (props.dashboard === false ? "center" : "")};

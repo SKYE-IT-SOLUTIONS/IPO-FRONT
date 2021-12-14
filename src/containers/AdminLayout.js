@@ -11,8 +11,8 @@ export default function AdminLayout() {
       <Header>
         <TopLogoBar />
       </Header>
-      <Main>
-          <SideNav/>
+      <Main dashbard={true}>
+          {/* <SideNav/> */}
         <Outlet />
       </Main>
       <Footer>

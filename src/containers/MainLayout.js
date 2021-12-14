@@ -12,7 +12,7 @@ export default function MainLayout() {
         <TopLogoBar />
         <NavBar />
       </Header>
-      <Main>
+      <Main dashboard={false}>
         <Outlet />
       </Main>
       <Footer>

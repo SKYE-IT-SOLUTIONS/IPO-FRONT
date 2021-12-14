@@ -33,7 +33,7 @@ const routes = (isAuthenticated) => [
       path: '/admin',
       element: true ? <AdminLayout/> : <Navigate to='/login' />,
       children: [
-        { path: 'dashboard', element: <h1>Admin Content</h1> },
+        { path: 'dashboard', element: <Dashboard/> },
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
       ]
