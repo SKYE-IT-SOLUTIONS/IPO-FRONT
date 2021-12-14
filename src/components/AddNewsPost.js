@@ -23,6 +23,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
+import { Simple_Validator} from "../utils/validation";
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -116,6 +117,8 @@ function AddNewsPost() {
   // useS
   const [newTitle, setNewsTitle] = useState("")
   const [content, setContent] = useState("");
+  const [contentInfo, setContentInfo] = useState({error: null,status: false});
+
   const [contentList, setContentList] = useState([]);
 
   const [imageUrl, setImageUrl] = useState(null)
@@ -163,6 +166,7 @@ function AddNewsPost() {
             <NewsInput type="text" placeholder="Enter News Title" value={newTitle} onChange={(e) => {
               setNewsTitle(e.target.value)
               dispatch(setTitle(e.target.value))
+              // setTitleInfo(Simple_Validator(e.target.value,"Title"));
             }}/>
           <Title>Image</Title>
           <FileUpload style={{ backgroundColor:'#ededed'}}
@@ -193,8 +197,10 @@ function AddNewsPost() {
             ))}
           </ul>
           <OuterTextArea>
+          
           <TextArea rows="4" value={content} placeholder="Enter Description" onChange={(e) => {
             setContent(e.target.value)
+            setContentInfo(Simple_Validator(e.target.value,"Description"))
           }}/>
           <Icon
                 icon="akar-icons:circle-plus-fill"

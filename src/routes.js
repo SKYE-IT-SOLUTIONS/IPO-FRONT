@@ -10,6 +10,7 @@ import Spinner from './components/Spinner';
 import UploadImage from './test/UploadImage';
 import AdminLayout from './containers/AdminLayout';
 import Dashboard from './containers/Dashboard/index';
+import JobList from './containers/JobList';
 
 const routes = (isAuthenticated) => [
     {
@@ -20,6 +21,7 @@ const routes = (isAuthenticated) => [
         { path: '404', element: <NotFound /> },
         { path: 'home', element: <HomeContent/> },
         { path: 'addJob', element: <AddJobPost/> },
+        { path: 'jobs', element: <JobList/> },
         { path: 'job/:id', element: <PostJob/> },
         { path: 'news/:id', element: <NewsView/> },
         { path: 'news/preview', element: <NewsView/> },
