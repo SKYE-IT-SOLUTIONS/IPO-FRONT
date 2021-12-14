@@ -106,7 +106,7 @@ function NewsView() {
                   <Title>{newsData?.title}</Title>
                 </Col>
                 <Col md={6} sm={12}>
-                  <Image src={newsData?.url} thumbnail />
+                  <Image src={newsData?.image} thumbnail />
                 </Col>
               </Row>
               <Row>
