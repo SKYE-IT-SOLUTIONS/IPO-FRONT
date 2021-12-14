@@ -89,7 +89,7 @@ const FileUpload = ({
           {...otherProps}
         />
       </FileUploadContainer>
-      <FilePreviewContainer>
+      {/* <FilePreviewContainer>
         <span>Preview</span>
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
@@ -119,7 +119,7 @@ const FileUpload = ({
             );
           })}
         </PreviewList>
-      </FilePreviewContainer>
+      </FilePreviewContainer> */}
     </>
   );
 };

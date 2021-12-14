@@ -87,12 +87,15 @@ const Title = styled(Lable)`
     padding-top: 15px;
 `
 
-const Error = styled.p`
-  color: red;
-  font-size: 13px;
-  margin: 0px;
-  padding: 5px 0px;
-`;
+const PalestherImage = styled.img`
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:100px;
+  height:100px;
+  margin-top:10px;
+  border-radius: 10px;
+`
 
 function AddNewsPost() {
   const dispatch = useDispatch()
@@ -101,12 +104,12 @@ function AddNewsPost() {
   const { fonts } = useContext(ThemeContext);
   // useS
   const [newTitle, setNewsTitle] = useState("")
-  const [titleInfo, setTitleInfo] = useState({ error: null, status: false });
-
   const [content, setContent] = useState("");
   const [contentInfo, setContentInfo] = useState({error: null,status: false});
 
   const [contentList, setContentList] = useState([]);
+
+  const [imageUrl, setImageUrl] = useState(null)
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -125,17 +128,19 @@ function AddNewsPost() {
     if(storeTitle !== null || storeDescription.length !== 0 || storeDescription !== undefined){
       setNewsTitle(storeTitle)
       setContentList(storeDescription)
+      setImageUrl(storeImage)
     }
     setIsLoading(false)
   }, [])
 
   const updateUploadedFiles = async (files) => {
-    if(files.lenth !=0){
-    setFiles(files)
-    console.log(files[0])
-    const dataUrl = await setImageBuffer(files[0])
-    dispatch(setImage(dataUrl))
-  }
+    if(files.length !== 0){
+      setFiles(files)
+      console.log(files[0])
+      const dataUrl = await setImageBuffer(files[0])
+      dispatch(setImage(dataUrl))
+      setImageUrl(dataUrl)
+    }
   };
   
   return (
@@ -154,20 +159,6 @@ function AddNewsPost() {
               dispatch(setTitle(e.target.value))
               setTitleInfo(Simple_Validator(e.target.value,"Title"));
             }}/>
-            {titleInfo.error != null && <Error>{titleInfo.error}</Error>}
-          {/* <Collection>
-            <Title>Image</Title>
-            <label htmlFor="contained-button-file">
-              <InputImage
-                accept="image/*"
-                id="contained-button-file"
-                type="file"
-              />
-              <Button variant="contained" component="span" startIcon={<CloudUploadIcon />}>
-                Upload
-              </Button>
-            </label>
-          </Collection> */}
           <Title>Image</Title>
           <FileUpload style={{ backgroundColor:'#ededed'}}
                   accept=".jpg,.png,.jpeg"
@@ -178,6 +169,7 @@ function AddNewsPost() {
                  
                 />
             {/* <ImageInput type="file"/> */}
+            {imageUrl && <PalestherImage image={imageUrl}/>}<br/>
           <Title>Description</Title>
           <ul>
             {contentList && contentList.map((value,index) => ( 

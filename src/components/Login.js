@@ -2,14 +2,21 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Route } from "react-router-dom";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
+<<<<<<< Updated upstream
 import { AuthContext } from "../contexts/AuthContext";
 import { Simple_Validator} from "../utils/validation";
 import {useSelector,useDispatch} from 'react-redux'
+=======
+import { Simple_Validator} from "../services/ValidationService";
+import {useDispatch} from 'react-redux'
+>>>>>>> Stashed changes
 import { setUserId, setUserLoggedIn, setUserRole } from "../store/userSlice"
+import AddNewsPost from "./AddNewsPost";
+import CustomSnackBar from "./CustomSnackBar";
 
 
 const LoginBody = styled(Modal.Body)`
@@ -59,7 +66,18 @@ function Login(props) {
   const [passwordInfo, setPasswordInfo] = useState({error: null,status: false});
 
   const [isLoading, setisLoading] = useState(false);
+
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
 
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.button : dark.button;
@@ -70,8 +88,24 @@ function Login(props) {
 
   const user = new AuthServices();
 
-  const handleLogin = async (e) => {
-    dispatch(setUserLoggedIn("NBSS"))
+  const handleLogin = async () => {
+      setisLoading(true);
+      const { status, data, error } = await user.handleLogin(
+        {username: username,password: password},
+      );
+      console.log(status);
+      setisLoading(false);
+      if (status) {
+        dispatch(setUserId(data?.id))
+        dispatch(setUserLoggedIn("NBSS"))
+        dispatch(setUserRole(data?.roles))
+        props.onHide();
+        navigate("admin");
+      }else {
+        setIsErrorMsgOpen(true)
+        setSubmitError(error);
+      }
+      
   }
 
   return (
@@ -117,34 +151,16 @@ function Login(props) {
         />
         {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}
         <LoginButton
-          disabled={isLoading}
+          disabled={isLoading || !usernameInfo.status || !passwordInfo.status}
           bgColor={!isLoading ? them.login : them.disable}
           onClick={async () => {
-            handleLogin()
-            // if (usernameInfo.status && passwordInfo.status) {
-            //   setSubmitError(null);
-            //   setisLoading(true);
-            //   const { status, error } = await user.handleLogin(
-            //     {username: username,password: password,},
-            //     setIsAuthenticated
-            //   );
-            //   setisLoading(false);
-
-            //   if (status) {
-            //     props.onHide();
-            //   }
-            //   if (status) {
-            //     console.log(props);
-            //     navigate("admin");
-            //   } else {
-            //     setSubmitError(error);
-            //   }
-            // }
+            if(usernameInfo.status && passwordInfo.status){
+              handleLogin();
+            }
           }}
         >
           Log In
         </LoginButton>
-        {submitError != null && <Error>{submitError}</Error>}
         <table>
           <tbody>
             <tr>
@@ -158,6 +174,7 @@ function Login(props) {
           </tbody>
         </table>
       </LoginBody>
+      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={submitError}/>
     </Modal>
   );
 }

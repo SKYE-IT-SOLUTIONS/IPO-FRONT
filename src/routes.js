@@ -26,7 +26,7 @@ const routes = (isAuthenticated) => [
         { path: '404', element: <NotFound /> },
         { path: 'home', element: <HomeContent/> },
         { path: '/addJob', element: <AddJobPost/> },
-        { path: '/jobPost', element: <PostJob/> },
+        { path: '/job/:id', element: <PostJob/> },
         { path: '/news/:id', element: <NewsView/> },
         { path: '/news/preview', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
