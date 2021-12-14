@@ -8,7 +8,7 @@ import DataService from "../services/DataService";
 import Snackbar from "./CustomSnackBar";
 import { useSelector } from "react-redux";
 import Spinner from "./Spinner";
-import { useNavigate,Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NewContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -106,7 +106,7 @@ function NewsView() {
                   <Title>{newsData?.title}</Title>
                 </Col>
                 <Col md={6} sm={12}>
-                  <Image src={newsData?.url} thumbnail />
+                  <Image src={newsData?.image} thumbnail />
                 </Col>
               </Row>
               <Row>

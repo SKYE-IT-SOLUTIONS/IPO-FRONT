@@ -1,16 +1,29 @@
-import React, { useContext , useState , useEffect } from "react";
-import { Container, Row, Col, Input, Lable, CustomButton } from "./CommonComponents";
+import React, { useContext, useState, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  Lable,
+  CustomButton,
+} from "./CommonComponents";
 import styled from "styled-components";
 import newsImage from "../assets/News-cuate.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
 import FileUpload from "./fileupload/FileUpload";
-import { useNavigate,Route } from 'react-router-dom';
-import {setTitle, setDescription, setImage , removeDescription} from '../store/newsSlice'
-import { useDispatch ,useSelector } from "react-redux";
+import { useNavigate, Route } from "react-router-dom";
+import {
+  setTitle,
+  setDescription,
+  setImage,
+  removeDescription,
+} from "../store/newsSlice";
+import { useDispatch, useSelector } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
+import { Simple_Validator} from "../utils/validation";
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -20,7 +33,7 @@ const NewContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   font-family: ${({ font }) => font.general};
-  padding-top:25px;
+  padding-top: 25px;
   @media (max-width: 600px) {
     padding: 25px 20px;
   }
@@ -41,13 +54,13 @@ const ApplyImage = styled.div`
   @media (min-width: 768px) {
     height: 90%;
     width: 100%;
-    margin-top:30px;
-    margin-left:-50px
+    margin-top: 30px;
+    margin-left: -50px;
   }
   @media (max-width: 768px) {
     height: 300px;
     width: 300px;
-    margin-top:-30px;  
+    margin-top: -30px;
   }
 `;
 
@@ -66,10 +79,10 @@ const NewsInput = styled(Input)`
 `;
 
 const OuterTextArea = styled.div`
-display: flex;
+  display: flex;
   flex-direction: row;
   padding-bottom: 20px;
-`
+`;
 
 const TextArea = styled.textarea`
   width: 100%;
@@ -79,12 +92,12 @@ const TextArea = styled.textarea`
 `;
 
 const NewsButton = styled(CustomButton)`
-    margin: 15px 0;
-`
+  margin: 15px 0;
+`;
 
 const Title = styled(Lable)`
-    padding-top: 15px;
-`
+  padding-top: 15px;
+`;
 
 const PalestherImage = styled.img`
   background-image: url(${({ image }) => image});
@@ -97,13 +110,15 @@ const PalestherImage = styled.img`
 `
 
 function AddNewsPost() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const { fonts } = useContext(ThemeContext);
   // useS
   const [newTitle, setNewsTitle] = useState("")
   const [content, setContent] = useState("");
+  const [contentInfo, setContentInfo] = useState({error: null,status: false});
+
   const [contentList, setContentList] = useState([]);
 
   const [imageUrl, setImageUrl] = useState(null)
@@ -111,14 +126,11 @@ function AddNewsPost() {
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const uploadPackageImages = (files, requestId) =>null;
-    // packageService.packageImagesUpload(files, requestId);
-
-    const storeTitle = useSelector((state) => state.news.title);
-    const storeImage = useSelector((state) => state.news.image);
-    const storeDescription = useSelector((state) => state.news.description);
+  const storeTitle = useSelector((state) => state.news.title);
+  const storeImage = useSelector((state) => state.news.image);
+  const storeDescription = useSelector((state) => state.news.description);
 
   useEffect(() => {
     setIsLoading(true)
@@ -127,8 +139,8 @@ function AddNewsPost() {
       setContentList(storeDescription)
       setImageUrl(storeImage)
     }
-    setIsLoading(false)
-  }, [])
+    setIsLoading(false);
+  }, []);
 
   const updateUploadedFiles = async (files) => {
     if(files.length !== 0){
@@ -139,7 +151,7 @@ function AddNewsPost() {
       setImageUrl(dataUrl)
     }
   };
-  
+
   return (
     <>
     {isLoading ? <Spinner/> :
@@ -154,6 +166,7 @@ function AddNewsPost() {
             <NewsInput type="text" placeholder="Enter News Title" value={newTitle} onChange={(e) => {
               setNewsTitle(e.target.value)
               dispatch(setTitle(e.target.value))
+              // setTitleInfo(Simple_Validator(e.target.value,"Title"));
             }}/>
           <Title>Image</Title>
           <FileUpload style={{ backgroundColor:'#ededed'}}
@@ -184,8 +197,10 @@ function AddNewsPost() {
             ))}
           </ul>
           <OuterTextArea>
+          
           <TextArea rows="4" value={content} placeholder="Enter Description" onChange={(e) => {
             setContent(e.target.value)
+            setContentInfo(Simple_Validator(e.target.value,"Description"))
           }}/>
           <Icon
                 icon="akar-icons:circle-plus-fill"
@@ -199,23 +214,41 @@ function AddNewsPost() {
                       dispatch(setDescription(content))
                       setContent("")
                     }
+                  }}
+                />
+              </OuterTextArea>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
                 }}
-              />
-          </OuterTextArea>
-          <div style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
-          <NewsButton style={{width:"20%"}} submit onClick={()=>{
-            navigate('/news/preview');
-            }}>View</NewsButton>
-          <NewsButton style={{width:"20%"}}  submit onClick={()=>{
-            dispatch(removeDescription())
-            dispatch(setImage(null))
-            dispatch(setTitle(null))
-          }}>Submit</NewsButton>
-          </div>
-        </DetailCol>
-      </Row>
-    </NewContainer>
-    }
+              >
+                <NewsButton
+                  style={{ width: "20%" }}
+                  submit
+                  onClick={() => {
+                    navigate("/news/preview");
+                  }}
+                >
+                  View
+                </NewsButton>
+                <NewsButton
+                  style={{ width: "20%" }}
+                  submit
+                  onClick={() => {
+                    dispatch(removeDescription());
+                    dispatch(setImage(null));
+                    dispatch(setTitle(null));
+                  }}
+                >
+                  Submit
+                </NewsButton>
+              </div>
+            </DetailCol>
+          </Row>
+        </NewContainer>
+      }
     </>
   );
 }

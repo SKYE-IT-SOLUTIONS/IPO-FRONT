@@ -18,7 +18,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const KILO_BYTES_PER_BYTE = 1000;
-const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
+const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 5000000;
 
 const convertNestedObjectToArray = (nestedObj) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
@@ -75,7 +75,7 @@ const FileUpload = ({
   return (
     <>
       <FileUploadContainer>
-        <DragDropText>Drag and drop your files anywhere or</DragDropText>
+        <DragDropText>Drag and drop your file anywhere or Click to Upload(MAX SIZE-5MB)</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
            <Fileuploadbtn /> 
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
