@@ -1,8 +1,9 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "../components/CommonComponents";
 import NewsCard from "../components/NewsCard";
 import Pagination from "../components/Pagination";
 import DataService from "../services/DataService";
+import Spinner from "../components/Spinner";
 
 function NewsList() {
   const news1 = {
@@ -31,38 +32,46 @@ function NewsList() {
 
   const dataService = new DataService();
 
-  const [newsList, setNewsList] = useState([])
-  const [error, setError] = useState("")
+  const [newsList, setNewsList] = useState([]);
+  const [error, setError] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchNews = async () => {
-      const {status, data, error} = await dataService.handleGetAllNews();
-      if(status){
+      const { status, data, error } = await dataService.handleGetAllNews();
+      if (status) {
         setNewsList(data);
-      }else{
+      } else {
         setError(error);
         console.log(error);
       }
-      
+      setIsLoading(false);
     };
     fetchNews();
-
   }, []);
 
   return (
-    <Container fluid>
-      {/* <Row>
-        <NewsCard news={news1}/>
-        <NewsCard news={news2}/>
-      </Row> */}
-      <Pagination
-        data={newsList}
-        RenderComponent={NewsCard}
-        title="Posts"
-        pageLimit={1}
-        dataLimit={6}
-      />
-    </Container>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Container fluid>
+          {/* <Row>
+      <NewsCard news={news1}/>
+      <NewsCard news={news2}/>
+    </Row> */}
+          <Pagination
+            data={newsList}
+            RenderComponent={NewsCard}
+            title="Posts"
+            pageLimit={1}
+            dataLimit={6}
+          />
+        </Container>
+      )}
+    </>
   );
 }
 
