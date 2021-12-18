@@ -8,6 +8,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useParams } from "react-router-dom";
 import DataService from "../services/DataService";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const JobContainer = styled(Container)`
   /* display: flex;
@@ -215,91 +216,98 @@ function PostJob({ dataFromProp }) {
 
   const { fonts } = useContext(ThemeContext);
   return (
-    <JobContainer font={fonts}>
-      {isLoading ? <h1>Loading</h1> : <h1>Done</h1>}
-      {jobData && (
-        <>
-          <Table>
-            <tbody>
-              <tr>
-                <Td>
-                  <Logo></Logo>
-                </Td>
-                <Td>
-                  <MainTitle>{jobData?.title}</MainTitle>
-                </Td>
-              </tr>
-            </tbody>
-          </Table>
-          <Title>Job Position : {jobData?.position}</Title>
-          <Description>{jobData?.description}</Description>
-          <Row style={{ paddingTop: "15px" }}>
-            <Col md={6} sm={12}>
-              <ApplyImage image={JobPhoto} />
-              {jobData?.salary && (
-                <>
-                  <SalaryDiv>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td rowSpan={2}>
-                            <Icon icon="emojione:money-bag" height="60" />
-                          </td>
-                          <td>
-                            <Salary>Salary</Salary>
-                            <SalaryValue>Rs.{jobData?.salary}/=</SalaryValue>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </SalaryDiv>
-                </>
-              )}
-            </Col>
-            <Col md={6} sm={12}>
-              {jobData?.specifications && (
-                <>
-                  <RequirementTitle>Specifications</RequirementTitle>
-                  <ul>
-                    {jobData?.specifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <JobContainer font={fonts}>
+          {jobData && (
+            <>
+              <Table>
+                <tbody>
+                  <tr>
+                    <Td>
+                      <Logo></Logo>
+                    </Td>
+                    <Td>
+                      <MainTitle>{jobData?.title}</MainTitle>
+                    </Td>
+                  </tr>
+                </tbody>
+              </Table>
+              <Title>Job Position : {jobData?.position}</Title>
+              <Description>{jobData?.description}</Description>
+              <Row style={{ paddingTop: "15px" }}>
+                <Col md={6} sm={12}>
+                  <ApplyImage image={JobPhoto} />
+                  {jobData?.salary && (
+                    <>
+                      <SalaryDiv>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td rowSpan={2}>
+                                <Icon icon="emojione:money-bag" height="60" />
+                              </td>
+                              <td>
+                                <Salary>Salary</Salary>
+                                <SalaryValue>
+                                  Rs.{jobData?.salary}/=
+                                </SalaryValue>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </SalaryDiv>
+                    </>
+                  )}
+                </Col>
+                <Col md={6} sm={12}>
+                  {jobData?.specifications && (
+                    <>
+                      <RequirementTitle>Specifications</RequirementTitle>
+                      <ul>
+                        {jobData?.specifications.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              {jobData?.qualifications && (
-                <>
-                  <RequirementTitle>Qualifications</RequirementTitle>
-                  <ul>
-                    {jobData?.qualifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
+                  {jobData?.qualifications && (
+                    <>
+                      <RequirementTitle>Qualifications</RequirementTitle>
+                      <ul>
+                        {jobData?.qualifications.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              {jobData?.experience && (
-                <>
-                  <RequirementTitle>Experience</RequirementTitle>
-                  <ul>
-                    {jobData?.experience.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </Col>
-          </Row>
-          <div style={{ textAlign: "right" }}>
-            <CustomButton apply>Apply</CustomButton>
-          </div>
-          <Deadline>
-            Application Deadline : <Date>{jobData?.date}</Date>
-          </Deadline>
-        </>
+                  {jobData?.experience && (
+                    <>
+                      <RequirementTitle>Experience</RequirementTitle>
+                      <ul>
+                        {jobData?.experience.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </Col>
+              </Row>
+              <div style={{ textAlign: "right" }}>
+                <CustomButton apply>Apply</CustomButton>
+              </div>
+              <Deadline>
+                Application Deadline : <Date>{jobData?.date}</Date>
+              </Deadline>
+            </>
+          )}
+        </JobContainer>
       )}
-    </JobContainer>
+    </>
   );
 }
 
