@@ -39,19 +39,19 @@ const Title = styled.h1`
   text-align: center;
   font-weight: 1000;
   @media only screen and (min-width: 700px) {
-    margin-top: 70px;
-  }
-  @media (min-width: 500px) and (max-width: 700px) {
     margin-top: 50px;
   }
-  @media (min-width: 300px) and (max-width: 500px) {
-    margin-top: 40px;
+  @media (min-width: 500px) and (max-width: 700px) {
+    margin-top: 30px;
   }
-  @media (min-width: 200px) and (max-width: 400px) {
+  @media (min-width: 300px) and (max-width: 500px) {
     margin-top: 25px;
   }
-  @media (max-width: 200px) {
+  @media (min-width: 200px) and (max-width: 400px) {
     margin-top: 20px;
+  }
+  @media (max-width: 200px) {
+    margin-top: 10px;
   }
 `;
 const Para = styled.p`
@@ -60,6 +60,7 @@ const Para = styled.p`
   @media only screen and (min-width: 1160px) {
     font-size: 15px;
     margin-top: 20px;
+   
   }
   @media (min-width: 1024px) and (max-width: 1160px) {
     font-size: 15px;
@@ -72,11 +73,13 @@ const Para = styled.p`
   }
   @media (min-width: 500px) and (max-width: 700px) {
     font-size: 13px;
-    margin-top: 15px;
+    margin-top: 8px;
+    padding-left: 100px;
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 10px;
+    
+   
   }
   @media (max-width: 300px) {
     font-size: 8px;
@@ -93,7 +96,7 @@ const Image = styled("img")`
     visibility: hidden;
   }
 `;
-const P1=styled.h5`
+const P1=styled.p`
     color:#000000;
 `;
 function Mission() {

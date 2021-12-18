@@ -10,6 +10,9 @@ import Spinner from './components/Spinner';
 import AdminLayout from './containers/AdminLayout';
 import Dashboard from './containers/Dashboard/index';
 import JobList from './containers/JobList';
+import Editcontact from './components/EditContact';
+import Submitcv from './components/Submitcv';
+import RequestGraduate from './components/Reuestgraduate';
 
 //Testing Components
 import MapView from './components/MapViewUpdated';
@@ -30,8 +33,12 @@ const routes = (isAuthenticated) => [
         { path: 'news/preview', element: <NewsView/> },
         { path: 'addNews', element: <AddNewsPost/> },
         { path: 'spinner', element: <Spinner/> },
-        { path: 'test', element:<MapView/> },
-        { path: '*', element: <Navigate to='/404' /> }
+        { path: 'test', element:<UploadImage/> },
+        { path: '*', element: <Navigate to='/404' /> },
+        { path: 'editcontact', element: <Editcontact/> },
+        { path: 'submitcv', element: <Submitcv/> },
+        { path: 'requestgraduate', element: <RequestGraduate/> },
+
       ]
     },
     {
