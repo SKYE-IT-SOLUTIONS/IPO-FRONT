@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
-  height: 81vh;
-  width: 285px;
+  height: 590px;
+  width: ${(props) => (props.active ? "285px" : "82px")};;
   overflow: hidden;
+  transition: all 0.5s ease;
 `;
 const SideNavBarContainer = styled.div`
   position: relative;
@@ -111,10 +113,21 @@ const NavListItemTooltip = styled.span`
   }
 `;
 const SideNav = () => {
+  const navigate = useNavigate();
   const [active, setActive] = useState(true);
+
+  function handleResize() {
+    console.log("Inner",window.innerHeight);
+    if(window.innerWidth < 1214){
+      setActive(false);
+    }else{
+      setActive(true);
+    }
+  }
+  window.addEventListener("resize", handleResize);
   return (
     <React.Fragment>
-      <Body>
+      <Body active={active}>
         <SideNavBarContainer active={active}>
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
@@ -128,7 +141,7 @@ const SideNav = () => {
 
           <NavBody>
             <NavListItem>
-              <NavListLink>
+              <NavListLink onClick={() => navigate("/home")}>
                 <NavListItemIcon className="bx bx-home"></NavListItemIcon>
                 <NavListItemName active={active}>Home</NavListItemName>
               </NavListLink>
@@ -136,7 +149,7 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink>
+              <NavListLink onClick={() => navigate("/dashboard/users")}>
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
                 <NavListItemName active={active}>Users</NavListItemName>
               </NavListLink>
@@ -144,11 +157,11 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink>
+              <NavListLink onClick={() => navigate("/dashboard/news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
-                <NavListItemName active={active}>Messages</NavListItemName>
+                <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Messages</NavListItemTooltip>
+              <NavListItemTooltip active={active}>News</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>

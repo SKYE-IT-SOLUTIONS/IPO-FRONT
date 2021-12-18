@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewIcon from "@mui/icons-material/Visibility";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+
+const rowWidth = 200;
 
 const columns = [
   {
@@ -16,18 +17,32 @@ const columns = [
     width: 70,
   },
   {
-    field: "name",
+    field: "fname",
     headerName: "First name",
     headerAlign: "center",
     align: "center",
-    width: 130,
+    width: rowWidth,
   },
   {
-    field: "surname",
+    field: "lname",
     headerName: "Last name",
     headerAlign: "center",
     align: "center",
-    width: 130,
+    width: rowWidth,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    headerAlign: "center",
+    align: "center",
+    width: rowWidth,
+  },
+  {
+    field: "address",
+    headerName: "Address",
+    headerAlign: "center",
+    align: "center",
+    width: rowWidth + 100,
   },
   {
     field: "view",
@@ -35,7 +50,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     sortable: false,
-    width: 60,
+    width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
       return <ViewIcon sx={{ fontSize: 30 }} />;
@@ -47,7 +62,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     sortable: false,
-    width: 60,
+    width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
       return <ModeEditOutlineIcon sx={{ fontSize: 30 }} />;
@@ -59,7 +74,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     sortable: false,
-    width: 70,
+    width: 70 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
       return <DeleteIcon sx={{ fontSize: 30 }} />;
@@ -68,39 +83,140 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, name: "Example 1", surname: "example" },
-  { id: 2, name: "Example 2", surname: "example" },
-  { id: 3, name: "Example 2", surname: "example" },
-  { id: 4, name: "Example 2", surname: "example" },
-  { id: 5, name: "Example 2", surname: "example" },
-  { id: 6, name: "Example 2", surname: "example" },
-  { id: 7, name: "Example 2", surname: "example" },
-  { id: 8, name: "Example 2", surname: "example" },
-  { id: 9, name: "Example 2", surname: "example" },
-  { id: 10, name: "Example 2", surname: "example" },
-  { id: 11, name: "Example 2", surname: "example" },
-  { id: 12, name: "Example 2", surname: "example" },
+  {
+    id: 1,
+    fname: "Sandaruwan",
+    lname: "Lakshitha",
+    email: "sandaruwan@gmail.com",
+    address: "Demodarawaththa, Mahagama",
+  },
+  {
+    id: 2,
+    fname: "Supun",
+    lname: "Tharuka",
+    email: "supun@gmail.com",
+    address: "Engiriya, Mahagama",
+  },
+  {
+    id: 3,
+    fname: "Buddhika",
+    lname: "Halangoda",
+    email: "halangoda@gmail.com",
+    address: "Matale, Mahagama",
+  },
+  {
+    id: 4,
+    fname: "Nadun",
+    lname: "Nethsara",
+    email: "nethsara@gmail.com",
+    address: "Kadawatha, Mahagama",
+  },
+  {
+    id: 5,
+    fname: "Sandaruwan",
+    lname: "Lakshitha",
+    email: "sandaruwan@gmail.com",
+    address: "Demodarawaththa, Mahagama",
+  },
+  {
+    id: 6,
+    fname: "Supun",
+    lname: "Tharuka",
+    email: "supun@gmail.com",
+    address: "Engiriya, Mahagama",
+  },
+  {
+    id: 7,
+    fname: "Buddhika",
+    lname: "Halangoda",
+    email: "halangoda@gmail.com",
+    address: "Matale, Mahagama",
+  },
+  {
+    id: 8,
+    fname: "Nadun",
+    lname: "Nethsara",
+    email: "nethsara@gmail.com",
+    address: "Kadawatha, Mahagama",
+  },
+  {
+    id: 9,
+    fname: "Sandaruwan",
+    lname: "Lakshitha",
+    email: "sandaruwan@gmail.com",
+    address: "Demodarawaththa, Mahagama",
+  },
+  {
+    id: 10,
+    fname: "Supun",
+    lname: "Tharuka",
+    email: "supun@gmail.com",
+    address: "Engiriya, Mahagama",
+  },
+  {
+    id: 11,
+    fname: "Buddhika",
+    lname: "Halangoda",
+    email: "halangoda@gmail.com",
+    address: "Matale, Mahagama",
+  },
+  {
+    id: 12,
+    fname: "Nadun",
+    lname: "Nethsara",
+    email: "nethsara@gmail.com",
+    address: "Kadawatha, Mahagama",
+  },
+  {
+    id: 13,
+    fname: "Sandaruwan",
+    lname: "Lakshitha",
+    email: "sandaruwan@gmail.com",
+    address: "Demodarawaththa, Mahagama",
+  },
+  {
+    id: 14,
+    fname: "Supun",
+    lname: "Tharuka",
+    email: "supun@gmail.com",
+    address: "Engiriya, Mahagama",
+  },
+  {
+    id: 15,
+    fname: "Buddhika",
+    lname: "Halangoda",
+    email: "halangoda@gmail.com",
+    address: "Matale, Mahagama",
+  },
+  {
+    id: 16,
+    fname: "Nadun",
+    lname: "Nethsara",
+    email: "nethsara@gmail.com",
+    address: "Kadawatha, Mahagama",
+  },
 ];
 
 const UserList = () => {
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(8);
 
   return (
-    <DataGrid
-      columns={columns}
-      rows={rows}
-      components={{
-        Toolbar: GridToolbar,
-      }}
-      page={page}
-      onPageChange={(newPage) => setPage(newPage)}
-      pageSize={pageSize}
-      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-      rowsPerPageOptions={[5, 10, 25, 50]}
-      pagination
-      autoHeight
-    />
+    <div style={{ width: "100%" }}>
+      <DataGrid
+        columns={columns}
+        rows={rows}
+        components={{
+          Toolbar: GridToolbar,
+        }}
+        page={page}
+        onPageChange={(newPage) => setPage(newPage)}
+        pageSize={pageSize}
+        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        rowsPerPageOptions={[8,10,12]}
+        pagination
+      />
+    </div>
   );
 };
 

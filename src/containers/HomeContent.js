@@ -6,9 +6,9 @@ import NewsList from '../containers/NewsList'
 export default function HomeContent() {
     return (
         <>
-            <ImageSlider />
+            {/*<ImageSlider />
             <Mover/>
-            <NewsList/>
+            <NewsList/>*/}
         </>
     )
 }

@@ -285,12 +285,7 @@ function NavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link>
-              <LoginTag onClick={() => navigate("/home")}>
-                Home
-              </LoginTag>
-            </Nav.Link>
-            <Nav.Link>
-              <LoginTag onClick={() => navigate("/dashboard")}>
+              <LoginTag onClick={() => navigate("/dashboard/users")}>
                 Dashboard
               </LoginTag>
             </Nav.Link>
