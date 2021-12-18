@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const jobSlice = createSlice({
   name: "job",
   initialState: {
-    title: "",
-    position: "",
-    description: "",
+    title: null,
+    position: null,
+    description: null,
     specifications: [],
     qualifications: [],
     experience: [],
+    salary : null,
+    deadline : null
   },
   reducers: {
     setTitle: (state, action) => {
@@ -16,20 +18,26 @@ export const jobSlice = createSlice({
     },
 
     setPosition: (state, action) => {
-      state.position = action.position;
+      state.position = action.payload;
     },
 
     setDescription: (state, action) => {
       state.description = action.payload;
     },
+    setSalary: (state, action) => {
+      state.salary = action.payload;
+    },
+    setDeadline: (state, action) => {
+      state.deadline = action.payload;
+    },
     setSpecifications: (state, action) => {
-      state.specifications = [...state.specifications, action.payload];
+      state.specifications = action.payload;
     },
     setQualifications: (state, action) => {
-      state.qualifications = [...state.qualifications, action.payload];
+      state.qualifications = action.payload;
     },
     setExperience: (state, action) => {
-      state.experience = [...state.experience, action.payload];
+      state.experience = action.payload;
     },
     removeDataArray: (state) => {
       state.specifications = [];
@@ -39,6 +47,6 @@ export const jobSlice = createSlice({
   },
 });
 
-export const { setTitle,setPosition,setDescription,setSpecifications,setQualifications,setExperience,removeDataArray} = jobSlice.actions;
+export const { setTitle,setPosition,setDescription,setDeadline,setSalary,setSpecifications,setQualifications,setExperience,removeDataArray} = jobSlice.actions;
 
 export default jobSlice.reducer;
