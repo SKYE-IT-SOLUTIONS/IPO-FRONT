@@ -4,7 +4,7 @@ import { SUBSCRIBE_URL } from "../config/urls";
 var result = { status: false, error: null }; //global variable declared
 
 export const subscribeIpo = async (data) => {
-  console.log("Subcription Process");
+  console.log("Subscription Process");
   await postRequest(SUBSCRIBE_URL, data)
     .then(({ data, error }) => {
         console.log("Data ",data)

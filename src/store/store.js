@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice";
 import newsSlice from "./newsSlice";
+import jobSlice from "./jobSlice";
 
 import { persistStore, persistReducer,FLUSH,
     REHYDRATE,
@@ -19,11 +20,13 @@ const persistConfig = {
 
 const userPersistReducer = persistReducer(persistConfig, userSlice);
 const newsPersistReducer = persistReducer(persistConfig, newsSlice);
+const jobPersistReducer = persistReducer(persistConfig, jobSlice);
 
 export const store = configureStore({
     reducer: {
         user: userPersistReducer,
         news: newsPersistReducer,
+        job: jobPersistReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {

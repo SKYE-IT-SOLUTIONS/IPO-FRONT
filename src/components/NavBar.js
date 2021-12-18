@@ -165,10 +165,13 @@ function NavBar(props) {
                 Vision and Mission
               </DropItems>
               <DropItems href="/#contact" id="bg-custom-3">
-                Contact Us
+               Our Proud Partners
               </DropItems>
               <DropItems href="/#news" id="bg-custom-3">
                 News
+              </DropItems>
+              <DropItems href="/#news" id="bg-custom-3">
+                Contact Us
               </DropItems>
             </NavDropdown>
 
@@ -182,6 +185,13 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/alumni/index.html"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Alumini Association
+              </DropItems>
               <DropItems
                 href="https://www.agri.ruh.ac.lk/"
                 target="_blank"
@@ -197,25 +207,15 @@ function NavBar(props) {
                 University of Ruhuna
               </DropItems>
               <DropItems
-                href="https://www.agri.ruh.ac.lk/ipo/cgu/index.html"
+                href="http://documents.gov.lk/en/gazette.php"
                 target="_blank"
                 id="bg-custom-3"
               >
-                Career Guidance Unit
-              </DropItems>
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/alumni/index.html"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Alumini Online
-              </DropItems>
-              <DropItems href="" id="bg-custom-3">
-                Useful Links
+               Government Gazzet
               </DropItems>
             </NavDropdown>
 
-            <NavDropdown
+            {/* <NavDropdown
               title={<NavTitle>Student Services</NavTitle>}
               id="collasible-nav-dropdown"
               show={showSS}
@@ -234,7 +234,7 @@ function NavBar(props) {
               <DropItems href="/jobs" id="bg-custom-3">
                 Other Events
               </DropItems>
-            </NavDropdown>
+            </NavDropdown> */}
 
             <NavDropdown
               title={<NavTitle>Industrial Relationships</NavTitle>}
@@ -274,32 +274,21 @@ function NavBar(props) {
             <NavDropdown
               title={<NavTitle>Other Services</NavTitle>}
               id="collasible-nav-dropdown"
-              show={showOS}
-              onMouseEnter={() => showDropdown("Other Services")}
-              onMouseLeave={() => hideDropdown("Other Services")}
+               show={showOS}
+               onMouseEnter={() => showDropdown("Other Services")}
+               onMouseLeave={() => hideDropdown("Other Services")}
               onClick={() => {
                 console.log("show");
               }}
             >
-              <NavDropdown
-                title={<NavSubTitle>Organize</NavSubTitle>}
-                drop="end"
-                show={showOSW}
-                onMouseEnter={() => showDropdown("Organize a")}
-                onMouseLeave={() => hideDropdown("Organize a")}
-                onClick={() => {
-                  console.log("show");
-                }}
-              >
-                <DropItems href="/workshop" id="bg-custom-3">
-                  WorkShop
-                </DropItems>
-                <DropItems href="/traning" id="bg-custom-3">
-                  Training Program
-                </DropItems>
-              </NavDropdown>
               <DropItems href="/product" id="bg-custom-3">
-                Order A Product
+                Organize a Workshop/Training
+              </DropItems>
+              <DropItems href="/product" id="bg-custom-3">
+                General Feedback
+              </DropItems>
+              <DropItems href="/product" id="bg-custom-3">
+                Contact Us
               </DropItems>
             </NavDropdown>
           </Nav>
@@ -309,7 +298,8 @@ function NavBar(props) {
                   <Nav1>
                         <NavDropdown
                           align={{ lg: 'start' }}
-                          
+                          drop="start"
+
                           title={icon}
                           show={showIcon}
                           drop="start"

@@ -55,19 +55,19 @@ function NewsList() {
       await fetch(" http://localhost:3005/news").then(res => res.json()).then(data => {
         console.log(data)
         setNewsList(data)
-        setNewsLoaded(true)
+        // setNewsLoaded(true)
       }).catch(e=>console.log(e));
     };
     fetchNews();
     setIsLoading(false)
 
-  }, [newsLoaded]);
+  }, []);
 
   return (
     <>
       {isLoading ? (
         <Spinner />
-      ) : (
+      ) : newsList.length >= 1 && (
         <Container fluid>
           {/* <Row>
       <NewsCard news={news1}/>
