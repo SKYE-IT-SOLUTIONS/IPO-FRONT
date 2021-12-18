@@ -11,6 +11,8 @@ import MapView from '../components/MapView'
 export default function HomeContent() {
     return (
         <>
+            <ImageSlider />
+            <Mover />
             <SponsorList/>
             <NewsList/>
             <Container fluid>
