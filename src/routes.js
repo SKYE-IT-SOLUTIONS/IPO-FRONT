@@ -39,16 +39,6 @@ const routes = (isAuthenticated) => [
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
       ]
-    },
-    {
-      path: '/ass',
-      element: <h1>Hello</h1>,
-      children: [
-        
-        { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
-        { path: 'register', element:"" },
-        { path: 'delivery', element: "" },
-      ]
     }
   ];
   
