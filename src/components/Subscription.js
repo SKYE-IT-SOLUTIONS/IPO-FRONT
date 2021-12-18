@@ -39,6 +39,7 @@ const SubInput = styled(Input)`
 
 const SubIcon = styled(Icon)`
   margin: auto;
+  color:#0f3443;
 `;
 
 const SubBttn = styled(CustomButton)`
@@ -52,6 +53,12 @@ const Error = styled.p`
   text-align: left;
   padding: 5px 0 5px 2px;
 `;
+
+const Title =  styled.h1`
+  font-family: ${({ fonts }) => fonts.title};
+  font-size: 25px;
+  color:#DC281E;
+`
 
 function Subscription() {
   const { fonts } = useContext(ThemeContext);
@@ -78,6 +85,7 @@ function Subscription() {
   return (
     <SubscriptDiv fonts={fonts} md={4} sm={12}>
       <SubIcon icon="entypo:mail" width="70" />
+      <Title fonts={fonts}>SUBSCRIBE US</Title>
       <InfoLable>
         Join our subscribe list to get the latest news & updates
       </InfoLable>

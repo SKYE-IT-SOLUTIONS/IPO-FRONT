@@ -7,13 +7,16 @@ import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
-import UploadImage from './test/UploadImage';
 import AdminLayout from './containers/AdminLayout';
 import Dashboard from './containers/Dashboard/index';
 import JobList from './containers/JobList';
 import Editcontact from './components/EditContact';
 import Submitcv from './components/Submitcv';
 import RequestGraduate from './components/Reuestgraduate';
+
+//Testing Components
+import MapView from './components/MapViewUpdated';
+
 
 const routes = (isAuthenticated) => [
     {
@@ -45,16 +48,6 @@ const routes = (isAuthenticated) => [
         { path: 'dashboard', element: <Dashboard/> },
         { path: 'dashboard/ongoing', element: "" },
         { path: '*', element: <Navigate to='/404' /> }
-      ]
-    },
-    {
-      path: '/ass',
-      element: <h1>Hello</h1>,
-      children: [
-        
-        { path: 'login', element: isAuthenticated ? <Navigate to='/' /> : <Navigate to='/404' /> },
-        { path: 'register', element:"" },
-        { path: 'delivery', element: "" },
       ]
     }
   ];

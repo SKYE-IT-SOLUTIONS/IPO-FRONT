@@ -19,7 +19,7 @@ export default function HomeContent() {
                 <Row>
                     <ContactUs/>
                     <Subscription/>
-                    <Col md={4} lg={4} style={{padding:"0"}}>
+                    <Col md={4} lg={4} style={{padding:"0",height:"200px"}}>
                         <MapView/>
                     </Col>
                 </Row>
