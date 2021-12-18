@@ -7,8 +7,8 @@ import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
-import AdminLayout from './containers/AdminLayout';
-import Dashboard from './containers/Dashboard/index';
+// import AdminLayout from './containers/AdminLayout';
+// import Dashboard from './containers/Dashboard/index';
 import JobList from './containers/JobList';
 
 //Testing Components
