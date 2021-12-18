@@ -9,10 +9,10 @@ import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Login from "./Login";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useSelector,useDispatch } from "react-redux"
 import {setUserLoggedIn } from "../store/userSlice"
 import Cookies from 'js-cookie'
+import { Icon } from '@iconify/react';
 
 
 const CustomNavBar = styled(Navbar)`
@@ -47,7 +47,7 @@ const LoginTag = styled.span`
 
 const Nav1=styled(Nav)`
   margin-Top:-20px;
-  margin-Right:100px;
+  /* margin-Right:100px; */
 `;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
@@ -76,7 +76,7 @@ function NavBar(props) {
   }, [userLogged])
   
   // const userLogged=false;
-  const icon = <AccountCircleIcon fontSize="inherit" style={{color:"white"}}/>;
+  const icon = <Icon icon="carbon:user-avatar-filled-alt" width="30"/>;
   const showDropdown = (title) => {
     switch (title) {
       case "Home":
@@ -312,6 +312,7 @@ function NavBar(props) {
                           
                           title={icon}
                           show={showIcon}
+                          drop="start"
                           onMouseEnter={() => showDropdown("Icon")}
                           onMouseLeave={() => hideDropdown("Icon")}
                           onClick={() => {
