@@ -15,8 +15,6 @@ export default function AuthContextProvider(props) {
     const fetchUser = async () => {
       const refreshToken = getRefreshToken();
       if (
-        refreshToken !== null ||
-        refreshToken !== undefined ||
         refreshToken !== ""
       ) {
         const { status, error } = await isUser();

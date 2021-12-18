@@ -1,5 +1,5 @@
 // third party imports
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -9,6 +9,11 @@ import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Login from "./Login";
+import { useSelector,useDispatch } from "react-redux"
+import {setUserLoggedIn } from "../store/userSlice"
+import Cookies from 'js-cookie'
+import { Icon } from '@iconify/react';
+
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};
@@ -40,11 +45,17 @@ const LoginTag = styled.span`
   font-size: 16px;
 `;
 
+const Nav1=styled(Nav)`
+  margin-Top:-20px;
+  /* margin-Right:100px; */
+`;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const [modalShow, setModalShow] = React.useState(false);
+  const [isLogged, setisLogged] = useState(false)
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const current_theme = theme ? light : dark;
 
@@ -57,6 +68,15 @@ function NavBar(props) {
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
 
+  const userLogged = useSelector(state => state.user.iuli);
+
+
+  useEffect(() => {
+    setisLogged(userLogged === "NBSS")
+  }, [userLogged])
+  
+  // const userLogged=false;
+  const icon = <Icon icon="carbon:user-avatar-filled-alt" width="30"/>;
   const showDropdown = (title) => {
     switch (title) {
       case "Home":
@@ -145,10 +165,13 @@ function NavBar(props) {
                 Vision and Mission
               </DropItems>
               <DropItems href="/#contact" id="bg-custom-3">
-                Contact Us
+               Our Proud Partners
               </DropItems>
               <DropItems href="/#news" id="bg-custom-3">
                 News
+              </DropItems>
+              <DropItems href="/#news" id="bg-custom-3">
+                Contact Us
               </DropItems>
             </NavDropdown>
 
@@ -162,6 +185,13 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/alumni/index.html"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Alumini Association
+              </DropItems>
               <DropItems
                 href="https://www.agri.ruh.ac.lk/"
                 target="_blank"
@@ -177,25 +207,15 @@ function NavBar(props) {
                 University of Ruhuna
               </DropItems>
               <DropItems
-                href="https://www.agri.ruh.ac.lk/ipo/cgu/index.html"
+                href="http://documents.gov.lk/en/gazette.php"
                 target="_blank"
                 id="bg-custom-3"
               >
-                Career Guidance Unit
-              </DropItems>
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/alumni/index.html"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Alumini Online
-              </DropItems>
-              <DropItems href="" id="bg-custom-3">
-                Useful Links
+               Government Gazzet
               </DropItems>
             </NavDropdown>
 
-            <NavDropdown
+            {/* <NavDropdown
               title={<NavTitle>Student Services</NavTitle>}
               id="collasible-nav-dropdown"
               show={showSS}
@@ -214,7 +234,7 @@ function NavBar(props) {
               <DropItems href="/jobs" id="bg-custom-3">
                 Other Events
               </DropItems>
-            </NavDropdown>
+            </NavDropdown> */}
 
             <NavDropdown
               title={<NavTitle>Industrial Relationships</NavTitle>}
@@ -254,53 +274,59 @@ function NavBar(props) {
             <NavDropdown
               title={<NavTitle>Other Services</NavTitle>}
               id="collasible-nav-dropdown"
-              show={showOS}
-              onMouseEnter={() => showDropdown("Other Services")}
-              onMouseLeave={() => hideDropdown("Other Services")}
+               show={showOS}
+               onMouseEnter={() => showDropdown("Other Services")}
+               onMouseLeave={() => hideDropdown("Other Services")}
               onClick={() => {
                 console.log("show");
               }}
             >
-              <NavDropdown
-                title={<NavSubTitle>Organize</NavSubTitle>}
-                drop="end"
-                show={showOSW}
-                onMouseEnter={() => showDropdown("Organize a")}
-                onMouseLeave={() => hideDropdown("Organize a")}
-                onClick={() => {
-                  console.log("show");
-                }}
-              >
-                <DropItems href="/workshop" id="bg-custom-3">
-                  WorkShop
-                </DropItems>
-                <DropItems href="/traning" id="bg-custom-3">
-                  Training Program
-                </DropItems>
-              </NavDropdown>
               <DropItems href="/product" id="bg-custom-3">
-                Order A Product
+                Organize a Workshop/Training
+              </DropItems>
+              <DropItems href="/product" id="bg-custom-3">
+                General Feedback
+              </DropItems>
+              <DropItems href="/product" id="bg-custom-3">
+                Contact Us
               </DropItems>
             </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link>
-              <LoginTag onClick={() => navigate("/admin/dashboard/user")}>
-                Admin
-              </LoginTag>
-            </Nav.Link>
-            <Nav.Link>
-              <LoginTag onClick={() => navigate("/student/dashboard/profile")}>
-                Student
-              </LoginTag>
-            </Nav.Link>
-            <Nav.Link>
-              <LoginTag onClick={() => navigate("/company/dashboard/profile")}>
-               Company
-              </LoginTag>
-            </Nav.Link>
-            <Nav.Link>
-              <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              {isLogged ? (
+                  <Nav1>
+                        <NavDropdown
+                          align={{ lg: 'start' }}
+                          drop="start"
+
+                          title={icon}
+                          show={showIcon}
+                          drop="start"
+                          onMouseEnter={() => showDropdown("Icon")}
+                          onMouseLeave={() => hideDropdown("Icon")}
+                          onClick={() => {
+                            console.log("show");
+                          }}
+                          
+                        >
+                          <NavDropdown.Item href="/dashboard">
+                              Dashboard
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item
+                            href="/" 
+                            onClick={() => {
+                              dispatch(setUserLoggedIn("SSNB"))
+                              navigate("/")
+                            }}
+                          >Log Out
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav1>):(
+               <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              )
+            }
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

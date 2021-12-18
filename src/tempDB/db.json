@@ -1,0 +1,123 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "message": "some comment",
+      "postId": 1
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": " 7 Ways to Make Money While Waiting for Disability Benefits",
+      "image": "https://images.unsplash.com/photo-1638727751809-2de7202d138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "description": [
+      
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32."
+        
+      ],
+      "uploadTime": "2021 Nov 25"
+    },
+    {
+      "id": 2,
+      "title": " 7 Ways to Make Money While Waiting for Disability Benefits",
+      "image": "https://images.unsplash.com/photo-1638727751809-2de7202d138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "description": [
+      
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32."
+        
+      ],
+      "uploadTime": "2021 Nov 25"
+    },
+    {
+      "id": 2,
+      "title": " 7 Ways to Make Money While Waiting for Disability Benefits",
+      "image": "https://images.unsplash.com/photo-1638727751809-2de7202d138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "description": [
+      
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32."
+        
+      ],
+      "uploadTime": "2021 Nov 25"
+    },
+    {
+      "id": 2,
+      "title": " 7 Ways to Make Money While Waiting for Disability Benefits",
+      "image": "https://images.unsplash.com/photo-1638727751809-2de7202d138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "description": [
+      
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32."
+        
+      ],
+      "uploadTime": "2021 Nov 25"
+    }
+  ],
+  "job": [
+    {
+      "id": 1,
+      "title": "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
+      "position": "Software Engineer",
+      "description": "Try to think about paragraphs in terms of thematic unity: a paragraph isa sentence or a group of sentences that supports one central, unifiedidea. Paragraphs add one idea at a time to your broader argument.Try think about paragraphs in terms of thematic unity: a paragraph is asentence or a group of sentences that supports one central, unified.",
+      "specifications": [
+        "Applicant age should be with in range 25 - 35",
+        "Area of residence : Negambo"
+      ],
+      "qualifications": [
+        "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx"
+      ],
+      "experience": [
+        "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx"
+      ],
+      "salary": 100000,
+      "date": "2021/12/10"
+    },
+    {
+      "id": 2,
+      "title": "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
+      "position": "Software Engineer",
+      "description": "Try to think about paragraphs in terms of thematic unity: a paragraph isa sentence or a group of sentences that supports one central, unifiedidea. Paragraphs add one idea at a time to your broader argument.Try think about paragraphs in terms of thematic unity: a paragraph is asentence or a group of sentences that supports one central, unified.",
+      "specifications": [
+        "Applicant age should be with in range 25 - 35",
+        "Area of residence : Negambo"
+      ],
+      "qualifications": [
+        "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx"
+      ],
+      "experience": [
+        "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
+        "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx"
+      ],
+      "date": "2021/12/10"
+    }
+  ]
+}

@@ -81,13 +81,17 @@ const AnimatedText = styled.span`
     top: 423px;
   }
 
-  @media (min-width: 767px) and (max-width: 1024px) {
+  @media (min-width: 848px) and (max-width: 1024px) {
+    font-size: 35px;
+    top: 370px;
+  }
+  @media (min-width: 767px) and (max-width: 848px) {
     font-size: 35px;
     top: 394px;
   }
   @media (min-width: 500px) and (max-width: 767px) {
-    font-size: 25px;
-    top: 320px;
+    font-size: 20px;
+    top: 370px;
     visibility: hidden;
   }
   @media (min-width: 300px) and (max-width: 500px) {
@@ -104,10 +108,10 @@ const AnimatedText = styled.span`
 `;
 
 function ImageSlider() {
-  const { theme, light, dark } = useContext(ThemeContext);
+  // const { theme, light, dark } = useContext(ThemeContext);
 
-    const current_theme = theme ? light : dark;
-    console.log(current_theme)
+  //   const current_theme = theme ? light : dark;
+  //   console.log(current_theme)
  
     return(
       

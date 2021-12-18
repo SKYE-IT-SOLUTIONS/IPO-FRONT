@@ -4,6 +4,7 @@ import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Col} from './CommonComponents'
+import { useNavigate } from "react-router-dom";
 
 const NewsDiv = styled(Col)`
   :hover {
@@ -39,12 +40,14 @@ const NewsContent = styled(Card.Text)`
   text-align: justify;
   font-size: 12px;
   margin-bottom: 8px;
-  min-height : 90px;
+  height : 150px;
 `;
 
 const NewsButton = styled(CustomButton)`
   margin: 0px 0px 10px 0px;
   font-size: 12px;
+  position: absolute;
+  bottom: 20px;
 `;
 
 const NewsFooter = styled.span`
@@ -54,7 +57,9 @@ const NewsFooter = styled.span`
   left : 18px ;
 `;
 
+
 function NewsCard({news}) {
+  const navigate = useNavigate();
   const { fonts } = useContext(ThemeContext)
   const characters = 150
 
@@ -63,22 +68,26 @@ function NewsCard({news}) {
     return new_para.concat("...")
   }
 
+  const handleLoad = () => {
+    navigate(`/news/${news?.id}`)
+  };
+
   return (
     <NewsDiv md={4} sm={6} lg={3} xl={3} xxl={2} xs={10}>
       <NewsCardView font={fonts}>
-        <NewsImg image={news.url}/>
+        <NewsImg image={news?.image}/>
         <Card.Body>
           <NewsTitle font={fonts.title}>
-           {news.title}
+           {news?.title}
           </NewsTitle>
           <NewsContent>
-            {news.content.length > characters
-            ? sliceParagraph(news.content)
-            : news.content
+            {news?.description[0]?.length > characters
+            ? sliceParagraph(news?.description[0])
+            : news?.description[0]
             }
           </NewsContent>
-          <NewsButton apply> Read </NewsButton>
-            <NewsFooter> Last updated {news.time} ago </NewsFooter>
+          <NewsButton apply onClick={handleLoad}> Read </NewsButton>
+            <NewsFooter> Last updated {news?.uploadTime} ago </NewsFooter>
         </Card.Body>
       </NewsCardView>
     </NewsDiv>

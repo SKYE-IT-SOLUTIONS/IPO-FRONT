@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import styled, { css } from 'styled-components'
 import { Icon } from "@iconify/react";
 
+
 //assets
 import twitter from "../assets/twitter.png";
 import insta from "../assets/instagram.png";
@@ -33,12 +34,14 @@ export const CustomButton = styled.button`
     props.cancle &&
     css`
       background: red;
+      border: 1px solid red;
     `}
 
   ${(props) =>
     props.apply &&
     css`
       background: linear-gradient(to left, #41295a, #2f0743);
+      border: 1px solid #41295a;
     `}
 
   ${(props) =>
@@ -58,3 +61,4 @@ export const Input = styled.input`
   border: 2px solid black;
   padding: 5px;
 `;
+

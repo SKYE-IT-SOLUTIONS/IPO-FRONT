@@ -1,19 +1,17 @@
 // third party imports
-import React, { useContext } from "react";
+import React,{useState} from "react";
 import { useRoutes } from "react-router-dom";
 //in app imports-presentational
 import routes from "./routes";
 
 //in app imports-logical
 import ThemeContextProvider from "./contexts/ThemeContext";
-
-import { AuthContext } from "./contexts/AuthContext";
+import { useSelector } from "react-redux";
 
 function App() {
-  
-  const {isAuthenticated} = useContext(AuthContext);
-  const routing = useRoutes(routes(isAuthenticated));
-  
+  const  isUserLoggedIn  = useSelector(state => state.user.iuli);
+  console.log("State user ",useSelector(state => state.user))
+  const routing = useRoutes(routes(isUserLoggedIn === "NBSS" ? true : false ));
   return <ThemeContextProvider>{routing}</ThemeContextProvider>;
 }
 

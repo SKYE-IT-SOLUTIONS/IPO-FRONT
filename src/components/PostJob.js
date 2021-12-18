@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton } from "./CommonComponents";
 // import JobPhoto from "../assets/Joboffersbro.svg"
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useParams } from "react-router-dom";
+import DataService from "../services/DataService";
+import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const JobContainer = styled(Container)`
   /* display: flex;
@@ -57,7 +61,7 @@ const Description = styled.p`
   @media (max-width: 1040px) {
     font-size: 15px;
   }
-`
+`;
 
 const ApplyImage = styled.div`
   height: 512px;
@@ -123,13 +127,13 @@ const Date = styled.span`
 
 const List = styled.li`
   font-size: 15px;
-`
+`;
 
 const Deadline = styled.h6`
-   @media (max-width: 1040px) {
+  @media (max-width: 1040px) {
     font-size: 15px;
   }
-`
+`;
 
 const data = {
   title: "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
@@ -167,90 +171,143 @@ const data = {
   date: "2021/12/10",
 };
 
-function PostJob() {
+function PostJob({ dataFromProp }) {
+  const navigate = useNavigate();
+
+  const dataService = new DataService();
+
+  const { id } = useParams();
+
+  const [jobData, setJobData] = useState({
+    id: "",
+    title: "",
+    position: "",
+    description: "",
+    specifications: [],
+    qualifications: [],
+    experience: [],
+    salary: "",
+    date: "",
+  });
+  const [error, setError] = useState("");
+  const [isLoading, setisLoading] = useState(false);
+
+  useEffect(() => {
+    setisLoading(true);
+    const fetchJob = async () => {
+      if (dataFromProp === null || dataFromProp === undefined) {
+        console.log(id);
+        const { status, data, error } = id
+          ? await dataService.handleGetJob(id)
+          : null;
+        if (status) {
+          setJobData(data);
+        } else {
+          setError(error);
+          navigate("/404");
+        }
+      } else {
+        setJobData(dataFromProp);
+      }
+      setisLoading(false);
+    };
+    fetchJob();
+  }, []);
+
   const { fonts } = useContext(ThemeContext);
   return (
-    <JobContainer font={fonts}>
-      {data && (
-        <>
-          <Table>
-            <tbody>
-              <tr>
-                <Td>
-                  <Logo></Logo>
-                </Td>
-                <Td>
-                  <MainTitle>{data.title}</MainTitle>
-                </Td>
-              </tr>
-            </tbody>
-          </Table>
-          <Title>Job Position : {data.position}</Title>
-          <Description>{data.description}</Description>
-          <Row style={{ paddingTop: "15px" }}>
-            <Col md={6} sm={12}>
-              <ApplyImage image={JobPhoto} />
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <JobContainer font={fonts}>
+          {jobData && (
+            <>
+              <Table>
+                <tbody>
+                  <tr>
+                    <Td>
+                      <Logo></Logo>
+                    </Td>
+                    <Td>
+                      <MainTitle>{jobData?.title}</MainTitle>
+                    </Td>
+                  </tr>
+                </tbody>
+              </Table>
+              <Title>Job Position : {jobData?.position}</Title>
+              <Description>{jobData?.description}</Description>
+              <Row style={{ paddingTop: "15px" }}>
+                <Col md={6} sm={12}>
+                  <ApplyImage image={JobPhoto} />
+                  {jobData?.salary && (
+                    <>
+                      <SalaryDiv>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td rowSpan={2}>
+                                <Icon icon="emojione:money-bag" height="60" />
+                              </td>
+                              <td>
+                                <Salary>Salary</Salary>
+                                <SalaryValue>
+                                  Rs.{jobData?.salary}/=
+                                </SalaryValue>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </SalaryDiv>
+                    </>
+                  )}
+                </Col>
+                <Col md={6} sm={12}>
+                  {jobData?.specifications && (
+                    <>
+                      <RequirementTitle>Specifications</RequirementTitle>
+                      <ul>
+                        {jobData?.specifications.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              <SalaryDiv>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td rowSpan={2}>
-                        <Icon icon="emojione:money-bag" height="60" />
-                      </td>
-                      <td>
-                        <Salary>Salary</Salary>
-                        <SalaryValue>Rs.{data.salary}/=</SalaryValue>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </SalaryDiv>
-            </Col>
-            <Col md={6} sm={12}>
-              {data.specifications && (
-                <>
-                  <RequirementTitle>Specifications</RequirementTitle>
-                  <ul>
-                    {data.specifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
+                  {jobData?.qualifications && (
+                    <>
+                      <RequirementTitle>Qualifications</RequirementTitle>
+                      <ul>
+                        {jobData?.qualifications.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              {data.qualifications && (
-                <>
-                  <RequirementTitle>Qualifications</RequirementTitle>
-                  <ul>
-                    {data.qualifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {data.experience && (
-                <>
-                  <RequirementTitle>Experience</RequirementTitle>
-                  <ul>
-                    {data.experience.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </Col>
-          </Row>
-          <div style={{ textAlign: "right" }}>
-            <CustomButton apply>Apply</CustomButton>
-          </div>
-          <Deadline>
-            Application Deadline : <Date>{data.date}</Date>
-          </Deadline>
-        </>
+                  {jobData?.experience && (
+                    <>
+                      <RequirementTitle>Experience</RequirementTitle>
+                      <ul>
+                        {jobData?.experience.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </Col>
+              </Row>
+              <div style={{ textAlign: "right" }}>
+                <CustomButton apply>Apply</CustomButton>
+              </div>
+              <Deadline>
+                Application Deadline : <Date>{jobData?.date}</Date>
+              </Deadline>
+            </>
+          )}
+        </JobContainer>
       )}
-    </JobContainer>
+    </>
   );
 }
 

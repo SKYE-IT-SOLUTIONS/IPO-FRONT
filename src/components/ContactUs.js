@@ -14,13 +14,14 @@ const ContactHeader = styled.div`
 const ContactRow = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding-bottom: 5px;
+  justify-content: space-around;
+  padding-bottom: 5px;  
+  margin:auto;
 `;
 
 const DetailCol = styled(Col)`
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
 `;
 
 const ContainerDiv = styled(Col)`
@@ -30,6 +31,7 @@ const ContainerDiv = styled(Col)`
   background: ${({bg}) => bg};
   font-family: ${({font}) => font.general};
   color: white;
+  padding:15px 0px;
   /* width: 100%; */
   @media only screen and (min-width: 1400px) {
     font-size: 14px;
@@ -58,7 +60,7 @@ const arrayMap = (data,index,ob) => {
   <ContactRow key={index}>
         <DetailCol>{data}</DetailCol>
         <Col>
-          <div>
+          <div style={{paddingLeft:"2px"}}>
             {ob[data]}
           </div>
         </Col>
@@ -86,13 +88,12 @@ function ContactUs(props) {
   }, [])
 
   return (
-    <ContainerDiv bg={them.ui} font={fonts} md="4" sm="6">
-      <ContactHeader>Contact Us</ContactHeader>
+    <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
+        <ContactHeader>Contact Us</ContactHeader>
 
-      {keyArray ? keyArray.map((data,index) => {
-        return arrayMap(data,index,contactData);
-      }):""}
-
+        {keyArray ? keyArray.map((data,index) => {
+          return arrayMap(data,index,contactData);
+        }):""}
     </ContainerDiv>
   );
 }
