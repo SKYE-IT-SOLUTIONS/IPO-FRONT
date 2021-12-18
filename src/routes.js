@@ -33,7 +33,6 @@ const routes = (isAuthenticated) => [
         { path: 'news/preview', element: <NewsView/> },
         { path: 'addNews', element: <AddNewsPost/> },
         { path: 'spinner', element: <Spinner/> },
-        { path: 'test', element:<UploadImage/> },
         { path: '*', element: <Navigate to='/404' /> },
         { path: 'editcontact', element: <Editcontact/> },
         { path: 'submitcv', element: <Submitcv/> },
