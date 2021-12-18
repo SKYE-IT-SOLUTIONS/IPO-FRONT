@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
-// import JobPhoto from "../assets/Joboffersbro.svg"
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -14,13 +13,13 @@ const JobContainer = styled(Container)`
 
 const TitleDiv = styled.div`
   display: flex;
-  flex-direction:column;
-  text-align:center;
-  justify-content: center;
-  padding: 20px 0;
+  flex-direction: column;
+  padding: 5px 0;
 `;
 const RequirementTitle = styled.h4`
   padding-top: 10px;
+  font-size: 20px;
+
   @media (max-width: 1040px) {
     font-size: 18px;
   }
@@ -38,7 +37,10 @@ const Logo = styled.div`
 `;
 
 const Title = styled.h4`
+  margin: auto 0;
   padding-right: 5px;
+  font-size: 20px;
+  padding: 15px 0 10px 0;
 
   @media (max-width: 1040px) {
     font-size: 18px;
@@ -46,7 +48,7 @@ const Title = styled.h4`
 `;
 
 const ApplyImage = styled.div`
-  height: 512px;
+  height: 450px;
   width: 512px;
   background-image: url(${({ image }) => image});
   background-position: center;
@@ -65,57 +67,18 @@ const ApplyImage = styled.div`
   }
 `;
 
-const Table = styled.table`
-  margin: 25px auto;
-`;
-
-const Td = styled.td`
-  padding: 0 10px;
-`;
-
-const SalaryDiv = styled.div`
-  border: 2px solid black;
-  width: 200px;
-  margin: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
 const Salary = styled.p`
-  color: #003c70;
-  margin-bottom: 0;
-  padding-left: 10px;
-  padding-top: 8px;
+  margin: auto;
+  padding-right: 15px;
+  font-size: 20px;
 
-  @media (min-width: 768px) and (max-width: 1040px) {
-    font-size: 14px;
+  @media (max-width: 1040px) {
+    font-size: 18px;
   }
 `;
 
 const CustomInput = styled(Input)`
-  width: 50%;
-  margin:auto;
-
-  @media (max-width: 1040px) {
-    font-size: 13px;
-    width: 80%;
-  }
-`;
-
-const DateInput = styled(Input)`
-  width: 30%;
-
-  @media (min-width: 768px) and (max-width: 1040px) {
-    font-size: 13px;
-  }
-`;
-
-const SalaryInput = styled(Input)`
-  width: 90%;
-  margin-left: 10px;
-  color: #ff0f0f;
+  width: 100%;
 
   @media (max-width: 1040px) {
     font-size: 13px;
@@ -124,12 +87,32 @@ const SalaryInput = styled(Input)`
 
 const PositionInput = styled(Input)`
   width: 40%;
-  height: 37px;
+
+  @media (max-width: 1040px) {
+    font-size: 13px;
+    width: 80%;
+  }
+`;
+
+const DateInput = styled(Input)`
+  width: 150px;
+  margin-left: 15px;
+
+  @media (min-width: 768px) and (max-width: 1040px) {
+    font-size: 13px;
+  }
+`;
+
+const SalaryInput = styled(Input)`
+  width: 150px;
+  margin-left: 15px;
+  /* margin-bottom: 10px; */
 
   @media (max-width: 1040px) {
     font-size: 13px;
   }
 `;
+
 const TextArea = styled.textarea`
   width: 100%;
   border-radius: 5px;
@@ -145,7 +128,7 @@ const ExtraInput = styled.input`
   width: 95%;
   border-radius: 5px;
   border: 2px solid black;
-  padding: 1px;
+  padding: 5px;
 
   @media (min-width: 1041px) and (max-width: 1200px) {
     width: 90%;
@@ -155,13 +138,10 @@ const ExtraInput = styled.input`
     width: 85%;
     font-size: 13px;
   }
-
 `;
 
-const Position = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 15px;
+const TableTr = styled.tr`
+  height: auto;
 `;
 
 const Error = styled.p`
@@ -171,13 +151,20 @@ const Error = styled.p`
   padding: 5px 0px;
 `;
 
+const SubmitBttn = styled(CustomButton)`
+  margin: 15px 0;
+`;
+
 function AddJobPost() {
   const { fonts } = useContext(ThemeContext);
   const [title, setTitle] = useState("");
   const [titleInfo, setTitleInfo] = useState({ error: null, status: false });
 
   const [position, setPosition] = useState("");
-  const [positionInfo, setPositionInfo] = useState({ error: null, status: false });
+  const [positionInfo, setPositionInfo] = useState({
+    error: null,
+    status: false,
+  });
 
   const [decription, setDecription] = useState("");
 
@@ -196,34 +183,36 @@ function AddJobPost() {
   return (
     <JobContainer font={fonts}>
       <TitleDiv>
+
+        <Title>Job Title</Title>
         <CustomInput
           type="text"
           value={title}
           placeholder="Enter Job Title"
           onChange={(e) => {
-            let val = e.target.value
-            setTitle(val)
-            setTitleInfo(Simple_Validator(val,"Title"))
+            let val = e.target.value;
+            setTitle(val);
+            setTitleInfo(Simple_Validator(val, "Title"));
           }}
         />
         {!titleInfo.status && <Error>{titleInfo.error}</Error>}
-      </TitleDiv>
 
-      <Position>
-        <Title>Job Position : </Title>{" "}
+        <Title>Job Position</Title>
         <PositionInput
           type="text"
           value={position}
           placeholder="Enter Job Position"
           onChange={(e) => {
-            let val = e.target.value
-            setPosition(val)
-            setPositionInfo(Simple_Validator(val,"Job Position"))
+            let val = e.target.value;
+            setPosition(val);
+            setPositionInfo(Simple_Validator(val, "Job Position"));
           }}
         />
-      </Position>
-      {!positionInfo.status  && <Error style={{paddingLeft:"12%"}}>{positionInfo.error}</Error>}
+        {!positionInfo.status && <Error>{positionInfo.error}</Error>}
 
+      </TitleDiv>
+
+      <Title>Job Description</Title>
       <TextArea
         rows="4"
         value={decription}
@@ -235,29 +224,6 @@ function AddJobPost() {
       <Row style={{ padding: "15px 0" }}>
         <Col md={6} sm={12}>
           <ApplyImage image={JobPhoto} />
-
-          <SalaryDiv>
-            <table>
-              <tbody>
-                <tr>
-                  <td rowSpan={2}>
-                    <Icon icon="emojione:money-bag" height="60" />
-                  </td>
-                  <td>
-                    <Salary>Salary</Salary>
-                    <SalaryInput
-                      type="text"
-                      placeholder="0"
-                      value={salary}
-                      onChange={(e) => {
-                        setSalary(e.target.value);
-                      }}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </SalaryDiv>
         </Col>
         <Col md={6} sm={12}>
           <RequirementTitle>Specifications</RequirementTitle>
@@ -379,22 +345,52 @@ function AddJobPost() {
               />
             </li>
           </ul>
+
+          <table>
+            <tbody>
+              <TableTr>
+                <td>
+                  <Salary>Salary</Salary>
+                </td>
+                <td>
+                  :{" "}
+                  <SalaryInput
+                    type="string"
+                    placeholder="0.00"
+                    value={salary}
+                    onChange={(e) => {
+                      let value = parseInt(e.target.value)
+                      setSalary(value.toFixed(2));
+                    }}
+                  />
+                </td>
+              </TableTr>
+              <br />
+              <TableTr>
+                <td>
+                  <Salary>Application Deadline</Salary>
+                </td>
+                <td>
+                  :{" "}
+                  <DateInput
+                    type="date"
+                    value={date}
+                    onChange={(e) => {
+                      setDate(e.target.value);
+                      console.log(e.target.value);
+                    }}
+                  />
+                </td>
+              </TableTr>
+            </tbody>
+          </table>
         </Col>
       </Row>
-      <h6>
-        Application Deadline :{" "}
-        <DateInput
-          type="date"
-          value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-            console.log(e.target.value);
-          }}
-        />
-      </h6>
+
       <div style={{ textAlign: "right" }}>
-        <CustomButton submit>Submit</CustomButton>
+        <SubmitBttn submit>Submit</SubmitBttn>
       </div>
+
     </JobContainer>
   );
 }

@@ -34,12 +34,14 @@ export const CustomButton = styled.button`
     props.cancle &&
     css`
       background: red;
+      border: 1px solid red;
     `}
 
   ${(props) =>
     props.apply &&
     css`
       background: linear-gradient(to left, #41295a, #2f0743);
+      border: 1px solid #41295a;
     `}
 
   ${(props) =>
