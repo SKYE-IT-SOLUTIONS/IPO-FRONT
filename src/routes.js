@@ -11,6 +11,9 @@ import UploadImage from './test/UploadImage';
 import AdminLayout from './containers/AdminLayout';
 import Dashboard from './containers/Dashboard/index';
 import JobList from './containers/JobList';
+import Editcontact from './components/EditContact';
+import Submitcv from './components/Submitcv';
+import RequestGraduate from './components/Reuestgraduate';
 
 const routes = (isAuthenticated) => [
     {
@@ -28,7 +31,11 @@ const routes = (isAuthenticated) => [
         { path: 'addNews', element: <AddNewsPost/> },
         { path: 'spinner', element: <Spinner/> },
         { path: 'test', element:<UploadImage/> },
-        { path: '*', element: <Navigate to='/404' /> }
+        { path: '*', element: <Navigate to='/404' /> },
+        { path: 'editcontact', element: <Editcontact/> },
+        { path: 'submitcv', element: <Submitcv/> },
+        { path: 'requestgraduate', element: <RequestGraduate/> },
+
       ]
     },
     {
