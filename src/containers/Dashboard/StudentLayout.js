@@ -18,7 +18,7 @@ const StudentLayout = () => {
     <>
       <Header>
         <TopLogoBar />
-        <NavBar />
+        {/* <NavBar /> */}
       </Header>
       <Main>
         <Container>

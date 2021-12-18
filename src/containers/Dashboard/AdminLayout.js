@@ -18,7 +18,7 @@ const AdminLayout = () => {
     <>
       <Header>
         <TopLogoBar />
-        <NavBar />
+        {/* <NavBar /> */}
       </Header>
       <Main>
         <Container>
