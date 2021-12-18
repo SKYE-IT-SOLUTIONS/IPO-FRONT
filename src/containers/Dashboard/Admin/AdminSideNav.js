@@ -114,7 +114,7 @@ const NavListItemTooltip = styled.span`
 `;
 const AdminSideNav = () => {
   const navigate = useNavigate();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   function handleResize() {
     console.log("Inner", window.innerHeight);
