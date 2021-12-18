@@ -7,10 +7,13 @@ import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
 import Spinner from './components/Spinner';
-import UploadImage from './test/UploadImage';
 import AdminLayout from './containers/AdminLayout';
 import Dashboard from './containers/Dashboard/index';
 import JobList from './containers/JobList';
+
+//Testing Components
+import MapView from './components/MapViewUpdated';
+
 
 const routes = (isAuthenticated) => [
     {
@@ -27,7 +30,7 @@ const routes = (isAuthenticated) => [
         { path: 'news/preview', element: <NewsView/> },
         { path: 'addNews', element: <AddNewsPost/> },
         { path: 'spinner', element: <Spinner/> },
-        { path: 'test', element:<UploadImage/> },
+        { path: 'test', element:<MapView/> },
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },
