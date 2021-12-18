@@ -1,10 +1,9 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "../components/CommonComponents";
 import NewsCard from "../components/NewsCard";
 import Pagination from "../components/Pagination";
 import DataService from "../services/DataService";
 import Spinner from "../components/Spinner";
-
 
 function NewsList() {
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +83,6 @@ function NewsList() {
         </Container>
       )}
     </>
-
   );
 }
 

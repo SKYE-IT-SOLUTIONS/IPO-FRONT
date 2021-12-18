@@ -187,7 +187,7 @@ function SponsorList() {
 
   return (
     <OuterDiv>
-    <Title font={fonts}>Our Proud Sponsors</Title>
+    <Title font={fonts}>Our Proud Partners</Title>
     <ImageScroller/>
     </OuterDiv>
   );
