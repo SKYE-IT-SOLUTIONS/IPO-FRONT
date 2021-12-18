@@ -17,7 +17,7 @@ export const newsSlice = createSlice({
             state.title = action.payload;
         },
         setDescription: (state, action) => {
-            state.description = [...state.description,action.payload];
+            state.description = action.payload;
         },
         removeDescription: (state) => {
             state.description = [];
