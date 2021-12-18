@@ -7,13 +7,13 @@ import { Header, Main, Footer } from "../../components/DashboardLayout";
 import TopLogoBar from "../../components/TopLogoBar";
 import NavBar from "../../components/NavBar";
 import FooterContent from "../../components/Footer";
-import SideNav from "../../components/SideNav";
+import StudentSideNav from "./Student/StudentSideNav";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Dashboard = () => {
+const StudentLayout = () => {
   return (
     <>
       <Header>
@@ -22,7 +22,7 @@ const Dashboard = () => {
       </Header>
       <Main>
         <Container>
-          <SideNav/>
+          <StudentSideNav/>
           <Outlet />
         </Container>
       </Main>
@@ -33,4 +33,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default StudentLayout;

@@ -43,7 +43,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     sortable: false,
-    width: 60 + 20,
+    width: 80,
     disableClickEventBubbling: true,
     renderCell: () => {
       return <ViewIcon sx={{ fontSize: 30 }} />;

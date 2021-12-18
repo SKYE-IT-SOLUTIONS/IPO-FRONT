@@ -7,16 +7,81 @@ import PostJob from "./components/PostJob";
 import NewsView from "./components/NewsView";
 import AddNewsPost from "./components/AddNewsPost";
 
-import Dashboard from "./containers/Dashboard/Dashboard";
-import UserList from "./containers/Dashboard/Users/UserList";
-import NewsList from "./containers/Dashboard/News/NewsList";
+import AdminLayout from "./containers/Dashboard/AdminLayout";
+import StudentLayout from "./containers/Dashboard/StudentLayout";
+import CompanyLayout from "./containers/Dashboard/CompanyLayout";
+
+import { default as UserListOfAdmin } from "./containers/Dashboard/Admin/Users/UserList";
+import { default as NewsListOfAdmin } from "./containers/Dashboard/Admin/News/NewsList";
+import { default as JobListOfAdmin } from "./containers/Dashboard/Admin/Jobs/JobList";
+import { default as CompanyListOfAdmin } from "./containers/Dashboard/Admin/Company/CompanyList";
 
 const routes = (isAuthenticated) => [
   {
     path: "/admin",
-    element: isAuthenticated ? <Dashboard /> : <Navigate to="/login" />,
+    element: true ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
-      { path: "/admin/dashboard", element: <h1>Dash</h1> },
+      { path: "/admin/dashboard/user", element: <UserListOfAdmin /> },
+      { path: "/admin/dashboard/news", element: <NewsListOfAdmin /> },
+      { path: "/admin/dashboard/job", element: <JobListOfAdmin /> },
+      { path: "/admin/dashboard/company", element: <CompanyListOfAdmin /> },
+      { path: "/admin/dashboard/settings", element: <h1>Admin Settings</h1> },
+      { path: "*", element: <Navigate to="/404" /> },
+    ],
+  },
+  {
+    path: "/student",
+    element: true ? <StudentLayout /> : <Navigate to="/login" />,
+    children: [
+      {
+        path: "/student/dashboard/profile",
+        element: <h1>Profile view of student</h1>,
+      },
+      {
+        path: "/student/dashboard/news",
+        element: <h1>News List of student</h1>,
+      },
+      { path: "/student/dashboard/job", element: <h1>Job list of student</h1> },
+      {
+        path: "/student/dashboard/feedback",
+        element: <h1>Feedback view of student</h1>,
+      },
+      {
+        path: "/student/dashboard/settings",
+        element: <h1>Student Settings</h1>,
+      },
+      { path: "*", element: <Navigate to="/404" /> },
+    ],
+  },
+  {
+    path: "/company",
+    element: true ? <CompanyLayout /> : <Navigate to="/login" />,
+    children: [
+      {
+        path: "/company/dashboard/profile",
+        element: <h1>Profile view of company</h1>,
+      },
+      {
+        path: "/company/dashboard/news",
+        element: <h1>News List of company</h1>,
+      },
+      { path: "/company/dashboard/job", element: <h1>Job list of student</h1> },
+      {
+        path: "/company/dashboard/settings",
+        element: <h1>Student Settings</h1>,
+      },
+      { path: "*", element: <Navigate to="/404" /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: true ? <AdminLayout /> : <Navigate to="/login" />,
+    children: [
+      { path: "/admin/dashboard/user", element: <UserListOfAdmin /> },
+      { path: "/admin/dashboard/news", element: <NewsListOfAdmin /> },
+      { path: "/admin/dashboard/job", element: <JobListOfAdmin /> },
+      { path: "/admin/dashboard/company", element: <CompanyListOfAdmin /> },
+      { path: "/admin/dashboard/settings", element: <h1>Admin Settings</h1> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
@@ -43,15 +108,6 @@ const routes = (isAuthenticated) => [
         element: isAuthenticated ? <Navigate to="/" /> : <Navigate to="/404" />,
       },
       { path: "register", element: "" },
-      { path: "delivery", element: "" },
-    ],
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    children: [
-      { path: "/dashboard/users", element: <UserList/> },
-      { path: "/dashboard/news", element: <NewsList/> },
       { path: "delivery", element: "" },
     ],
   },

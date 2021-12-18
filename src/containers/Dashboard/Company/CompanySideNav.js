@@ -112,7 +112,7 @@ const NavListItemTooltip = styled.span`
     top: 50%;
   }
 `;
-const SideNav = () => {
+const AdminSideNav = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
 
@@ -149,15 +149,17 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/users")}>
+              <NavListLink
+                onClick={() => navigate("/company/dashboard/profile")}
+              >
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
-                <NavListItemName active={active}>Users</NavListItemName>
+                <NavListItemName active={active}>Profile</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Users</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Profile</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/news")}>
+              <NavListLink onClick={() => navigate("/company/dashboard/news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -165,7 +167,7 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink>
+              <NavListLink onClick={() => navigate("/company/dashboard/job")}>
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
@@ -173,15 +175,9 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink>
-                <NavListItemIcon className="bx bx-building-house"></NavListItemIcon>
-                <NavListItemName active={active}>Company</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Company</NavListItemTooltip>
-            </NavListItem>
-
-            <NavListItem>
-              <NavListLink>
+              <NavListLink
+                onClick={() => navigate("/company/dashboard/settings")}
+              >
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>
               </NavListLink>
@@ -194,4 +190,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default AdminSideNav;

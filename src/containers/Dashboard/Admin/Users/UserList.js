@@ -42,7 +42,7 @@ const columns = [
     headerName: "Address",
     headerAlign: "center",
     align: "center",
-    width: rowWidth + 100,
+    width: rowWidth + 150,
   },
   {
     field: "view",

@@ -285,8 +285,18 @@ function NavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link>
-              <LoginTag onClick={() => navigate("/dashboard/users")}>
-                Dashboard
+              <LoginTag onClick={() => navigate("/admin/dashboard/user")}>
+                Admin
+              </LoginTag>
+            </Nav.Link>
+            <Nav.Link>
+              <LoginTag onClick={() => navigate("/student/dashboard/profile")}>
+                Student
+              </LoginTag>
+            </Nav.Link>
+            <Nav.Link>
+              <LoginTag onClick={() => navigate("/company/dashboard/profile")}>
+               Company
               </LoginTag>
             </Nav.Link>
             <Nav.Link>
