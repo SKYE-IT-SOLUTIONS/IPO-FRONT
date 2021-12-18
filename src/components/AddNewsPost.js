@@ -211,7 +211,7 @@ function AddNewsPost() {
                     if(content !== ""){
                       let list = [...contentList,content]
                       setContentList(list)
-                      dispatch(setDescription(content))
+                      dispatch(setDescription(list))
                       setContent("")
                     }
                   }}
