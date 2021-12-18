@@ -12,14 +12,14 @@ export default function HomeContent() {
     return (
         <>
             <ImageSlider />
-            <Mover/>
+            <Mover />
             <SponsorList/>
             <NewsList/>
             <Container fluid>
                 <Row>
                     <ContactUs/>
                     <Subscription/>
-                    <Col md={4} lg={4} style={{padding:"0"}}>
+                    <Col md={4} lg={4} style={{padding:"0",height:"200px"}}>
                         <MapView/>
                     </Col>
                 </Row>

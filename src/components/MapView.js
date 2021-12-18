@@ -4,7 +4,7 @@ import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
 function MapView() {
   const containerStyle = {
     // position:'center',  
-    height: '340px',
+    height: '380px',
     width:"33.33%"
   }
   const displayMarkers = () => {
