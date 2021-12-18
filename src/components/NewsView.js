@@ -68,7 +68,7 @@ function NewsView() {
     setisLoading(true);
     const fetchNews = async () => {
       if (id !== undefined && id !== null) {
-        console.log("Databse Call");
+        console.log("Database Call");
         console.log(id);
         const { status, data, error } = id
           ? await dataService.handleGetNews(id)
