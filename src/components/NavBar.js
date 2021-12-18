@@ -1,5 +1,5 @@
 // third party imports
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -9,11 +9,12 @@ import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Login from "./Login";
-import { useSelector,useDispatch } from "react-redux"
-import {setUserLoggedIn } from "../store/userSlice"
-import Cookies from 'js-cookie'
-import { Icon } from '@iconify/react';
-
+import { useSelector, useDispatch } from "react-redux";
+import { setUserLoggedIn, setUserRole, setUserId } from "../store/userSlice";
+// import Cookies from 'js-cookie'
+import { Icon } from "@iconify/react";
+import AuthServices from "../services/AuthServices";
+import CustomSnackBar from "./CustomSnackBar";
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};
@@ -45,17 +46,18 @@ const LoginTag = styled.span`
   font-size: 16px;
 `;
 
-const Nav1=styled(Nav)`
-  margin-Top:-20px;
+const Nav1 = styled(Nav)`
+  margin-top: -20px;
   /* margin-Right:100px; */
 `;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const [modalShow, setModalShow] = React.useState(false);
-  const [isLogged, setisLogged] = useState(false)
+  const [isLogged, setisLogged] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const authService = new AuthServices();
 
   const current_theme = theme ? light : dark;
 
@@ -68,15 +70,26 @@ function NavBar(props) {
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
 
-  const userLogged = useSelector(state => state.user.iuli);
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+  const [error, setError] = useState(null);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
+
+  const userLogged = useSelector((state) => state.user.iuli);
+  const userRole = useSelector(state => state.user.userRole);
 
   useEffect(() => {
-    setisLogged(userLogged === "NBSS")
-  }, [userLogged])
-  
+    setisLogged(userLogged === "NBSS");
+  }, [userLogged]);
+
   // const userLogged=false;
-  const icon = <Icon icon="carbon:user-avatar-filled-alt" width="30"/>;
+  const icon = <Icon icon="carbon:user-avatar-filled-alt" width="30" />;
   const showDropdown = (title) => {
     switch (title) {
       case "Home":
@@ -165,7 +178,7 @@ function NavBar(props) {
                 Vision and Mission
               </DropItems>
               <DropItems href="/#contact" id="bg-custom-3">
-               Our Proud Partners
+                Our Proud Partners
               </DropItems>
               <DropItems href="/#news" id="bg-custom-3">
                 News
@@ -211,31 +224,9 @@ function NavBar(props) {
                 target="_blank"
                 id="bg-custom-3"
               >
-               Government Gazzet
+                Government Gazzet
               </DropItems>
             </NavDropdown>
-
-            {/* <NavDropdown
-              title={<NavTitle>Student Services</NavTitle>}
-              id="collasible-nav-dropdown"
-              show={showSS}
-              onMouseEnter={() => showDropdown("Student Services")}
-              onMouseLeave={() => hideDropdown("Student Services")}
-              onClick={() => {
-                console.log("show");
-              }}
-            >
-              <DropItems href="/jobs" id="bg-custom-3">
-                Job Opertunities
-              </DropItems>
-              <DropItems href="/jobs" id="bg-custom-3">
-                Training Programs
-              </DropItems>
-              <DropItems href="/jobs" id="bg-custom-3">
-                Other Events
-              </DropItems>
-            </NavDropdown> */}
-
             <NavDropdown
               title={<NavTitle>Industrial Relationships</NavTitle>}
               id="collasible-nav-dropdown"
@@ -274,9 +265,9 @@ function NavBar(props) {
             <NavDropdown
               title={<NavTitle>Other Services</NavTitle>}
               id="collasible-nav-dropdown"
-               show={showOS}
-               onMouseEnter={() => showDropdown("Other Services")}
-               onMouseLeave={() => hideDropdown("Other Services")}
+              show={showOS}
+              onMouseEnter={() => showDropdown("Other Services")}
+              onMouseLeave={() => hideDropdown("Other Services")}
               onClick={() => {
                 console.log("show");
               }}
@@ -295,38 +286,63 @@ function NavBar(props) {
           <Nav>
             <Nav.Link>
               {isLogged ? (
-                  <Nav1>
-                        <NavDropdown
-                          align={{ lg: 'start' }}
-                          drop="start"
+                <Nav1>
+                  <NavDropdown
+                    align={{ lg: "start" }}
+                    drop="start"
+                    title={icon}
+                    show={showIcon}
+                    drop="start"
+                    onMouseEnter={() => showDropdown("Icon")}
+                    onMouseLeave={() => hideDropdown("Icon")}
+                    onClick={() => {
+                      console.log("show");
+                    }}
+                  >
+                    <NavDropdown.Item onClick={()=>{
+                      console.log("userRole",userRole);
+                      switch (userRole) {
+                        case "ROLE_ADMIN":
+                          navigate("/admin/dashboard");
+                          break;
+                        case "ROLE_STUDENT":
+                          navigate("/student/dashboard");
+                          break;
+                        case "ROLE_COMPANY":
+                          navigate("/company/dashboard");
+                          break;
+                        default:
+                          navigate("/");
+                          break;
+                      }
+                    }}>
+                      Dashboard
+                    </NavDropdown.Item>
 
-                          title={icon}
-                          show={showIcon}
-                          drop="start"
-                          onMouseEnter={() => showDropdown("Icon")}
-                          onMouseLeave={() => hideDropdown("Icon")}
-                          onClick={() => {
-                            console.log("show");
-                          }}
-                          
-                        >
-                          <NavDropdown.Item href="/dashboard">
-                              Dashboard
-                          </NavDropdown.Item>
+                    <NavDropdown.Item
+                      href="/"
+                      onClick={async () => {
+                        const { status, error } =
+                          await authService.handleLogout();
+                        if (status) {
+                          dispatch(setUserLoggedIn("SSNB"));
+                          dispatch(setUserRole(""));
+                          dispatch(setUserId(""));
+                          navigate("/");
+                        } else {
+                          setError(error);
+                          setIsErrorMsgOpen(true);
 
-                          <NavDropdown.Item
-                            href="/" 
-                            onClick={() => {
-                              dispatch(setUserLoggedIn("SSNB"))
-                              navigate("/")
-                            }}
-                          >Log Out
-                          </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav1>):(
-               <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
-              )
-            }
+                        }
+                      }}
+                    >
+                      Log Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav1>
+              ) : (
+                <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              )}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -336,7 +352,9 @@ function NavBar(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
+       <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
     </CustomNavBar>
+
   );
 }
 

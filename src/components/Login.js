@@ -91,9 +91,23 @@ function Login(props) {
       if (status) {
         dispatch(setUserId(data?.id))
         dispatch(setUserLoggedIn("NBSS"))
-        dispatch(setUserRole(data?.roles))
+        dispatch(setUserRole(data?.roles[0]))
         props.onHide();
-        navigate("admin");
+        console.log("Role",data?.roles[0])
+        switch (data?.roles[0]) {
+          case "ROLE_ADMIN":
+            navigate("/admin/dashboard");
+            break;
+          case "ROLE_STUDENT":
+            navigate("/student/dashboard");
+            break;
+          case "ROLE_COMPANY":
+            navigate("/company/dashboard");
+            break;
+          default:
+            navigate("/");
+            break;
+        }
       }else {
         setIsErrorMsgOpen(true)
         setSubmitError(error);

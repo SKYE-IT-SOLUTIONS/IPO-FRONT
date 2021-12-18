@@ -1,5 +1,6 @@
 import { authRequest, getErrorMessage, postRequest } from "../utils";
 import {
+  getRefreshToken,
   getAccessToken,
   setAccessToken,
   getUserId,
@@ -65,10 +66,12 @@ export const logOut = async () => {
 };
 
 export const isUser = async () => {
-  const access = await getAccessToken();
-  if (access === "") {
-    return { status: false,data: null, error: "Access Token Not Found" };
+  console.log("isUser");
+  const refresh = getRefreshToken();
+  if (refresh === "") {
+    return { status: false,data: null, error: "Refresh Token Not Found" };
   }
+  const access = getAccessToken();
   var config = {
     method: "POST",
     url: ACCESS_URL,
@@ -82,13 +85,13 @@ export const isUser = async () => {
     .then(async ({ data, error }) => {
       if (!error) {
         if (data.status === 200) {
-          result = { status: true,data: data?.data, error: null };
+          result = { status: true,data: null, error: null };
         } else {
           result = { status: false,data: null, error: "Undefined Status Code" };
         }
       } else {
         if (error.status === 401) {
-          // console.log("Access Token Expired")
+          console.log("Access Token Expired")
           const { status, error } = await refreshAccessToken(
             REFRESH_URL,
             postRequest
@@ -104,7 +107,6 @@ export const isUser = async () => {
       }
     })
     .catch((error) => {
-      console.log("error " + error);
       result = { status: false,data: null, error: getErrorMessage(error) };
     });
   return result;
