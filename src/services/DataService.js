@@ -8,12 +8,10 @@ import {
 
 const NEWS_DATA_URL = "/news";
 const JOB_DATA_URL = "/job";
+const CONTACT_US ='/contactUs'
 
 export default class DataService {
-  handleUpload = (file) => {};
-
-  handleDelete = (file) => {};
-
+  //get news and job data
   handleGetNews = async (id) => {
     const result = await onGetOne(NEWS_DATA_URL, id);
     return result;
@@ -29,6 +27,7 @@ export default class DataService {
     return result;
   };
 
+  //handle job and news submit
   handleSubmitNews = async (data) => {
     const result = await onSubmit(NEWS_DATA_URL, data);
     return result;
@@ -39,6 +38,7 @@ export default class DataService {
     return result;
   };
 
+  //handle job and news update
   handleUpdateNews = async (id, data) => {
     const result = await onUpdate(NEWS_DATA_URL, id, data);
     return result;
@@ -49,6 +49,7 @@ export default class DataService {
     return result;
   };
 
+  //handle job and news delete
   handleDeleteNews = async (id) => {
     const result = await onDelete(NEWS_DATA_URL, id);
     return result;
@@ -56,6 +57,18 @@ export default class DataService {
 
   handleDeleteJob = async (id) => {
     const result = await onDelete(JOB_DATA_URL, id);
+    return result;
+  };
+
+  //handle get contact us details
+  handleGetContactDetails = async () => {
+    const result = await onGetOne(CONTACT_US);
+    return result;
+  };
+
+  //handle update contact us details
+  handleUpdateContactDetails = async (data) => {
+    const result = await onUpdate(CONTACT_US, data);
     return result;
   };
 }
