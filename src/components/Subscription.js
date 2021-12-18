@@ -70,16 +70,18 @@ function Subscription() {
   const [emailInfo, setEmailInfo] = useState({ error: null, status: false });
 
   const [isLoading, setisLoading] = useState(false);
-  const [submitError, setSubmitError] = useState(null);
+  // const [submitError, setSubmitError] = useState(null);
 
-  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [severity, setSeverity] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setIsErrorMsgOpen(false);
+    setSnackbarOpen(false);
   };
 
   return (
@@ -122,12 +124,17 @@ function Subscription() {
             setisLoading(true)
             const {status,error} = await subscribeIpo({ name, email });
             if(status){
+              setMessage("Subscribed Successfully")
+              setSeverity("success")
+              setSnackbarOpen(true)
               setName("")
               setEmail("")
-              setSubmitError(null)
+              setNameInfo({error:null,status:false})
+              setEmailInfo({error:null,status:false})
             }else{
-              setSubmitError(error)
-              setIsErrorMsgOpen(true)
+              setMessage(error)
+              setSeverity("error")
+              setSnackbarOpen(true)
             }
             setisLoading(false)
           }
@@ -135,7 +142,7 @@ function Subscription() {
       >
         SUBMIT
       </SubBttn>
-      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={submitError}/>
+      <CustomSnackBar isOpen={snackbarOpen}  severity={severity} handleClose={handleClose} message={message}/>
     </SubscriptDiv>
   );
 }
