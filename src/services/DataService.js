@@ -4,12 +4,15 @@ import {
   onSubmit,
   onUpdate,
   onDelete,
+  onSubmitNoAuth
 } from "../api/data/dataAPI";
 
 const NEWS_DATA_URL = "/news";
 const GLOBAL_NEWS_DATA_URL = "news/global";
 const JOB_DATA_URL = "/job";
 const CONTACT_US ='/contactUs'
+const SUBSCRIBE_URL ='/email/add'
+
 
 export default class DataService {
   //get news and job data
@@ -77,4 +80,10 @@ export default class DataService {
     const result = await onUpdate(CONTACT_US, data);
     return result;
   };
+
+  //handle subscribe email
+  handleSubscription = async (data) => {
+    const result = await onSubmitNoAuth(SUBSCRIBE_URL, data);
+    return result;
+  }
 }

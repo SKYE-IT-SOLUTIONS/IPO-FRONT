@@ -46,6 +46,34 @@ export const onSubmit = async (DATA_URL, data) => {
   return result;
 };
 
+export const onSubmitNoAuth = async (DATA_URL, data) => {
+  var config = {
+    method: "POST",
+    url: DATA_URL,
+    data: data,
+  };
+  console.log("onSubmitNoAuth");
+  await authRequest(config)
+    .then(async ({ data, error }) => {
+      if (!error) {
+        if (data.status === 200) {
+          console.log("success");
+          result = { status: true,data:data?.data, error: null };
+        }else {
+          console.log("Error")
+          result = { status: false,data:null, error: getErrorMessage(error) };
+        }
+      } else {
+        result = { status: false,data:null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      console.log("error");
+      result = { status: false,data:null, error: getErrorMessage(error) };
+    });
+  return result;
+};
+
 export const onUpdate = async (DATA_URL, id, data) => {
   var config = {
     method: "PUT",
