@@ -25,6 +25,9 @@ import { default as UserListOfAdmin } from "./containers/Dashboard/Admin/Users/U
 import { default as NewsListOfAdmin } from "./containers/Dashboard/Admin/News/NewsList";
 import { default as JobListOfAdmin } from "./containers/Dashboard/Admin/Jobs/JobList";
 import { default as CompanyListOfAdmin } from "./containers/Dashboard/Admin/Company/CompanyList";
+import StudentRegister from './components/StudentRegister';
+import CompanyRegister from './components/CompanyRegister';
+import SendMail from './components/SendMail';
 
 
 const routes = (isAuthenticated) => [
@@ -46,7 +49,9 @@ const routes = (isAuthenticated) => [
         { path: 'editcontact', element: <Editcontact/> },
         { path: 'submitcv', element: <Submitcv/> },
         { path: 'requestgraduate', element: <RequestGraduate/> },
-
+        { path: 'studentReg', element: <StudentRegister/> },
+        { path: 'companyReg', element: <CompanyRegister/> },
+        { path: 'sendMail', element: <SendMail/> },
       ]
     },
     {
