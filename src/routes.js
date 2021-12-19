@@ -13,7 +13,7 @@ import JobList from "./containers/JobList";
 import EditContact from "./components/EditContact";
 import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
-import RegistationDashboard from "./components/Registationdashboard";
+import RegistrationDashboard from "./components/Register";
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -44,18 +44,18 @@ const routes = (isAuthenticated,userRole) => [
       { path: "news/:id", element: <NewsView /> },
       { path: "spinner", element: <Spinner /> },
       { path: "submitCv", element: <SubmitCv /> },
-      { path: "requestGraduate", element: <RequestGraduate /> },
-      { path: 'studentReg', element: <StudentRegister/> },
-      { path: 'companyReg', element: <CompanyRegister/> },
-      { path: 'sendMail', element: <SendMail/> },
-      { path: 'registationdashboard', element: <RegistationDashboard/>},
+      { path: "requestPerson", element: <RequestGraduate /> },
+      { path: 'register', element: <RegistrationDashboard/>},
+      { path: 'register/companyReg', element: <CompanyRegister/> },
+      { path: 'register/studentReg', element: <StudentRegister/> },
+      { path: 'register/sendMail', element: <SendMail/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
   },
   {
     path: "/admin",
-    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
       { path: "dashboard", element: <h1>Admin Dashboard</h1>  },
       { path: "user", element: <UserListOfAdmin />},
@@ -76,11 +76,11 @@ const routes = (isAuthenticated,userRole) => [
     path: "/student",
     element: (isAuthenticated && userRole === "ROLE_STUDENT" ) ? <StudentLayout /> : <Navigate to="/login" />,
     children: [
-      {path: "/student/dashboard", element: <h1>Profile view of student</h1>},
-      {path: "/student/dashboard/news", element: <h1>News List of student</h1>},
-      {path: "/student/dashboard/job", element: <h1>Job list of student</h1> },
-      {path: "/student/dashboard/feedback", element: <h1>Feedback view of student</h1>},
-      {path: "/student/dashboard/settings", element: <h1>Student Settings</h1>},
+      {path: "dashboard", element: <h1>Profile view of student</h1>},
+      {path: "news", element: <h1>News List of student</h1>},
+      {path: "job", element: <h1>Job list of student</h1> },
+      {path: "feedback", element: <h1>Feedback view of student</h1>},
+      {path: "settings", element: <h1>Student Settings</h1>},
       {path: "/student", element: <Navigate to="/404" /> },
       {path: "*", element: <Navigate to="/404" /> },
     ],
