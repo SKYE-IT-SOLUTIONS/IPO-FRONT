@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import DataService from "../services/DataService";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import { useSelector } from "react-redux";
 
 const JobContainer = styled(Container)`
   /* display: flex;
@@ -192,22 +193,50 @@ function PostJob({ dataFromProp }) {
   const [error, setError] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
+  const storeTitle = useSelector((state) => state.job.title);
+  const storePosition = useSelector((state) => state.job.position);
+  const storeDescription = useSelector((state) => state.job.description);
+  const storeSpecifications = useSelector((state) => state.job.specifications);
+  const storeQualifications = useSelector((state) => state.job.qualifications);
+  const storeExperience = useSelector((state) => state.job.experience);
+  const storeSalary = useSelector((state) => state.job.salary);
+  const storeDeadline = useSelector((state) => state.job.deadline );
+
   useEffect(() => {
     setisLoading(true);
     const fetchJob = async () => {
-      if (dataFromProp === null || dataFromProp === undefined) {
+      if (id !== undefined && id !== null) {
         console.log(id);
-        const { status, data, error } = id
-          ? await dataService.handleGetJob(id)
-          : null;
-        if (status) {
-          setJobData(data);
-        } else {
-          setError(error);
-          navigate("/404");
-        }
+        // const { status, data, error } = id
+        //   ? await dataService.handleGetJob(id)
+        //   : null;
+        // if (status) {
+        //   setJobData(data);
+        // } else {
+        //   setError(error);
+        //   navigate("/404");
+        // }
+
+        let rdata;
+        await fetch(`http://localhost:3005/job/${id}`).then(res=>
+          res.json()
+        ).then(data=>{
+          rdata=data.data;console.log("rdata",data)
+          setJobData(data)
+        }).catch(e=>console.log(e))
+        
       } else {
-        setJobData(dataFromProp);
+        setJobData({
+          id: "",
+          title: storeTitle,
+          position: storePosition,
+          description: storeDescription,
+          specifications: storeSpecifications,
+          qualifications: storeQualifications,
+          experience: storeExperience,
+          salary: storeSalary,
+          date: "Not Posted Yet",
+        })
       }
       setisLoading(false);
     };
@@ -230,17 +259,17 @@ function PostJob({ dataFromProp }) {
                       <Logo></Logo>
                     </Td>
                     <Td>
-                      <MainTitle>{jobData?.title}</MainTitle>
+                      {jobData.title && <MainTitle>{jobData.title}</MainTitle>}
                     </Td>
                   </tr>
                 </tbody>
               </Table>
-              <Title>Job Position : {jobData?.position}</Title>
+              {jobData.position && <Title>Job Position : {jobData.position}</Title>}
               <Description>{jobData?.description}</Description>
               <Row style={{ paddingTop: "15px" }}>
                 <Col md={6} sm={12}>
                   <ApplyImage image={JobPhoto} />
-                  {jobData?.salary && (
+                  {jobData.salary && (
                     <>
                       <SalaryDiv>
                         <table>
@@ -263,7 +292,7 @@ function PostJob({ dataFromProp }) {
                   )}
                 </Col>
                 <Col md={6} sm={12}>
-                  {jobData?.specifications && (
+                  {jobData.specifications.length !== 0 && (
                     <>
                       <RequirementTitle>Specifications</RequirementTitle>
                       <ul>
@@ -274,7 +303,7 @@ function PostJob({ dataFromProp }) {
                     </>
                   )}
 
-                  {jobData?.qualifications && (
+                  {jobData.qualifications.length !== 0  && (
                     <>
                       <RequirementTitle>Qualifications</RequirementTitle>
                       <ul>
@@ -285,7 +314,7 @@ function PostJob({ dataFromProp }) {
                     </>
                   )}
 
-                  {jobData?.experience && (
+                  {jobData.experience.length !== 0 && (
                     <>
                       <RequirementTitle>Experience</RequirementTitle>
                       <ul>

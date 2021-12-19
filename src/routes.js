@@ -13,6 +13,7 @@ import JobList from "./containers/JobList";
 import EditContact from "./components/EditContact";
 import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
+import RegistationDashboard from "./components/Registationdashboard";
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -39,6 +40,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "home", element: <HomeContent /> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
+      { path: "job/preview", element: <PostJob /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "spinner", element: <Spinner /> },
       { path: "submitCv", element: <SubmitCv /> },
@@ -46,7 +48,9 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'studentReg', element: <StudentRegister/> },
       { path: 'companyReg', element: <CompanyRegister/> },
       { path: 'sendMail', element: <SendMail/> },
+      { path: 'registationdashboard', element: <RegistationDashboard/>},
       { path: "*", element: <Navigate to="/404" /> },
+      
     ],
   },
   {
