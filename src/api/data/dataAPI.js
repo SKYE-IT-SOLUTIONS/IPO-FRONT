@@ -25,6 +25,9 @@ export const onSubmit = async (DATA_URL, data) => {
       if (!error) {
         if (data.status === 200) {
           result = { status: true,data:data?.data, error: null };
+        }else if(data.status === 201) {
+          console.log("success");
+          result = { status: true,data:data?.data, error: null };
         } else if (data.status === 401) {
           const { status, error } = await refreshAccessToken(
             REFRESH_URL,

@@ -127,6 +127,7 @@ function StudentRegister() {
 
             <Lable>Student Registration Number</Lable>
             <Input
+            value={reg}
               type="text"
               onChange={(e) => {
                 let val = e.target.value
@@ -138,6 +139,7 @@ function StudentRegister() {
 
             <Lable>Name</Lable>
             <Input
+            value={name}
               type="text"
               onChange={(e) => {
                 let val = e.target.value
@@ -149,6 +151,7 @@ function StudentRegister() {
 
             <Lable>Password</Lable>
             <Input
+             value={password}
               type="password"
               onChange={(e) => {
                 let val = e.target.value
@@ -161,6 +164,7 @@ function StudentRegister() {
             <Lable>Confirm Password</Lable>
             <Input
               type="password"
+              value={confirmPassword}
               onChange={(e) => {
                 let value = e.target.value
                 setConfirmPassword(value)
