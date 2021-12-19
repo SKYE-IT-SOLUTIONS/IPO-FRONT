@@ -243,7 +243,7 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <NavDropdown
+              {/* <NavDropdown
                 title={<NavSubTitle>Request a Graduates/s</NavSubTitle>}
                 drop="end"
                 show={showIRR}
@@ -259,7 +259,10 @@ function NavBar(props) {
                 <DropItems href="/survey" id="bg-custom-3">
                   A Survey
                 </DropItems>
-              </NavDropdown>
+              </NavDropdown> */}
+              <DropItems id="bg-custom-3" onClick={()=>{navigate("/requestPerson")}}>
+              Request a Graduate/s or<br/> Undergraduate/s
+              </DropItems>
               <DropItems href="/add" id="bg-custom-3">
                 Submit an Advertisement
               </DropItems>
@@ -328,18 +331,22 @@ function NavBar(props) {
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
-                        const { status, error } =
-                          await authService.handleLogout();
-                        if (status) {
+                        // const { status, error } =
+                        //   await authService.handleLogout();
+                        // if (status) {
+                        //   dispatch(setUserLoggedIn("SSNB"));
+                        //   dispatch(setUserRole(""));
+                        //   dispatch(setUserId(""));
+                        //   navigate("/");
+                        // } else {
+                        //   setError(error);
+                        //   setIsErrorMsgOpen(true);
+
+                        // }
                           dispatch(setUserLoggedIn("SSNB"));
                           dispatch(setUserRole(""));
                           dispatch(setUserId(""));
                           navigate("/");
-                        } else {
-                          setError(error);
-                          setIsErrorMsgOpen(true);
-
-                        }
                       }}
                     >
                       Log Out

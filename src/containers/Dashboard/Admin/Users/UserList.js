@@ -202,6 +202,8 @@ const UserList = () => {
   const [pageSize, setPageSize] = useState(8);
 
   return (
+    <>
+    <h1>User List</h1>  
     <div style={{ width: "100%" }}>
       <DataGrid
         columns={columns}
@@ -217,6 +219,7 @@ const UserList = () => {
         pagination
       />
     </div>
+    </>
   );
 };
 

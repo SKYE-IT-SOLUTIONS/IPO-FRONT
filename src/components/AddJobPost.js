@@ -7,6 +7,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { Simple_Validator } from "../utils/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import DataService from "../services/DataService";
+
 import {
   setTitle,
   setPosition,
@@ -215,6 +217,18 @@ function AddJobPost() {
 
   const [salary, setJobSalary] = useState("");
   const [date, setDate] = useState("");
+
+  const dataService = new DataService();
+
+  const handleNewsSubmit = async (payload) => {
+    setIsLoading(true);
+    const {status,data,error} = await dataService.handleSubmitJob(payload);
+    if(status){
+      navigate("/");
+    }
+    setIsLoading(false);
+    
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -474,7 +488,9 @@ function AddJobPost() {
               <SubmitBttn onClick={() => {
                 navigate("/job/preview");
               }}>Preview</SubmitBttn>
-          <SubmitBttn submit>Submit</SubmitBttn>
+          <SubmitBttn submit onClick={()=>{
+            handleNewsSubmit();
+          }}>Submit</SubmitBttn>
             </Col>
           </Row>   
         </JobContainer>

@@ -10,6 +10,7 @@ import {Container} from "./CommonComponents";
 
   const  OuterDiv = styled(Container)`
     font-family: ${({ font }) => font.general};
+    text-align: center;
   `
 
 const images = [
@@ -66,6 +67,7 @@ const Image = styled('span')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   color: theme.palette.common.white,
+  
 }));
 
 const ImageBackdrop = styled('span')(({ theme }) => ({
@@ -88,14 +90,19 @@ const ImageMarked = styled('span')(({ theme }) => ({
   left: 'calc(50% - 9px)',
   transition: theme.transitions.create('opacity'),
 }));
+const AnimatedText = styled('h1')`
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
 
+`;
 export default function ButtonBases() {
     const { fonts } = useContext(ThemeContext);
 
   return (
       <OuterDiv font={fonts}>
-          <h2 style={{textAlign:"center"}}>Choose You Choice</h2>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+          <AnimatedText>Choose You Choice</AnimatedText>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
       {images.map((image) => (
         <ImageButton
           focusRipple
@@ -104,8 +111,8 @@ export default function ButtonBases() {
             width: image.width,
           }}
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          <ImageBackdrop className="MuiImageBackdrop-root" />
+          <ImageSrc style={{ backgroundImage: `url(${image.url})`}} />
+          <ImageBackdrop className="MuiImageBackdrop-root"/>
           <Image>
             <Typography
               component="span"

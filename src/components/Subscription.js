@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Input, Lable, CustomButton } from "./CommonComponents";
-import { subscribeIpo } from "../api/subAPI";
 import { Simple_Validator, Validator } from "../utils/validation";
 import { patternMail } from "../config/pattern";
 import CustomSnackBar from "./CustomSnackBar";
+import DataService from "../services/DataService";
 
 const SubscriptDiv = styled(Col)`
   display: flex;
@@ -84,6 +84,29 @@ function Subscription() {
     setSnackbarOpen(false);
   };
 
+  const dataService = new DataService();
+
+  const handleSubscribe = async () => {
+    if(nameInfo.status && emailInfo.status){
+      setisLoading(true)
+      const {status,error} = await dataService.handleSubscription({ name:name, email:email });
+      if(status){
+        setMessage("Subscribed Successfully")
+        setSeverity("success")
+        setSnackbarOpen(true)
+        setName("")
+        setEmail("")
+        setNameInfo({error:null,status:false})
+        setEmailInfo({error:null,status:false})
+      }else{
+        setMessage(error)
+        setSeverity("error")
+        setSnackbarOpen(true)
+      }
+      setisLoading(false)
+    }
+  }
+
   return (
     <SubscriptDiv fonts={fonts} md={4} sm={12}>
       <SubIcon icon="entypo:mail" width="70" />
@@ -119,26 +142,7 @@ function Subscription() {
       <SubBttn
         submit
         disabled={isLoading || !nameInfo.status || !emailInfo.status}
-        onClick={async () => {
-          if(nameInfo.status && emailInfo.status){
-            setisLoading(true)
-            const {status,error} = await subscribeIpo({ name, email });
-            if(status){
-              setMessage("Subscribed Successfully")
-              setSeverity("success")
-              setSnackbarOpen(true)
-              setName("")
-              setEmail("")
-              setNameInfo({error:null,status:false})
-              setEmailInfo({error:null,status:false})
-            }else{
-              setMessage(error)
-              setSeverity("error")
-              setSnackbarOpen(true)
-            }
-            setisLoading(false)
-          }
-        }}
+        onClick={handleSubscribe}
       >
         SUBMIT
       </SubBttn>

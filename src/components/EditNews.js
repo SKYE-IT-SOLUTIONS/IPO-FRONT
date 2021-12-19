@@ -137,25 +137,30 @@ function AddNewsPost() {
     setIsLoading(true);
     const fetchNews = async () => {
         if (id !== undefined && id !== null) {
-        //   console.log("Database Call");
-        //   console.log(id);
-        //   const { status, data, error } = id
-        //     ? await dataService.handleGetNews(id)
-        //     : null;
-        //   if (status) {
-        //     setNewsData(data);
-                let rdata;
-                await fetch(`http://localhost:3005/news/${id}`).then(res=>
-                res.json()
-                ).then(data=>{
-                console.log("rdata",data)
-                setNewsTitle(data.title)
-                setContentList(data.description)
-                setImageUrl(data.image)
-                setNewsVisibility(data.visibility)
-                }).catch(e=>console.log(e)).finally(()=>{
-                    setIsLoading(false);
-                })
+          console.log("Database Call");
+          console.log(id);
+          const { status, data, error } = id
+            ? await dataService.handleGetNews(id)
+            : null;
+          if (status) {
+            // setNewsData(data);
+        setNewsTitle(data.title)
+        setContentList(data.description)
+        setImageUrl(data.url)
+        setNewsVisibility(data.global)
+        setIsLoading(false);}
+                // let rdata;
+                // await fetch(`http://localhost:3005/news/${id}`).then(res=>
+                // res.json()
+                // ).then(data=>{
+                // console.log("rdata",data)
+                // setNewsTitle(data.title)
+                // setContentList(data.description)
+                // setImageUrl(data.image)
+                // setNewsVisibility(data.visibility)
+                // }).catch(e=>console.log(e)).finally(()=>{
+                //     setIsLoading(false);
+                // })
           } else {
             setError(error);
             navigate("/404");

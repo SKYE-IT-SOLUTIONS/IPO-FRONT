@@ -122,7 +122,7 @@ function NewsView() {
               </Row>{" "}
               <Date font={fonts}>
                 {newsData.uploadTime !== ""
-                  ? `Last updated - ${newsData.uploadTime}`
+                  ? `Last updated - ${newsData.howLong}`
                   : ""}
               </Date>
             </>

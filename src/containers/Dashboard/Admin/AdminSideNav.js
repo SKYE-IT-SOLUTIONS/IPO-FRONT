@@ -6,7 +6,7 @@ const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
-  height: 590px;
+  height: 650px;
   width: ${(props) => (props.active ? "285px" : "82px")};
   overflow: hidden;
   transition: all 0.5s ease;
@@ -128,7 +128,7 @@ const AdminSideNav = () => {
   return (
     <React.Fragment>
       <Body active={active}>
-        <SideNavBarContainer active={active}>
+        <SideNavBarContainer active={active} >
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
             <NavHeaderName>Dashboard</NavHeaderName>

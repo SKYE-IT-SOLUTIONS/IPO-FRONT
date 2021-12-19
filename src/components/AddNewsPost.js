@@ -13,7 +13,9 @@ import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
 import FileUpload from "./fileupload/FileUpload";
-import { useNavigate, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import DataService from "../services/DataService";
+
 import {
   setTitle,
   setDescription,
@@ -141,6 +143,23 @@ function AddNewsPost() {
   const storeImage = useSelector((state) => state.news.image);
   const storeDescription = useSelector((state) => state.news.description);
   const storeVisibility = useSelector((state) => state.news.visibility);
+
+  const dataService = new DataService();
+  const [error, setError] = useState("");
+
+  const handleNewsSubmit = async (payload) => {
+    console.log("payload", payload);
+    const { status,data, error } = await dataService.handleSubmitNews(payload);
+    if (status) {
+      dispatch(removeDescription());
+      dispatch(setImage(null));
+      dispatch(setTitle(null));
+      navigate(`/admin/news/${data}`);
+    }else{
+      console.log("error", error);
+      setError(error);
+    }
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -312,7 +331,7 @@ function AddNewsPost() {
               </div> */}
               <NewsButton
                 onClick={() => {
-                  navigate("/news/preview");
+                  navigate("/admin/news/preview");
                 }}
               >
                 Preview
@@ -320,9 +339,15 @@ function AddNewsPost() {
               <NewsButton
                 submit
                 onClick={() => {
-                  dispatch(removeDescription());
-                  dispatch(setImage(null));
-                  dispatch(setTitle(null));
+                  console.log("submit");
+                  if (true) {
+                    handleNewsSubmit({
+                      title: newTitle,
+                      description: contentList,
+                      global: visibility,
+                      url: imageUrl,
+                    });
+                  }
                 }}
               >
                 Submit

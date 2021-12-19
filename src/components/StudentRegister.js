@@ -127,6 +127,7 @@ function StudentRegister() {
 
             <Lable>Student Registration Number</Lable>
             <Input
+            value={reg}
               type="text"
               value={reg}
               onChange={(e) => {
@@ -139,6 +140,7 @@ function StudentRegister() {
 
             <Lable>Name</Lable>
             <Input
+            value={name}
               type="text"
               value={name}
               onChange={(e) => {
@@ -151,6 +153,7 @@ function StudentRegister() {
 
             <Lable>Password</Lable>
             <Input
+             value={password}
               type="password"
               value={password}
               onChange={(e) => {
