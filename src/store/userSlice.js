@@ -5,7 +5,7 @@ export const userSlice = createSlice({
     initialState: {
         userId : '',
         iuli : "SSNB",
-        userRoles : []
+        userRole : ""
     },
     reducers: {
         setUserId : (state, action) => {
@@ -15,7 +15,7 @@ export const userSlice = createSlice({
             state.iuli = action.payload;
         },
         setUserRole : (state, action) => {
-            state.userRoles = action.payload;
+            state.userRole = action.payload;
         }
     }
 });
