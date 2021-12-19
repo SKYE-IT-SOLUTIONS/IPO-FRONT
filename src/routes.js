@@ -29,6 +29,7 @@ import { default as CompanyListOfAdmin } from "./containers/Dashboard/Admin/Comp
 import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
+import EditNews from './components/EditNews';
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -53,6 +54,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'companyReg', element: <CompanyRegister/> },
       { path: 'sendMail', element: <SendMail/> },
       { path: 'registationdashboard', element: <RegistationDashboard/>},
+      { path: 'editnews/:id', element: <EditNews/>},
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
