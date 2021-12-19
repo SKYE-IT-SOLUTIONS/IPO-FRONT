@@ -39,6 +39,12 @@ const DropItems = styled(NavDropdown.Item)`
   padding-top: 7px;
   padding-bottom: 7px;
 `;
+const RegisterTag = styled.span`
+  color: red;
+  font-weight: 500;
+  font-size: 16px;
+  padding-right: 15px;
+`;
 
 const LoginTag = styled.span`
   color: white;
@@ -340,8 +346,12 @@ function NavBar(props) {
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav1>
-              ) : (
+              ) : ( <span>
+                <RegisterTag onClick={() => {
+                    navigate("/registationdashboard");
+                  }}>Register</RegisterTag>
                 <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+                </span>
               )}
             </Nav.Link>
           </Nav>

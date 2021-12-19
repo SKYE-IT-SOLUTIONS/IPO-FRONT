@@ -13,6 +13,7 @@ import JobList from "./containers/JobList";
 import Editcontact from "./components/EditContact";
 import Submitcv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
+import RegistationDashboard from "./components/Registationdashboard";
 
 //Testing Components
 import MapView from "./components/MapViewUpdated";
@@ -51,7 +52,9 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'studentReg', element: <StudentRegister/> },
       { path: 'companyReg', element: <CompanyRegister/> },
       { path: 'sendMail', element: <SendMail/> },
+      { path: 'registationdashboard', element: <RegistationDashboard/>},
       { path: "*", element: <Navigate to="/404" /> },
+      
     ],
   },
   {

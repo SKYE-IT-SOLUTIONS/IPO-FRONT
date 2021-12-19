@@ -58,14 +58,11 @@ const Error = styled.p`
 function Requestgraduate() {
     const { fonts } = useContext(ThemeContext);
 
-    const [name,setName]=useState();
-    const [nameInfo,setNameInfo]=useState({error: null,status: false});
-    const [description,setDescription]=useState();
-    const [descriptionInfo,setDescriptionInfo]=useState({error: null,status: false});
+    const [reqperson,setReqperson]=useState("Graduate");
     const [count,setCount]=useState();
     const [countInfo,setCountInfo]=useState({error: null,status: false});
-    const [reqperson,setReqperson]=useState("Graduate");
-    const [reason,setReason]=useState();
+    const [reason,setReason]=useState("educationalEvent");
+    const [other,setOther]=useState();
     const [mail,setMail]=useState();
     const [mailInfo,setMailInfo]=useState({error: null,status: false});
     const [number,setNumber]=useState();
@@ -77,20 +74,17 @@ function Requestgraduate() {
     const [upload,setUpload] =useState({});
     const [uploadInfo,setUploadInfo]=useState({error: null,status: false});
 
-
-    const output=[
-        {
-         Name:{name},
-         About:{description},   
-         RequestPerson:{reqperson},
-         RequestCount:{count},
-         Reason:{reason},
-         Mail:{mail},
-         MobileNumber:{number},
-         Address:{},
-        }
-     ]
-
+   const output=[
+       {
+        RequestPerson:{reqperson},
+        RequestCount:{count},
+        Reason:{reason},
+        Other:{other},
+        Mail:{mail},
+        MobileNumber:{number},
+        Address:{},
+       }
+    ]
     return (
         <Requestdiv font={fonts}>
             <MPaper>
@@ -106,40 +100,12 @@ function Requestgraduate() {
                 <Bordercol md={7} sm={12}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
                         <Grid item xs={6}>
-                            <H5div><h5 >Enter your Details</h5></H5div>
+                            <H5div><h5 >Enter Details</h5></H5div>
                         </Grid>
                         <Grid item xs={6}>
                            
                         </Grid>
-                        <Grid item xs={4}>
-                            <>Your Name</>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <><Inputs type="text" name="name" value={name} 
-                                placeholder="Enter Your Name"
-                                onChange={(e) => {
-                                setName(e.target.value)
-                                setNameInfo(Simple_Validator(e.target.value,"Name"));
-                                }}
-                                /><br/>
-                                {!nameInfo.status && <Error>{nameInfo.error}</Error>}</>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <>Introduce Yourself</>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <><TextArea
-                                    rows="4"
-                                    value={description}
-                                    placeholder="Enter Description"
-                                    onChange={(e) => {
-                                        setDescription(e.target.value);
-                                        setDescriptionInfo(Simple_Validator(e.target.value,"Description"));
-                                    }}
-                                /><br/>
-                                {!descriptionInfo.status && <Error>{descriptionInfo.error}</Error>}
-                                </>
-                        </Grid>
+                        
                         <Grid item xs={4}>
                             <>Request Person</>
                         </Grid>
@@ -157,7 +123,6 @@ function Requestgraduate() {
                                     console.log(e.target.value)
                                     }}
                             />
-                            {console.log(reqperson)}
                             <Form.Check
                                 type="radio"
                                 label="Undergraduate"
@@ -185,17 +150,59 @@ function Requestgraduate() {
                                 /><br/>
                                 {!countInfo.status && <Error>{countInfo.error}</Error>}
                                 </>
-                        </Grid> 
+                        </Grid>
                         <Grid item xs={4}>
                             <>Reason</>
                         </Grid>
                         <Grid item xs={8}>
+                        <><Form>
+                            <Form.Check
+                                type="radio"
+                                label="For educational event"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios1"
+                                value="educationalEvent"
+                                checked
+                                onChange={(e) => {
+                                    setReason(e.target.value)
+                                    console.log(e.target.value)
+                                    }}
+                            />
+                            <Form.Check
+                                type="radio"
+                                label="For survay"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                                value="survay"
+                                onChange={(e) => {
+                                    setReason(e.target.value)
+                                    console.log(e.target.value)
+                                    }}
+                            />
+                            <Form.Check
+                                type="radio"
+                                label="other"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                                value="other"
+                                onChange={(e) => {
+                                    setReason(e.target.value)
+                                    console.log(e.target.value)
+                                    }}
+                            />
+                            </Form>
+                            </>    
+                        </Grid>
+                        <Grid item xs={4}>
+                            <>Other</>
+                        </Grid>
+                        <Grid item xs={8}>
                             <><><TextArea
                                     rows="4"
-                                    value={reason}
+                                    value={other}
                                     placeholder="Enter Reason"
                                     onChange={(e) => {
-                                        setReason(e.target.value);
+                                        setOther(e.target.value);
                                     }}
                                 /></></>
                         </Grid>
@@ -235,7 +242,7 @@ function Requestgraduate() {
                             <>Address</>
                         </Grid>
                         <Grid item xs={8}>
-                        <><InputAddress type="text" name="name" placeholder="Apart No" value={addressNo} 
+                            <><InputAddress type="text" name="name" placeholder="Apart No" value={addressNo} 
                                 onChange={(e) => {
                                 setAddressNo(e.target.value)
                                 }}/></><br/>
@@ -248,35 +255,14 @@ function Requestgraduate() {
                                 setCity(e.target.value)
                                 setCityInfo(Simple_Validator(e.target.value,"City"));
                                 }}/>{!cityInfo.status && <Error>{cityInfo.error}</Error>}<br/>
-                                </>      
+                                </>     
                         </Grid>
                        
                     </Grid>
-                    <hr/>
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    <Grid item xs={4}>
-                            <>Upload recommendation letter</>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <>
-                            <Form.Group controlId="formFile" className="mb-3">
-                                <Form.Control type="file" 
-                                 onChange = {(e) => {
-                                console.log("onFileChange Triggered");
-                                setUpload(e.target.files[0]);
-                                console.log("selected file"+e.target.files[0]);
-                                setUploadInfo(upload_Validator(e.target.files[0],"File"))
-                                }}/> 
-                                {(upload.name && upload.size) != null ?  <p>({(upload.size/1000000).toFixed(2)} mb)</p> : null}
-                                {uploadInfo.error != null && <Error>{uploadInfo.error}</Error>}
-                            </Form.Group>
-                            </>
-                        </Grid>
-                    </Grid>
 
                     <CustomButton type="submit" submit 
-                     disabled={!nameInfo.status || !descriptionInfo.status || !countInfo.status || !mailInfo.status || !numberInfo.status || !cityInfo.status || !uploadInfo.status}
-                    
+                     disabled={!countInfo.status || !mailInfo.status || !numberInfo.status || !cityInfo.status || !uploadInfo.status}
+                     
                     >
                     submit
                     </CustomButton><br/>
