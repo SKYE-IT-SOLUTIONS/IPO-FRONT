@@ -50,6 +50,14 @@ const Error = styled.p`
   padding: 5px 0 5px 2px;
 `;
 
+const Success = styled.p`
+  color: 	#009933;
+  font-size: 13px;
+  margin: 0px;
+  text-align: left;
+  padding: 5px 0 5px 2px;
+`;
+
 const SeparateDiv = styled.div`
   border: 4px solid;
   border-radius: 10px;
@@ -127,7 +135,7 @@ function StudentRegister() {
                 setMatchPassword(passwordMatcher(password,value))
               }}
             />
-             {!matchPassword.isMatching && <Error>{matchPassword.error}</Error>}
+             {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> :  <Success>Password is matching</Success>}
 
             <LoginBttn submit>Register</LoginBttn>
           </SeparateDiv>
