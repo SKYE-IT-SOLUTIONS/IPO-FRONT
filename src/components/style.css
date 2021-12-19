@@ -46,31 +46,12 @@
   }
   
   .slides > button:first-child {
-    left: -50%;
+    left: -35%;
   }
   
   .slides > button:last-child {
-    right: -50%;
+    right: -35%;
   }
-  
-  .slideContent {
-    width: 175px;
-    height: 150px;
-    border: 1px solid white;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    transition: transform 0.5s ease-in-out;
-    opacity: 0.7;
-    border-radius: 10px;
-    display: grid;
-    
-    align-content: center;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) translateX(calc(100% * var(--offset)))
-      rotateY(calc(-45deg * var(--dir)));
-  }
-
   
   .slideSubtitle,
   .slideTitle {
@@ -118,3 +99,180 @@
     pointer-events: auto;
   }
   
+
+  @media only screen and (min-width: 1160px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(60% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+    
+  }
+
+  @media (min-width: 1024px) and (max-width: 1160px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(35% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+    
+  }
+
+  @media (min-width: 848px) and (max-width: 1024px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(30% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+    
+  }
+  @media (min-width: 767px) and (max-width: 848px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(25% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+    
+  }
+  @media (min-width: 500px) and (max-width: 767px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(20% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+
+  }
+  @media (min-width: 400px) and (max-width: 500px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(10% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+  
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(0% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+        
+      
+    }
+  
+  }
+  @media (max-width: 300px) {
+    .slideContent {
+      width: 175px;
+      height: 150px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0.7;
+      border-radius: 10px;
+      display: grid;
+      
+      align-content: center;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) translateX(calc(0% * var(--offset)))
+      rotateY(calc(-45deg * var(--dir)));
+          
+    }
+  }
