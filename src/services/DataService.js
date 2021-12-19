@@ -7,6 +7,7 @@ import {
 } from "../api/data/dataAPI";
 
 const NEWS_DATA_URL = "/news";
+const GLOBAL_NEWS_DATA_URL = "news/global";
 const JOB_DATA_URL = "/job";
 const CONTACT_US ='/contactUs'
 
@@ -24,6 +25,11 @@ export default class DataService {
 
   handleGetAllNews = async () => {
     const result = await onGetAll(NEWS_DATA_URL);
+    return result;
+  };
+  
+  handleGetGlobalNews = async () => {
+    const result = await onGetAll(GLOBAL_NEWS_DATA_URL);
     return result;
   };
 
