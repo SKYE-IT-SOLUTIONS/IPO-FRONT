@@ -62,7 +62,7 @@ const routes = (isAuthenticated,userRole) => [
     children: [
       { path: "dashboard", element:  <h1>Admin Dashboard</h1> },
       { path: "user", element: <UserListOfAdmin />},
-      { path: "news", element: <NewsListOfAdmin /> },
+      { path: "news", element: <SelectNews/> },
       { path: 'editNews/:id', element: <EditNews/>},
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
