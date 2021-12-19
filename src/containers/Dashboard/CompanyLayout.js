@@ -2,10 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { Header, Main, Footer } from "../../components/DashboardLayout";
+import { Header, Main, Footer, SideNav } from "../../components/DashboardLayout";
 
 import TopLogoBar from "../../components/TopLogoBar";
-import NavBar from "../../components/NavBar";
+// import NavBar from "../../components/NavBar";
 import FooterContent from "../../components/Footer";
 import CompanySideNav from "./Company/CompanySideNav";
 
@@ -20,12 +20,12 @@ const AdminLayout = () => {
         <TopLogoBar />
         {/* <NavBar /> */}
       </Header>
-      <Main>
+      <SideNav>
         <Container>
           <CompanySideNav/>
           <Outlet />
         </Container>
-      </Main>
+      </SideNav>
       <Footer>
         <FooterContent />
       </Footer>

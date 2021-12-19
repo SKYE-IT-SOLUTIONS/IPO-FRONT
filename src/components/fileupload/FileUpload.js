@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import React, { useRef } from "react";
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {
   FileUploadContainer,
   FormField,
   DragDropText,
   UploadFileBtn,
-  FilePreviewContainer,
-  ImagePreview,
-  PreviewContainer,
-  PreviewList,
-  FileMetaData,
-  RemoveFileIcon,
+  // FilePreviewContainer,
+  // ImagePreview,
+  // PreviewContainer,
+  // PreviewList,
+  // FileMetaData,
+  // RemoveFileIcon,
   Fileuploadbtn
   
  
 } from "./FileUpload.Styles";
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
-const KILO_BYTES_PER_BYTE = 1000;
+// const KILO_BYTES_PER_BYTE = 1000;
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 5000000;
 
 const convertNestedObjectToArray = (nestedObj) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
 
-const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
+// const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const FileUpload = ({
   label,
@@ -66,11 +66,11 @@ const FileUpload = ({
     }
   };
 
-  const removeFile = (fileName) => {
-    delete files[fileName];
-    setFiles({ ...files });
-    callUpdateFilesCb({ ...files });
-  };
+  // const removeFile = (fileName) => {
+  //   delete files[fileName];
+  //   setFiles({ ...files });
+  //   callUpdateFilesCb({ ...files });
+  // };
 
   return (
     <>

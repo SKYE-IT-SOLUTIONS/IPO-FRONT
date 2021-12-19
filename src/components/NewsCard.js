@@ -75,7 +75,7 @@ function NewsCard({news}) {
   return (
     <NewsDiv md={4} sm={6} lg={3} xl={3} xxl={2} xs={10}>
       <NewsCardView font={fonts}>
-        <NewsImg image={news?.image}/>
+        <NewsImg image={news?.url}/>
         <Card.Body>
           <NewsTitle font={fonts.title}>
            {news?.title}
@@ -87,7 +87,7 @@ function NewsCard({news}) {
             }
           </NewsContent>
           <NewsButton apply onClick={handleLoad}> Read </NewsButton>
-            <NewsFooter> Last updated {news?.uploadTime} ago </NewsFooter>
+            <NewsFooter> Last updated {news?.howLong} ago </NewsFooter>
         </Card.Body>
       </NewsCardView>
     </NewsDiv>

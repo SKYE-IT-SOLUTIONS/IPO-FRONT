@@ -135,6 +135,62 @@ const Deadline = styled.h6`
     font-size: 15px;
   }
 `;
+const AnimatedText = styled.span`
+  font-weight: 800;
+  font-family: sans-serif;
+  background: red;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: no-repeat;
+  text-align: center;
+  position: absolute;
+  text-align: center;
+  animation: pop 5s ease-in-out infinite;
+  animation-delay: 2s infinite;
+  @keyframes pop{
+  50%  {
+    transform: scale(1.25);
+  }
+}
+
+  @media only screen and (min-width: 1160px) {
+    font-size: 30px;
+    margin-top: -10px;
+    
+  }
+
+  @media (min-width: 1024px) and (max-width: 1160px) {
+    font-size: 25px;
+    margin-top: -10px;
+    
+  }
+
+  @media (min-width: 848px) and (max-width: 1024px) {
+    font-size: 20px;
+    margin-top: -5px;
+    
+  }
+  @media (min-width: 767px) and (max-width: 848px) {
+    font-size: 15px;
+    
+  }
+  @media (min-width: 500px) and (max-width: 767px) {
+    font-size: 12px;
+
+  }
+  @media (min-width: 400px) and (max-width: 500px) {
+    font-size: 10px;
+  
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    font-size: 9px;
+  
+  }
+  @media (max-width: 300px) {
+    font-size: 8px;  
+  }
+`;
 
 const data = {
   title: "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
@@ -330,7 +386,7 @@ function PostJob({ dataFromProp }) {
                 <CustomButton apply>Apply</CustomButton>
               </div>
               <Deadline>
-                Application Deadline : <Date>{jobData?.date}</Date>
+              Application Deadline :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <AnimatedText>{jobData?.date}</AnimatedText>
               </Deadline>
             </>
           )}

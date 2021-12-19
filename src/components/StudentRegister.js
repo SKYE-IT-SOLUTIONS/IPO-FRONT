@@ -12,7 +12,10 @@ import student from "../assets/studentreg.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { passwordMatcher } from "../utils/passwordMatcher";
 import { Simple_Validator, Validator } from "../utils/validation";
-import {patternPassword,patternContact,patternMail} from '../config/pattern'
+import {patternPassword} from '../config/pattern';
+import AuthServices from "../services/AuthServices";
+import { useNavigate } from "react-router-dom";
+import CustomSnackBar from "./CustomSnackBar";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -83,6 +86,35 @@ function StudentRegister() {
   const [passwordInfo, setPasswordInfo] = useState({ error: null, status: false });
   const [matchPassword, setMatchPassword] = useState({error:null,isMatching:false});
 
+  const [error, setError] = useState("");
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
+
+  const authServices = new AuthServices();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (credentials) => {
+    setIsLoading(true);
+    const {status,data,error}  = await authServices.handleSignUp(credentials);
+    if(status){
+      sessionStorage.setItem("email",data?.email);
+      navigate("/register/sendMail");
+    }else{
+      setError(error);
+      setIsErrorMsgOpen(true);
+    }
+    setIsLoading(false);
+  }
+
   return (
     <RegistrationDiv font={fonts}>
       <Row style={{ paddingTop: "10px" }}>
@@ -137,10 +169,19 @@ function StudentRegister() {
             />
              {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> :  <Success>Password is matching</Success>}
 
-            <LoginBttn submit>Register</LoginBttn>
+            <LoginBttn submit disabled={isLoading || !nameInfo.status || !regInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
+              if(nameInfo.status && regInfo.status && passwordInfo.status && matchPassword.isMatching){
+                handleSubmit({
+                  "username" : reg,
+                  "password" : confirmPassword,
+                  "role" : ["student"]
+              });
+              }
+            }}>Register</LoginBttn>
           </SeparateDiv>
         </LoginCol>
       </Row>
+      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
     </RegistrationDiv>
   );
 }

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Stack,Paper,Grid } from '@mui/material'
-import styled,{ keyframes } from "styled-components";
+import { Stack,Paper } from '@mui/material'
+import styled from "styled-components";
 import Student from '../assets/Student.svg';
 import Company from '../assets/companyimg.svg';
-import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
+import {Row, Col, CustomButton} from "./CommonComponents";
+import { useNavigate } from 'react-router-dom';
 
 const Mdiv=styled.div`
     padding: 100px;
@@ -64,10 +65,10 @@ const AnimatedText = styled.span`
   position: absolute;
   text-align: center;
   @keyframes text {
-  0% { opacity: 0; transform: translateY(-50px); }
+  0% { opacity: 0; transform: translateZ(-50px); }
   25% { opacity: 1; transform: translateY(0px); }
   75% { opacity: 1; transform: translateY(0px); }
-  100% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 0; transform: translateZ(-50px); }
   }
   @media only screen and (min-width: 1160px) {
     font-size: 50px;
@@ -103,16 +104,19 @@ const AnimatedText = styled.span`
     font-size: 20px;  
   }
 `;
-const Wrapperdiv=styled.div`
+const WrapperDiv=styled.div`
     padding: 40px;
     display: flex;
     text-align: center;
     flex-direction: column;
+    cursor: pointer;
 `;
 const Button=styled(CustomButton)`
     margin: auto;
 `;
-function Registationdashboard() {
+function Register() {
+
+  const navigate = useNavigate();
     
     return (
         <div>
@@ -122,26 +126,26 @@ function Registationdashboard() {
             <Stack direction="row" spacing={10} >
              <Row> 
                  <Col style={{paddingBottom:"15px"}}>  
-                <Paper elevation={6}>
-                < Wrapperdiv>
+                <Paper elevation={6} onClick={()=>{navigate("companyReg")}}>
+                <WrapperDiv>
                     <StyledImg
                     alt=""
                     src={Company}
                     />
                     <Button disabled>Company</Button>
-                </ Wrapperdiv>
+                </WrapperDiv>
                 </Paper>
                 </Col>
                
                 <Col>
-                <Paper elevation={6}>
-                < Wrapperdiv >
+                <Paper elevation={6} onClick={()=>{navigate("studentReg")}}>
+                <WrapperDiv>
                     <StyledImg
                     alt=""
                     src={Student}
                     />
                     <Button disabled>Student</Button>
-                </ Wrapperdiv>
+                </WrapperDiv>
                 </Paper>
                 </Col>
                 </Row>
@@ -152,4 +156,4 @@ function Registationdashboard() {
     )
 }
 
-export default Registationdashboard
+export default Register;

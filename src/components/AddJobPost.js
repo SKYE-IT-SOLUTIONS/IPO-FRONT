@@ -19,8 +19,7 @@ import {
   removeDataArray,
 } from "../store/jobSlice";
 import Spinner from "./Spinner";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+
 
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -77,9 +76,14 @@ const ApplyImage = styled.div`
     width: 360px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 576px) {
     height: 360px;
     width: 360px;
+  }
+
+  @media (max-width: 576px) {
+    height: 250px;
+    width: 250px;
   }
 `;
 
@@ -472,19 +476,7 @@ function AddJobPost() {
               }}>Preview</SubmitBttn>
           <SubmitBttn submit>Submit</SubmitBttn>
             </Col>
-          </Row>
-
-          {/* <ButtonGroup
-            variant="contained"
-            aria-label="outlined primary button group"
-            
-          >
-            <Button color="success">Draft</Button>
-            <Button onClick={() => {
-                navigate("/job/preview");
-              }}>Preview</Button>
-          </ButtonGroup> */}
-          
+          </Row>   
         </JobContainer>
       )}
     </>

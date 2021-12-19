@@ -114,7 +114,7 @@ const NavListItemTooltip = styled.span`
 `;
 const AdminSideNav = () => {
   const navigate = useNavigate();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
 
   function handleResize() {
     console.log("Inner", window.innerHeight);
@@ -149,7 +149,7 @@ const AdminSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/user")}>
+              <NavListLink onClick={() => navigate("user")}>
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
                 <NavListItemName active={active}>Students</NavListItemName>
               </NavListLink>
@@ -157,7 +157,7 @@ const AdminSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/news")}>
+              <NavListLink onClick={() => navigate("news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -165,7 +165,7 @@ const AdminSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/job")}>
+              <NavListLink onClick={() => navigate("job")}>
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
@@ -173,7 +173,7 @@ const AdminSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/company")}>
+              <NavListLink onClick={() => navigate("company")}>
                 <NavListItemIcon className="bx bx-building-house"></NavListItemIcon>
                 <NavListItemName active={active}>Company</NavListItemName>
               </NavListLink>
@@ -181,7 +181,7 @@ const AdminSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/admin/dashboard/settings")}>
+              <NavListLink onClick={() => navigate("settings")}>
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>
               </NavListLink>

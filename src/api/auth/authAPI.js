@@ -13,6 +13,7 @@ import {
   LOGOUT_URL,
   ACCESS_URL,
   REFRESH_URL,
+  SIGNUP_URL,
 } from "../../config/urls";
 
 var result = { status: false, error: null }; //global variable declared
@@ -28,6 +29,25 @@ export const loginIn = async (credentials) => {
         setRefreshToken(refreshToken);
         setUserId(id);
         console.log("login success");
+        result = { status: true,data: data?.data, error: null };
+      } else {
+        result = { status: false,data: null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      console.log("error " + error);
+      result = { status: false,data: null, error: getErrorMessage(error) };
+    });
+  console.log(result);
+  return result;
+};
+
+export const signUp = async (credentials) => {
+  console.log("signUp");
+  await postRequest(SIGNUP_URL, credentials)
+    .then(({ data, error }) => {
+      if (!error) {
+        console.log("signUp success");
         result = { status: true,data: data?.data, error: null };
       } else {
         result = { status: false,data: null, error: getErrorMessage(error) };

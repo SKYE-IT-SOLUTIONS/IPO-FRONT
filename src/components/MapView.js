@@ -1,11 +1,17 @@
 import React from "react";
 import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
+import styled from "styled-components";
+
+const Map1=styled(Map)`
+ 
+`;
+
 
 function MapView() {
   const containerStyle = {
     // position:'center',  
-    height: '380px',
-    width:"33.33%"
+    height: '50%',
+    width:"33.33%",
   }
   const displayMarkers = () => {
     return (
@@ -21,7 +27,7 @@ function MapView() {
   };
 
   return (
-    <Map
+    <Map1
       google={window.google}
       zoom={10}
       containerStyle={containerStyle}
@@ -29,7 +35,7 @@ function MapView() {
     >
       {displayMarkers()}
        
-    </Map>
+    </Map1>
   );
 }
 
