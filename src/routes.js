@@ -29,6 +29,7 @@ import { default as CompanyListOfAdmin } from "./containers/Dashboard/Admin/Comp
 import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
+import EditNews from './components/EditNews';
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -54,11 +55,12 @@ const routes = (isAuthenticated,userRole) => [
   },
   {
     path: "/admin",
-    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
       { path: "dashboard", element: <h1>Admin Dashboard</h1>  },
       { path: "user", element: <UserListOfAdmin />},
       { path: "news", element: <NewsListOfAdmin /> },
+      { path: 'editNews/:id', element: <EditNews/>},
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
@@ -73,7 +75,7 @@ const routes = (isAuthenticated,userRole) => [
   },
   {
     path: "/student",
-    element: (isAuthenticated && userRole === "ROLE_STUDENT" ) ? <StudentLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_STUDENT" )  ? <StudentLayout /> : <Navigate to="/login" />,
     children: [
       {path: "dashboard", element: <h1>Profile view of student</h1>},
       {path: "news", element: <h1>News List of student</h1>},

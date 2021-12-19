@@ -12,15 +12,27 @@ import { persistStore, persistReducer,FLUSH,
 
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-    key: "root",
+const persistConfigNews = {
+    key: "news",
     version: 1,
     storage,
 }
 
-const userPersistReducer = persistReducer(persistConfig, userSlice);
-const newsPersistReducer = persistReducer(persistConfig, newsSlice);
-const jobPersistReducer = persistReducer(persistConfig, jobSlice);
+const persistConfigJob = {
+    key: "job",
+    version: 1,
+    storage,
+}
+
+const persistConfigUser = {
+    key: "user",
+    version: 1,
+    storage,
+}
+
+const userPersistReducer = persistReducer(persistConfigUser, userSlice);
+const newsPersistReducer = persistReducer(persistConfigNews, newsSlice);
+const jobPersistReducer = persistReducer(persistConfigJob, jobSlice);
 
 export const store = configureStore({
     reducer: {

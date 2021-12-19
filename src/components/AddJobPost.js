@@ -20,6 +20,7 @@ import {
 } from "../store/jobSlice";
 import Spinner from "./Spinner";
 
+
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
   margin: 10px 0;
@@ -171,8 +172,9 @@ const Error = styled.p`
 `;
 
 const SubmitBttn = styled(CustomButton)`
-  margin: 15px 0;
+  margin: 35px 10px 15px 10px;
 `;
+
 
 function AddJobPost() {
   const dispatch = useDispatch();
@@ -428,7 +430,7 @@ function AddJobPost() {
                 )}
               </ul>
 
-              {/* <table>
+              <table>
                 <tbody>
                   <TableTr>
                     <td>
@@ -468,27 +470,13 @@ function AddJobPost() {
                     </td>
                   </TableTr>
                 </tbody>
-              </table> */}
+              </table>
+              <SubmitBttn onClick={() => {
+                navigate("/job/preview");
+              }}>Preview</SubmitBttn>
+          <SubmitBttn submit>Submit</SubmitBttn>
             </Col>
-          </Row>
-
-          <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                <SubmitBttn
-                  submit
-                  onClick={() => {
-                    navigate("/job/preview");
-                  }}
-                >
-                  Preview
-                </SubmitBttn>
-                <SubmitBttn submit>Submit</SubmitBttn>
-              </div>
+          </Row>   
         </JobContainer>
       )}
     </>

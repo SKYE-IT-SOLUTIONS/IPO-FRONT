@@ -6,7 +6,11 @@ export const Validator = (input, pattern,input_type = "") => {
     error = input_type + " Required";
     status = false;
   } else if (!pattern.test(input)) {
-    error = "Enter Valid " + input_type;
+    if(input_type === "Password"){
+      error = input_type + " should contain 8 characters,at least a number and a capital letter";
+    }else{
+      error = "Enter Valid " + input_type;
+    }
     status = false;
   } else {
     status = true;
