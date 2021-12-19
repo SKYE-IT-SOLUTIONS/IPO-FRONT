@@ -12,7 +12,7 @@ export default function HomeContent() {
     return (
         <>
             <ImageSlider />
-            <Mover/>
+            <Mover />
             <SponsorList/>
             <NewsList/>
             <Container fluid>

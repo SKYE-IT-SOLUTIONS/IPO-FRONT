@@ -20,7 +20,7 @@ export const Simple_Validator = (input,input_type = "") => {
   let status = false;
 
   if (input === "") {
-    error = input_type + " Required";
+    error = input_type + " is required";
     status = false;
   } else {
     status = true;

@@ -6,6 +6,7 @@ export const newsSlice = createSlice({
         title: null,
         description: [],
         image: null,
+        visibility : true
     },
     reducers: {
         setNews: (state, action) => {
@@ -17,7 +18,10 @@ export const newsSlice = createSlice({
             state.title = action.payload;
         },
         setDescription: (state, action) => {
-            state.description = [...state.description,action.payload];
+            state.description = action.payload;
+        },
+        setVisibility: (state, action) => {
+            state.visibility = action.payload;
         },
         removeDescription: (state) => {
             state.description = [];
@@ -28,7 +32,7 @@ export const newsSlice = createSlice({
     }
 });
 
-export const { setNews, setTitle, setDescription, setImage ,removeDescription } = newsSlice.actions;
+export const { setNews, setTitle, setDescription, setImage ,setVisibility,removeDescription } = newsSlice.actions;
 
 export default newsSlice.reducer;
 

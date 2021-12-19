@@ -1,10 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Simple_Validator } from "../utils/validation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setTitle,
+  setPosition,
+  setDescription,
+  setSalary,
+  setDeadline,
+  setSpecifications,
+  setQualifications,
+  setExperience,
+  removeDataArray,
+} from "../store/jobSlice";
+import Spinner from "./Spinner";
 
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -156,242 +169,307 @@ const SubmitBttn = styled(CustomButton)`
 `;
 
 function AddJobPost() {
+  const dispatch = useDispatch();
+  const storeTitle = useSelector((state) => state.job.title);
+  const storePosition = useSelector((state) => state.job.position);
+  const storeDescription = useSelector((state) => state.job.description);
+  const storeSpecifications = useSelector((state) => state.job.specifications);
+  const storeQualifications = useSelector((state) => state.job.qualifications);
+  const storeExperience = useSelector((state) => state.job.experience);
+  const storeSalary = useSelector((state) => state.job.salary);
+  const storeDeadline = useSelector((state) => state.job.deadline);
+
   const { fonts } = useContext(ThemeContext);
-  const [title, setTitle] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [title, setJobTitle] = useState("");
   const [titleInfo, setTitleInfo] = useState({ error: null, status: false });
 
-  const [position, setPosition] = useState("");
+  const [position, setJobPosition] = useState("");
   const [positionInfo, setPositionInfo] = useState({
     error: null,
     status: false,
   });
 
-  const [decription, setDecription] = useState("");
+  const [decription, setJobDescription] = useState("");
 
   const [specList, setSpecList] = useState([]);
-  const [specification, setSpecification] = useState("");
+  const [specification, setJobSpecification] = useState("");
 
   const [qlfList, setQlfList] = useState([]);
-  const [qualification, setQualification] = useState("");
+  const [qualification, setJobQualification] = useState("");
 
   const [expList, setExpList] = useState([]);
-  const [experience, setExperience] = useState("");
+  const [experience, setJobExperience] = useState("");
 
-  const [salary, setSalary] = useState("");
+  const [salary, setJobSalary] = useState("");
   const [date, setDate] = useState("");
 
+  useEffect(() => {
+    setIsLoading(true);
+    if (
+      storeTitle !== null ||
+      storeDescription !== null ||
+      storePosition !== null ||
+      storeSpecifications.length !== 0 ||
+      storeQualifications.length !== 0 ||
+      storeExperience.length !== 0 ||
+      storeDeadline !== null ||
+      storeSalary !== null
+    ) {
+      setJobTitle(storeTitle);
+      setJobPosition(storePosition);
+      setJobDescription(storeDescription);
+      setSpecList(storeSpecifications);
+      setQlfList(storeQualifications);
+      setExpList(storeExperience);
+      setJobSalary(storeSalary);
+      setDate(storeDeadline);
+    }
+    setIsLoading(false);
+  }, []);
+
   return (
-    <JobContainer font={fonts}>
-      <TitleDiv>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <JobContainer font={fonts}>
+          <TitleDiv>
+            <Title>Job Title</Title>
+            <CustomInput
+              type="text"
+              value={title}
+              placeholder="Enter Job Title"
+              onChange={(e) => {
+                let val = e.target.value;
+                setJobTitle(val);
+                setTitleInfo(Simple_Validator(val, "Title"));
+                dispatch(setTitle(val));
+              }}
+            />
+            {!titleInfo.status && <Error>{titleInfo.error}</Error>}
 
-        <Title>Job Title</Title>
-        <CustomInput
-          type="text"
-          value={title}
-          placeholder="Enter Job Title"
-          onChange={(e) => {
-            let val = e.target.value;
-            setTitle(val);
-            setTitleInfo(Simple_Validator(val, "Title"));
-          }}
-        />
-        {!titleInfo.status && <Error>{titleInfo.error}</Error>}
+            <Title>Job Position</Title>
+            <PositionInput
+              type="text"
+              value={position}
+              placeholder="Enter Job Position"
+              onChange={(e) => {
+                let val = e.target.value;
+                setJobPosition(val);
+                setPositionInfo(Simple_Validator(val, "Job Position"));
+                dispatch(setPosition(val));
+              }}
+            />
+            {!positionInfo.status && <Error>{positionInfo.error}</Error>}
+          </TitleDiv>
 
-        <Title>Job Position</Title>
-        <PositionInput
-          type="text"
-          value={position}
-          placeholder="Enter Job Position"
-          onChange={(e) => {
-            let val = e.target.value;
-            setPosition(val);
-            setPositionInfo(Simple_Validator(val, "Job Position"));
-          }}
-        />
-        {!positionInfo.status && <Error>{positionInfo.error}</Error>}
+          <Title>Job Description</Title>
+          <TextArea
+            rows="4"
+            value={decription}
+            placeholder="Enter Description"
+            onChange={(e) => {
+              let val = e.target.value;
+              setJobDescription(val);
+              dispatch(setDescription(val));
+            }}
+          />
+          <Row style={{ padding: "15px 0" }}>
+            <Col md={6} sm={12}>
+              <ApplyImage image={JobPhoto} />
+            </Col>
+            <Col md={6} sm={12}>
+              <RequirementTitle>Specifications</RequirementTitle>
+              <ul>
+                {specList &&
+                  specList.map((value, index) => (
+                    <li key={index}>
+                      {value}{" "}
+                      <Icon
+                        icon="ic:round-cancel"
+                        style={{ marginLeft: "5px" }}
+                        color="red"
+                        height="20"
+                        onClick={() => {
+                          let list = specList.filter((_, ind) => ind !== index);
+                          setSpecList(list);
+                          dispatch(setSpecifications(list));
+                        }}
+                      />
+                    </li>
+                  ))}
+                {specList.length < 5 && (
+                  <li>
+                    <ExtraInput
+                      type="text"
+                      value={specification}
+                      placeholder="Enter Job Specification"
+                      onChange={(e) => {
+                        setJobSpecification(e.target.value);
+                      }}
+                    />{" "}
+                    <Icon
+                      icon="akar-icons:circle-plus-fill"
+                      height="20"
+                      color="#001e62"
+                      onClick={() => {
+                        if (specification !== "") {
+                          let list = [...specList, specification];
+                          setSpecList(list);
+                          dispatch(setSpecifications(list));
+                          setJobSpecification("");
+                        }
+                      }}
+                    />
+                  </li>
+                )}
+              </ul>
 
-      </TitleDiv>
+              <RequirementTitle>Qualifications</RequirementTitle>
+              <ul>
+                {qlfList &&
+                  qlfList.map((value, index) => (
+                    <li key={index}>
+                      {value}{" "}
+                      <Icon
+                        icon="ic:round-cancel"
+                        style={{ marginLeft: "5px" }}
+                        color="red"
+                        height="20"
+                        onClick={() => {
+                          let list = qlfList.filter((_, ind) => ind !== index);
+                          setQlfList(list);
+                          dispatch(setQualifications(list));
+                        }}
+                      />
+                    </li>
+                  ))}
+                {qlfList.length < 5 && (
+                  <li>
+                    <ExtraInput
+                      type="text"
+                      value={qualification}
+                      placeholder="Enter Job Qualification"
+                      onChange={(e) => {
+                        setJobQualification(e.target.value);
+                      }}
+                    />{" "}
+                    <Icon
+                      icon="akar-icons:circle-plus-fill"
+                      height="20"
+                      color="#001e62"
+                      onClick={() => {
+                        if (qualification !== "") {
+                          let list = [...qlfList, qualification];
+                          setQlfList(list);
+                          dispatch(setQualifications(list));
+                          setJobQualification("");
+                        }
+                      }}
+                    />
+                  </li>
+                )}
+              </ul>
 
-      <Title>Job Description</Title>
-      <TextArea
-        rows="4"
-        value={decription}
-        placeholder="Enter Description"
-        onChange={(e) => {
-          setDecription(e.target.value);
-        }}
-      />
-      <Row style={{ padding: "15px 0" }}>
-        <Col md={6} sm={12}>
-          <ApplyImage image={JobPhoto} />
-        </Col>
-        <Col md={6} sm={12}>
-          <RequirementTitle>Specifications</RequirementTitle>
-          <ul>
-            {specList &&
-              specList.map((value, index) => (
-                <li key={index}>
-                  {value}{" "}
-                  <Icon
-                    icon="ic:round-cancel"
-                    style={{ marginLeft: "5px" }}
-                    color="red"
-                    height="20"
-                    onClick={() => {
-                      setSpecList(specList.filter((_, ind) => ind !== index));
-                    }}
-                  />
-                </li>
-              ))}
-            <li>
-              <ExtraInput
-                type="text"
-                value={specification}
-                placeholder="Enter Job Specification"
-                onChange={(e) => {
-                  setSpecification(e.target.value);
-                }}
-              />{" "}
-              <Icon
-                icon="akar-icons:circle-plus-fill"
-                height="20"
-                color="#001e62"
-                onClick={() => {
-                  if (specification !== "") {
-                    setSpecList([...specList, specification]);
-                    setSpecification("");
-                  }
-                }}
-              />
-            </li>
-          </ul>
+              <RequirementTitle>Experience</RequirementTitle>
+              <ul>
+                {expList &&
+                  expList.map((value, index) => (
+                    <li key={index}>
+                      {value}{" "}
+                      <Icon
+                        icon="ic:round-cancel"
+                        style={{ marginLeft: "5px" }}
+                        color="red"
+                        height="20"
+                        onClick={() => {
+                          let list = expList.filter((_, ind) => ind !== index);
+                          setExpList(list);
+                          dispatch(setExperience(list));
+                        }}
+                      />
+                    </li>
+                  ))}
+                {expList.length < 5 && (
+                  <li>
+                    <ExtraInput
+                      type="text"
+                      value={experience}
+                      placeholder="Enter Experience"
+                      onChange={(e) => {
+                        setJobExperience(e.target.value);
+                      }}
+                    />{" "}
+                    <Icon
+                      icon="akar-icons:circle-plus-fill"
+                      height="20"
+                      color="#001e62"
+                      onClick={() => {
+                        if (experience !== "") {
+                          let list = [...expList, experience];
+                          setExpList(list);
+                          dispatch(setExperience(list));
+                          setJobExperience("");
+                        }
+                      }}
+                    />
+                  </li>
+                )}
+              </ul>
 
-          <RequirementTitle>Qualifications</RequirementTitle>
-          <ul>
-            {qlfList &&
-              qlfList.map((value, index) => (
-                <li key={index}>
-                  {value}{" "}
-                  <Icon
-                    icon="ic:round-cancel"
-                    style={{ marginLeft: "5px" }}
-                    color="red"
-                    height="20"
-                    onClick={() => {
-                      setQlfList(qlfList.filter((_, ind) => ind !== index));
-                    }}
-                  />
-                </li>
-              ))}
-            <li>
-              <ExtraInput
-                type="text"
-                value={qualification}
-                placeholder="Enter Job Qualification"
-                onChange={(e) => {
-                  setQualification(e.target.value);
-                }}
-              />{" "}
-              <Icon
-                icon="akar-icons:circle-plus-fill"
-                height="20"
-                color="#001e62"
-                onClick={() => {
-                  if (qualification !== "") {
-                    setQlfList([...qlfList, qualification]);
-                    setQualification("");
-                  }
-                }}
-              />
-            </li>
-          </ul>
+              <table>
+                <tbody>
+                  <TableTr>
+                    <td>
+                      <Salary>Salary</Salary>
+                    </td>
+                    <td>
+                      :{" "}
+                      <SalaryInput
+                        type="string"
+                        placeholder="0.00"
+                        value={salary}
+                        onChange={(e) => {
+                          let value = parseInt(e.target.value);
+                          setJobSalary(value);
+                          dispatch(setSalary(value));
+                        }}
+                      />
+                    </td>
+                  </TableTr>
+                  <br />
+                  <TableTr>
+                    <td>
+                      <Salary>Application Deadline</Salary>
+                    </td>
+                    <td>
+                      :{" "}
+                      <DateInput
+                        type="date"
+                        value={date}
+                        onChange={(e) => {
+                          let date = e.target.value;
+                          setDate(date);
+                          dispatch(setDeadline(date));
+                          console.log(e.target.value);
+                        }}
+                      />
+                    </td>
+                  </TableTr>
+                </tbody>
+              </table>
+            </Col>
+          </Row>
 
-          <RequirementTitle>Experience</RequirementTitle>
-          <ul>
-            {expList &&
-              expList.map((value, index) => (
-                <li key={index}>
-                  {value}{" "}
-                  <Icon
-                    icon="ic:round-cancel"
-                    style={{ marginLeft: "5px" }}
-                    color="red"
-                    height="20"
-                    onClick={() => {
-                      setExpList(expList.filter((_, ind) => ind !== index));
-                    }}
-                  />
-                </li>
-              ))}
-            <li>
-              <ExtraInput
-                type="text"
-                value={experience}
-                placeholder="Enter Experience"
-                onChange={(e) => {
-                  setExperience(e.target.value);
-                }}
-              />{" "}
-              <Icon
-                icon="akar-icons:circle-plus-fill"
-                height="20"
-                color="#001e62"
-                onClick={() => {
-                  if (experience !== "") {
-                    setExpList([...expList, experience]);
-                    setExperience("");
-                  }
-                }}
-              />
-            </li>
-          </ul>
-
-          <table>
-            <tbody>
-              <TableTr>
-                <td>
-                  <Salary>Salary</Salary>
-                </td>
-                <td>
-                  :{" "}
-                  <SalaryInput
-                    type="string"
-                    placeholder="0.00"
-                    value={salary}
-                    onChange={(e) => {
-                      let value = parseInt(e.target.value)
-                      setSalary(value.toFixed(2));
-                    }}
-                  />
-                </td>
-              </TableTr>
-              <br />
-              <TableTr>
-                <td>
-                  <Salary>Application Deadline</Salary>
-                </td>
-                <td>
-                  :{" "}
-                  <DateInput
-                    type="date"
-                    value={date}
-                    onChange={(e) => {
-                      setDate(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                  />
-                </td>
-              </TableTr>
-            </tbody>
-          </table>
-        </Col>
-      </Row>
-
-      <div style={{ textAlign: "right" }}>
-        <SubmitBttn submit>Submit</SubmitBttn>
-      </div>
-
-    </JobContainer>
+          <div style={{ textAlign: "right" }}>
+            <SubmitBttn submit>Submit</SubmitBttn>
+          </div>
+        </JobContainer>
+      )}
+    </>
   );
 }
 
