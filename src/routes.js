@@ -59,7 +59,7 @@ const routes = (isAuthenticated,userRole) => [
     path: "/admin",
     element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
-      { path: "dashboard", element: <h1>Admin Dashboard</h1>  },
+      { path: "dashboard", element:  <h1>Admin Dashboard</h1> },
       { path: "user", element: <UserListOfAdmin />},
       { path: "news", element: <NewsListOfAdmin /> },
       { path: 'editNews/:id', element: <EditNews/>},
