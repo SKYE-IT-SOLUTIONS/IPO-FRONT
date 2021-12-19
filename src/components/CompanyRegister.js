@@ -8,7 +8,7 @@ import {
   Col,
 } from "./CommonComponents";
 import styled from "styled-components";
-import company from "../assets/Company.svg";
+import company from "../assets/Businessman.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { passwordMatcher } from "../utils/passwordMatcher";
 import { Simple_Validator, Validator } from "../utils/validation";

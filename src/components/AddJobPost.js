@@ -75,9 +75,14 @@ const ApplyImage = styled.div`
     width: 360px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 576px) {
     height: 360px;
     width: 360px;
+  }
+
+  @media (max-width: 576px) {
+    height: 250px;
+    width: 250px;
   }
 `;
 
@@ -423,7 +428,7 @@ function AddJobPost() {
                 )}
               </ul>
 
-              <table>
+              {/* <table>
                 <tbody>
                   <TableTr>
                     <td>
@@ -463,7 +468,7 @@ function AddJobPost() {
                     </td>
                   </TableTr>
                 </tbody>
-              </table>
+              </table> */}
             </Col>
           </Row>
 

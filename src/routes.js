@@ -10,13 +10,13 @@ import Spinner from "./components/Spinner";
 // import AdminLayout from './containers/AdminLayout';
 // import Dashboard from './containers/Dashboard/index';
 import JobList from "./containers/JobList";
-import Editcontact from "./components/EditContact";
-import Submitcv from "./components/Submitcv";
+import EditContact from "./components/EditContact";
+import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
 import RegistationDashboard from "./components/Registationdashboard";
 
 //Testing Components
-import MapView from "./components/MapViewUpdated";
+// import MapView from "./components/MapViewUpdated";
 
 import AdminLayout from "./containers/Dashboard/AdminLayout";
 import StudentLayout from "./containers/Dashboard/StudentLayout";
@@ -38,17 +38,13 @@ const routes = (isAuthenticated,userRole) => [
       { path: "/", element: <HomeContent /> },
       { path: "404", element: <NotFound /> },
       { path: "home", element: <HomeContent /> },
-      { path: "addJob", element: <AddJobPost /> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
       { path: "job/preview", element: <PostJob /> },
       { path: "news/:id", element: <NewsView /> },
-      { path: "news/preview", element: <NewsView /> },
-      { path: "addNews", element: <AddNewsPost /> },
       { path: "spinner", element: <Spinner /> },
-      { path: "editcontact", element: <Editcontact /> },
-      { path: "submitcv", element: <Submitcv /> },
-      { path: "requestgraduate", element: <RequestGraduate /> },
+      { path: "submitCv", element: <SubmitCv /> },
+      { path: "requestGraduate", element: <RequestGraduate /> },
       { path: 'studentReg', element: <StudentRegister/> },
       { path: 'companyReg', element: <CompanyRegister/> },
       { path: 'sendMail', element: <SendMail/> },
@@ -59,14 +55,19 @@ const routes = (isAuthenticated,userRole) => [
   },
   {
     path: "/admin",
-    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
-      { path: "/admin/dashboard", element: <h1>Admin Dashboard</h1>  },
-      { path: "/admin/dashboard/user", element: <UserListOfAdmin />},
-      { path: "/admin/dashboard/news", element: <NewsListOfAdmin /> },
-      { path: "/admin/dashboard/job", element: <JobListOfAdmin /> },
-      { path: "/admin/dashboard/company", element: <CompanyListOfAdmin /> },
-      { path: "/admin/dashboard/settings", element: <h1>Admin Settings</h1> },
+      { path: "dashboard", element: <h1>Admin Dashboard</h1>  },
+      { path: "user", element: <UserListOfAdmin />},
+      { path: "news", element: <NewsListOfAdmin /> },
+      { path: "news/addNews", element: <AddNewsPost /> },
+      { path: "news/preview", element: <NewsView /> },
+      { path: "news/:id", element: <NewsView /> },
+      { path: "job", element: <JobListOfAdmin /> },
+      { path: "job/addJob", element: <AddJobPost /> },
+      { path: "company", element: <CompanyListOfAdmin /> },
+      { path: "settings", element:  <EditContact />},//<h1>Admin Settings</h1>
+      { path: "editContact", element: <EditContact /> },
       { path: "/admin", element: <Navigate to="/404" /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
