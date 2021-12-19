@@ -19,11 +19,15 @@ import {
   setDescription,
   setImage,
   removeDescription,
+  setVisibility
 } from "../store/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
-import { Simple_Validator} from "../utils/validation";
+import { Simple_Validator } from "../utils/validation";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -103,11 +107,11 @@ const PalestherImage = styled.img`
   background-image: url(${({ image }) => image});
   background-repeat: no-repeat;
   background-size: cover;
-  width:100px;
-  height:100px;
-  margin-top:10px;
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
   border-radius: 10px;
-`
+`;
 
 function AddNewsPost() {
   const dispatch = useDispatch();
@@ -115,13 +119,18 @@ function AddNewsPost() {
 
   const { fonts } = useContext(ThemeContext);
   // useS
-  const [newTitle, setNewsTitle] = useState("")
+  const [newTitle, setNewsTitle] = useState("");
   const [content, setContent] = useState("");
-  const [contentInfo, setContentInfo] = useState({error: null,status: false});
+  const [visibility, setNewsVisibility] = useState(true);
+
+  const [contentInfo, setContentInfo] = useState({
+    error: null,
+    status: false,
+  });
 
   const [contentList, setContentList] = useState([]);
 
-  const [imageUrl, setImageUrl] = useState(null)
+  const [imageUrl, setImageUrl] = useState(null);
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -131,92 +140,148 @@ function AddNewsPost() {
   const storeTitle = useSelector((state) => state.news.title);
   const storeImage = useSelector((state) => state.news.image);
   const storeDescription = useSelector((state) => state.news.description);
+  const storeVisibility = useSelector((state) => state.news.visibility);
 
   useEffect(() => {
-    setIsLoading(true)
-    if(storeTitle !== null || storeDescription.length !== 0 || storeDescription !== undefined){
-      setNewsTitle(storeTitle)
-      setContentList(storeDescription)
-      setImageUrl(storeImage)
+    setIsLoading(true);
+    if (
+      storeTitle !== null ||
+      storeDescription.length !== 0 ||
+      storeDescription !== undefined ||
+      !storeVisibility
+    ) {
+      setNewsTitle(storeTitle);
+      setContentList(storeDescription);
+      setImageUrl(storeImage);
+      setNewsVisibility(storeVisibility)
     }
     setIsLoading(false);
   }, []);
 
   const updateUploadedFiles = async (files) => {
-    if(files.length !== 0){
-      setFiles(files)
-      console.log(files[0])
-      const dataUrl = await setImageBuffer(files[0])
-      dispatch(setImage(dataUrl))
-      setImageUrl(dataUrl)
+    if (files.length !== 0) {
+      setFiles(files);
+      console.log(files[0]);
+      const dataUrl = await setImageBuffer(files[0]);
+      dispatch(setImage(dataUrl));
+      setImageUrl(dataUrl);
     }
   };
 
   return (
     <>
-    {isLoading ? <Spinner/> :
-      <NewContainer font={fonts}>
-      <Row>
-        <Col md={5} sm={12}>
-          <ApplyImage image={newsImage} /> 
-        </Col>
-        <DetailCol md={7} sm={12}>
-            <Title>Title</Title>
-            
-            <NewsInput type="text" placeholder="Enter News Title" value={newTitle} onChange={(e) => {
-              setNewsTitle(e.target.value)
-              dispatch(setTitle(e.target.value))
-              // setTitleInfo(Simple_Validator(e.target.value,"Title"));
-            }}/>
-          <Title>Image</Title>
-          <FileUpload style={{ backgroundColor:'#ededed'}}
-                  accept=".jpg,.png,.jpeg"
-                  label="News Image(s)"
-                  files={filesU}
-                  setFiles={setFilesU}
-                  updateFilesCb={updateUploadedFiles}
-                 
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <NewContainer font={fonts}>
+          <Row>
+            <Col md={5} sm={12}>
+              <ApplyImage image={newsImage} />
+            </Col>
+            <DetailCol md={7} sm={12}>
+              <Title>Title</Title>
+
+              <NewsInput
+                type="text"
+                placeholder="Enter News Title"
+                value={newTitle}
+                onChange={(e) => {
+                  setNewsTitle(e.target.value);
+                  dispatch(setTitle(e.target.value));
+                  // setTitleInfo(Simple_Validator(e.target.value,"Title"));
+                }}
+              />
+              <Title>Image</Title>
+              <FileUpload
+                style={{ backgroundColor: "#ededed" }}
+                accept=".jpg,.png,.jpeg"
+                label="News Image(s)"
+                files={filesU}
+                setFiles={setFilesU}
+                updateFilesCb={updateUploadedFiles}
+              />
+              {/* <ImageInput type="file"/> */}
+              {imageUrl && <PalestherImage image={imageUrl} />}
+              <br />
+              <Title>Description</Title>
+              <ul>
+                {contentList &&
+                  contentList.map((value, index) => (
+                    <li key={index} style={{ textAlign: "justify" }}>
+                      {value}{" "}
+                      <Icon
+                        icon="ic:round-cancel"
+                        style={{ margin: "auto 3px" }}
+                        color="red"
+                        height="30"
+                        onClick={() => {
+                          let list = contentList.filter(
+                            (_, ind) => ind !== index
+                          );
+                          setContentList(list);
+                          dispatch(setDescription(list));
+                        }}
+                      />
+                    </li>
+                  ))}
+              </ul>
+              <OuterTextArea>
+                <TextArea
+                  rows="4"
+                  value={content}
+                  placeholder="Enter Description"
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                    setContentInfo(
+                      Simple_Validator(e.target.value, "Description")
+                    );
+                  }}
                 />
-            {/* <ImageInput type="file"/> */}
-            {imageUrl && <PalestherImage image={imageUrl}/>}<br/>
-          <Title>Description</Title>
-          <ul>
-            {contentList && contentList.map((value,index) => ( 
-                <li key={index} style={{textAlign:"justify"}}>{value} <Icon
-                    icon="ic:round-cancel"
-                    style={{margin:"auto 3px"}}
-                    color="red"
-                    height="30"
-                    onClick={()=>{
-                        let list = contentList.filter((_, ind) => ind !== index)
-                        setContentList(list);
-                        dispatch(setDescription(list))
-                    }}
-                  /></li>
-                
-            ))}
-          </ul>
-          <OuterTextArea>
-          
-          <TextArea rows="4" value={content} placeholder="Enter Description" onChange={(e) => {
-            setContent(e.target.value)
-            setContentInfo(Simple_Validator(e.target.value,"Description"))
-          }}/>
-          <Icon
-                icon="akar-icons:circle-plus-fill"
-                height="34"
-                color="#001e62"
-                style={{margin:"auto 3px"}}
-                onClick={() => {
-                    if(content !== ""){
-                      let list = [...contentList,content]
-                      setContentList(list)
-                      dispatch(setDescription(list))
-                      setContent("")
+                <Icon
+                  icon="akar-icons:circle-plus-fill"
+                  height="34"
+                  color="#001e62"
+                  style={{ margin: "auto 3px" }}
+                  onClick={() => {
+                    if (content !== "") {
+                      let list = [...contentList, content];
+                      setContentList(list);
+                      dispatch(setDescription(list));
+                      setContent("");
                     }
                   }}
                 />
               </OuterTextArea>
+
+              <Title>News Visibility</Title>
+              <RadioGroup
+                row
+                aria-label="visibility"
+                value={visibility}
+                name="row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="true"
+                  control={<Radio />}
+                  label="Public"
+                  onChange={(e) => {
+                    let val = e.target.value
+                    setNewsVisibility(!!val)
+                    dispatch(setVisibility(!!val))
+                  }}
+                />
+                <FormControlLabel
+                  value="false"
+                  control={<Radio />}
+                  label="Private"
+                  onChange={(e) => {
+                    let val = e.target.value
+                    setNewsVisibility(!val)
+                    dispatch(setVisibility(!val))
+                  }}
+                />
+              </RadioGroup>
+
               <div
                 style={{
                   display: "flex",
@@ -248,7 +313,7 @@ function AddNewsPost() {
             </DetailCol>
           </Row>
         </NewContainer>
-      }
+      )}
     </>
   );
 }
