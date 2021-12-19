@@ -40,8 +40,8 @@ const DropItems = styled(NavDropdown.Item)`
   padding-bottom: 7px;
 `;
 const RegisterTag = styled.span`
-  color: red;
-  font-weight: 500;
+  color: white;
+  font-weight: 1000;
   font-size: 16px;
   padding-right: 15px;
 `;
