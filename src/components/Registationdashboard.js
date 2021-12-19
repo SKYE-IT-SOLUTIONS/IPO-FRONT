@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack,Paper,Grid } from '@mui/material'
 import styled,{ keyframes } from "styled-components";
-import Student from '../assets/Student.svg';
+import Student from '../assets/student.svg';
 import Company from '../assets/companyimg.svg';
 import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
 
