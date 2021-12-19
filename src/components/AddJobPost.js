@@ -19,6 +19,8 @@ import {
   removeDataArray,
 } from "../store/jobSlice";
 import Spinner from "./Spinner";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -166,8 +168,9 @@ const Error = styled.p`
 `;
 
 const SubmitBttn = styled(CustomButton)`
-  margin: 15px 0;
+  margin: 35px 10px 15px 10px;
 `;
+
 
 function AddJobPost() {
   const dispatch = useDispatch();
@@ -464,26 +467,24 @@ function AddJobPost() {
                   </TableTr>
                 </tbody>
               </table>
+              <SubmitBttn onClick={() => {
+                navigate("/job/preview");
+              }}>Preview</SubmitBttn>
+          <SubmitBttn submit>Submit</SubmitBttn>
             </Col>
           </Row>
 
-          <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                <SubmitBttn
-                  submit
-                  onClick={() => {
-                    navigate("/job/preview");
-                  }}
-                >
-                  Preview
-                </SubmitBttn>
-                <SubmitBttn submit>Submit</SubmitBttn>
-              </div>
+          {/* <ButtonGroup
+            variant="contained"
+            aria-label="outlined primary button group"
+            
+          >
+            <Button color="success">Draft</Button>
+            <Button onClick={() => {
+                navigate("/job/preview");
+              }}>Preview</Button>
+          </ButtonGroup> */}
+          
         </JobContainer>
       )}
     </>
