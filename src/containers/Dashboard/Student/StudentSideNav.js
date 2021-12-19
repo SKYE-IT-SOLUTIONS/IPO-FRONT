@@ -150,7 +150,7 @@ const StudentSideNav = () => {
 
             <NavListItem>
               <NavListLink
-                onClick={() => navigate("/student/dashboard/profile")}
+                onClick={() => navigate("dashboard")}
               >
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
                 <NavListItemName active={active}>Profile</NavListItemName>
@@ -159,7 +159,7 @@ const StudentSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/student/dashboard/news")}>
+              <NavListLink onClick={() => navigate("news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -167,7 +167,7 @@ const StudentSideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/student/dashboard/job")}>
+              <NavListLink onClick={() => navigate("job")}>
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
@@ -176,7 +176,7 @@ const StudentSideNav = () => {
 
             <NavListItem>
               <NavListLink
-                onClick={() => navigate("/student/dashboard/settings")}
+                onClick={() => navigate("settings")}
               >
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>

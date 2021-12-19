@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { Header, Main, Footer } from "../../components/DashboardLayout";
+import { Header, Main, Footer,SideNav } from "../../components/DashboardLayout";
 
 import TopLogoBar from "../../components/TopLogoBar";
 // import NavBar from "../../components/NavBar";
@@ -20,12 +20,12 @@ const StudentLayout = () => {
         <TopLogoBar />
         {/* <NavBar /> */}
       </Header>
-      <Main>
+      <SideNav>
         <Container>
           <StudentSideNav/>
           <Outlet />
         </Container>
-      </Main>
+      </SideNav>
       <Footer>
         <FooterContent />
       </Footer>
