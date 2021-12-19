@@ -14,6 +14,7 @@ import EditContact from "./components/EditContact";
 import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
 import RegistrationDashboard from "./components/Register";
+import SelectNews from './components/SelectNews'
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -55,6 +56,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/companyReg', element: <CompanyRegister/> },
       { path: 'register/studentReg', element: <StudentRegister/> },
       { path: 'register/sendMail', element: <SendMail/> },
+      { path: 'selectnews', element: <SelectNews/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
@@ -65,7 +67,7 @@ const routes = (isAuthenticated,userRole) => [
     children: [
       { path: "dashboard", element: <h1>Admin Dashboard</h1>  },
       { path: "user", element: <UserListOfAdmin />},
-      { path: "news", element: <NewsListOfAdmin /> },
+      { path: "news", element: <SelectNews/> },
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },

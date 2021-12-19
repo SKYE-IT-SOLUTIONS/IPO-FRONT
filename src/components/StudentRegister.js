@@ -128,6 +128,7 @@ function StudentRegister() {
             <Lable>Student Registration Number</Lable>
             <Input
               type="text"
+              value={reg}
               onChange={(e) => {
                 let val = e.target.value
                 setReg(val)
@@ -139,6 +140,7 @@ function StudentRegister() {
             <Lable>Name</Lable>
             <Input
               type="text"
+              value={name}
               onChange={(e) => {
                 let val = e.target.value
                 setName(val)
@@ -150,6 +152,7 @@ function StudentRegister() {
             <Lable>Password</Lable>
             <Input
               type="password"
+              value={password}
               onChange={(e) => {
                 let val = e.target.value
                 setPasswordInfo(Validator(val,patternPassword,"Password"))
@@ -161,6 +164,7 @@ function StudentRegister() {
             <Lable>Confirm Password</Lable>
             <Input
               type="password"
+              value={confirmPassword}
               onChange={(e) => {
                 let value = e.target.value
                 setConfirmPassword(value)
