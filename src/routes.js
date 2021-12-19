@@ -15,7 +15,7 @@ import Submitcv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
 
 //Testing Components
-import MapView from "./components/MapViewUpdated";
+// import MapView from "./components/MapViewUpdated";
 
 import AdminLayout from "./containers/Dashboard/AdminLayout";
 import StudentLayout from "./containers/Dashboard/StudentLayout";
