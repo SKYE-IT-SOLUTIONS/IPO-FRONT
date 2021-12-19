@@ -15,6 +15,7 @@ import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
 import RegistrationDashboard from "./components/Register";
 import SelectNews from './components/SelectNews'
+import SelectJob from './components/SelectJob'
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -71,7 +72,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
-      { path: "job", element: <JobListOfAdmin /> },
+      { path: "job", element: <SelectJob/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },
       { path: "settings", element:  <EditContact />},//<h1>Admin Settings</h1>

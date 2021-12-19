@@ -15,12 +15,12 @@ import {Container} from "./CommonComponents";
 const images = [
   {
     url: newsList,
-    title: 'View News List',
+    title: 'View Job List',
     width: '50%',
   },
   {
     url: addnews,
-    title: 'Add News',
+    title: 'Add Job',
     width: '50%',
   },
 ];
