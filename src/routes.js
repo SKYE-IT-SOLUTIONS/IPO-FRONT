@@ -40,6 +40,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "addJob", element: <AddJobPost /> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
+      { path: "job/preview", element: <PostJob /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "addNews", element: <AddNewsPost /> },

@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Simple_Validator } from "../utils/validation";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   setTitle,
   setPosition,
@@ -170,6 +171,8 @@ const SubmitBttn = styled(CustomButton)`
 
 function AddJobPost() {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const storeTitle = useSelector((state) => state.job.title);
   const storePosition = useSelector((state) => state.job.position);
   const storeDescription = useSelector((state) => state.job.description);
@@ -464,9 +467,23 @@ function AddJobPost() {
             </Col>
           </Row>
 
-          <div style={{ textAlign: "right" }}>
-            <SubmitBttn submit>Submit</SubmitBttn>
-          </div>
+          <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                <SubmitBttn
+                  submit
+                  onClick={() => {
+                    navigate("/job/preview");
+                  }}
+                >
+                  Preview
+                </SubmitBttn>
+                <SubmitBttn submit>Submit</SubmitBttn>
+              </div>
         </JobContainer>
       )}
     </>
