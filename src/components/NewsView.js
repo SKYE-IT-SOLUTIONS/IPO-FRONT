@@ -106,7 +106,7 @@ function NewsView() {
                   <Title>{newsData?.title}</Title>
                 </Col>
                 <Col md={6} sm={12}>
-                  <Image src={newsData?.image} thumbnail />
+                  <Image src={newsData?.url} thumbnail />
                 </Col>
               </Row>
               <Row>
@@ -122,7 +122,7 @@ function NewsView() {
               </Row>{" "}
               <Date font={fonts}>
                 {newsData.uploadTime !== ""
-                  ? `Last updated - ${newsData.uploadTime}`
+                  ? `Last updated - ${newsData.howLong}`
                   : ""}
               </Date>
             </>
