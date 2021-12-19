@@ -348,7 +348,7 @@ function NavBar(props) {
                 </Nav1>
               ) : ( <span>
                 <RegisterTag onClick={() => {
-                    navigate("/registationdashboard");
+                    navigate("/register");
                   }}>Register</RegisterTag>
                 <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
                 </span>
