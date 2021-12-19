@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import styled from 'styled-components';
 import {Container} from "./CommonComponents";
   import sendMail from '../assets/sendMail.svg'
@@ -35,11 +35,17 @@ const Email = styled.span`
 
 function SendMail() {
     const { fonts } = useContext(ThemeContext);
+    const [email, setEmail] = useState("")
+
+    useEffect(() => {
+        setEmail(sessionStorage.getItem("email"))
+        sessionStorage.removeItem("email")
+    }, [])
 
     return (
         <OuterDiv font={fonts}>
             <LoginImg src={sendMail} />
-            <Text>Confirmation mail is send to <Email>lucifermxms@gmail.com</Email></Text>
+            <Text>Confirmation mail is send to <Email>{email}</Email></Text>
         </OuterDiv>
     )
 }

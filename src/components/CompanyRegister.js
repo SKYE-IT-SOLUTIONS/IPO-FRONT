@@ -13,6 +13,9 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { passwordMatcher } from "../utils/passwordMatcher";
 import { Simple_Validator, Validator } from "../utils/validation";
 import {patternPassword,patternContact,patternMail} from '../config/pattern'
+import AuthServices from "../services/AuthServices";
+import { useNavigate } from "react-router-dom";
+import CustomSnackBar from "./CustomSnackBar";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -87,6 +90,35 @@ function CompanyRegister() {
   const [cityInfo, setCityInfo] = useState({ error: null, status: false });
   const [passwordInfo, setPasswordInfo] = useState({ error: null, status: false });
   const [matchPassword, setMatchPassword] = useState({error:null,isMatching:false});
+
+  const [error, setError] = useState("");
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
+
+  const authServices = new AuthServices();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (credentials) => {
+    setIsLoading(true);
+    const {status,data,error}  = await authServices.handleSignUp(credentials);
+    if(status){
+      sessionStorage.setItem("email",data?.email);
+      navigate("/register/sendMail");
+    }else{
+      setError(error);
+      setIsErrorMsgOpen(true);
+    }
+    setIsLoading(false);
+  }
 
   return (
     <RegistrationDiv font={fonts}>
@@ -194,10 +226,23 @@ function CompanyRegister() {
 
               {!matchPassword.isMatching && <Error>{matchPassword.error}</Error>}
 
-            <LoginBttn submit>Register</LoginBttn>
+            <LoginBttn submit disabled={isLoading ||!nameInfo.status || !emailInfo.status || !personInfo.status || !contactInfo.status || !cityInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
+              if(nameInfo.status && emailInfo.status && personInfo.status && contactInfo.status && cityInfo.status && passwordInfo.status && matchPassword.isMatching){
+                handleSubmit({
+                  "email" : email,
+                  "password" : password,
+                  "companyname":name,
+                  "conatctperson":person,
+                  "conatctnumber":contact,
+                  "address":`${no},<br/>${street},<br/>${city}`,
+                  "role" : ["company"]
+              });
+              }
+            }}>Register</LoginBttn>
           </SeparateDiv>
         </LoginCol>
       </Row>
+      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
     </RegistrationDiv>
   );
 }

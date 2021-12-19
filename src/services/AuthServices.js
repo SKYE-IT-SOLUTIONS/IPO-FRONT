@@ -1,7 +1,14 @@
-import { loginIn, logOut,isUser } from "../api/auth/authAPI";
+import { loginIn, logOut,isUser,signUp } from "../api/auth/authAPI";
 
 export default class AuthServices {
-  // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
+
+  handleSignUp = async (credentials) => {
+    const response = await signUp(credentials);
+    return response;
+
+  };
+
+    // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
   handleLogin = async (credentials) => {
     const response = await loginIn(credentials);
     return response;
