@@ -19,7 +19,7 @@ import {
   setDescription,
   setImage,
   removeDescription,
-  setVisibility
+  setVisibility,
 } from "../store/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
@@ -96,7 +96,7 @@ const TextArea = styled.textarea`
 `;
 
 const NewsButton = styled(CustomButton)`
-  margin: 15px 0;
+  margin: 25px 20px 30px 0;
 `;
 
 const Title = styled(Lable)`
@@ -153,7 +153,7 @@ function AddNewsPost() {
       setNewsTitle(storeTitle);
       setContentList(storeDescription);
       setImageUrl(storeImage);
-      setNewsVisibility(storeVisibility)
+      setNewsVisibility(storeVisibility);
     }
     setIsLoading(false);
   }, []);
@@ -265,9 +265,9 @@ function AddNewsPost() {
                   control={<Radio />}
                   label="Public"
                   onChange={(e) => {
-                    let val = e.target.value
-                    setNewsVisibility(!!val)
-                    dispatch(setVisibility(!!val))
+                    let val = e.target.value;
+                    setNewsVisibility(!!val);
+                    dispatch(setVisibility(!!val));
                   }}
                 />
                 <FormControlLabel
@@ -275,14 +275,14 @@ function AddNewsPost() {
                   control={<Radio />}
                   label="Private"
                   onChange={(e) => {
-                    let val = e.target.value
-                    setNewsVisibility(!val)
-                    dispatch(setVisibility(!val))
+                    let val = e.target.value;
+                    setNewsVisibility(!val);
+                    dispatch(setVisibility(!val));
                   }}
                 />
               </RadioGroup>
 
-              <div
+              {/* <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -309,7 +309,24 @@ function AddNewsPost() {
                 >
                   Submit
                 </NewsButton>
-              </div>
+              </div> */}
+              <NewsButton
+                onClick={() => {
+                  navigate("/news/preview");
+                }}
+              >
+                Preview
+              </NewsButton>
+              <NewsButton
+                submit
+                onClick={() => {
+                  dispatch(removeDescription());
+                  dispatch(setImage(null));
+                  dispatch(setTitle(null));
+                }}
+              >
+                Submit
+              </NewsButton>
             </DetailCol>
           </Row>
         </NewContainer>
