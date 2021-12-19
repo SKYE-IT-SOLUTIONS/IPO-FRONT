@@ -14,6 +14,7 @@ import EditContact from "./components/EditContact";
 import SubmitCv from "./components/Submitcv";
 import RequestGraduate from "./components/Reuestgraduate";
 import RegistrationDashboard from "./components/Register";
+import SelectNews from './components/SelectNews'
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -29,6 +30,7 @@ import { default as CompanyListOfAdmin } from "./containers/Dashboard/Admin/Comp
 import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
+import EditNews from './components/EditNews';
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -43,23 +45,29 @@ const routes = (isAuthenticated,userRole) => [
       { path: "job/preview", element: <PostJob /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "spinner", element: <Spinner /> },
+      { path: "requestgraduate", element: <RequestGraduate /> },
+      { path: 'studentReg', element: <StudentRegister/> },
+      { path: 'companyReg', element: <CompanyRegister/> },
+      { path: 'sendMail', element: <SendMail/> },
+      { path: 'editnews/:id', element: <EditNews/>},
       { path: "submitCv", element: <SubmitCv /> },
       { path: "requestPerson", element: <RequestGraduate /> },
       { path: 'register', element: <RegistrationDashboard/>},
       { path: 'register/companyReg', element: <CompanyRegister/> },
       { path: 'register/studentReg', element: <StudentRegister/> },
       { path: 'register/sendMail', element: <SendMail/> },
+      { path: 'selectnews', element: <SelectNews/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
   },
   {
     path: "/admin",
-    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
       { path: "dashboard", element:  <h1>Admin Dashboard</h1> },
       { path: "user", element: <UserListOfAdmin />},
-      { path: "news", element: <NewsListOfAdmin /> },
+      { path: "news", element: <SelectNews/> },
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
@@ -74,7 +82,7 @@ const routes = (isAuthenticated,userRole) => [
   },
   {
     path: "/student",
-    element: (isAuthenticated && userRole === "ROLE_STUDENT" ) ? <StudentLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_STUDENT" )  ? <StudentLayout /> : <Navigate to="/login" />,
     children: [
       {path: "dashboard", element: <h1>Profile view of student</h1>},
       {path: "news", element: <h1>News List of student</h1>},

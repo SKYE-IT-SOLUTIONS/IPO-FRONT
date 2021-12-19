@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack,Paper } from '@mui/material'
 import styled from "styled-components";
-import Student from '../assets/student.svg';
+import Student from '../assets/Student.svg';
 import Company from '../assets/companyimg.svg';
 import {Row, Col, CustomButton} from "./CommonComponents";
 import { useNavigate } from 'react-router-dom';

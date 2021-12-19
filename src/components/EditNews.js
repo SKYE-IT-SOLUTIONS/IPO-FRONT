@@ -13,21 +13,14 @@ import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
 import FileUpload from "./fileupload/FileUpload";
-import { useNavigate, Route } from "react-router-dom";
-import {
-  setTitle,
-  setDescription,
-  setImage,
-  removeDescription,
-  setVisibility,
-} from "../store/newsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate ,useParams } from "react-router-dom";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
 import { Simple_Validator } from "../utils/validation";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import DataService from "../services/DataService";
 
 const InputImage = muistyled("input")({
   display: "none",
@@ -114,8 +107,9 @@ const PalestherImage = styled.img`
 `;
 
 function AddNewsPost() {
-  const dispatch = useDispatch();
   let navigate = useNavigate();
+  const { id } = useParams();
+  const dataService = new DataService();
 
   const { fonts } = useContext(ThemeContext);
   // useS
@@ -128,6 +122,8 @@ function AddNewsPost() {
     status: false,
   });
 
+  const [error, setError] = useState("");
+
   const [contentList, setContentList] = useState([]);
 
   const [imageUrl, setImageUrl] = useState(null);
@@ -137,25 +133,35 @@ function AddNewsPost() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const storeTitle = useSelector((state) => state.news.title);
-  const storeImage = useSelector((state) => state.news.image);
-  const storeDescription = useSelector((state) => state.news.description);
-  const storeVisibility = useSelector((state) => state.news.visibility);
-
   useEffect(() => {
     setIsLoading(true);
-    if (
-      storeTitle !== null ||
-      storeDescription.length !== 0 ||
-      storeDescription !== undefined ||
-      !storeVisibility
-    ) {
-      setNewsTitle(storeTitle);
-      setContentList(storeDescription);
-      setImageUrl(storeImage);
-      setNewsVisibility(storeVisibility);
-    }
-    setIsLoading(false);
+    const fetchNews = async () => {
+        if (id !== undefined && id !== null) {
+        //   console.log("Database Call");
+        //   console.log(id);
+        //   const { status, data, error } = id
+        //     ? await dataService.handleGetNews(id)
+        //     : null;
+        //   if (status) {
+        //     setNewsData(data);
+                let rdata;
+                await fetch(`http://localhost:3005/news/${id}`).then(res=>
+                res.json()
+                ).then(data=>{
+                console.log("rdata",data)
+                setNewsTitle(data.title)
+                setContentList(data.description)
+                setImageUrl(data.image)
+                setNewsVisibility(data.visibility)
+                }).catch(e=>console.log(e)).finally(()=>{
+                    setIsLoading(false);
+                })
+          } else {
+            setError(error);
+            navigate("/404");
+          }
+        }
+      fetchNews();
   }, []);
 
   const updateUploadedFiles = async (files) => {
@@ -163,7 +169,6 @@ function AddNewsPost() {
       setFiles(files);
       console.log(files[0]);
       const dataUrl = await setImageBuffer(files[0]);
-      dispatch(setImage(dataUrl));
       setImageUrl(dataUrl);
     }
   };
@@ -173,7 +178,9 @@ function AddNewsPost() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <NewContainer font={fonts}>
+          <>
+          {newTitle && 
+          <NewContainer font={fonts}>
           <Row>
             <Col md={5} sm={12}>
               <ApplyImage image={newsImage} />
@@ -187,7 +194,6 @@ function AddNewsPost() {
                 value={newTitle}
                 onChange={(e) => {
                   setNewsTitle(e.target.value);
-                  dispatch(setTitle(e.target.value));
                   // setTitleInfo(Simple_Validator(e.target.value,"Title"));
                 }}
               />
@@ -219,7 +225,6 @@ function AddNewsPost() {
                             (_, ind) => ind !== index
                           );
                           setContentList(list);
-                          dispatch(setDescription(list));
                         }}
                       />
                     </li>
@@ -246,7 +251,6 @@ function AddNewsPost() {
                     if (content !== "") {
                       let list = [...contentList, content];
                       setContentList(list);
-                      dispatch(setDescription(list));
                       setContent("");
                     }
                   }}
@@ -267,7 +271,6 @@ function AddNewsPost() {
                   onChange={(e) => {
                     let val = e.target.value;
                     setNewsVisibility(!!val);
-                    dispatch(setVisibility(!!val));
                   }}
                 />
                 <FormControlLabel
@@ -277,7 +280,6 @@ function AddNewsPost() {
                   onChange={(e) => {
                     let val = e.target.value;
                     setNewsVisibility(!val);
-                    dispatch(setVisibility(!val));
                   }}
                 />
               </RadioGroup>
@@ -310,26 +312,20 @@ function AddNewsPost() {
                   Submit
                 </NewsButton>
               </div> */}
-              <NewsButton
-                onClick={() => {
-                  navigate("/news/preview");
-                }}
-              >
-                Preview
-              </NewsButton>
+              <div style={{textAlign:"right"}}>
               <NewsButton
                 submit
-                onClick={() => {
-                  dispatch(removeDescription());
-                  dispatch(setImage(null));
-                  dispatch(setTitle(null));
-                }}
               >
                 Submit
               </NewsButton>
+              </div>
+              
             </DetailCol>
           </Row>
         </NewContainer>
+          }
+          </>
+
       )}
     </>
   );

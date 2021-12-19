@@ -39,6 +39,14 @@ const Heading = styled.h1`
   /* margin-top: -30px; */
 `;
 
+const Success = styled.p`
+  color: 	#009933;
+  font-size: 13px;
+  margin: 0px;
+  text-align: left;
+  padding: 5px 0 5px 2px;
+`;
+
 const LoginCol = styled(Col)`
   display: flex;
   flex-direction: column;
@@ -202,7 +210,7 @@ function CompanyRegister() {
 
             <Lable>Password</Lable>
             <Input
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => {
                 let val = e.target.value
@@ -214,7 +222,7 @@ function CompanyRegister() {
 
             <Lable>Confirm Password</Lable>
             <Input
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={(e) => {
                 let value = e.target.value
@@ -224,7 +232,7 @@ function CompanyRegister() {
               }}
             />
 
-              {!matchPassword.isMatching && <Error>{matchPassword.error}</Error>}
+              {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> : <Success>Password is matching</Success>}
 
             <LoginBttn submit disabled={isLoading ||!nameInfo.status || !emailInfo.status || !personInfo.status || !contactInfo.status || !cityInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
               if(nameInfo.status && emailInfo.status && personInfo.status && contactInfo.status && cityInfo.status && passwordInfo.status && matchPassword.isMatching){

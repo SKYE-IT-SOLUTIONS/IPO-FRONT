@@ -53,6 +53,14 @@ const Error = styled.p`
   padding: 5px 0 5px 2px;
 `;
 
+const Success = styled.p`
+  color: 	#009933;
+  font-size: 13px;
+  margin: 0px;
+  text-align: left;
+  padding: 5px 0 5px 2px;
+`;
+
 const SeparateDiv = styled.div`
   border: 4px solid;
   border-radius: 10px;
@@ -120,6 +128,7 @@ function StudentRegister() {
             <Lable>Student Registration Number</Lable>
             <Input
               type="text"
+              value={reg}
               onChange={(e) => {
                 let val = e.target.value
                 setReg(val)
@@ -131,6 +140,7 @@ function StudentRegister() {
             <Lable>Name</Lable>
             <Input
               type="text"
+              value={name}
               onChange={(e) => {
                 let val = e.target.value
                 setName(val)
@@ -142,6 +152,7 @@ function StudentRegister() {
             <Lable>Password</Lable>
             <Input
               type="password"
+              value={password}
               onChange={(e) => {
                 let val = e.target.value
                 setPasswordInfo(Validator(val,patternPassword,"Password"))
@@ -153,13 +164,14 @@ function StudentRegister() {
             <Lable>Confirm Password</Lable>
             <Input
               type="password"
+              value={confirmPassword}
               onChange={(e) => {
                 let value = e.target.value
                 setConfirmPassword(value)
                 setMatchPassword(passwordMatcher(password,value))
               }}
             />
-             {!matchPassword.isMatching && <Error>{matchPassword.error}</Error>}
+             {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> :  <Success>Password is matching</Success>}
 
             <LoginBttn submit disabled={isLoading || !nameInfo.status || !regInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
               if(nameInfo.status && regInfo.status && passwordInfo.status && matchPassword.isMatching){
