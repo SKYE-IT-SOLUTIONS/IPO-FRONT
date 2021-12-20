@@ -7,6 +7,7 @@ import addnews from '../assets/addnews.svg'
 import newsList from '../assets/newsList.svg'
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Container} from "./CommonComponents";
+import { useNavigate } from 'react-router-dom';
 
   const  OuterDiv = styled(Container)`
     font-family: ${({ font }) => font.general};
@@ -18,11 +19,13 @@ const images = [
     url: newsList,
     title: 'View News List',
     width: '50%',
+    nav:"list"
   },
   {
     url: addnews,
     title: 'Add News',
     width: '50%',
+    nav:"addNews"
   },
 ];
 
@@ -98,6 +101,7 @@ const AnimatedText = styled('h1')`
 `;
 export default function ButtonBases() {
     const { fonts } = useContext(ThemeContext);
+    const navigate = useNavigate();
 
   return (
       <OuterDiv font={fonts}>
@@ -110,6 +114,7 @@ export default function ButtonBases() {
           style={{
             width: image.width,
           }}
+          onClick={()=>{navigate(image.nav)}}
         >
           <ImageSrc style={{ backgroundImage: `url(${image.url})`}} />
           <ImageBackdrop className="MuiImageBackdrop-root"/>
