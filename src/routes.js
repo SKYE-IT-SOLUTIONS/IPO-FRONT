@@ -71,6 +71,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "job", element: <SelectJob/> },
+      { path: "job/:id", element: <PostJob /> },
+      { path: "job/preview", element: <PostJob /> },
       { path: "job/list", element: <JobListOfAdmin/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },

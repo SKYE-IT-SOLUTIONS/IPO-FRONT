@@ -192,42 +192,6 @@ const AnimatedText = styled.span`
   }
 `;
 
-const data = {
-  title: "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
-  position: "Software Engineer",
-  description: `Try to think about paragraphs in terms of thematic unity: a paragraph is
-  a sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.Try to
-  think about paragraphs in terms of thematic unity: a paragraph is a
-  sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.Try to
-  think about paragraphs in terms of thematic unity: a paragraph is a
-  sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.`,
-  specifications: [
-    "Applicant age should be with in range 25 - 35",
-    "Area of residence : Negambo",
-  ],
-  qualifications: [
-    "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-  ],
-  experience: [
-    "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-  ],
-  salary: 100000,
-  date: "2021/12/10",
-};
-
 function PostJob({ dataFromProp }) {
   const navigate = useNavigate();
 
@@ -263,23 +227,28 @@ function PostJob({ dataFromProp }) {
     const fetchJob = async () => {
       if (id !== undefined && id !== null) {
         console.log(id);
-        // const { status, data, error } = id
-        //   ? await dataService.handleGetJob(id)
-        //   : null;
-        // if (status) {
-        //   setJobData(data);
-        // } else {
-        //   setError(error);
-        //   navigate("/404");
-        // }
-
-        let rdata;
-        await fetch(`http://localhost:3005/job/${id}`).then(res=>
-          res.json()
-        ).then(data=>{
-          rdata=data.data;console.log("rdata",data)
-          setJobData(data)
-        }).catch(e=>console.log(e))
+        const { status, data, error } = id
+          ? await dataService.handleGetJob(id)
+          : null;
+        if (status) {
+          console.log("data", data);
+          // setJobData(data);
+          setJobData({
+            id: data?.id,
+            title: data?.title,
+            position: data?.position,
+            description: data?.description,
+            specifications: data?.specifications,
+            qualifications: data.qualifications,
+            experience: data?.experiences,
+            salary: data?.salary,
+            deadline: data?.deadline,
+            date: data?.uploadTime,
+          })
+        } else {
+          setError(error);
+          navigate("/404");
+        }
         
       } else {
         setJobData({
@@ -291,6 +260,7 @@ function PostJob({ dataFromProp }) {
           qualifications: storeQualifications,
           experience: storeExperience,
           salary: storeSalary,
+          deadline: storeDeadline,
           date: "Not Posted Yet",
         })
       }
@@ -348,7 +318,7 @@ function PostJob({ dataFromProp }) {
                   )}
                 </Col>
                 <Col md={6} sm={12}>
-                  {jobData.specifications.length !== 0 && (
+                  {jobData?.specifications?.length !== 0 && (
                     <>
                       <RequirementTitle>Specifications</RequirementTitle>
                       <ul>
@@ -359,11 +329,11 @@ function PostJob({ dataFromProp }) {
                     </>
                   )}
 
-                  {jobData.qualifications.length !== 0  && (
+                  {jobData?.qualifications?.length !== 0  && (
                     <>
                       <RequirementTitle>Qualifications</RequirementTitle>
                       <ul>
-                        {jobData?.qualifications.map((value, index) => (
+                        {jobData?.qualifications?.map((value, index) => (
                           <List key={index}>{value}</List>
                         ))}
                       </ul>
