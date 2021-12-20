@@ -32,6 +32,7 @@ import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
 import EditNews from './components/EditNews';
+import NewsCollection from "./components/NewsCollection";
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -52,6 +53,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/studentReg', element: <StudentRegister/> },
       { path: 'register/sendMail', element: <SendMail/> },
       { path: 'selectnews', element: <SelectNews/> },
+      { path: 'allnews', element: <NewsCollection/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
