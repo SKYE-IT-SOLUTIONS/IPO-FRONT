@@ -63,11 +63,13 @@ const routes = (isAuthenticated,userRole) => [
       { path: "dashboard", element:  <h1>Admin Dashboard</h1> },
       { path: "user", element: <UserListOfAdmin />},
       { path: "news", element: <SelectNews/> },
+      { path: "news/list", element: <NewsListOfAdmin/> },
       { path: 'editNews/:id', element: <EditNews/>},
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "job", element: <SelectJob/> },
+      { path: "job/list", element: <JobListOfAdmin/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },
       { path: "settings", element:  <EditContact />},//<h1>Admin Settings</h1>
