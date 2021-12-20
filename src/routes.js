@@ -52,8 +52,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/companyReg', element: <CompanyRegister/> },
       { path: 'register/studentReg', element: <StudentRegister/> },
       { path: 'register/sendMail', element: <SendMail/> },
-      { path: 'selectnews', element: <SelectNews/> },
-      { path: 'allnews', element: <NewsCollection/> },
+      { path: 'selectNews', element: <SelectNews/> },
+      { path: 'allNews', element: <NewsCollection/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
