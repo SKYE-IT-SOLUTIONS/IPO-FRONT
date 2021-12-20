@@ -33,6 +33,7 @@ import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
 import EditNews from './components/EditNews';
+import NewsCollection from "./components/NewsCollection";
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -52,7 +53,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/companyReg', element: <CompanyRegister/> },
       { path: 'register/studentReg', element: <StudentRegister/> },
       { path: 'register/sendMail', element: <SendMail/> },
-      { path: 'selectnews', element: <SelectNews/> },
+      { path: 'selectNews', element: <SelectNews/> },
+      { path: 'allNews', element: <NewsCollection/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
@@ -64,11 +66,13 @@ const routes = (isAuthenticated,userRole) => [
       { path: "dashboard", element:  <AdminDashboard/> },
       { path: "user", element: <UserListOfAdmin />},
       { path: "news", element: <SelectNews/> },
+      { path: "news/list", element: <NewsListOfAdmin/> },
       { path: 'editNews/:id', element: <EditNews/>},
       { path: "news/addNews", element: <AddNewsPost /> },
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "job", element: <SelectJob/> },
+      { path: "job/list", element: <JobListOfAdmin/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },
       { path: "settings", element:  <EditContact />},//<h1>Admin Settings</h1>
