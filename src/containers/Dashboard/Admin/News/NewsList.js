@@ -35,9 +35,10 @@ const NewsList = () => {
         setError(error);
         console.log(error);
       }
+      setIsLoading(false);
     };
     fetchNews();
-    setIsLoading(false);
+    
   }, []);
 
   const columns = [
