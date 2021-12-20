@@ -40,6 +40,11 @@ export const jobSlice = createSlice({
       state.experience = action.payload;
     },
     removeDataArray: (state) => {
+      state.title=null;
+      state.position=null;
+      state.description=null;
+      state.salary=null;
+      state.deadline=null;
       state.specifications = [];
       state.qualifications = [];
       state.experience = [];

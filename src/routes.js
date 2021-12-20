@@ -16,6 +16,7 @@ import RequestGraduate from "./components/Reuestgraduate";
 import RegistrationDashboard from "./components/Register";
 import SelectNews from './components/SelectNews'
 import SelectJob from './components/SelectJob'
+import AdminDashboard from "./components/AdminDashboard"
 
 //Testing Components
 // import MapView from "./components/MapViewUpdated";
@@ -62,7 +63,7 @@ const routes = (isAuthenticated,userRole) => [
     path: "/admin",
     element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
-      { path: "dashboard", element:  <h1>Admin Dashboard</h1> },
+      { path: "dashboard", element:  <AdminDashboard/> },
       { path: "user", element: <UserListOfAdmin />},
       { path: "news", element: <SelectNews/> },
       { path: "news/list", element: <NewsListOfAdmin/> },
@@ -71,6 +72,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "job", element: <SelectJob/> },
+      { path: "job/:id", element: <PostJob /> },
+      { path: "job/preview", element: <PostJob /> },
       { path: "job/list", element: <JobListOfAdmin/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },

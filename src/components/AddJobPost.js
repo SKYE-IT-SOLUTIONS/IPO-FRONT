@@ -220,13 +220,20 @@ function AddJobPost() {
 
   const dataService = new DataService();
 
-  const handleNewsSubmit = async (payload) => {
+  const handleJobSubmit = async (payload) => {
     setIsLoading(true);
     const {status,data,error} = await dataService.handleSubmitJob(payload);
     if(status){
-      navigate("/");
+      console.log("Job Post Successfully");
+      dispatch(removeDataArray());
+      setIsLoading(false);
+      navigate(`/admin/job/${data}`);
+      
+    }else{
+      setIsLoading(false);
+      console.log(error);
     }
-    setIsLoading(false);
+ 
     
   }
 
@@ -489,7 +496,20 @@ function AddJobPost() {
                 navigate("/job/preview");
               }}>Preview</SubmitBttn>
           <SubmitBttn submit onClick={()=>{
-            handleNewsSubmit();
+            if(titleInfo.status && positionInfo.status){
+              handleJobSubmit(
+                {
+                  "title": title,
+                  "position": position,
+                  "description": decription,
+                  "specifications": specList,
+                  "qualifications": qlfList,
+                  "experiences": expList,
+                  "salary":salary,
+                  "deadline": date
+              }
+              );
+            }
           }}>Submit</SubmitBttn>
             </Col>
           </Row>   
