@@ -1,14 +1,15 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Stack,Paper } from '@mui/material'
 import styled from "styled-components";
 import Student from '../assets/student.svg';
 import Company from '../assets/companyimg.svg';
 import {Row, Col, CustomButton} from "./CommonComponents";
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Mdiv=styled.div`
     padding: 100px;
-    
+    font-family: ${({ font }) => font.general};
 `;
 const StyledImg =styled.img`
   padding: auto;
@@ -54,7 +55,7 @@ const Header=styled.h1`
 const AnimatedText = styled.span`
   margin-top: 20px;
   font-weight: 800;
-  font-family: sans-serif;
+  font-family: ${({ font }) => font.general};
   background: black;
   -webkit-background-clip: text;
   background-clip: text;
@@ -115,13 +116,13 @@ const Button=styled(CustomButton)`
     margin: auto;
 `;
 function Register() {
-
+  const { fonts } = useContext(ThemeContext);
   const navigate = useNavigate();
     
     return (
         <div>
-            <Header><AnimatedText>Choose Your character</AnimatedText></Header>
-        <Mdiv >
+            <Header><AnimatedText font={fonts}>Choose Your character</AnimatedText></Header>
+        <Mdiv font={fonts}>
             
             <Stack direction="row" spacing={10} >
              <Row> 
@@ -132,7 +133,7 @@ function Register() {
                     alt=""
                     src={Company}
                     />
-                    <Button disabled>Company</Button>
+                    <Button disabled submit>Company</Button>
                 </WrapperDiv>
                 </Paper>
                 </Col>
@@ -144,7 +145,7 @@ function Register() {
                     alt=""
                     src={Student}
                     />
-                    <Button disabled>Student</Button>
+                    <Button disabled submit>Student</Button>
                 </WrapperDiv>
                 </Paper>
                 </Col>
