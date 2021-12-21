@@ -10,7 +10,7 @@ const Body = styled.div`
   position: relative;
   height: 900px;
   min-width: 60px;
-  width: ${(props) => (props.active ? "285px" : "70px")};
+  width: ${(props) => (props.active ? "285px" : "80px")};
   overflow: hidden;
   transition: all 0.5s ease;
 `;
@@ -46,7 +46,7 @@ const NavHeaderName = styled.div`
 const MenuIcon = styled.i`
   position: absolute;
   color: #fff;
-  left: ${(props) => (props.active ? "90%" : "50%")};
+  left: ${(props) => (props.active ? "80%" : "50%")};
   top: 6px;
   font-size: 20px;
   height: 50px;
@@ -55,8 +55,13 @@ const MenuIcon = styled.i`
   line-height: 50px;
   transform: translateX(-50%);
 
+  @media (min-width: 300px) {
+   
+    left: ${(props) => (props.active ? "80%" : "50%")};
+  }
   @media (max-width: 300px) {
     display: none;
+    left: ${(props) => (props.active ? "50%" : "50%")};
   }
 `;
 const NavBody = styled.ul`
