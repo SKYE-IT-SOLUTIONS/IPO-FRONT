@@ -17,7 +17,7 @@ import { Container, Row, Col } from "../components/CommonComponents";
 
 const MainRow=styled(Row)`
   justify-content: center;
-  padding: 32px;
+  
 `;
 const MainCol=styled(Col)`
   justify-content: center;

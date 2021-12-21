@@ -233,6 +233,59 @@ function NavBar(props) {
             </NavDropdown>
 
             <NavDropdown
+              title={<NavTitle>Student Services</NavTitle>}
+              id="collasible-nav-dropdown"
+              show={showSS}
+              onMouseEnter={() => showDropdown("Student Services")}
+              onMouseLeave={() => hideDropdown("Student Services")}
+              onClick={() => {
+                console.log("show");
+              }}
+            ><DropItems id="bg-custom-3" onClick={()=>{navigate("/login")}}>
+            Send a CV
+            </DropItems>
+
+              <NavDropdown
+                  title={<NavSubTitle onClick={()=>{navigate("/login")}}>Request a training<br/>session</NavSubTitle>}
+                  id="collasible-nav-dropdown"
+                  drop="end"
+                  show={showIRR}
+                  onMouseEnter={() => showDropdown("Request a Graduates/s for")}
+                  onMouseLeave={() => hideDropdown("Request a Graduates/s for")}
+                  onClick={() => {
+                    console.log("show");
+                  }}
+                  style={{ fontSize: "10px", paddingLeft: "2px" }}
+                >
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
+                  How to prepare a CV
+                  </NavDropdown.Item>
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
+                  Facing an interview
+                  </NavDropdown.Item>
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
+                  Findinng a job
+                  </NavDropdown.Item>
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
+                  Personal development
+                  </NavDropdown.Item>
+                  <NavDropdown.Item id="bg-custom-3" onClick={()=>{navigate("login")}}>
+                  Finding scholarships
+                  </NavDropdown.Item>
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
+                  Foreign Employment
+                  </NavDropdown.Item>
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
+                  Plot the career path
+                  </NavDropdown.Item>
+                </NavDropdown>
+              
+              <DropItems href="/product" id="bg-custom-3" onClick={()=>{navigate("login")}}>
+              Register to Internship
+              </DropItems>
+            </NavDropdown>
+
+            <NavDropdown
               title={<NavTitle>Other Services</NavTitle>}
               id="collasible-nav-dropdown"
               show={showOS}
@@ -243,7 +296,7 @@ function NavBar(props) {
               }}
             >
               <DropItems href="/product" id="bg-custom-3">
-                Organize a Workshop/Training
+                Organize a Workshop/<br/>Training
               </DropItems>
               <DropItems href="/product" id="bg-custom-3">
                 General Feedback
@@ -252,6 +305,8 @@ function NavBar(props) {
                 Contact Us
               </DropItems>
             </NavDropdown>
+
+              
             <NavDropdown
               title={<NavTitle>Related Links</NavTitle>}
               id="collasible-nav-dropdown"
@@ -330,6 +385,7 @@ function NavBar(props) {
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
+                      
                           dispatch(setUserLoggedIn("SSNB"));
                           dispatch(setUserRole(""));
                           dispatch(setUserId(""));
