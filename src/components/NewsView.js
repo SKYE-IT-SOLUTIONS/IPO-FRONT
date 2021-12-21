@@ -74,7 +74,13 @@ function NewsView() {
           ? await dataService.handleGetNews(id)
           : null;
         if (status) {
-          setNewsData(data);
+          console.log("After add : ",data)
+          setNewsData({
+            title: data.title,
+            url: data.url,
+            description: data.description,
+            uploadTime: data.howLong,
+          });
         } else {
           setError(error);
           navigate("/404");
@@ -121,9 +127,7 @@ function NewsView() {
                 </Col>
               </Row>{" "}
               <Date font={fonts}>
-                {newsData.uploadTime !== ""
-                  ? `Last updated - ${newsData.howLong}`
-                  : ""}
+                  Last updated - {newsData.uploadTime}
               </Date>
             </>
           )}

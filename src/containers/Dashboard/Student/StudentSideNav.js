@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
 
 const Body = styled.div`
   box-sizing: border-box;
@@ -27,7 +29,8 @@ const NavHeder = styled.div`
   width: 100%;
   align-items: center;
   opacity: ${(props) => (props.active ? "1" : "0")};
-  pointer-events: none;
+  cursor: pointer;
+  /* pointer-events: none; */
   transition: all 0.5s ease;
 `;
 const NavHeaderIcon = styled.i`
@@ -114,6 +117,7 @@ const NavListItemTooltip = styled.span`
 `;
 const StudentSideNav = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [active, setActive] = useState(false);
 
   function handleResize() {
@@ -131,8 +135,9 @@ const StudentSideNav = () => {
         <SideNavBarContainer active={active}>
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
-            <NavHeaderName>Dashboard</NavHeaderName>
+            <NavHeaderName onClick={() => navigate("dashboard")}>Dashboard</NavHeaderName>
           </NavHeder>
+           
           <MenuIcon
             className="bx bx-menu"
             active={active}
@@ -175,6 +180,14 @@ const StudentSideNav = () => {
             </NavListItem>
 
             <NavListItem>
+              <NavListLink onClick={() => navigate("services")}>
+                <NavListItemIcon className="bx bx-donate-blood"></NavListItemIcon>
+                <NavListItemName active={active}>Student Services</NavListItemName>
+              </NavListLink>
+              <NavListItemTooltip active={active}>Student Services</NavListItemTooltip>
+            </NavListItem>
+
+            <NavListItem>
               <NavListLink
                 onClick={() => navigate("settings")}
               >
@@ -183,6 +196,21 @@ const StudentSideNav = () => {
               </NavListLink>
               <NavListItemTooltip active={active}>Settings</NavListItemTooltip>
             </NavListItem>
+
+            <NavListItem>
+              <NavListLink  onClick={ () => {
+                          dispatch(setUserLoggedIn("SSNB"));
+                          dispatch(setUserRole(""));
+                          dispatch(setUserId(""));
+                          navigate("/home");
+                      }}>
+                <NavListItemIcon className="bx bx-log-out"></NavListItemIcon>
+                <NavListItemName active={active}  href="/"
+                     >Logout</NavListItemName>
+              </NavListLink>
+              <NavListItemTooltip active={active}>Logout</NavListItemTooltip>
+            </NavListItem>
+
           </NavBody>
         </SideNavBarContainer>
       </Body>

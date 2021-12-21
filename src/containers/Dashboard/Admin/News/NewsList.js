@@ -30,6 +30,7 @@ const NewsList = () => {
     const fetchNews = async () => {
       const { status, data, error } = await dataService.handleGetGlobalNews();
       if (status) {
+        console.log("In Admin : ",data)
         setNewsList(data);
       } else {
         setError(error);

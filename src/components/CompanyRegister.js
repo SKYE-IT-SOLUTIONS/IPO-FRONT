@@ -119,7 +119,7 @@ function CompanyRegister() {
     setIsLoading(true);
     const {status,data,error}  = await authServices.handleSignUp(credentials);
     if(status){
-      sessionStorage.setItem("email",data?.email);
+      sessionStorage.setItem("email",data);
       navigate("/register/sendMail");
     }else{
       setError(error);

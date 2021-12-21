@@ -13,6 +13,20 @@ import { Bar} from 'react-chartjs-2';
 import { Paper, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
+import { Container, Row, Col } from "../components/CommonComponents";
+
+const MainRow=styled(Row)`
+  justify-content: center;
+  padding: 32px;
+`;
+const MainCol=styled(Col)`
+  justify-content: center;
+  padding: 10px;
+`;
+const MainPaper=styled(Paper)`
+   justify-content: center;
+`;
+
 
 ChartJS.register(ArcElement, Tooltip, Legend,CategoryScale,
     LinearScale,
@@ -116,18 +130,17 @@ export const data2 = {
 const AdminDashboard = () => {
   return (
     <div>
-        <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        justifyContent="center"
-        spacing={5}
-        style={{padding:"32px"}}
-        >
-        <Paper elevation={5}><h1 style={{textAlign:"center"}}>News & Post</h1><Pie data={data} /></Paper>
-        <Paper elevation={5}><h1 style={{textAlign:"center"}}>Events</h1><Pie data={data1} /></Paper>
-        <Paper elevation={5}><h1 style={{textAlign:"center"}}>Users</h1><Pie data={data2} /></Paper>
-        </Stack>
-        <hr/>
+              <MainRow>
+                <MainCol md={4} sm={6} xs={8}>
+                  <MainPaper elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></MainPaper>
+                </MainCol>
+                <MainCol md={4} sm={6} xs={8}>
+                  <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></MainPaper>
+                </MainCol>
+                <MainCol md={4} sm={6} xs={8}>
+                <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Users</p><Pie data={data2} /></MainPaper>
+                </MainCol>
+              </MainRow>
         
     </div>
   )
