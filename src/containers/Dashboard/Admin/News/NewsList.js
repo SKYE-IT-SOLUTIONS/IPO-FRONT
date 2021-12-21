@@ -102,8 +102,16 @@ const NewsList = () => {
       sortable: false,
       width: 70 + 20,
       disableClickEventBubbling: true,
-      renderCell: () => {
-        return <DeleteIcon sx={{ fontSize: 30 }} />;
+      renderCell: ({id,...params}) => {
+        return <DeleteIcon sx={{ fontSize: 30 }} onClick={async ()=>{
+          const {status, error} = await dataService.handleDeleteNews(id);
+          if(status){
+            setNewsList(newsList.filter(news => news.id !== id));
+            navigate("/admin/news/list")
+          }else{
+            console.log(error);
+          }
+          }}/>;
       },
     },
   ];

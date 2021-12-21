@@ -133,6 +133,19 @@ function AddNewsPost() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleNewsUpdate = async (payload) => {
+    console.log("payload", payload);
+    const { status,data, error } = await dataService.handleUpdateNews(id,payload);
+    console.log("status", status);
+    if (status) {
+      console.log("data", data);
+      // navigate(`/admin/news/${data}`);
+    }else{
+      console.log("error", error);
+      setError(error);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
@@ -149,18 +162,6 @@ function AddNewsPost() {
         setImageUrl(data.url)
         setNewsVisibility(data.global)
         setIsLoading(false);}
-                // let rdata;
-                // await fetch(`http://localhost:3005/news/${id}`).then(res=>
-                // res.json()
-                // ).then(data=>{
-                // console.log("rdata",data)
-                // setNewsTitle(data.title)
-                // setContentList(data.description)
-                // setImageUrl(data.image)
-                // setNewsVisibility(data.visibility)
-                // }).catch(e=>console.log(e)).finally(()=>{
-                //     setIsLoading(false);
-                // })
           } else {
             setError(error);
             navigate("/404");
@@ -288,40 +289,22 @@ function AddNewsPost() {
                   }}
                 />
               </RadioGroup>
-
-              {/* <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                <NewsButton
-                  style={{ width: "20%" }}
-                  submit
-                  onClick={() => {
-                    navigate("/news/preview");
-                  }}
-                >
-                  View
-                </NewsButton>
-                <NewsButton
-                  style={{ width: "20%" }}
-                  submit
-                  onClick={() => {
-                    dispatch(removeDescription());
-                    dispatch(setImage(null));
-                    dispatch(setTitle(null));
-                  }}
-                >
-                  Submit
-                </NewsButton>
-              </div> */}
               <div style={{textAlign:"right"}}>
               <NewsButton
                 submit
+                onClick={() => {
+                  console.log("update");
+                  if (true) {
+                    handleNewsUpdate({
+                      title: newTitle,
+                      description: contentList,
+                      global: visibility,
+                      url: imageUrl,
+                    });
+                  }
+                }}
               >
-                Submit
+                Update
               </NewsButton>
               </div>
               
