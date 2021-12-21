@@ -235,6 +235,59 @@ function NavBar(props) {
             </NavDropdown>
 
             <NavDropdown
+              title={<NavTitle>Student Services</NavTitle>}
+              id="collasible-nav-dropdown"
+              show={showSS}
+              onMouseEnter={() => showDropdown("Student Services")}
+              onMouseLeave={() => hideDropdown("Student Services")}
+              onClick={() => {
+                console.log("show");
+              }}
+            ><DropItems href="/product" id="bg-custom-3" onClick={()=>{navigate("/home")}}>
+            Send a CV
+            </DropItems>
+
+              <NavDropdown
+                  title={<NavSubTitle>Request a training<br/>session</NavSubTitle>}
+                  id="collasible-nav-dropdown"
+                  drop="end"
+                  show={showIRR}
+                  onMouseEnter={() => showDropdown("Request a Graduates/s for")}
+                  onMouseLeave={() => hideDropdown("Request a Graduates/s for")}
+                  onClick={() => {
+                    console.log("show");
+                  }}
+                  style={{ fontSize: "10px", paddingLeft: "2px" }}
+                >
+                  <NavDropdown.Item href="/vacancy" id="bg-custom-3">
+                  How to prepare a CV
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Facing an interview
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Findinng a job
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Personal development
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Finding scholarships
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Foreign Employment
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  Plot the career path
+                  </NavDropdown.Item>
+                </NavDropdown>
+              
+              <DropItems href="/product" id="bg-custom-3">
+              Register to Internship
+              </DropItems>
+            </NavDropdown>
+
+            <NavDropdown
               title={<NavTitle>Other Services</NavTitle>}
               id="collasible-nav-dropdown"
               show={showOS}
@@ -245,7 +298,7 @@ function NavBar(props) {
               }}
             >
               <DropItems href="/product" id="bg-custom-3">
-                Organize a Workshop/Training
+                Organize a Workshop/<br/>Training
               </DropItems>
               <DropItems href="/product" id="bg-custom-3">
                 General Feedback
@@ -254,6 +307,8 @@ function NavBar(props) {
                 Contact Us
               </DropItems>
             </NavDropdown>
+
+              
             <NavDropdown
               title={<NavTitle>Related Links</NavTitle>}
               id="collasible-nav-dropdown"
@@ -333,18 +388,7 @@ function NavBar(props) {
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
-                        // const { status, error } =
-                        //   await authService.handleLogout();
-                        // if (status) {
-                        //   dispatch(setUserLoggedIn("SSNB"));
-                        //   dispatch(setUserRole(""));
-                        //   dispatch(setUserId(""));
-                        //   navigate("/");
-                        // } else {
-                        //   setError(error);
-                        //   setIsErrorMsgOpen(true);
-
-                        // }
+                      
                           dispatch(setUserLoggedIn("SSNB"));
                           dispatch(setUserRole(""));
                           dispatch(setUserId(""));

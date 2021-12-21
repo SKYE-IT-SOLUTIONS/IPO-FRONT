@@ -2,20 +2,39 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+let heighty=window.scrollY;
+
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
-  height: 590px;
-  width: ${(props) => (props.active ? "285px" : "82px")};
+  min-height: 615px;
+  height: heighty;
+  min-width: 40px;
   overflow: hidden;
   transition: all 0.5s ease;
+  @media only screen and (min-width: 1024px) {
+    width: ${(props) => (props.active ? "285px" : "86px")};
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    width: ${(props) => (props.active ? "285px" : "85px")};
+  }
+  @media (min-width: 500px) and (max-width: 700px) {
+    width: ${(props) => (props.active ? "285px" : "85px")};
+  }
+  @media (min-width: 300px) and (max-width: 500px) {
+    width: ${(props) => (props.active ? "285px" : "75px")};
+  }
+  @media (max-width: 300px) {
+    width: ${(props) => (props.active ? "285px" : "40px")};
+  }
 `;
 const SideNavBarContainer = styled.div`
   position: relative;
+  z-index: 999;
   left: 0;
   height: 100%;
-  width: ${(props) => (props.active ? "240px" : "82px")};
+  width: ${(props) => (props.active ? "240px" : "80px")};
   background-color: ${(props) => (props.color ? props.color : "#11101d")};
   padding: 6px 16px;
   transition: all 0.5s ease;
@@ -27,28 +46,92 @@ const NavHeder = styled.div`
   width: 100%;
   align-items: center;
   opacity: ${(props) => (props.active ? "1" : "0")};
-  pointer-events: none;
+  cursor: pointer;
+  /* pointer-events: none; */
   transition: all 0.5s ease;
+  
 `;
 const NavHeaderIcon = styled.i`
-  font-size: 28px;
-  margin-right: 5px;
+  @media only screen and (min-width: 1024px) {
+    font-size: 28px;
+    margin-right: 5px;
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    font-size: 25px;
+    margin-right: 5px;
+  }
+  @media (min-width: 300px) and (max-width: 700px) {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  @media (max-width: 300px) {
+    font-size: 18px;
+    margin-right: 5px;
+  }
 `;
 const NavHeaderName = styled.div`
-  font-style: 20px;
-  font-weight: 400;
+  
+  font-weight: 500;
+  @media only screen and (min-width: 1024px) {
+    font-size: 15px;
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    font-size: 13px;
+  }
+  @media (min-width: 300px) and (max-width: 700px) {
+    font-size: 12px;
+  }
+  @media (max-width: 300px) {
+    font-size: 0px;
+  }
 `;
 const MenuIcon = styled.i`
   position: absolute;
   color: #fff;
-  left: ${(props) => (props.active ? "90%" : "50%")};
+  text-align: center;
+  transform: translateX(-50%);
+
+  @media only screen and (min-width: 1024px) {
+    left: ${(props) => (props.active ? "86%" : "50%")};
   top: 6px;
   font-size: 20px;
   height: 50px;
   width: 50px;
-  text-align: center;
+  line-height: 50px;  
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    left: ${(props) => (props.active ? "75%" : "45%")};
+  top: 6px;
+  font-size: 20px;
+  height: 50px;
+  width: 50px;
   line-height: 50px;
-  transform: translateX(-50%);
+  }
+  @media (min-width: 500px) and (max-width: 700px) {
+    left: ${(props) => (props.active ? "58%" : "40%")};
+  top: 6px;
+  font-size: 20px;
+  height: 0px;
+  width: 100px;
+  line-height: 50px;
+  }
+  @media (min-width: 300px) and (max-width: 500px) {
+    left: ${(props) => (props.active ? "50%" : "40%")};
+  top: 6px;
+  font-size: 20px;
+  height: 0px;
+  width: 100px;
+  line-height: 50px;
+  }
+  @media (max-width: 300px) {
+    left: ${(props) => (props.active ? "40%" : "50%")};
+  top: 6px;
+  font-size: 15px;
+  height: 20px;
+  width: 20px;
+  line-height: 50px;
+  margin-left: -15px;
+  }
 `;
 const NavBody = styled.ul`
   margin-top: 15px;
@@ -77,17 +160,54 @@ const NavListLink = styled.a`
   }
 `;
 const NavListItemIcon = styled.i`
-  height: 50px;
-  min-width: 50px;
-  border-radius: 12px;
-  line-height: 50px;
   text-align: center;
-  font-size: 22px;
+
+  @media only screen and (min-width: 1024px) {
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    font-size: 22px;  
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    height: 40px;
+    min-width: 40px;
+    border-radius: 12px;
+    line-height: 40px;
+    font-size: 20px;  
+  }
+  @media (min-width: 300px) and (max-width: 700px) {
+    height: 30px;
+    min-width: 30px;
+    border-radius: 12px;
+    line-height: 30px;
+    font-size: 18px;
+  }
+  @media (max-width: 300px) {
+    height: 8px;
+    min-width: 10px;
+    border-radius: 8px;
+    line-height: 10px;
+    font-size: 15px;
+  }
 `;
 const NavListItemName = styled.span`
   opacity: ${(props) => (props.active ? "1" : "0")};
   pointer-events: ${(props) => (props.active ? "none" : "auto")};
   transition: all 0.5s ease;
+  
+  @media only screen and (min-width: 1024px) {
+    font-size: 15px;
+  }
+  @media (min-width: 700px) and (max-width: 1024px) {
+    font-size: 13px;
+  }
+  @media (min-width: 300px) and (max-width: 700px) {
+    font-size: 12px;
+  }
+  @media (max-width: 300px) {
+    font-size: 8px;
+  }
 `;
 const NavListItemTooltip = styled.span`
   position: absolute;
