@@ -128,10 +128,16 @@ const TextArea = styled.textarea`
   border: 2px solid black;
   padding: 5px;
 
-  @media (min-width: 768px) and (max-width: 1040px) {
+  @media (max-width: 1040px) {
     font-size: 13px;
   }
 `;
+
+const Facts = styled.li`
+    @media (max-width: 1040px) {
+    font-size: 13px;
+  }
+`
 
 const ExtraInput = styled.input`
   width: 95%;
@@ -158,6 +164,11 @@ const Error = styled.p`
   font-size: 14px;
   margin: 0px;
   padding: 5px 0px;
+
+  @media (max-width: 1040px) {
+    width: 85%;
+    font-size: 13px;
+  }
 `;
 
 const SubmitBttn = styled(CustomButton)`
@@ -198,17 +209,7 @@ function AddJobPost() {
 
   const dataService = new DataService();
 
-  const [jobData, setJobData] = useState({
-    id: "",
-    title: "",
-    position: "",
-    description: "",
-    specifications: [],
-    qualifications: [],
-    experience: [],
-    salary: "",
-    date: "",
-  });
+  
   const [error, setError] = useState("");
 
   const handleJobSubmit = async (payload) => {
@@ -238,22 +239,20 @@ function AddJobPost() {
             : null;
           if (status) {
             console.log("data", data);
-            // setJobData(data);
-            // setJobData({
-            //   id: data?.id,
-            //   title: data?.title,
-            //   position: data?.position,
-            //   description: data?.description,
-            //   specifications: data?.specifications,
-            //   qualifications: data.qualifications,
-            //   experience: data?.experiences,
-            //   salary: data?.salary,
-            //   deadline: data?.deadline,
-            //   date: data?.uploadTime,
-            // })
-         
-          
-        }
+            setJobTitle(data?.title)
+            setJobDescription(data?.description)
+            setJobPosition(data?.position)
+            setSpecList(data?.specifications)
+            setQlfList(data?.qualifications)
+            setExpList(data?.experiences)
+            setJobSalary(data?.salary)
+            setDate(data?.deadline)
+            setTitleInfo(Simple_Validator(data?.title, "Title"));
+            setPositionInfo(Simple_Validator(data?.position, "Job Position"));
+        }else {
+            setError(error);
+            navigate("/404");
+          }
         setIsLoading(false);
       };
       fetchJob();
@@ -312,7 +311,7 @@ function AddJobPost() {
               <ul>
                 {specList &&
                   specList.map((value, index) => (
-                    <li key={index}>
+                    <Facts key={index}>
                       {value}{" "}
                       <Icon
                         icon="ic:round-cancel"
@@ -324,7 +323,7 @@ function AddJobPost() {
                           setSpecList(list);
                         }}
                       />
-                    </li>
+                    </Facts>
                   ))}
                 {specList.length < 5 && (
                   <li>
@@ -356,7 +355,7 @@ function AddJobPost() {
               <ul>
                 {qlfList &&
                   qlfList.map((value, index) => (
-                    <li key={index}>
+                    <Facts key={index}>
                       {value}{" "}
                       <Icon
                         icon="ic:round-cancel"
@@ -368,7 +367,7 @@ function AddJobPost() {
                           setQlfList(list);
                         }}
                       />
-                    </li>
+                    </Facts>
                   ))}
                 {qlfList.length < 5 && (
                   <li>
@@ -400,7 +399,7 @@ function AddJobPost() {
               <ul>
                 {expList &&
                   expList.map((value, index) => (
-                    <li key={index}>
+                    <Facts key={index}>
                       {value}{" "}
                       <Icon
                         icon="ic:round-cancel"
@@ -412,7 +411,7 @@ function AddJobPost() {
                           setExpList(list);
                         }}
                       />
-                    </li>
+                    </Facts>
                   ))}
                 {expList.length < 5 && (
                   <li>
@@ -486,18 +485,18 @@ function AddJobPost() {
             console.log("Title : ",titleInfo.status)
             if(titleInfo.status && positionInfo.status){
               console.log("Working")
-              handleJobSubmit(
-                {
-                  "title": title,
-                  "position": position,
-                  "description": decription,
-                  "specifications": specList,
-                  "qualifications": qlfList,
-                  "experiences": expList,
-                  "salary":salary,
-                  "deadline": date
-              }
-              );
+            //   handleJobSubmit(
+            //     {
+            //       "title": title,
+            //       "position": position,
+            //       "description": decription,
+            //       "specifications": specList,
+            //       "qualifications": qlfList,
+            //       "experiences": expList,
+            //       "salary":salary,
+            //       "deadline": date
+            //   }
+            //   );
             }
           }}>Submit</SubmitBttn>
             </Col>
