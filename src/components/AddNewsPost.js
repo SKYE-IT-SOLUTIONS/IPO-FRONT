@@ -47,6 +47,13 @@ const NewContainer = styled(Container)`
   /* text-align: start; */
 `;
 
+const Error = styled.p`
+  color: red;
+  font-size: 14px;
+  margin: 0px;
+  padding: 5px 0px;
+`;
+
 const DetailCol = styled(Col)``;
 
 const ApplyImage = styled.div`
@@ -119,6 +126,8 @@ function AddNewsPost() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  const defaultNews = "https://images.unsplash.com/photo-1560177112-fbfd5fde9566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+
   const { fonts } = useContext(ThemeContext);
   // useS
   const [newTitle, setNewsTitle] = useState("");
@@ -129,10 +138,14 @@ function AddNewsPost() {
     error: null,
     status: false,
   });
+  const [titleInfo, setTitleInfo] = useState({
+    error: null,
+    status: false,
+  });
 
   const [contentList, setContentList] = useState([]);
 
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultNews);
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -164,11 +177,11 @@ function AddNewsPost() {
   useEffect(() => {
     setIsLoading(true);
     if (
-      storeTitle !== null ||
-      storeDescription.length !== 0 ||
-      storeDescription !== undefined ||
-      !storeVisibility
+      storeTitle === null &&
+      storeDescription.length === 0
     ) {
+      dispatch(setImage(defaultNews))
+    }else{
       setNewsTitle(storeTitle);
       setContentList(storeDescription);
       setImageUrl(storeImage);
@@ -207,9 +220,12 @@ function AddNewsPost() {
                 onChange={(e) => {
                   setNewsTitle(e.target.value);
                   dispatch(setTitle(e.target.value));
-                  // setTitleInfo(Simple_Validator(e.target.value,"Title"));
+                  setTitleInfo(Simple_Validator(e.target.value,"Title"));
                 }}
               />
+              {!titleInfo.status && <Error>{titleInfo.error}</Error>}
+
+
               <Title>Image</Title>
               <FileUpload
                 style={{ backgroundColor: "#ededed" }}
@@ -239,6 +255,7 @@ function AddNewsPost() {
                           );
                           setContentList(list);
                           dispatch(setDescription(list));
+                          setContentInfo(Simple_Validator(list,"Description"));
                         }}
                       />
                     </li>
@@ -271,6 +288,7 @@ function AddNewsPost() {
                   }}
                 />
               </OuterTextArea>
+              {!contentInfo.status && <Error>{contentInfo.error}</Error>}  
 
               <Title>News Visibility</Title>
               <RadioGroup
@@ -301,34 +319,6 @@ function AddNewsPost() {
                 />
               </RadioGroup>
 
-              {/* <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                <NewsButton
-                  style={{ width: "20%" }}
-                  submit
-                  onClick={() => {
-                    navigate("/news/preview");
-                  }}
-                >
-                  View
-                </NewsButton>
-                <NewsButton
-                  style={{ width: "20%" }}
-                  submit
-                  onClick={() => {
-                    dispatch(removeDescription());
-                    dispatch(setImage(null));
-                    dispatch(setTitle(null));
-                  }}
-                >
-                  Submit
-                </NewsButton>
-              </div> */}
               <NewsButton
                 onClick={() => {
                   navigate("/admin/news/preview");
@@ -340,7 +330,7 @@ function AddNewsPost() {
                 submit
                 onClick={() => {
                   console.log("submit");
-                  if (true) {
+                  if (contentInfo.status && titleInfo.status) {
                     handleNewsSubmit({
                       title: newTitle,
                       description: contentList,

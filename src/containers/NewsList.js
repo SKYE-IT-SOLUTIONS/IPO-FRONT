@@ -19,7 +19,7 @@ function NewsList() {
     const fetchNews = async () => {
       const { status, data, error } = await dataService.handleGetGlobalNews();
       if (status) {
-        setNewsList(data);
+        setNewsList(data.sort((a,b)=>b.id-a.id));
       } else {
         setError(error);
         console.log(error);

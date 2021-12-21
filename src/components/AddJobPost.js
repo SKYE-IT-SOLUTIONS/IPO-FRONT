@@ -257,6 +257,8 @@ function AddJobPost() {
       setExpList(storeExperience);
       setJobSalary(storeSalary);
       setDate(storeDeadline);
+      setTitleInfo(Simple_Validator(storeTitle, "Title"))
+      setPositionInfo(Simple_Validator(storePosition, "Job Position"));
     }
     setIsLoading(false);
   }, []);
@@ -496,7 +498,9 @@ function AddJobPost() {
                 navigate("/job/preview");
               }}>Preview</SubmitBttn>
           <SubmitBttn submit onClick={()=>{
+            console.log("Title : ",titleInfo.status)
             if(titleInfo.status && positionInfo.status){
+              console.log("Working")
               handleJobSubmit(
                 {
                   "title": title,
