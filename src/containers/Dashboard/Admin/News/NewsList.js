@@ -1,21 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewIcon from "@mui/icons-material/Visibility";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DataService from "../../../../services/DataService";
-import { Spinner } from "react-bootstrap";
+import Spinner from "../../../../components/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const rowWidth = 200;
 
-
 const NewsList = () => {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(8);
-
-
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,9 +25,9 @@ const NewsList = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetGlobalNews();
+      const { status, data, error } = await dataService.handleGetAllNews();
       if (status) {
-        console.log("In Admin : ",data)
+        console.log("In Admin : ", data);
         setNewsList(data);
       } else {
         setError(error);
@@ -39,7 +36,6 @@ const NewsList = () => {
       setIsLoading(false);
     };
     fetchNews();
-    
   }, []);
 
   const columns = [
@@ -56,21 +52,21 @@ const NewsList = () => {
       headerName: "Title",
       headerAlign: "center",
       align: "center",
-      width: 2*rowWidth,
+      width: 2 * rowWidth,
     },
     {
       field: "description",
       headerName: "Description",
       headerAlign: "center",
       align: "left",
-      width: 2*rowWidth,
+      width: 2 * rowWidth,
     },
     {
       field: "updatedDate",
       headerName: "Updated",
       headerAlign: "center",
       align: "center",
-      width: rowWidth-50,
+      width: rowWidth - 50,
     },
     {
       field: "view",
@@ -80,8 +76,15 @@ const NewsList = () => {
       sortable: false,
       width: 80,
       disableClickEventBubbling: true,
-      renderCell: ({id,...params}) => {
-        return <ViewIcon sx={{ fontSize: 30 }} onClick={()=>{navigate(`/admin/news/${id}`)}}/>;
+      renderCell: ({ id, ...params }) => {
+        return (
+          <ViewIcon
+            sx={{ fontSize: 30 }}
+            onClick={() => {
+              navigate(`/admin/news/${id}`);
+            }}
+          />
+        );
       },
     },
     {
@@ -92,8 +95,15 @@ const NewsList = () => {
       sortable: false,
       width: 60 + 20,
       disableClickEventBubbling: true,
-      renderCell: ({id,...params}) => {
-        return <ModeEditOutlineIcon sx={{ fontSize: 30 }} onClick={()=>{navigate(`/admin/editNews/${id}`)}}/>;
+      renderCell: ({ id, ...params }) => {
+        return (
+          <ModeEditOutlineIcon
+            sx={{ fontSize: 30 }}
+            onClick={() => {
+              navigate(`/admin/editNews/${id}`);
+            }}
+          />
+        );
       },
     },
     {
@@ -104,49 +114,56 @@ const NewsList = () => {
       sortable: false,
       width: 70 + 20,
       disableClickEventBubbling: true,
-      renderCell: ({id,...params}) => {
-        return <DeleteIcon sx={{ fontSize: 30 }} onClick={async ()=>{
-          const {status, error} = await dataService.handleDeleteNews(id);
-          if(status){
-            setNewsList(newsList.filter(news => news.id !== id));
-            navigate("/admin/news/list")
-          }else{
-            console.log(error);
-          }
-          }}/>;
+      renderCell: ({ id, ...params }) => {
+        return (
+          <DeleteIcon
+            sx={{ fontSize: 30 }}
+            onClick={async () => {
+              const { status, error } = await dataService.handleDeleteNews(id);
+              if (status) {
+                setNewsList(newsList.filter((news) => news.id !== id));
+                navigate("/admin/news/list");
+              } else {
+                console.log(error);
+              }
+            }}
+          />
+        );
       },
     },
   ];
 
   const rows = newsList.map((newsList) => {
-  return {
-    id:newsList?.id,
-    title: newsList?.title,
-    description: newsList?.description[0],
-    updatedDate: newsList?.howLong + "  ago",
-  };
-});
+    return {
+      id: newsList?.id,
+      title: newsList?.title,
+      description: newsList?.description[0],
+      updatedDate: newsList?.howLong + "  ago",
+    };
+  });
 
-  return (<>
-  {
-    isLoading ? <Spinner/> : <div style={{ width: "100%" }}>
-    <DataGrid
-      columns={columns}
-      rows={rows}
-      components={{
-        Toolbar: GridToolbar,
-      }}
-      page={page}
-      onPageChange={(newPage) => setPage(newPage)}
-      pageSize={pageSize}
-      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-      rowsPerPageOptions={[8, 10, 12]}
-      pagination
-    />
-  </div>
-  }
-  </>
-    
+  return (
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div style={{ width: "100%" }}>
+          <DataGrid
+            columns={columns}
+            rows={rows}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            page={page}
+            onPageChange={(newPage) => setPage(newPage)}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[8, 10, 12]}
+            pagination
+          />
+        </div>
+      )}
+    </>
   );
 };
 

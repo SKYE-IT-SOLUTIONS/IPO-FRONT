@@ -30,6 +30,11 @@ export default class DataService {
     const result = await onGetAll(NEWS_DATA_URL);
     return result;
   };
+
+  handleGetAllJobs = async () => {
+    const result = await onGetAll(JOB_DATA_URL);
+    return result;
+  };
   
   handleGetGlobalNews = async () => {
     const result = await onGetAll(GLOBAL_NEWS_DATA_URL);
