@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import Login from "./Login";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLoggedIn, setUserRole, setUserId } from "../store/userSlice";
 // import Cookies from 'js-cookie'
@@ -58,7 +57,6 @@ const Nav1 = styled(Nav)`
 `;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const [modalShow, setModalShow] = React.useState(false);
   const [isLogged, setisLogged] = useState(false);
 
   const navigate = useNavigate();
@@ -303,7 +301,6 @@ function NavBar(props) {
                     drop="start"
                     title={icon}
                     show={showIcon}
-                    drop="start"
                     onMouseEnter={() => showDropdown("Icon")}
                     onMouseLeave={() => hideDropdown("Icon")}
                     onClick={() => {
@@ -333,18 +330,6 @@ function NavBar(props) {
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
-                        // const { status, error } =
-                        //   await authService.handleLogout();
-                        // if (status) {
-                        //   dispatch(setUserLoggedIn("SSNB"));
-                        //   dispatch(setUserRole(""));
-                        //   dispatch(setUserId(""));
-                        //   navigate("/");
-                        // } else {
-                        //   setError(error);
-                        //   setIsErrorMsgOpen(true);
-
-                        // }
                           dispatch(setUserLoggedIn("SSNB"));
                           dispatch(setUserRole(""));
                           dispatch(setUserId(""));
@@ -359,19 +344,13 @@ function NavBar(props) {
                 <RegisterTag onClick={() => {
                     navigate("/register");
                   }}>Register</RegisterTag>
-                <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+                <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
                 </span>
               )}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Login
-        history={props.history}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-       <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
     </CustomNavBar>
 
   );

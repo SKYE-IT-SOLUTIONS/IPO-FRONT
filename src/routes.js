@@ -34,6 +34,7 @@ import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
 import EditNews from './components/EditNews';
 import NewsCollection from "./components/NewsCollection";
+import LoginPage from "./components/LoginPage";
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -43,6 +44,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "/", element: <HomeContent /> },
       { path: "404", element: <NotFound /> },
       { path: "home", element: <HomeContent /> },
+      { path: "login", element: <LoginPage/> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
       { path: "job/preview", element: <PostJob /> },
