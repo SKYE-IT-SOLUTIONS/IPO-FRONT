@@ -180,10 +180,10 @@ function NavBar(props) {
                 navigate("/home");
               }}
             >
-              <DropItems href="/#VandM" id="bg-custom-3">
+              <DropItems href="" id="bg-custom-3">
                 Vision and Mission
               </DropItems>
-              <DropItems href="/#contact" id="bg-custom-3">
+              <DropItems href="" id="bg-custom-3">
                 Our Proud Partners
               </DropItems>
               <DropItems id="bg-custom-3" onClick={()=>{
