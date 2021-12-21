@@ -197,45 +197,6 @@ function NavBar(props) {
             </NavDropdown>
 
             <NavDropdown
-              title={<NavTitle>Related Links</NavTitle>}
-              id="collasible-nav-dropdown"
-              show={showRL}
-              onMouseEnter={() => showDropdown("Related Links")}
-              onMouseLeave={() => hideDropdown("Related Links")}
-              onClick={() => {
-                console.log("show");
-              }}
-            >
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/alumni/index.html"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Alumini Association
-              </DropItems>
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Faculty of Agriculture
-              </DropItems>
-              <DropItems
-                href="https://www.ruh.ac.lk/"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                University of Ruhuna
-              </DropItems>
-              <DropItems
-                href="http://documents.gov.lk/en/gazette.php"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Government Gazzet
-              </DropItems>
-            </NavDropdown>
-            <NavDropdown
               title={<NavTitle>Industrial Relationships</NavTitle>}
               id="collasible-nav-dropdown"
               show={showIR}
@@ -291,6 +252,45 @@ function NavBar(props) {
               </DropItems>
               <DropItems href="/product" id="bg-custom-3">
                 Contact Us
+              </DropItems>
+            </NavDropdown>
+            <NavDropdown
+              title={<NavTitle>Related Links</NavTitle>}
+              id="collasible-nav-dropdown"
+              show={showRL}
+              onMouseEnter={() => showDropdown("Related Links")}
+              onMouseLeave={() => hideDropdown("Related Links")}
+              onClick={() => {
+                console.log("show");
+              }}
+            >
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/alumni/index.html"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Alumini Association
+              </DropItems>
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Faculty of Agriculture
+              </DropItems>
+              <DropItems
+                href="https://www.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                University of Ruhuna
+              </DropItems>
+              <DropItems
+                href="http://documents.gov.lk/en/gazette.php"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Government Gazzet
               </DropItems>
             </NavDropdown>
           </Nav>

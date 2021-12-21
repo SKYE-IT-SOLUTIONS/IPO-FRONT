@@ -90,6 +90,7 @@ const routes = (isAuthenticated,userRole) => [
       {path: "dashboard", element: <h1>Profile view of student</h1>},
       {path: "news", element: <h1>News List of student</h1>},
       {path: "job", element: <h1>Job list of student</h1> },
+      {path: "services", element: <h1>Student Services</h1> },
       {path: "submitCv", element: <SubmitCv /> },
       {path: "feedback", element: <h1>Feedback view of student</h1>},
       {path: "settings", element: <h1>Student Settings</h1>},

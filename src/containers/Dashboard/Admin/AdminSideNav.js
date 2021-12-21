@@ -1,21 +1,25 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
 
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
   height: 900px;
-  width: ${(props) => (props.active ? "285px" : "82px")};
+  min-width: 60px;
+  width: ${(props) => (props.active ? "285px" : "70px")};
   overflow: hidden;
   transition: all 0.5s ease;
 `;
 const SideNavBarContainer = styled.div`
   position: relative;
+  z-index: 999;
   left: 0;
   height: 100%;
-  width: ${(props) => (props.active ? "240px" : "82px")};
+  width: ${(props) => (props.active ? "240px" : "70px")};
   background-color: ${(props) => (props.color ? props.color : "#11101d")};
   padding: 6px 16px;
   transition: all 0.5s ease;
@@ -27,7 +31,8 @@ const NavHeder = styled.div`
   width: 100%;
   align-items: center;
   opacity: ${(props) => (props.active ? "1" : "0")};
-  pointer-events: none;
+  cursor: pointer;
+  /* pointer-events: none; */
   transition: all 0.5s ease;
 `;
 const NavHeaderIcon = styled.i`
@@ -49,6 +54,10 @@ const MenuIcon = styled.i`
   text-align: center;
   line-height: 50px;
   transform: translateX(-50%);
+
+  @media (max-width: 300px) {
+    display: none;
+  }
 `;
 const NavBody = styled.ul`
   margin-top: 15px;
@@ -114,6 +123,8 @@ const NavListItemTooltip = styled.span`
 `;
 const AdminSideNav = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [active, setActive] = useState(true);
 
   function handleResize() {
@@ -131,7 +142,7 @@ const AdminSideNav = () => {
         <SideNavBarContainer active={active} >
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
-            <NavHeaderName>Dashboard</NavHeaderName>
+            <NavHeaderName onClick={() => navigate("dashboard")}>Dashboard</NavHeaderName>
           </NavHeder>
           <MenuIcon
             className="bx bx-menu"
@@ -187,6 +198,21 @@ const AdminSideNav = () => {
               </NavListLink>
               <NavListItemTooltip active={active}>Settings</NavListItemTooltip>
             </NavListItem>
+
+            <NavListItem>
+              <NavListLink  onClick={ () => {
+                          dispatch(setUserLoggedIn("SSNB"));
+                          dispatch(setUserRole(""));
+                          dispatch(setUserId(""));
+                          navigate("/home");
+                      }}>
+                <NavListItemIcon className="bx bx-log-out"></NavListItemIcon>
+                <NavListItemName active={active}  href="/"
+                     >Logout</NavListItemName>
+              </NavListLink>
+              <NavListItemTooltip active={active}>Logout</NavListItemTooltip>
+            </NavListItem>
+
           </NavBody>
         </SideNavBarContainer>
       </Body>
