@@ -186,7 +186,7 @@ function NavBar(props) {
               </DropItems>
               <DropItems id="bg-custom-3" onClick={()=>{
                 console.log("Clicked News");
-                navigate("/allNews")}}>
+                navigate("allNews")}}>
                 News
               </DropItems>
               <DropItems href="/#contact" id="bg-custom-3">
