@@ -63,7 +63,7 @@ function NavBar(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authService = new AuthServices();
+  // const authService = new AuthServices();
 
   const current_theme = theme ? light : dark;
 
@@ -180,16 +180,18 @@ function NavBar(props) {
                 navigate("/home");
               }}
             >
-              <DropItems href="/#VandM" id="bg-custom-3">
+              <DropItems href="" id="bg-custom-3">
                 Vision and Mission
               </DropItems>
-              <DropItems href="/#contact" id="bg-custom-3">
+              <DropItems href="" id="bg-custom-3">
                 Our Proud Partners
               </DropItems>
-              <DropItems href="/#news" id="bg-custom-3">
+              <DropItems id="bg-custom-3" onClick={()=>{
+                console.log("Clicked News");
+                navigate("/allNews")}}>
                 News
               </DropItems>
-              <DropItems href="/#news" id="bg-custom-3">
+              <DropItems href="/#contact" id="bg-custom-3">
                 Contact Us
               </DropItems>
             </NavDropdown>

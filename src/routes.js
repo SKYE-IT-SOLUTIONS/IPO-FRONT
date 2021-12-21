@@ -61,7 +61,7 @@ const routes = (isAuthenticated,userRole) => [
   },
   {
     path: "/admin",
-    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) || true ? <AdminLayout /> : <Navigate to="/login" />,
+    element: (isAuthenticated && userRole === "ROLE_ADMIN" ) ? <AdminLayout /> : <Navigate to="/login" />,
     children: [
       { path: "dashboard", element:  <AdminDashboard/> },
       { path: "user", element: <UserListOfAdmin />},
@@ -72,6 +72,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: "news/preview", element: <NewsView /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "job", element: <SelectJob/> },
+      { path: "job/:id", element: <PostJob /> },
+      { path: "job/preview", element: <PostJob /> },
       { path: "job/list", element: <JobListOfAdmin/> },
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },

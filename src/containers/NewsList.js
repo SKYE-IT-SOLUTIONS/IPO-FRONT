@@ -24,6 +24,7 @@ function NewsList() {
         setError(error);
         console.log(error);
       }
+      setIsLoading(false);
     };
     // fetchNews();
 
@@ -35,7 +36,7 @@ function NewsList() {
     //   }).catch(e=>console.log(e));
     // };
     fetchNews();
-    setIsLoading(false);
+    
   }, []);
   console.log("error", error);
   return (

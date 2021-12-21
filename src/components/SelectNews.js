@@ -93,13 +93,15 @@ const ImageMarked = styled('span')(({ theme }) => ({
   left: 'calc(50% - 9px)',
   transition: theme.transitions.create('opacity'),
 }));
+
 const AnimatedText = styled('h1')`
   font-family: ${({ font }) => font.general};
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
-
+  padding: 25px 0;
 `;
+
 export default function ButtonBases() {
     const { fonts } = useContext(ThemeContext);
     const navigate = useNavigate();

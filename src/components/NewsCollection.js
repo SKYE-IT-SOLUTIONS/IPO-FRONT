@@ -33,7 +33,7 @@ function NewsCollection() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Container fluid>
+        <Container>
           <Row>
             {newsData &&
               newsData.map((news, index) => (
