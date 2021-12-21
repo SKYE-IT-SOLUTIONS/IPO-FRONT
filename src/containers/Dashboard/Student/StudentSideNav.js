@@ -10,9 +10,14 @@ const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
+<<<<<<< HEAD
   min-height: 615px;
   height: heighty;
   min-width: 40px;
+=======
+  height: 750px;
+  width: ${(props) => (props.active ? "285px" : "82px")};
+>>>>>>> 5d288c5d3d0a59a4ae53fa1a493278d438e8d32c
   overflow: hidden;
   transition: all 0.5s ease;
   @media only screen and (min-width: 1024px) {

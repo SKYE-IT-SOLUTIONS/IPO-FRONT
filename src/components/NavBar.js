@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import Login from "./Login";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLoggedIn, setUserRole, setUserId } from "../store/userSlice";
 // import Cookies from 'js-cookie'
@@ -58,7 +57,6 @@ const Nav1 = styled(Nav)`
 `;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const [modalShow, setModalShow] = React.useState(false);
   const [isLogged, setisLogged] = useState(false);
 
   const navigate = useNavigate();
@@ -243,12 +241,12 @@ function NavBar(props) {
               onClick={() => {
                 console.log("show");
               }}
-            ><DropItems href="/product" id="bg-custom-3" onClick={()=>{navigate("/home")}}>
+            ><DropItems id="bg-custom-3" onClick={()=>{navigate("/login")}}>
             Send a CV
             </DropItems>
 
               <NavDropdown
-                  title={<NavSubTitle>Request a training<br/>session</NavSubTitle>}
+                  title={<NavSubTitle onClick={()=>{navigate("/login")}}>Request a training<br/>session</NavSubTitle>}
                   id="collasible-nav-dropdown"
                   drop="end"
                   show={showIRR}
@@ -259,30 +257,30 @@ function NavBar(props) {
                   }}
                   style={{ fontSize: "10px", paddingLeft: "2px" }}
                 >
-                  <NavDropdown.Item href="/vacancy" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
                   How to prepare a CV
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
                   Facing an interview
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
                   Findinng a job
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
                   Personal development
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item id="bg-custom-3" onClick={()=>{navigate("login")}}>
                   Finding scholarships
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
                   Foreign Employment
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/survey" id="bg-custom-3">
+                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
                   Plot the career path
                   </NavDropdown.Item>
                 </NavDropdown>
               
-              <DropItems href="/product" id="bg-custom-3">
+              <DropItems href="/product" id="bg-custom-3" onClick={()=>{navigate("login")}}>
               Register to Internship
               </DropItems>
             </NavDropdown>
@@ -358,7 +356,6 @@ function NavBar(props) {
                     drop="start"
                     title={icon}
                     show={showIcon}
-                    drop="start"
                     onMouseEnter={() => showDropdown("Icon")}
                     onMouseLeave={() => hideDropdown("Icon")}
                     onClick={() => {
@@ -403,19 +400,13 @@ function NavBar(props) {
                 <RegisterTag onClick={() => {
                     navigate("/register");
                   }}>Register</RegisterTag>
-                <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+                <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
                 </span>
               )}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Login
-        history={props.history}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-       <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
     </CustomNavBar>
 
   );

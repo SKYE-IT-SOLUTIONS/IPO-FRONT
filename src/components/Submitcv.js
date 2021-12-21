@@ -81,7 +81,7 @@ function Submitcv() {
         </Col>
         <Col md={6} sm={12}>
           <Row>
-            <h3>CV</h3>
+            {/* <h3>CV</h3> */}
             <FileUpload
                accept=".jpg,.png,.jpeg"
                label="News Image(s)"

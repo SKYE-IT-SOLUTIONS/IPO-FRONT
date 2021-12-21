@@ -58,6 +58,7 @@ export const onSubmitNoAuth = async (DATA_URL, data) => {
   console.log("onSubmitNoAuth");
   await authRequest(config)
     .then(async ({ data, error }) => {
+      console.log("run subs")
       if (!error) {
         if (data.status === 200) {
           console.log("success");
@@ -89,6 +90,8 @@ export const onUpdate = async (DATA_URL, id, data) => {
   };
   await authRequest(config)
     .then(async ({ data, error }) => {
+      console.log("data", data);
+      console.log("error", error);
       if (!error) {
         if (data.status === 201) {
           result = { status: true,data:data?.data, error: null };
@@ -124,8 +127,9 @@ export const onDelete = async (DATA_URL, id) => {
   };
   await authRequest(config)
     .then(async ({ data, error }) => {
+      console.log("data", data);
       if (!error) {
-        if (data.status === 204) {
+        if (data.status === 202) {
           result = { status: true,data:data?.data, error: null };
         } else if (data.status === 401) {
           const { status, error } = await refreshAccessToken(

@@ -30,6 +30,7 @@ const NewsList = () => {
     const fetchNews = async () => {
       const { status, data, error } = await dataService.handleGetGlobalNews();
       if (status) {
+        console.log("In Admin : ",data)
         setNewsList(data);
       } else {
         setError(error);
@@ -103,8 +104,16 @@ const NewsList = () => {
       sortable: false,
       width: 70 + 20,
       disableClickEventBubbling: true,
-      renderCell: () => {
-        return <DeleteIcon sx={{ fontSize: 30 }} />;
+      renderCell: ({id,...params}) => {
+        return <DeleteIcon sx={{ fontSize: 30 }} onClick={async ()=>{
+          const {status, error} = await dataService.handleDeleteNews(id);
+          if(status){
+            setNewsList(newsList.filter(news => news.id !== id));
+            navigate("/admin/news/list")
+          }else{
+            console.log(error);
+          }
+          }}/>;
       },
     },
   ];

@@ -25,7 +25,7 @@ const Body = styled.div`
     width: ${(props) => (props.active ? "285px" : "85px")};
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    width: ${(props) => (props.active ? "285px" : "75px")};
+    width: ${(props) => (props.active ? "285px" : "90px")};
   }
   @media (max-width: 300px) {
     width: ${(props) => (props.active ? "285px" : "40px")};
