@@ -94,6 +94,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
   transition: theme.transitions.create('opacity'),
 }));
 const AnimatedText = styled('h1')`
+  font-family: ${({ font }) => font.general};
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
@@ -105,7 +106,7 @@ export default function ButtonBases() {
 
   return (
       <OuterDiv font={fonts}>
-          <AnimatedText>Choose You Choice</AnimatedText>
+          <AnimatedText font={fonts}>Choose You Choice</AnimatedText>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
       {images.map((image) => (
         <ImageButton
