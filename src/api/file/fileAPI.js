@@ -1,9 +1,8 @@
-import { getErrorMessage, postRequest } from "../utils";
-import { FILE_UPLOAD_URL } from "../../config/urls";
+import { getErrorMessage, postRequest,authRequest } from "../utils";
 
 var result = { status: false, error: null, fileURL: null };
 
-export const onFileUpload = async (file) => {
+export const onFileUpload = async (FILE_UPLOAD_URL, file) => {
   console.log("onFileUpload Triggered");
 
   const formData = new FormData();
@@ -18,9 +17,7 @@ export const onFileUpload = async (file) => {
   await postRequest(FILE_UPLOAD_URL, formData, config)
     .then(({ data, error }) => {
       if (!error) {
-        const { fileUrl, message } = data.data;
-        console.log(message);
-        result = { status: true, error: null, fileURL: fileUrl };
+        result = { status: true, error: null, data: data?.data };
       } else {
         result = {
           status: false,
@@ -37,4 +34,26 @@ export const onFileUpload = async (file) => {
   return result;
 };
 
-export const onFileDelete = async (fileId) => {}
+export const onFileDelete = async (FILE_URL) => {
+  var config = {
+    method: "DELETE",
+    url: FILE_URL,
+  };
+  await authRequest(config)
+    .then(async ({ data, error }) => {
+      if (!error) {
+        if (data.status === 200) {
+          result = { status: true,data:null, error: null };
+        }else if(data.status === 204) {
+          console.log("success");
+          result = { status: true,data:null, error: null };
+        }
+      } else {
+        result = { status: false,data:null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      result = { status: false,data:null, error: getErrorMessage(error) };
+    });
+  return result;
+}

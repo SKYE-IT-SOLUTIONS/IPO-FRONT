@@ -59,6 +59,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/sendMail', element: <SendMail/> },
       { path: 'selectNews', element: <SelectNews/> },
       { path: 'allNews', element: <NewsCollection/> },
+      // { path: 'test', element: <UploadImage/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],
@@ -79,6 +80,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "job/:id", element: <PostJob /> },
       { path: "job/preview", element: <PostJob /> },
       { path: "job/list", element: <JobListOfAdmin/> },
+      { path: 'editJob/:id', element: <h1>Edit Job</h1>},
       { path: "job/addJob", element: <AddJobPost /> },
       { path: "company", element: <CompanyListOfAdmin /> },
       { path: "settings", element:  <EditContact />},//<h1>Admin Settings</h1>

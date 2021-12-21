@@ -15,6 +15,7 @@ import { styled as muistyled } from "@mui/material/styles";
 import FileUpload from "./fileupload/FileUpload";
 import { useNavigate } from "react-router-dom";
 import DataService from "../services/DataService";
+import FileService from "../services/FileService";
 
 import {
   setTitle,
@@ -125,6 +126,7 @@ const PalestherImage = styled.img`
 function AddNewsPost() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const fileService = new FileService();
 
   const defaultNews = "https://images.unsplash.com/photo-1560177112-fbfd5fde9566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
 
@@ -145,7 +147,7 @@ function AddNewsPost() {
 
   const [contentList, setContentList] = useState([]);
 
-  const [imageUrl, setImageUrl] = useState(defaultNews);
+  const [imageUrl, setImageUrl] = useState("");
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -177,11 +179,9 @@ function AddNewsPost() {
   useEffect(() => {
     setIsLoading(true);
     if (
-      storeTitle === null &&
-      storeDescription.length === 0
-    ) {
-      dispatch(setImage(defaultNews))
-    }else{
+      storeTitle !== null ||
+      storeDescription.length !== 0
+    ){
       setNewsTitle(storeTitle);
       setContentList(storeDescription);
       setImageUrl(storeImage);
@@ -194,9 +194,17 @@ function AddNewsPost() {
     if (files.length !== 0) {
       setFiles(files);
       console.log(files[0]);
-      const dataUrl = await setImageBuffer(files[0]);
-      dispatch(setImage(dataUrl));
-      setImageUrl(dataUrl);
+      
+      const {status,error,data} = await fileService.handleCreate(files[0]);
+      
+    if (status) {
+      console.log("fileURL", data?.fileUrl);
+      dispatch(setImage(data?.fileUrl));
+      setImageUrl(data?.fileUrl);
+    }else{
+      console.log("error", error);
+    }
+      
     }
   };
 
@@ -236,7 +244,7 @@ function AddNewsPost() {
                 updateFilesCb={updateUploadedFiles}
               />
               {/* <ImageInput type="file"/> */}
-              {imageUrl && <PalestherImage image={imageUrl} />}
+              <PalestherImage image={imageUrl?imageUrl:defaultNews} />
               <br />
               <Title>Description</Title>
               <ul>
