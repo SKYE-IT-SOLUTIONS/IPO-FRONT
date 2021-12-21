@@ -34,7 +34,7 @@ import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
 import EditNews from './components/EditNews';
 import NewsCollection from "./components/NewsCollection";
-import UploadImage from "./test/UploadImage";
+import LoginPage from "./components/LoginPage";
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -44,6 +44,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "/", element: <HomeContent /> },
       { path: "404", element: <NotFound /> },
       { path: "home", element: <HomeContent /> },
+      { path: "login", element: <LoginPage/> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
       { path: "job/preview", element: <PostJob /> },
@@ -56,7 +57,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/sendMail', element: <SendMail/> },
       { path: 'selectNews', element: <SelectNews/> },
       { path: 'allNews', element: <NewsCollection/> },
-      { path: 'test', element: <UploadImage/> },
+      // { path: 'test', element: <UploadImage/> },
       { path: "*", element: <Navigate to="/404" /> },
       
     ],

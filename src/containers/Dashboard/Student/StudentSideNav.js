@@ -8,7 +8,7 @@ const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
-  height: 590px;
+  height: 750px;
   width: ${(props) => (props.active ? "285px" : "82px")};
   overflow: hidden;
   transition: all 0.5s ease;

@@ -129,7 +129,6 @@ function StudentRegister() {
             <Input
             value={reg}
               type="text"
-              value={reg}
               onChange={(e) => {
                 let val = e.target.value
                 setReg(val)
@@ -142,7 +141,6 @@ function StudentRegister() {
             <Input
             value={name}
               type="text"
-              value={name}
               onChange={(e) => {
                 let val = e.target.value
                 setName(val)
@@ -155,7 +153,6 @@ function StudentRegister() {
             <Input
              value={password}
               type="password"
-              value={password}
               onChange={(e) => {
                 let val = e.target.value
                 setPasswordInfo(Validator(val,patternPassword,"Password"))
