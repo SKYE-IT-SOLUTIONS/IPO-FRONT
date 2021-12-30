@@ -131,13 +131,13 @@ const AdminDashboard = () => {
   return (
     <div>
               <MainRow>
-                <MainCol md={4} sm={6} xs={8}>
+                <MainCol md={4} sm={12} xs={8}>
                   <MainPaper elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></MainPaper>
                 </MainCol>
-                <MainCol md={4} sm={6} xs={8}>
+                <MainCol md={4} sm={12} xs={8}>
                   <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></MainPaper>
                 </MainCol>
-                <MainCol md={4} sm={6} xs={8}>
+                <MainCol md={4} sm={12} xs={8}>
                 <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Users</p><Pie data={data2} /></MainPaper>
                 </MainCol>
               </MainRow>
