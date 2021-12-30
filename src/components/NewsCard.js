@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Col} from './CommonComponents'
 import { useNavigate } from "react-router-dom";
+import {sliceParagraph} from '../utils/sliceParagraph'
 
 const NewsDiv = styled(Col)`
   :hover {
@@ -63,10 +64,10 @@ function NewsCard({news}) {
   const { fonts } = useContext(ThemeContext)
   const characters = 150
 
-  const sliceParagraph = (para) => {
-    let new_para = para.substr(0,characters)
-    return new_para.concat("...")
-  }
+  // const sliceParagraph = (para) => {
+  //   let new_para = para.substr(0,characters)
+  //   return new_para.concat("...")
+  // }
 
   const handleLoad = () => {
     navigate(`/news/${news?.id}`)
@@ -82,7 +83,7 @@ function NewsCard({news}) {
           </NewsTitle>
           <NewsContent>
             {news?.description[0]?.length > characters
-            ? sliceParagraph(news?.description[0])
+            ? sliceParagraph(news?.description[0],characters)
             : news?.description[0]
             }
           </NewsContent>

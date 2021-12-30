@@ -36,6 +36,8 @@ import EditNews from './components/EditNews';
 import EditJob from './components/EditJob';
 import NewsCollection from "./components/NewsCollection";
 import LoginPage from "./components/LoginPage";
+import Achievement from "./components/Achievement";
+import AchievementView from "./components/AchievementView";
 
 const routes = (isAuthenticated,userRole) => [
   {
@@ -59,6 +61,8 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'register/sendMail', element: <SendMail/> },
       { path: 'selectNews', element: <SelectNews/> },
       { path: 'allNews', element: <NewsCollection/> },
+      { path: 'achievements', element: <Achievement/> },
+      { path: 'achievement/:id', element: <AchievementView/> },
       // { path: 'test', element: <UploadImage/> },
       { path: "*", element: <Navigate to="/404" /> },
       
