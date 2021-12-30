@@ -33,6 +33,7 @@ import StudentRegister from './components/StudentRegister';
 import CompanyRegister from './components/CompanyRegister';
 import SendMail from './components/SendMail';
 import EditNews from './components/EditNews';
+import EditJob from './components/EditJob';
 import NewsCollection from "./components/NewsCollection";
 import LoginPage from "./components/LoginPage";
 import Requestworkshop from "./components/Requestworkshop";
@@ -48,6 +49,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "login", element: <LoginPage/> },
       { path: "jobs", element: <JobList /> },
       { path: "job/:id", element: <PostJob /> },
+      { path: "editJob/:id", element: <EditJob/> },
       { path: "job/preview", element: <PostJob /> },
       { path: "news/:id", element: <NewsView /> },
       { path: "spinner", element: <Spinner /> },
