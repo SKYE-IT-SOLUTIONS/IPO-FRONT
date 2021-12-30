@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {sliceParagraph} from '../utils/sliceParagraph'
+import { useNavigate } from "react-router-dom";
 
 const AchContainer = styled(Container)`
     font-family: ${({ font }) => font.general};
@@ -121,6 +122,7 @@ const data = [
 
 function Achievement() {
     const { fonts } = useContext(ThemeContext);
+    const navigate = useNavigate();
     const characters = 200
 
   return (
@@ -144,7 +146,7 @@ function Achievement() {
                     : value.description
                 }
                 <Read onClick={() => {
-                        console.log(value.id)
+                        navigate('/achievement/1')
                     }}> Read more</Read>
               </Content>
             </Col>

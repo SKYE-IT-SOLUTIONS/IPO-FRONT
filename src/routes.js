@@ -34,6 +34,7 @@ const LoginPage = React.lazy(()=>import("./components/LoginPage"));
 const RegistrationDashboard = React.lazy(()=>import("./components/Register"));
 const Achievement = React.lazy(()=>import("./components/Achievement"));
 const AchievementView = React.lazy(()=>import("./components/AchievementView"));
+const Requestworkshop = React.lazy(()=>import("./components/Requestworkshop"));
 
 //Include the view enhance the user experience, use suspense and fallback
 const View = (props)=>{
@@ -90,6 +91,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "company", element: <View><CompanyListOfAdmin/></View> },
       { path: "settings", element:  <View><EditContact /></View>},//<h1>Admin Settings</h1>
       { path: "editContact", element: <View><EditContact /></View>},//<h1>Admin Settings</h1>
+      { path: "requestWorkshop", element: <View><Requestworkshop/></View>},
       { path: "/admin", element: <Navigate to="/404" /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
