@@ -8,7 +8,7 @@ import {
 } from "../api/data/dataAPI";
 
 const NEWS_DATA_URL = "/news";
-const GLOBAL_NEWS_DATA_URL = "news/global";
+const GLOBAL_NEWS_DATA_URL = "news?visibility=global";
 const JOB_DATA_URL = "/job";
 const CONTACT_US ='/contactUs'
 const SUBSCRIBE_URL ='/email/add'
