@@ -1,9 +1,18 @@
 import { loginIn, logOut,isUser,signUp } from "../api/auth/authAPI";
 
+const COMPANY_SIGNUP = "/signup?profile=company";
+const STUDENT_SIGNUP = "/signup?profile=student";
+
 export default class AuthServices {
 
-  handleSignUp = async (credentials) => {
-    const response = await signUp(credentials);
+  handleCompanySignUp = async (credentials) => {
+    const response = await signUp(credentials,COMPANY_SIGNUP);
+    return response;
+
+  };
+
+  handleStudentSignUp = async (credentials) => {
+    const response = await signUp(credentials,STUDENT_SIGNUP);
     return response;
 
   };

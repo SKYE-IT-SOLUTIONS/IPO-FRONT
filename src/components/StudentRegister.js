@@ -104,7 +104,7 @@ function StudentRegister() {
 
   const handleSubmit = async (credentials) => {
     setIsLoading(true);
-    const {status,data,error}  = await authServices.handleSignUp(credentials);
+    const {status,data,error}  = await authServices.handleStudentSignUp(credentials);
     if(status){
       sessionStorage.setItem("email",data?.email);
       navigate("/register/sendMail");
@@ -157,6 +157,7 @@ function StudentRegister() {
                 let val = e.target.value
                 setPasswordInfo(Validator(val,patternPassword,"Password"))
                 setpassword(e.target.value)
+                setMatchPassword(passwordMatcher(val,confirmPassword))
               }}
             />
             {passwordInfo.error && <Error>{passwordInfo.error}</Error>}

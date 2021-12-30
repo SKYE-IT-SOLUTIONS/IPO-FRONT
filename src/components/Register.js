@@ -133,7 +133,7 @@ function Register() {
                     alt=""
                     src={Company}
                     />
-                    <Button disabled submit>Company</Button>
+                    <Button submit>Company</Button>
                 </WrapperDiv>
                 </Paper>
                 </Col>

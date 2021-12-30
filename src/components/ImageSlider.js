@@ -5,6 +5,9 @@ import { Carousel } from "react-bootstrap";
 //in app imports-presentational
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
+import Image1 from "../assets/UIpartnership4.jpg"
+import Image2 from "../assets/Faculty 001.jpg"
+import Image3 from "../assets/Job Fair 001.jpg"
 
 const ImageTag = styled.img`
     display:block;
@@ -120,19 +123,21 @@ function ImageSlider() {
           
           <Carousel.Item>
             <ImageTag
-              src="https://images.unsplash.com/photo-1594686948539-2709857f7066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+              src={Image1}
               alt="Second slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag 
-              src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            src={Image2}
+              // src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://images.unsplash.com/photo-1506377872008-6645d9d29ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            src={Image3}
+              // src="https://images.unsplash.com/photo-1506377872008-6645d9d29ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
               alt="Third slide"
             />
           </Carousel.Item>
