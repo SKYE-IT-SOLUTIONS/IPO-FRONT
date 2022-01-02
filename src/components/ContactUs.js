@@ -1,7 +1,9 @@
-import React, { useEffect,useState,useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
+import DataService from "../services/DataService";
+import Spinner from "../components/Spinner";
 
 const ContactHeader = styled.div`
   display: flex;
@@ -15,8 +17,8 @@ const ContactRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-bottom: 5px;  
-  margin:auto;
+  padding-bottom: 5px;
+  margin: auto;
 `;
 
 const DetailCol = styled(Col)`
@@ -28,10 +30,10 @@ const ContainerDiv = styled(Col)`
   display: "flex";
   flex-direction: column;
   justify-content: center;
-  background: ${({bg}) => bg};
-  font-family: ${({font}) => font.general};
+  background: ${({ bg }) => bg};
+  font-family: ${({ font }) => font.general};
   color: white;
-  padding:15px 0px;
+  padding: 15px 0px;
   /* width: 100%; */
   @media only screen and (min-width: 1400px) {
     font-size: 14px;
@@ -55,45 +57,58 @@ const ContainerDiv = styled(Col)`
   }
 `;
 
-const arrayMap = (data,index,ob) => {
-  return(
-  <ContactRow key={index}>
-        <DetailCol>{data}</DetailCol>
-        <Col>
-          <div style={{paddingLeft:"2px"}}>
-            {ob[data]}
-          </div>
-        </Col>
-    </ContactRow>);
-}
+const arrayMap = (data, index, ob) => {
+  return (
+    <ContactRow key={index}>
+      <DetailCol>{data}</DetailCol>
+      <Col>
+        <div style={{ paddingLeft: "2px" }}>{ob[data].length > 1 ? ob[data].concat("\n"):ob[data]}</div>
+      </Col>
+    </ContactRow>
+  );
+};
 
 function ContactUs(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [contactDetails, setContactDetails] = useState([]);
+  const [keyArray, setKeyArray] = useState(null);
+  const [error, setError] = useState("");
 
- const [keyArray, setKeyArray] = useState(null);
- const { theme, light, dark, fonts } = useContext(ThemeContext);
- const them = theme ? light : dark;
+  const dataService = new DataService();
 
-  const contactData ={
-    "Address":<>Industrial Placement Office <br />Dean's Office <br />Faculty of Agricultur<br />University of Ruhuna <br />Mapalana, Kamburupitiya <br />Sri Lanka</>,
-    "Telephone":"+94(0)41 229 2200 Ext 361",
-    "Fax":"+94(0)41 229 2384",
-    "Email":"ipo@agri.ruh.ac.lk",
-    "Industrial Placement Officer":"WMCJ Wijekoon (BSc Agric)"
-    
-  }
   useEffect(() => {
-    const keyArray = props.contactData ? Object.keys(props.contactData) : Object.keys(contactData);
-    setKeyArray(keyArray)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    setIsLoading(true);
+    const fetchNews = async () => {
+      const { status, data, error } =
+        await dataService.handleGetContactDetails();
+      if (status) {
+        console.log("In Admin : ", data);
+        setContactDetails({"Address":"","Email":data?.email,"Phone":data.telephone,"Fax":data.fax,"Officer":data.officer});
+        setKeyArray(Object.keys(contactDetails));
+      } else {
+        setError(error);
+        console.log(error);
+      }
+      setIsLoading(false);
+    };
+    fetchNews();
+  }, []);
 
-  return (
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
+  const them = theme ? light : dark;
+
+
+  return isLoading ? (
+    <Spinner/>
+  ) : (
     <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
-        <ContactHeader>Contact Us</ContactHeader>
+      <ContactHeader>Contact Us</ContactHeader>
 
-        {keyArray ? keyArray.map((data,index) => {
-          return arrayMap(data,index,contactData);
-        }):""}
+      {keyArray
+        ? keyArray.map((data, index) => {
+            return arrayMap(data, index, contactDetails);
+          })
+        : ""}
     </ContainerDiv>
   );
 }
