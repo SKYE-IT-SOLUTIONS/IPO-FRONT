@@ -8,6 +8,7 @@ import { Simple_Validator, Validator } from "../utils/validation";
 import { patternMail } from "../config/pattern";
 import CustomSnackBar from "./CustomSnackBar";
 import DataService from "../services/DataService";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const SubscriptDiv = styled(Col)`
   display: flex;
@@ -59,6 +60,11 @@ const Title =  styled.h1`
   font-size: 25px;
   color:#DC281E;
 `
+const RECAPTCHA =styled(ReCAPTCHA)`
+  display: flex;
+  justify-content: center;
+`;
+
 
 function Subscription() {
   const { fonts } = useContext(ThemeContext);
@@ -75,6 +81,7 @@ function Subscription() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const [severity, setSeverity] = useState("");
+  const [recaptcha,setRecaptcha] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -105,6 +112,11 @@ function Subscription() {
       }
       setisLoading(false)
     }
+  }
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setRecaptcha(true);
   }
 
   return (
@@ -139,9 +151,13 @@ function Subscription() {
       />
       {emailInfo !== null && <Error>{emailInfo.error}</Error>}
       <EmailInfo>We'll never share your email with anyone else.</EmailInfo>
+      <RECAPTCHA
+            sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
+            onChange={onChange}
+      />
       <SubBttn
         submit
-        disabled={isLoading || !nameInfo.status || !emailInfo.status}
+        disabled={isLoading || !nameInfo.status || !emailInfo.status || !recaptcha}
         onClick={handleSubscribe}
       >
         SUBMIT

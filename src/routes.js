@@ -35,6 +35,7 @@ const RegistrationDashboard = React.lazy(()=>import("./components/Register"));
 const Achievement = React.lazy(()=>import("./components/Achievement"));
 const AchievementView = React.lazy(()=>import("./components/AchievementView"));
 const Requestworkshop = React.lazy(()=>import("./components/Requestworkshop"));
+const GoogleCaptcha = React.lazy(()=>import("./components/Captcha"));
 
 //Include the view enhance the user experience, use suspense and fallback
 const View = (props)=>{
@@ -66,7 +67,9 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'achievements', element: <View><Achievement/></View> },
       { path: 'achievement/:id', element: <View><AchievementView/></View> },
       // { path: 'test', element: <UploadImage/> },
+      { path: 'captcha', element: <View><GoogleCaptcha/></View> },
       { path: "*", element: <Navigate to="/404" /> },
+
       
     ],
   },

@@ -7,7 +7,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend,
     Title,
     } from 'chart.js';
 
-import faker from 'faker';
 import { Pie} from 'react-chartjs-2';
 import { Bar} from 'react-chartjs-2';
 import { Paper, Stack } from '@mui/material';
