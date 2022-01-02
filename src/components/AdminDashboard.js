@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useContext, useState, useEffect } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend,
     CategoryScale,
     LinearScale,
@@ -14,9 +14,30 @@ import { Paper, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import { Container, Row, Col } from "../components/CommonComponents";
+import { ThemeContext } from "../contexts/ThemeContext";
+import editContact from '../assets/edit-contact.svg';
+import { Image } from 'react-bootstrap';
+import Card from './Statcard';
+import Users from '../assets/user.svg';
+import News from '../assets/News-rafiki.svg';
+import { Icon } from '@iconify/react';
+
+const Contactcontainer=styled(Container)`
+    font-family: ${({ font }) => font.general};
+    padding: 0px 10px;
+`;
+const StyledImg =styled('img')`
+  padding: auto;
+  height: 100%;
+  width: 100%;
+`;
+const Title1 =styled('h1')`
+    text-align: center;
+`;
 
 const MainRow=styled(Row)`
   justify-content: center;
+  padding: 10px;
   
 `;
 const MainCol=styled(Col)`
@@ -25,6 +46,7 @@ const MainCol=styled(Col)`
 `;
 const MainPaper=styled(Paper)`
    justify-content: center;
+   
 `;
 
 
@@ -128,20 +150,35 @@ export const data2 = {
   };
 
 const AdminDashboard = () => {
+  const { fonts } = useContext(ThemeContext);
   return (
     <div>
-              <MainRow>
-                <MainCol md={4} sm={12} xs={8}>
-                  <MainPaper elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></MainPaper>
-                </MainCol>
-                <MainCol md={4} sm={12} xs={8}>
-                  <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></MainPaper>
-                </MainCol>
-                <MainCol md={4} sm={12} xs={8}>
+        <Contactcontainer font={fonts}>
+            <Title1>View Details</Title1>
+            <MainRow style={{ paddingTop: "15px" }}>
+                <MainCol md={4} sm={6} xs={8}>
                 <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Users</p><Pie data={data2} /></MainPaper>
                 </MainCol>
-              </MainRow>
-        
+                <MainCol md={4} sm={6} xs={8}>    
+                <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></MainPaper>         
+                </MainCol>
+                <MainCol md={4} sm={6} xs={8}>    
+                        <MainPaper elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></MainPaper>         
+                </MainCol>
+            </MainRow>
+            <MainRow style={{ paddingTop: "15px" }}>
+                <MainCol md={4} sm={6} xs={8}>
+                  <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users"/>
+                </MainCol>
+                <MainCol md={4} sm={6} xs={8}>    
+                <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events"/> 
+                </MainCol>
+                <MainCol md={4} sm={6} xs={8}>    
+                <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Post" />    
+                </MainCol>
+            </MainRow>
+           
+        </Contactcontainer>
     </div>
   )
 }

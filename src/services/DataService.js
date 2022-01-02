@@ -10,7 +10,7 @@ import {
 const NEWS_DATA_URL = "/news";
 const GLOBAL_NEWS_DATA_URL = "news?visibility=global";
 const JOB_DATA_URL = "/job";
-const CONTACT_US ='/contactUs'
+const CONTACT_US ='/content'
 const SUBSCRIBE_URL ='/email/add'
 
 
@@ -76,7 +76,7 @@ export default class DataService {
 
   //handle get contact us details
   handleGetContactDetails = async () => {
-    const result = await onGetOne(CONTACT_US);
+    const result = await onGetAll(CONTACT_US);
     return result;
   };
 
