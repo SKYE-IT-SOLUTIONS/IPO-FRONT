@@ -216,6 +216,7 @@ function CompanyRegister() {
                 let val = e.target.value
                 setPasswordInfo(Validator(val,patternPassword,"Password"))
                 setpassword(e.target.value)
+                setMatchPassword(passwordMatcher(val,confirmPassword))
               }}
             />
              {passwordInfo.error && <Error>{passwordInfo.error}</Error>}
