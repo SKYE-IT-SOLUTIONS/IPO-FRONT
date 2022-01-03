@@ -7,6 +7,7 @@ import AdminLayout from './containers/Dashboard/AdminLayout';
 import StudentLayout from './containers/Dashboard/StudentLayout';
 import CompanyLayout from './containers/Dashboard/CompanyLayout';
 
+
 const NotFound = React.lazy(()=>import('./containers/404'));
 const HomeContent = React.lazy(()=>import('./containers/HomeContent'));
 const AddJobPost = React.lazy(()=>import('./components/AddJobPost'));
@@ -39,6 +40,7 @@ const Requesthall = React.lazy(()=>import("./components/Requesthall"));
 const Requestground = React.lazy(()=>import("./components/Requestground"));
 const GoogleCaptcha = React.lazy(()=>import("./components/Captcha"));
 const Feedback = React.lazy(()=>import("./components/Feedback"));
+const NavBarListView = React.lazy(()=>import("./components/NavBarListView"));
 
 //Include the view enhance the user experience, use suspense and fallback
 const View = (props)=>{
@@ -72,6 +74,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "requestWorkshop", element: <View><Requestworkshop/></View>},
       { path: 'requesthall', element: <View><Requesthall/></View> },
       { path: 'requestground', element: <View><Requestground/></View> },
+      { path: 'moreOpt', element: <View><NavBarListView/></View> },
       // { path: 'test', element: <UploadImage/> },
       { path: 'feedback', element: <View><Feedback/></View> },
       { path: 'captcha', element: <View><GoogleCaptcha/></View> },

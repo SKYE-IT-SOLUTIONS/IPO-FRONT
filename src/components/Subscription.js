@@ -116,7 +116,7 @@ function Subscription() {
 
   function onChange(value) {
     console.log("Captcha value:", value);
-    setRecaptcha(true);
+    setRecaptcha(!recaptcha);
   }
 
   return (

@@ -45,12 +45,24 @@ export const signUp = async (credentials,SIGNUP_URL) => {
   console.log("signUp");
   await postRequest(SIGNUP_URL, credentials)
     .then(({ data, error }) => {
-      console.log("signup-data" + data.data);
       if (!error) {
-        console.log("signUp success");
-        result = { status: true,data: data?.data, error: null };
+        if(data.status === 201){
+          // console.log("signup-data" + data.data);
+          console.log("signUp success");
+          result = { status: true,data: data?.data, error: null };
+        }else{
+          console.log("signUp failed");
+          result = { status: false,data: null, error: "error" };
+        }
       } else {
-        result = { status: false,data: null, error: getErrorMessage(error) };
+        console.log(error);
+        if(error.status === 404){
+          console.log("signUp failed-error");
+          result = { status: false,data: null, error: getErrorMessage(error) };
+        }else if(error.status === 400){
+          console.log("signUp failed-errorByAuth");
+          result = { status: false,data: null, error: error.data.message };
+        }
       }
     })
     .catch((error) => {

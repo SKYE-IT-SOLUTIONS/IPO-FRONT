@@ -61,17 +61,35 @@ const arrayMap = (data, index, ob) => {
   return (
     <ContactRow key={index}>
       <DetailCol>{data}</DetailCol>
-      <Col>
-        <div style={{ paddingLeft: "2px" }}>{ob[data].length > 1 ? ob[data].concat("\n"):ob[data]}</div>
-      </Col>
+      {data === "Address" ? (
+        <Col>
+          <div style={{ paddingLeft: "2px" }}>
+            {ob[data][0]}<br/>
+            {ob[data][1]}<br/>
+            {ob[data][2]}<br/>
+            {ob[data][3]}<br/>
+            {ob[data][4]}
+          </div>
+        </Col>
+      ) : (
+        <Col>
+          <div style={{ paddingLeft: "2px" }}>{ob[data]}</div>
+        </Col>
+      )}
     </ContactRow>
   );
 };
 
 function ContactUs(props) {
   const [isLoading, setIsLoading] = useState(false);
-  const [contactDetails, setContactDetails] = useState([]);
-  const [keyArray, setKeyArray] = useState(null);
+  const [contactDetails, setContactDetails] = useState({
+    "Address": "",
+    "Email": "",
+    "Phone": "",
+    "Fax": "",
+    "Officer": "",
+  });
+  const [keyArray, setKeyArray] = useState(["Address","Email","Phone","Fax","Officer"]);
   const [error, setError] = useState("");
 
   const dataService = new DataService();
@@ -83,8 +101,25 @@ function ContactUs(props) {
         await dataService.handleGetContactDetails();
       if (status) {
         console.log("In Admin : ", data);
-        setContactDetails({"Address":"","Email":data?.email,"Phone":data.telephone,"Fax":data.fax,"Officer":data.officer});
-        setKeyArray(Object.keys(contactDetails));
+        const AddFormat2 = [
+          data?.apartNo,
+          data?.line01,
+          data?.line02,
+          data?.line03,
+          data?.city,
+        ];
+        console.log(AddFormat2);
+        
+        let newData = {
+          "Address": AddFormat2,
+          "Email": data?.email,
+          "Phone": data.telephone,
+          "Fax": data.fax,
+          "Officer": data.officer
+        }
+        setContactDetails(newData);
+        // setKeyArray(Object.keys(contactDetails));
+        // console.log(Object.keys(contactDetails))
       } else {
         setError(error);
         console.log(error);
@@ -97,9 +132,8 @@ function ContactUs(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
 
-
   return isLoading ? (
-    <Spinner/>
+    <Spinner />
   ) : (
     <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
       <ContactHeader>Contact Us</ContactHeader>

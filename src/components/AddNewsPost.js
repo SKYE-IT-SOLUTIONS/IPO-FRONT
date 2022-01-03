@@ -186,6 +186,8 @@ function AddNewsPost() {
       setContentList(storeDescription);
       setImageUrl(storeImage);
       setNewsVisibility(storeVisibility);
+      setTitleInfo(Simple_Validator(storeTitle,"Title"));
+      setContentInfo(Simple_Validator(storeDescription,"Description"));
     }
     setIsLoading(false);
   }, []);
@@ -339,6 +341,7 @@ function AddNewsPost() {
                 onClick={() => {
                   console.log("submit");
                   if (contentInfo.status && titleInfo.status) {
+                    console.log("submit inside");
                     handleNewsSubmit({
                       title: newTitle,
                       description: contentList,
