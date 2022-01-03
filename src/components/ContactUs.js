@@ -62,7 +62,7 @@ const arrayMap = (data, index, ob) => {
     <ContactRow key={index}>
       <DetailCol>{data}</DetailCol>
       <Col>
-        <div style={{ paddingLeft: "2px" }}>{ob[data].length > 1 ? ob[data].concat("\n"):ob[data]}</div>
+        <div style={{ paddingLeft: "2px" }}>{ob[data]}</div>
       </Col>
     </ContactRow>
   );
@@ -82,9 +82,7 @@ function ContactUs(props) {
       const { status, data, error } =
         await dataService.handleGetContactDetails();
       if (status) {
-        console.log("In Admin : ", data);
-        setContactDetails({"Address":"","Email":data?.email,"Phone":data.telephone,"Fax":data.fax,"Officer":data.officer});
-        setKeyArray(Object.keys(contactDetails));
+        console.log(data);
       } else {
         setError(error);
         console.log(error);
