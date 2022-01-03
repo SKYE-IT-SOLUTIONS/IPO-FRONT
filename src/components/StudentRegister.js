@@ -16,6 +16,7 @@ import {patternPassword} from '../config/pattern';
 import AuthServices from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import CustomSnackBar from "./CustomSnackBar";
+import RECAPTCHA from "react-google-recaptcha";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -91,6 +92,8 @@ function StudentRegister() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [recaptcha,setRecaptcha] = useState(false);
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -113,6 +116,11 @@ function StudentRegister() {
       setIsErrorMsgOpen(true);
     }
     setIsLoading(false);
+  }
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setRecaptcha(!recaptcha);
   }
 
   return (
@@ -173,13 +181,17 @@ function StudentRegister() {
               }}
             />
              {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> :  <Success>Password is matching</Success>}
-
-            <LoginBttn submit disabled={isLoading || !nameInfo.status || !regInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
+             <RECAPTCHA
+            sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
+            onChange={onChange}
+      />
+            <LoginBttn submit disabled={!recaptcha ||isLoading || !nameInfo.status || !regInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
               if(nameInfo.status && regInfo.status && passwordInfo.status && matchPassword.isMatching){
                 handleSubmit({
                   "username" : reg,
                   "password" : confirmPassword,
-                  "role" : ["student"]
+                  "role" : ["student"],
+                  "name" : name,
               });
               }
             }}>Register</LoginBttn>
