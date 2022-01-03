@@ -10,14 +10,9 @@ const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   position: relative;
-<<<<<<< HEAD
   min-height: 615px;
   height: heighty;
   min-width: 40px;
-=======
-  height: 750px;
-  width: ${(props) => (props.active ? "285px" : "82px")};
->>>>>>> 5d288c5d3d0a59a4ae53fa1a493278d438e8d32c
   overflow: hidden;
   transition: all 0.5s ease;
   @media only screen and (min-width: 1024px) {
@@ -30,7 +25,7 @@ const Body = styled.div`
     width: ${(props) => (props.active ? "285px" : "85px")};
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    width: ${(props) => (props.active ? "285px" : "75px")};
+    width: ${(props) => (props.active ? "285px" : "80px")};
   }
   @media (max-width: 300px) {
     width: ${(props) => (props.active ? "285px" : "40px")};
@@ -240,10 +235,7 @@ const NavListItemTooltip = styled.span`
   }
 `;
 const StudentSideNav = () => {
-  const [screenSize, getDimension] = useState({
-    dynamicWidth: window.innerWidth,
-    dynamicHeight: window.innerHeight
-  });
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

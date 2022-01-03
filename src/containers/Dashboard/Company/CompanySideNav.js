@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 let heighty=window.scrollY;
 
@@ -23,7 +24,7 @@ const Body = styled.div`
     width: ${(props) => (props.active ? "285px" : "85px")};
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    width: ${(props) => (props.active ? "285px" : "75px")};
+    width: ${(props) => (props.active ? "285px" : "80px")};
   }
   @media (max-width: 300px) {
     width: ${(props) => (props.active ? "285px" : "40px")};
@@ -232,12 +233,15 @@ const NavListItemTooltip = styled.span`
     top: 50%;
   }
 `;
-const AdminSideNav = () => {
+const CompanySideNav = () => {
+  
   const navigate = useNavigate();
-  const [active, setActive] = useState(false);
+  const dispatch = useDispatch();
+
+  const [active, setActive] = useState(true);
 
   function handleResize() {
-    console.log("Inner", window.innerHeight);
+    console.log("Inner", window.scrollY);
     if (window.innerWidth < 1214) {
       setActive(false);
     } else {
@@ -310,4 +314,4 @@ const AdminSideNav = () => {
   );
 };
 
-export default AdminSideNav;
+export default CompanySideNav;
