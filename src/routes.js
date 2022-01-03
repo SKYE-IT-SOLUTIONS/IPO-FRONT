@@ -7,6 +7,7 @@ import AdminLayout from './containers/Dashboard/AdminLayout';
 import StudentLayout from './containers/Dashboard/StudentLayout';
 import CompanyLayout from './containers/Dashboard/CompanyLayout';
 
+
 const NotFound = React.lazy(()=>import('./containers/404'));
 const HomeContent = React.lazy(()=>import('./containers/HomeContent'));
 const AddJobPost = React.lazy(()=>import('./components/AddJobPost'));
@@ -36,6 +37,7 @@ const Achievement = React.lazy(()=>import("./components/Achievement"));
 const AchievementView = React.lazy(()=>import("./components/AchievementView"));
 const Requestworkshop = React.lazy(()=>import("./components/Requestworkshop"));
 const GoogleCaptcha = React.lazy(()=>import("./components/Captcha"));
+const NavBarListView = React.lazy(()=>import("./components/NavBarListView"));
 
 //Include the view enhance the user experience, use suspense and fallback
 const View = (props)=>{
@@ -66,6 +68,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'allNews', element: <View><NewsCollection/></View> },
       { path: 'achievements', element: <View><Achievement/></View> },
       { path: 'achievement/:id', element: <View><AchievementView/></View> },
+      { path: 'moreOpt', element: <View><NavBarListView/></View> },
       // { path: 'test', element: <UploadImage/> },
       { path: 'captcha', element: <View><GoogleCaptcha/></View> },
       { path: "*", element: <Navigate to="/404" /> },
