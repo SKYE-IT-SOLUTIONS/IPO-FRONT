@@ -16,6 +16,7 @@ import {patternPassword,patternContact,patternMail} from '../config/pattern'
 import AuthServices from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import CustomSnackBar from "./CustomSnackBar";
+import RECAPTCHA from "react-google-recaptcha";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -103,6 +104,7 @@ function CompanyRegister() {
   const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptcha,setRecaptcha] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -111,6 +113,11 @@ function CompanyRegister() {
 
     setIsErrorMsgOpen(false);
   };
+  
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setRecaptcha(!recaptcha);
+  }
 
   const authServices = new AuthServices();
   const navigate = useNavigate();
@@ -234,8 +241,11 @@ function CompanyRegister() {
             />
 
               {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> : <Success>Password is matching</Success>}
-
-            <LoginBttn submit disabled={isLoading ||!nameInfo.status || !emailInfo.status || !personInfo.status || !contactInfo.status || !cityInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
+              <RECAPTCHA
+            sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
+            onChange={onChange}
+      />
+            <LoginBttn submit disabled={!recaptcha || isLoading ||!nameInfo.status || !emailInfo.status || !personInfo.status || !contactInfo.status || !cityInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
               if(nameInfo.status && emailInfo.status && personInfo.status && contactInfo.status && cityInfo.status && passwordInfo.status && matchPassword.isMatching){
                 handleSubmit({
                   "email" : email,
