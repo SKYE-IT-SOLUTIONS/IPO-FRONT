@@ -4,32 +4,44 @@ import { Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import DataService from "../services/DataService";
 import Spinner from "../components/Spinner";
+import { Icon } from "@iconify/react";
 
 const ContactHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 10px;
-  font-size: 20px;
+  padding: 10px 0 15px 0;
+  font-size: 25px;
+  font-family: ${({ font }) => font.title};
 `;
 
 const ContactRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   margin: auto;
 `;
 
-const DetailCol = styled(Col)`
+const TopicCol = styled(Col)`
   padding-right: 10px;
   padding-left: 20px;
+  text-align: left;
+`;
+
+const DetailCol = styled(Col)`
+  text-align: left;
+`;
+
+const ContactIcon = styled(Icon)`
+  font-size: 60px;
 `;
 
 const ContainerDiv = styled(Col)`
-  display: "flex";
+  display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   background: ${({ bg }) => bg};
   font-family: ${({ font }) => font.general};
   color: white;
@@ -60,21 +72,25 @@ const ContainerDiv = styled(Col)`
 const arrayMap = (data, index, ob) => {
   return (
     <ContactRow key={index}>
-      <DetailCol>{data}</DetailCol>
+      <TopicCol>{data}</TopicCol>
       {data === "Address" ? (
-        <Col>
+        <DetailCol>
           <div style={{ paddingLeft: "2px" }}>
-            {ob[data][0]}<br/>
-            {ob[data][1]}<br/>
-            {ob[data][2]}<br/>
-            {ob[data][3]}<br/>
+            {ob[data][0]}
+            <br />
+            {ob[data][1]}
+            <br />
+            {ob[data][2]}
+            <br />
+            {ob[data][3]}
+            <br />
             {ob[data][4]}
           </div>
-        </Col>
+        </DetailCol>
       ) : (
-        <Col>
+        <DetailCol>
           <div style={{ paddingLeft: "2px" }}>{ob[data]}</div>
-        </Col>
+        </DetailCol>
       )}
     </ContactRow>
   );
@@ -83,13 +99,19 @@ const arrayMap = (data, index, ob) => {
 function ContactUs(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [contactDetails, setContactDetails] = useState({
-    "Address": "",
-    "Email": "",
-    "Phone": "",
-    "Fax": "",
-    "Officer": "",
+    Address: "",
+    Email: "",
+    Phone: "",
+    Fax: "",
+    Officer: "",
   });
-  const [keyArray, setKeyArray] = useState(["Address","Email","Phone","Fax","Officer"]);
+  const [keyArray, setKeyArray] = useState([
+    "Address",
+    "Email",
+    "Phone",
+    "Fax",
+    "Officer",
+  ]);
   const [error, setError] = useState("");
 
   const dataService = new DataService();
@@ -109,14 +131,14 @@ function ContactUs(props) {
           data?.city,
         ];
         console.log(AddFormat2);
-        
+
         let newData = {
-          "Address": AddFormat2,
-          "Email": data?.email,
-          "Phone": data.telephone,
-          "Fax": data.fax,
-          "Officer": data.officer
-        }
+          Address: AddFormat2,
+          Email: data?.email,
+          Phone: data.telephone,
+          Fax: data.fax,
+          Officer: data.officer,
+        };
         setContactDetails(newData);
         // setKeyArray(Object.keys(contactDetails));
         // console.log(Object.keys(contactDetails))
@@ -136,13 +158,16 @@ function ContactUs(props) {
     <Spinner />
   ) : (
     <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
-      <ContactHeader>Contact Us</ContactHeader>
+      <div>
+        <ContactIcon icon="ic:round-contact-phone" />
+        <ContactHeader font={fonts}>CONTACT US</ContactHeader>
 
-      {keyArray
-        ? keyArray.map((data, index) => {
-            return arrayMap(data, index, contactDetails);
-          })
-        : ""}
+        {keyArray
+          ? keyArray.map((data, index) => {
+              return arrayMap(data, index, contactDetails);
+            })
+          : ""}
+      </div>
     </ContainerDiv>
   );
 }

@@ -128,7 +128,7 @@ function AddNewsPost() {
   let navigate = useNavigate();
   const fileService = new FileService();
 
-  const defaultNews = "https://images.unsplash.com/photo-1560177112-fbfd5fde9566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+  const defaultNews = "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download"
 
   const { fonts } = useContext(ThemeContext);
   // useS
@@ -147,7 +147,7 @@ function AddNewsPost() {
 
   const [contentList, setContentList] = useState([]);
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(defaultNews);
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -167,7 +167,7 @@ function AddNewsPost() {
     const { status,data, error } = await dataService.handleSubmitNews(payload);
     if (status) {
       dispatch(removeDescription());
-      dispatch(setImage(null));
+      dispatch(setImage(defaultNews));
       dispatch(setTitle(null));
       navigate(`/admin/news/${data}`);
     }else{
@@ -246,7 +246,7 @@ function AddNewsPost() {
                 updateFilesCb={updateUploadedFiles}
               />
               {/* <ImageInput type="file"/> */}
-              <PalestherImage image={imageUrl?imageUrl:defaultNews} />
+              <PalestherImage image={imageUrl} />
               <br />
               <Title>Description</Title>
               <ul>
