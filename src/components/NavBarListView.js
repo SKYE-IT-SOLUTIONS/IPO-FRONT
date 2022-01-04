@@ -1,41 +1,62 @@
-import React from 'react'
+import React from "react";
 import { Container, Row, Col } from "./CommonComponents";
-import styled from 'styled-components'
-import { Icon } from '@iconify/react';
+import styled from "styled-components";
+import { Icon } from "@iconify/react";
 
-const NavList =  styled(Container)`
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    min-height: 76vh;
-`
+const NavList = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 76vh;
+`;
 
 const CustomUl = styled.ul`
-    list-style-type: none;
-`
+  list-style-type: none;
+`;
 
 const CustomLi = styled.li`
-    margin: 15px 0;
-`
+  margin: 15px 0;
+  cursor: pointer;
+
+  @media (max-width: 1040px) {
+    font-size: 14px;
+  }
+`;
+
+const Arrow = styled(Icon)`
+  margin: 0 15px 0 0;
+  font-size:20px;
+
+  @media (max-width: 1040px) {
+    font-size: 17px;
+  }
+`;
+
+const navList = [
+  "How to prepare a CV",
+  "Facing an interview",
+  "Findinng a job",
+  "Personal development",
+  "Finding scholarships",
+  "Foreign Employment",
+  "Plot the career path",
+];
 
 function NavBarListView() {
-    return (
-        <NavList>
-            <div  style={{margin:"auto"}}>
-            <CustomUl>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> How to prepare a CV</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Facing an interview</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Findinng a job</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Personal development</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Finding scholarships</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Foreign Employment</CustomLi>
-                <CustomLi><Icon icon="bi:arrow-right-circle-fill" height="20" /> Plot the career path</CustomLi>
-
-            </CustomUl>
-            </div>
-            
-        </NavList>
-    )
+  return (
+    <NavList>
+      <div style={{ margin: "auto"}}>
+        <CustomUl>
+          {navList &&
+            navList.map((value, index) => (
+              <CustomLi key={index}>
+                <Arrow icon="bi:arrow-right-circle-fill"/> {value}
+              </CustomLi>
+            ))}
+        </CustomUl>
+      </div>
+    </NavList>
+  );
 }
 
-export default NavBarListView
+export default NavBarListView;
