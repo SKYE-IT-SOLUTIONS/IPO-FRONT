@@ -85,6 +85,10 @@ function Requestworkshop() {
   const [cityInfo, setCityInfo] = useState({ error: null, status: false });
   const [upload, setUpload] = useState({});
   const [uploadInfo, setUploadInfo] = useState({ error: null, status: false });
+  const [partNumb,setPartNumb]=useState();
+  const [duration,setDuration]=useState();
+  const [location,setLocation]=useState();
+  const [experson,setExperson]=useState();
 
 
   const output = [
@@ -193,11 +197,11 @@ function Requestworkshop() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={count}
+                      value={partNumb}
                       placeholder="Enter Request Participant Count"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Participant Count"));
                       }}
                     />
                     <br />
@@ -212,11 +216,11 @@ function Requestworkshop() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={count}
+                      value={duration}
                       placeholder="Enter Duration Time"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Duration"));
                       }}
                     />
                     <br />
@@ -336,12 +340,12 @@ function Requestworkshop() {
                         <Inputs
                           type="text"
                           name="name"
-                          value={count}
+                          value={location}
                           placeholder="Enter Location"
                           onChange={(e) => {
                             setCount(e.target.value);
                             setCountInfo(
-                              Simple_Validator(e.target.value, "Count")
+                              Simple_Validator(e.target.value, "Location")
                             );
                           }}
                         />
@@ -360,11 +364,11 @@ function Requestworkshop() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={count}
+                      value={experson}
                       placeholder="Enter Expected Resource Person/s"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Experson"));
                       }}
                     />
                     <br />

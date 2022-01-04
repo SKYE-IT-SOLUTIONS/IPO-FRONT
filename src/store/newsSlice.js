@@ -5,7 +5,7 @@ export const newsSlice = createSlice({
     initialState: {
         title: null,
         description: [],
-        image: null,
+        image: "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download",
         visibility : true
     },
     reducers: {

@@ -86,7 +86,7 @@ function NavBar(props) {
   };
 
   const userLogged = useSelector((state) => state.user.iuli);
-  const userRole = useSelector(state => state.user.userRole);
+  const userRole = useSelector((state) => state.user.userRole);
 
   useEffect(() => {
     setisLogged(userLogged === "NBSS");
@@ -222,17 +222,22 @@ function NavBar(props) {
                   A Survey
                 </DropItems>
               </NavDropdown> */}
-              <DropItems id="bg-custom-3" onClick={()=>{navigate("/requestPerson")}}>
-              Request a Graduate/s or<br/> Undergraduate/s
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requestPerson");
+                }}
+              >
+                Request a Graduate/s or
+                <br /> Undergraduate/s
               </DropItems>
               <DropItems href="/requestWorkshop" id="bg-custom-3">
-                Organize a Workshop/<br/>Training
+                Organize a Workshop/
+                <br />
+                Training
               </DropItems>
               <DropItems href="/add" id="bg-custom-3">
                 Submit an Advertisement
-              </DropItems>
-              <DropItems href="/book" id="bg-custom-3">
-                Reserve Conferance Hall
               </DropItems>
             </NavDropdown>
 
@@ -245,47 +250,104 @@ function NavBar(props) {
               onClick={() => {
                 console.log("show");
               }}
-            ><DropItems id="bg-custom-3" onClick={()=>{navigate("/login")}}>
-            Send a CV
-            </DropItems>
+            >
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Send a CV
+              </DropItems>
 
               <NavDropdown
-                  title={<NavSubTitle onClick={()=>{navigate("/login")}}>Request a training<br/>&nbsp;&nbsp;session</NavSubTitle>}
-                  id="collasible-nav-dropdown"
-                  drop="end"
-                  show={showIRR}
-                  onMouseEnter={() => showDropdown("Request a Graduates/s for")}
-                  onMouseLeave={() => hideDropdown("Request a Graduates/s for")}
+                title={
+                  <NavSubTitle
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Request a training
+                    <br />
+                    &nbsp;&nbsp;session
+                  </NavSubTitle>
+                }
+                id="collasible-nav-dropdown"
+                drop="end"
+                show={showIRR}
+                onMouseEnter={() => showDropdown("Request a Graduates/s for")}
+                onMouseLeave={() => hideDropdown("Request a Graduates/s for")}
+                onClick={() => {
+                  console.log("show");
+                }}
+                style={{ fontSize: "10px", paddingLeft: "2px" }}
+              >
+                <NavDropdown.Item
+                  id="bg-custom-3"
                   onClick={() => {
-                    console.log("show");
+                    navigate("/login");
                   }}
-                  style={{ fontSize: "10px", paddingLeft: "2px" }}
                 >
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
-                  How to prepare a CV
-                  </NavDropdown.Item>
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("/login")}}>
-                  Facing an interview
-                  </NavDropdown.Item>
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
-                  Findinng a job
-                  </NavDropdown.Item>
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
-                  Personal development
-                  </NavDropdown.Item>
-                  <NavDropdown.Item id="bg-custom-3" onClick={()=>{navigate("login")}}>
-                  Finding scholarships
-                  </NavDropdown.Item>
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
-                  Foreign Employment
-                  </NavDropdown.Item>
-                  <NavDropdown.Item  id="bg-custom-3" onClick={()=>{navigate("login")}}>
-                  Plot the career path
-                  </NavDropdown.Item>
-                </NavDropdown>
-              
-              <DropItems href="/product" id="bg-custom-3" onClick={()=>{navigate("login")}}>
-              Register to Internship
+                  <NavSubTitle>How to prepare a CV</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <NavSubTitle>Facing an interview</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle>Findinng a job</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle>Personal development</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Finding scholarships</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Foreign Employment</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Plot the career path</NavSubTitle>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <DropItems
+                href="/product"
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("login");
+                }}
+              >
+                Register to Internship
               </DropItems>
             </NavDropdown>
 
@@ -299,20 +361,17 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              
               <DropItems href="/requesthall" id="bg-custom-3">
                 Reserve a Conference Hall
               </DropItems>
               <DropItems href="/requestground" id="bg-custom-3">
-              Reserve a Playground
+                Reserve a Playground
               </DropItems>
               <DropItems href="/feedback" id="bg-custom-3">
                 General Feedback
               </DropItems>
-              
             </NavDropdown>
 
-              
             <NavDropdown
               title={<NavTitle>Related Links</NavTitle>}
               id="collasible-nav-dropdown"
@@ -368,45 +427,51 @@ function NavBar(props) {
                       console.log("show");
                     }}
                   >
-                    <NavDropdown.Item onClick={()=>{
-                      console.log("userRole",userRole);
-                      switch (userRole) {
-                        case "ROLE_ADMIN":
-                          navigate("/admin/dashboard");
-                          break;
-                        case "ROLE_STUDENT":
-                          navigate("/student/dashboard");
-                          break;
-                        case "ROLE_COMPANY":
-                          navigate("/company/dashboard");
-                          break;
-                        default:
-                          navigate("/");
-                          break;
-                      }
-                    }}>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        console.log("userRole", userRole);
+                        switch (userRole) {
+                          case "ROLE_ADMIN":
+                            navigate("/admin/dashboard");
+                            break;
+                          case "ROLE_STUDENT":
+                            navigate("/student/dashboard");
+                            break;
+                          case "ROLE_COMPANY":
+                            navigate("/company/dashboard");
+                            break;
+                          default:
+                            navigate("/");
+                            break;
+                        }
+                      }}
+                    >
                       Dashboard
                     </NavDropdown.Item>
 
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
-                      
-                          dispatch(setUserLoggedIn("SSNB"));
-                          dispatch(setUserRole(""));
-                          dispatch(setUserId(""));
-                          navigate("/");
+                        dispatch(setUserLoggedIn("SSNB"));
+                        dispatch(setUserRole(""));
+                        dispatch(setUserId(""));
+                        navigate("/");
                       }}
                     >
                       Log Out
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav1>
-              ) : ( <span>
-                <RegisterTag onClick={() => {
-                    navigate("/register");
-                  }}>Register</RegisterTag>
-                <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
+              ) : (
+                <span>
+                  <RegisterTag
+                    onClick={() => {
+                      navigate("/register");
+                    }}
+                  >
+                    Register
+                  </RegisterTag>
+                  <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
                 </span>
               )}
             </Nav.Link>
@@ -414,7 +479,6 @@ function NavBar(props) {
         </Navbar.Collapse>
       </Container>
     </CustomNavBar>
-
   );
 }
 
