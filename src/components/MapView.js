@@ -22,7 +22,7 @@ function MapView() {
   const [wid, hei] = useWindowSize();
   let containerStyle;
 
-  if(wid>1080){
+  if(wid>770){
      containerStyle = {
       width:wid/3.1,
       height:hei/1.66,
