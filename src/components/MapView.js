@@ -22,7 +22,7 @@ function MapView() {
   const [wid, hei] = useWindowSize();
   let containerStyle;
 
-  if(wid>1080){
+  if(wid>770){
      containerStyle = {
       width:wid/3.1,
       height:hei/1.66,
@@ -35,15 +35,6 @@ function MapView() {
     }
   }
   
-   switch(wid) {
-
-        case ">1080":   return <ComponentA />;
-        case "two":   return <ComponentB />;
-        case "three": return <ComponentC />;
-        case "four":  return <ComponentD />;
-
-        default:      return <h1>No project match</h1>
-      }  
   
   const displayMarkers = () => {
     return (
