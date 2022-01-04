@@ -7,6 +7,7 @@ import Subscription from '../components/Subscription'
 import { Container,Row,Col } from '../components/CommonComponents'
 import SponsorList from '../components/SponsorList'
 import MapView from '../components/MapView'
+import Grid from '@material-ui/core/Grid'
 
 export default function HomeContent() {
     return (
@@ -19,7 +20,7 @@ export default function HomeContent() {
                 <Row>
                     <ContactUs/>
                     <Subscription/>
-                    <Col md={4} lg={4} style={{padding:"0",height:"200px"}}>
+                    <Col md={4} style={{padding:"0",height:"200px"}}>
                         <MapView/>
                     </Col>
                 </Row>

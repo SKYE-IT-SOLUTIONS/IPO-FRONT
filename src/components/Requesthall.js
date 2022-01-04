@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Paper, Grid, Box } from "@mui/material";
-import Request from "../assets/requestgraduate.svg";
+import Conference from "../assets/Conference.svg";
 import { Form } from "react-bootstrap";
 import {
   Simple_Validator,
@@ -61,7 +61,7 @@ const Error = styled.p`
   padding: 5px 0px;
 `;
 
-function Requestworkshop() {
+function Requesthall() {
   const { fonts } = useContext(ThemeContext);
 
   const [name, setName] = useState();
@@ -85,10 +85,6 @@ function Requestworkshop() {
   const [cityInfo, setCityInfo] = useState({ error: null, status: false });
   const [upload, setUpload] = useState({});
   const [uploadInfo, setUploadInfo] = useState({ error: null, status: false });
-  const [partNumb,setPartNumb]=useState();
-  const [duration,setDuration]=useState();
-  const [location,setLocation]=useState();
-  const [experson,setExperson]=useState();
 
 
   const output = [
@@ -107,11 +103,11 @@ function Requestworkshop() {
   return (
     <Requestdiv font={fonts}>
       <MPaper>
-        <Title>Request Workshop / Training Programme</Title>
+        <Title>Request a Faculty Conference Hall</Title>
         <Box sx={{ width: "100%" }}>
           <Row style={{ paddingTop: "15px" }}>
             <Col md={5} sm={12}>
-              <StyledImg alt="" src={Request} />
+              <StyledImg alt="" src={Conference} />
             </Col>
             <Bordercol md={7} sm={12}>
               <Grid
@@ -166,28 +162,7 @@ function Requestworkshop() {
                     )}
                   </>
                 </Grid>
-                <Grid item xs={4}>
-                  <>Introduce About Your Programme</>
-                </Grid>
-                <Grid item xs={8}>
-                  <>
-                    <TextArea
-                      rows="4"
-                      value={description}
-                      placeholder="Enter Description"
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                        setDescriptionInfo(
-                          Simple_Validator(e.target.value, "Description")
-                        );
-                      }}
-                    />
-                    <br />
-                    {!descriptionInfo.status && (
-                      <Error>{descriptionInfo.error}</Error>
-                    )}
-                  </>
-                </Grid>
+               
 
                 <Grid item xs={4}>
                   <>Expected Number Of participants</>
@@ -197,11 +172,11 @@ function Requestworkshop() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={partNumb}
+                      value={count}
                       placeholder="Enter Request Participant Count"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Participant Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Count"));
                       }}
                     />
                     <br />
@@ -216,11 +191,11 @@ function Requestworkshop() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={duration}
+                      value={count}
                       placeholder="Enter Duration Time"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Duration"));
+                        setCountInfo(Simple_Validator(e.target.value, "Count"));
                       }}
                     />
                     <br />
@@ -271,104 +246,20 @@ function Requestworkshop() {
                     </form>
                   </>
                 </Grid>
-                <Grid item xs={4}>
-                  <>Request Mode</>
-                </Grid>
-                <Grid item xs={8}>
-                  <RadioGroup
-                    row
-                    aria-label="visibility"
-                    value={reqperson}
-                    name="row-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="Graduate"
-                      control={<Radio />}
-                      label="Online"
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        setReqperson(val);
-                      }}
-                    />
-                    <FormControlLabel
-                      value="UnderGraduate"
-                      control={<Radio />}
-                      label="Physical"
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        setReqperson(val);
-                      }}
-                    />
-                  </RadioGroup>
-                  {/* <><Form>
-                            <Form.Check
-                                type="radio"
-                                label="Online"
-                                name="formHorizontalRadios"
-                                id="formHorizontalRadios1"
-                                value="Graduate"
-                                checked
-                                onChange={(e) => {
-                                    setReqperson(e.target.value)
-                                    console.log(e.target.value)
-                                    setValue(true);
-                                    }}
-                            />
-                            {console.log(reqperson)}
-                            <Form.Check
-                                type="radio"
-                                label="Physical"
-                                name="formHorizontalRadios"
-                                id="formHorizontalRadios2"
-                                value="UnderGraduate"
-                                onChange={(e) => {
-                                    setReqperson(e.target.value)
-                                    console.log(e.target.value)
-                                    setValue(false);
-                                    }}
-                            />
-                            </Form>
-                            </>    */}
-                </Grid>
-                {reqperson === "UnderGraduate" && (
-                  <>
-                    <Grid item xs={4}>
-                      <>Location</>
-                    </Grid>
-                    <Grid item xs={8}>
-                      <>
-                        <Inputs
-                          type="text"
-                          name="name"
-                          value={location}
-                          placeholder="Enter Location"
-                          onChange={(e) => {
-                            setCount(e.target.value);
-                            setCountInfo(
-                              Simple_Validator(e.target.value, "Location")
-                            );
-                          }}
-                        />
-                        <br />
-                        {!countInfo.status && <Error>{countInfo.error}</Error>}
-                      </>
-                    </Grid>
-                  </>
-                )}
 
                 <Grid item xs={4}>
-                  <>Expected Resource Person/s</>
+                  <>Perpose of the event</>
                 </Grid>
                 <Grid item xs={8}>
                   <>
                     <Inputs
                       type="text"
                       name="name"
-                      value={experson}
-                      placeholder="Enter Expected Resource Person/s"
+                      value={count}
+                      placeholder="Enter Perpose of the event"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Experson"));
+                        setCountInfo(Simple_Validator(e.target.value, "Count"));
                       }}
                     />
                     <br />
@@ -376,7 +267,7 @@ function Requestworkshop() {
                   </>
                 </Grid>
                 <Grid item xs={4}>
-                  <>Other Details</>
+                  <>event Details</>
                 </Grid>
                 <Grid item xs={8}>
                   <>
@@ -542,4 +433,4 @@ function Requestworkshop() {
   );
 }
 
-export default Requestworkshop;
+export default Requesthall;

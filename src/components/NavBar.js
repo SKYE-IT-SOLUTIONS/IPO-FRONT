@@ -224,12 +224,13 @@ function NavBar(props) {
               <DropItems id="bg-custom-3" onClick={()=>{navigate("/requestPerson")}}>
               Request a Graduate/s or<br/> Undergraduate/s
               </DropItems>
+              <DropItems href="/requestWorkshop" id="bg-custom-3">
+                Organize a Workshop/<br/>Training
+              </DropItems>
               <DropItems href="/add" id="bg-custom-3">
                 Submit an Advertisement
               </DropItems>
-              <DropItems href="/book" id="bg-custom-3">
-                Reserve Conferance Hall
-              </DropItems>
+            
             </NavDropdown>
 
             <NavDropdown
@@ -246,7 +247,7 @@ function NavBar(props) {
             </DropItems>
 
               <NavDropdown
-                  title={<NavSubTitle onClick={()=>{navigate("/login")}}>Request a training<br/>session</NavSubTitle>}
+                  title={<NavSubTitle onClick={()=>{navigate("/login")}}>Request a training<br/>&nbsp;&nbsp;session</NavSubTitle>}
                   id="collasible-nav-dropdown"
                   drop="end"
                   show={showIRR}
@@ -295,15 +296,17 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <DropItems href="/product" id="bg-custom-3">
-                Organize a Workshop/<br/>Training
+              
+              <DropItems href="/requesthall" id="bg-custom-3">
+                Reserve a Conference Hall
               </DropItems>
-              <DropItems href="/product" id="bg-custom-3">
+              <DropItems href="/requestground" id="bg-custom-3">
+              Reserve a Playground
+              </DropItems>
+              <DropItems href="/feedback" id="bg-custom-3">
                 General Feedback
               </DropItems>
-              <DropItems href="/product" id="bg-custom-3">
-                Contact Us
-              </DropItems>
+              
             </NavDropdown>
 
               

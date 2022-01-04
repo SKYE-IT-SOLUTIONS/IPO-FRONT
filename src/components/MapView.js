@@ -3,15 +3,13 @@ import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
 import styled from "styled-components";
 
 const Map1=styled(Map)`
- 
-`;
 
+`;
 
 function MapView() {
   const containerStyle = {
-    // position:'center',  
-    height: '50%',
-    width:"33.33%",
+    width: "33.33%",
+   height: "60%",
   }
   const displayMarkers = () => {
     return (

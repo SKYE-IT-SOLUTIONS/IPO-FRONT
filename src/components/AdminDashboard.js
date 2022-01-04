@@ -47,6 +47,17 @@ const MainPaper=styled(Paper)`
    justify-content: center;
    
 `;
+const Statdiv=styled('div')`
+   border: 4px solid;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 15px;
+  text-align: left;
+  background-color: #eef2f3;
+`;
 
 
 ChartJS.register(ArcElement, Tooltip, Legend,CategoryScale,
@@ -156,24 +167,24 @@ const AdminDashboard = () => {
             <Title1>View Details</Title1>
             <MainRow style={{ paddingTop: "15px" }}>
                 <MainCol md={4} sm={6} xs={8}>
-                <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Users</p><Pie data={data2} /></MainPaper>
+                <Statdiv elevation={5} ><p style={{textAlign:"center"}}>Users</p><Pie data={data2} /></Statdiv>
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                <MainPaper elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></MainPaper>         
+                <Statdiv elevation={5} ><p style={{textAlign:"center"}}>Events</p><Pie data={data1} /></Statdiv>         
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                        <MainPaper elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></MainPaper>         
+                        <Statdiv elevation={5} ><p style={{textAlign:"center"}}>News & Post</p><Pie data={data} /></Statdiv>         
                 </MainCol>
             </MainRow>
             <MainRow style={{ paddingTop: "15px" }}>
                 <MainCol md={4} sm={6} xs={8}>
-                  <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users"/>
+                  <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users" count="20"/>
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events"/> 
+                <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events" count="20"/> 
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Post" />    
+                <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Post" count="20"/>    
                 </MainCol>
             </MainRow>
            

@@ -35,7 +35,10 @@ const RegistrationDashboard = React.lazy(()=>import("./components/Register"));
 const Achievement = React.lazy(()=>import("./components/Achievement"));
 const AchievementView = React.lazy(()=>import("./components/AchievementView"));
 const Requestworkshop = React.lazy(()=>import("./components/Requestworkshop"));
+const Requesthall = React.lazy(()=>import("./components/Requesthall"));
+const Requestground = React.lazy(()=>import("./components/Requestground"));
 const GoogleCaptcha = React.lazy(()=>import("./components/Captcha"));
+const Feedback = React.lazy(()=>import("./components/Feedback"));
 const NavBarListView = React.lazy(()=>import("./components/NavBarListView"));
 const OurTeam = React.lazy(()=>import("./components/OurTeam"));
 
@@ -68,9 +71,13 @@ const routes = (isAuthenticated,userRole) => [
       { path: 'allNews', element: <View><NewsCollection/></View> },
       { path: 'achievements', element: <View><Achievement/></View> },
       { path: 'achievement/:id', element: <View><AchievementView/></View> },
+      { path: "requestWorkshop", element: <View><Requestworkshop/></View>},
+      { path: 'requesthall', element: <View><Requesthall/></View> },
+      { path: 'requestground', element: <View><Requestground/></View> },
       { path: 'moreOpt', element: <View><NavBarListView/></View> },
       { path: 'developers', element: <View><OurTeam/></View> },
       // { path: 'test', element: <UploadImage/> },
+      { path: 'feedback', element: <View><Feedback/></View> },
       { path: 'captcha', element: <View><GoogleCaptcha/></View> },
       { path: "*", element: <Navigate to="/404" /> },
 
