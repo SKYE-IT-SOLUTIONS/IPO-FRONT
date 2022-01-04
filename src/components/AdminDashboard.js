@@ -178,13 +178,13 @@ const AdminDashboard = () => {
             </MainRow>
             <MainRow style={{ paddingTop: "15px" }}>
                 <MainCol md={4} sm={6} xs={8}>
-                  <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users"/>
+                  <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users" count="20"/>
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events"/> 
+                <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events" count="20"/> 
                 </MainCol>
                 <MainCol md={4} sm={6} xs={8}>    
-                <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Post" />    
+                <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Post" count="20"/>    
                 </MainCol>
             </MainRow>
            

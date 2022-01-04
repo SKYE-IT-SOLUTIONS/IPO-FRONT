@@ -85,6 +85,8 @@ function Requestground() {
   const [cityInfo, setCityInfo] = useState({ error: null, status: false });
   const [upload, setUpload] = useState({});
   const [uploadInfo, setUploadInfo] = useState({ error: null, status: false });
+  const [partNumb,setPartNumb]=useState();
+  const [duration,setDuration]=useState();
 
 
   const output = [
@@ -172,11 +174,11 @@ function Requestground() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={count}
+                      value={partNumb}
                       placeholder="Enter Request Participant Count"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Request Participant Count"));
                       }}
                     />
                     <br />
@@ -191,11 +193,11 @@ function Requestground() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={count}
+                      value={duration}
                       placeholder="Enter Duration Time"
                       onChange={(e) => {
                         setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
+                        setCountInfo(Simple_Validator(e.target.value, "Duration Time"));
                       }}
                     />
                     <br />

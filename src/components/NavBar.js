@@ -230,9 +230,7 @@ function NavBar(props) {
               <DropItems href="/add" id="bg-custom-3">
                 Submit an Advertisement
               </DropItems>
-              <DropItems href="/book" id="bg-custom-3">
-                Reserve Conferance Hall
-              </DropItems>
+            
             </NavDropdown>
 
             <NavDropdown
