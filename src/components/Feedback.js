@@ -8,7 +8,8 @@ import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 
 const StyledImg = styled.img`
   padding: auto;
-  width: 100%;
+  size:100%
+  
 `;
 const Paper1=styled(Paper)`
     justify-content: center;
@@ -17,8 +18,13 @@ const Paper1=styled(Paper)`
 const Paper2=styled(Paper)`
     justify-content: center;
     padding: 32px;
+    
 `;
-
+const LoginCol = styled(Col)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 const labels = {
   0.5: 'Useless',
   1: 'Useless+',
@@ -37,21 +43,18 @@ export default function HoverRating() {
   const [hover, setHover] = React.useState(-1);
 
   return (
-    <Box
-    sx={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      '& > :not(style)': {
-        m: 1,
-       
-      },
-    }}
-  >
-      <Row style={{ paddingTop: "20px" }}>
+    <Container>
+      <Row style={{paddingTop:"20px"}}>
             <Col md={5} sm={12}>
-                <Paper1 elevation={6} >
+            <Paper2 elevation={6}>
                 <StyledImg alt="" src={Feedback} />
-                <h4>Rating</h4>
+               
+                </Paper2>
+        </Col>
+        
+    <Col md={7} sm={12} >
+          <Paper2 elevation={6}>
+          <h4>Rating</h4>
                     <Box
                     sx={{
                         
@@ -76,25 +79,14 @@ export default function HoverRating() {
                         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                     )}
                     </Box>
-                </Paper1>
-    </Col>
-    <Col md={7} sm={12}>
-    <Paper2 elevation={6}>
                   <>Your name</>
                   <br/><br/>
                   <TextField id="outlined-basic" label="name" variant="outlined"/><br/><br/>
                   <h4>Comment</h4>
-                  <TextareaAutosize
-                    aria-label="minimum height"
-                    minRows={6}
-                    placeholder="Enter Your Comment"
-                   
-                    />
-                
-    </Paper2>
+                  <TextField fullWidth label="comment" id="fullWidth"  />
+            </Paper2>
     </Col>
     </Row>
-  </Box>
-    
+  </Container>
   );
 }

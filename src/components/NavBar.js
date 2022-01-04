@@ -305,12 +305,10 @@ function NavBar(props) {
               <DropItems href="/requestground" id="bg-custom-3">
               Reserve a Playground
               </DropItems>
-              <DropItems href="/product" id="bg-custom-3">
+              <DropItems href="/feedback" id="bg-custom-3">
                 General Feedback
               </DropItems>
-              <DropItems href="/product" id="bg-custom-3">
-                Contact Us
-              </DropItems>
+              
             </NavDropdown>
 
               
