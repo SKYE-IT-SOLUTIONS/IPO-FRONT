@@ -34,17 +34,6 @@ function MapView() {
       height:hei/3.8,
     }
   }
-  
-   switch(wid) {
-
-        case ">1080":   return <ComponentA />;
-        case "two":   return <ComponentB />;
-        case "three": return <ComponentC />;
-        case "four":  return <ComponentD />;
-
-        default:      return <h1>No project match</h1>
-      }  
-  
   const displayMarkers = () => {
     return (
       
