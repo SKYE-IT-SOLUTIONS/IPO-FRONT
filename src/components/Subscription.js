@@ -61,8 +61,7 @@ const Title =  styled.h1`
   color:#DC281E;
 `
 const RECAPTCHA =styled(ReCAPTCHA)`
-  display: flex;
-  justify-content: center;
+  margin: auto;
 `;
 
 
