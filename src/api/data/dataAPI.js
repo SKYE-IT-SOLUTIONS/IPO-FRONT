@@ -58,9 +58,11 @@ export const onSubmitNoAuth = async (DATA_URL, data) => {
   console.log("onSubmitNoAuth");
   await authRequest(config)
     .then(async ({ data, error }) => {
-      console.log("run subs")
       if (!error) {
-        if (data.status === 200) {
+        if (data.status === 201) {
+          console.log("success");
+          result = { status: true,data:data?.data, error: null };
+        }else if(data.status === 200) {
           console.log("success");
           result = { status: true,data:data?.data, error: null };
         }else {

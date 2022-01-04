@@ -145,7 +145,7 @@ function Register() {
                     alt=""
                     src={Student}
                     />
-                    <Button disabled submit>Student</Button>
+                    <Button submit>Student</Button>
                 </WrapperDiv>
                 </Paper>
                 </Col>

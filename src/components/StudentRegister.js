@@ -12,11 +12,11 @@ import student from "../assets/studentreg.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { passwordMatcher } from "../utils/passwordMatcher";
 import { Simple_Validator, Validator } from "../utils/validation";
-import {patternPassword} from '../config/pattern';
+import { patternPassword } from "../config/pattern";
 import AuthServices from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import CustomSnackBar from "./CustomSnackBar";
-import RECAPTCHA from "react-google-recaptcha";
+import { Recaptcha } from "./CommonComponents";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -55,7 +55,7 @@ const Error = styled.p`
 `;
 
 const Success = styled.p`
-  color: 	#009933;
+  color: #009933;
   font-size: 13px;
   margin: 0px;
   text-align: left;
@@ -77,25 +77,31 @@ const SeparateDiv = styled.div`
 function StudentRegister() {
   const { fonts } = useContext(ThemeContext);
 
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const [reg, setReg] = useState("");
   const [password, setpassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [nameInfo, setNameInfo] = useState({ error: null, status: false });
   const [regInfo, setRegInfo] = useState({ error: null, status: false });
-  const [passwordInfo, setPasswordInfo] = useState({ error: null, status: false });
-  const [matchPassword, setMatchPassword] = useState({error:null,isMatching:false});
+  const [passwordInfo, setPasswordInfo] = useState({
+    error: null,
+    status: false,
+  });
+  const [matchPassword, setMatchPassword] = useState({
+    error: null,
+    isMatching: false,
+  });
 
   const [error, setError] = useState("");
   const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [recaptcha,setRecaptcha] = useState(false);
+  const [recaptcha, setRecaptcha] = useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -107,16 +113,18 @@ function StudentRegister() {
 
   const handleSubmit = async (credentials) => {
     setIsLoading(true);
-    const {status,data,error}  = await authServices.handleStudentSignUp(credentials);
-    if(status){
-      sessionStorage.setItem("email",data?.email);
+    const { status, data, error } = await authServices.handleStudentSignUp(
+      credentials
+    );
+    if (status) {
+      sessionStorage.setItem("email", data?.email);
       navigate("/register/sendMail");
-    }else{
+    } else {
       setError(error);
       setIsErrorMsgOpen(true);
     }
     setIsLoading(false);
-  }
+  };
 
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -135,37 +143,37 @@ function StudentRegister() {
 
             <Lable>Student Registration Number</Lable>
             <Input
-            value={reg}
+              value={reg}
               type="text"
               onChange={(e) => {
-                let val = e.target.value
-                setReg(val)
-                setRegInfo(Simple_Validator(val,"Registration Number"))
+                let val = e.target.value;
+                setReg(val);
+                setRegInfo(Simple_Validator(val, "Registration Number"));
               }}
             />
             {regInfo.error && <Error>{regInfo.error}</Error>}
 
             <Lable>Name</Lable>
             <Input
-            value={name}
+              value={name}
               type="text"
               onChange={(e) => {
-                let val = e.target.value
-                setName(val)
-                setNameInfo(Simple_Validator(val,"Company Name"))
+                let val = e.target.value;
+                setName(val);
+                setNameInfo(Simple_Validator(val, "Company Name"));
               }}
             />
             {nameInfo.error && <Error>{nameInfo.error}</Error>}
 
             <Lable>Password</Lable>
             <Input
-             value={password}
+              value={password}
               type="password"
               onChange={(e) => {
-                let val = e.target.value
-                setPasswordInfo(Validator(val,patternPassword,"Password"))
-                setpassword(e.target.value)
-                setMatchPassword(passwordMatcher(val,confirmPassword))
+                let val = e.target.value;
+                setPasswordInfo(Validator(val, patternPassword, "Password"));
+                setpassword(e.target.value);
+                setMatchPassword(passwordMatcher(val, confirmPassword));
               }}
             />
             {passwordInfo.error && <Error>{passwordInfo.error}</Error>}
@@ -175,30 +183,54 @@ function StudentRegister() {
               type="password"
               value={confirmPassword}
               onChange={(e) => {
-                let value = e.target.value
-                setConfirmPassword(value)
-                setMatchPassword(passwordMatcher(password,value))
+                let value = e.target.value;
+                setConfirmPassword(value);
+                setMatchPassword(passwordMatcher(password, value));
               }}
             />
-             {!matchPassword.isMatching ? <Error>{matchPassword.error}</Error> :  <Success>Password is matching</Success>}
-             <RECAPTCHA
-            sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
-            onChange={onChange}
-      />
-            <LoginBttn submit disabled={!recaptcha ||isLoading || !nameInfo.status || !regInfo.status || !passwordInfo.status || !matchPassword.isMatching} onClick={()=>{
-              if(nameInfo.status && regInfo.status && passwordInfo.status && matchPassword.isMatching){
-                handleSubmit({
-                  "username" : reg,
-                  "password" : confirmPassword,
-                  "role" : ["student"],
-                  "name" : name,
-              });
+            {!matchPassword.isMatching ? (
+              <Error>{matchPassword.error}</Error>
+            ) : (
+              <Success>Password is matching</Success>
+            )}
+            <Recaptcha onChange={onChange} />
+            <LoginBttn
+              submit
+              disabled={
+                !recaptcha ||
+                isLoading ||
+                !nameInfo.status ||
+                !regInfo.status ||
+                !passwordInfo.status ||
+                !matchPassword.isMatching
               }
-            }}>Register</LoginBttn>
+              onClick={() => {
+                if (
+                  nameInfo.status &&
+                  regInfo.status &&
+                  passwordInfo.status &&
+                  matchPassword.isMatching
+                ) {
+                  handleSubmit({
+                    username: reg,
+                    password: confirmPassword,
+                    role: ["student"],
+                    name: name,
+                  });
+                }
+              }}
+            >
+              Register
+            </LoginBttn>
           </SeparateDiv>
         </LoginCol>
       </Row>
-      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={error}/>
+      <CustomSnackBar
+        isOpen={isErrorMsgOpen}
+        severity="error"
+        handleClose={handleClose}
+        message={error}
+      />
     </RegistrationDiv>
   );
 }

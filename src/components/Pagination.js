@@ -73,20 +73,24 @@ function Pagination({ data, RenderComponent, pageLimit, dataLimit }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    console.log("widow Res " +window.devicePixelRatio);
+    const windowAbsoluteWidth = window.innerWidth / window.devicePixelRatio;
+    console.log("windowAbsoluteWidth " + windowAbsoluteWidth);
     function handleResize() {
-      if (window.innerWidth > 1400) {
+      console.log("widow Res " + windowAbsoluteWidth);
+      if ( windowAbsoluteWidth > 1400) {
         setdatalimit(6);
         setPages(Math.ceil(data.length / 6));
-      } else if (window.innerWidth > 1200 && window.innerWidth <= 1400) {
+      } else if (windowAbsoluteWidth > 1200 && windowAbsoluteWidth <= 1400) {
         setdatalimit(4);
         setPages(Math.ceil(data.length / 4));
-      } else if (window.innerWidth > 992 && window.innerWidth <= 1200) {
+      } else if (windowAbsoluteWidth > 992 && windowAbsoluteWidth <= 1200) {
         setdatalimit(4);
         setPages(Math.ceil(data.length / 4));
-      } else if (window.innerWidth > 768 && window.innerWidth <= 992) {
+      } else if (windowAbsoluteWidth > 768 && windowAbsoluteWidth <= 992) {
         setdatalimit(3);
         setPages(Math.ceil(data.length / 3));
-      } else if (window.innerWidth > 576 && window.innerWidth <= 768) {
+      } else if (windowAbsoluteWidth > 576 && windowAbsoluteWidth <= 768) {
         setdatalimit(2);
         setPages(Math.ceil(data.length / 3));
       } else {
@@ -95,7 +99,7 @@ function Pagination({ data, RenderComponent, pageLimit, dataLimit }) {
       }
     }
     window.addEventListener("resize", handleResize);
-  }, [data]);
+  }, [dataLimit]);
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);
