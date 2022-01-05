@@ -7,7 +7,11 @@ import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 // import Image1 from "https://drive.google.com/uc?id=1qiuj5yXJsj4jTo6a5plFrE8JwZ_3FUK7&export=download"
 // import Image2 from "../assets/Faculty 001.jpg"
-import Image3 from "../assets/Job Fair 001.jpg"
+import pic1 from "../assets/pic1.jpg"
+import pic2 from "../assets/pic2.jpg"
+import pic3 from "../assets/pic3.jpg"
+import pic4 from "../assets/pic4.jpg"
+import pic5 from "../assets/pic5.jpg"
 
 const ImageTag = styled.img`
     display:block;
@@ -123,31 +127,36 @@ function ImageSlider() {
           
           <Carousel.Item>
             <ImageTag
-              src="https://drive.google.com/uc?id=1qiuj5yXJsj4jTo6a5plFrE8JwZ_3FUK7&export=download"
+              // src="https://drive.google.com/uc?id=1qiuj5yXJsj4jTo6a5plFrE8JwZ_3FUK7&export=download"
+              src={pic5}
               alt="Second slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag 
-              src="https://drive.google.com/uc?id=1ORDr_fXlqRWeAq_cQrJQBemEpo157zdv&export=download"
+              // src="https://drive.google.com/uc?id=1ORDr_fXlqRWeAq_cQrJQBemEpo157zdv&export=download"
+              src={pic4}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://drive.google.com/uc?id=1rNhV-yIsDoeEHw2AKu5n9M0iWLx00JCJ&export=download"
+              // src="https://drive.google.com/uc?id=1rNhV-yIsDoeEHw2AKu5n9M0iWLx00JCJ&export=download"
+              src={pic3}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://drive.google.com/uc?id=154keKHftP8LWQAmAb2AREH44rPJhVCEA&export=download"
+              // src="https://drive.google.com/uc?id=154keKHftP8LWQAmAb2AREH44rPJhVCEA&export=download"
+              src={pic2}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://drive.google.com/uc?id=1bhrSyDG0vJS8lXpKIr83foWV9cNr-EE_&export=download"
+              // src="https://drive.google.com/uc?id=1bhrSyDG0vJS8lXpKIr83foWV9cNr-EE_&export=download"
+              src={pic1}
               alt="Third slide"
             />
           </Carousel.Item>
