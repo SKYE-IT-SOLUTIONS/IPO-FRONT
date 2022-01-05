@@ -13,6 +13,7 @@ const JOB_DATA_URL = "/job";
 const CONTACT_US ='/content'
 const SUBSCRIBE_URL ='/email/add'
 const REQUEST_OTHER_URL ='request?type=other'
+const GET_STAT_DATA ='/stat/'
 
 
 export default class DataService {
@@ -97,6 +98,11 @@ export default class DataService {
   handleRequestTypeOther = async (data) => {
     console.log(data)
     const result = await onSubmit(REQUEST_OTHER_URL, data);
+    return result;
+  }
+  //dashboard data
+  handleStatData = async () => {
+    const result = await onGetAll(GET_STAT_DATA);
     return result;
   }
 }
