@@ -2,6 +2,7 @@ import React ,{useContext} from 'react'
 import styled from "styled-components";
 import { Container, Row, Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useParams } from "react-router-dom";
 
 const AchContainer = styled(Container)`
     font-family: ${({ font }) => font.general};
@@ -66,21 +67,55 @@ const CustomRow = styled(Row)`
     padding-bottom: 10px;
 `;
 
-const data = 
-    {
-      id:1,
-      title:
-        "TEAM FALCON E REACHES TOP 20 IN VINUNIVERSITY GLOBAL CASE COMPETITION 2021",
-      description:
-        ["Team Falcon E, a group of students from the Department of Mechanical Engineering, representing the University of Moratuwa has emerged as one out of best 20 teams in VinUniversity Global Case Competition (VGCC) hosted by VinUniversity, Hanoi, Vietnam. The awards ceremony was held on 4th of December ",
-    "A paragraph is a self-contained unit of discourse in writing dealing with a particular point or idea. A paragraph consists of one or more sentences. Though not required by the syntax of any language, paragraphs are usually an expected part of formal writing, used to organize longer prose"
-    ],
-      image:
-        "https://images.unsplash.com/photo-1640697687394-d02650d7ecc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    }
+// const data = 
+//     {
+//       id:1,
+//       title:
+//         "TEAM FALCON E REACHES TOP 20 IN VINUNIVERSITY GLOBAL CASE COMPETITION 2021",
+//       description:
+//         ["Team Falcon E, a group of students from the Department of Mechanical Engineering, representing the University of Moratuwa has emerged as one out of best 20 teams in VinUniversity Global Case Competition (VGCC) hosted by VinUniversity, Hanoi, Vietnam. The awards ceremony was held on 4th of December ",
+//     "A paragraph is a self-contained unit of discourse in writing dealing with a particular point or idea. A paragraph consists of one or more sentences. Though not required by the syntax of any language, paragraphs are usually an expected part of formal writing, used to organize longer prose"
+//     ],
+//       image:
+//         "https://images.unsplash.com/photo-1640697687394-d02650d7ecc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+//     }
+
+const value = [
+  {
+    id:1,
+    title:
+      "TEAM FALCON E REACHES TOP 20 IN VINUNIVERSITY GLOBAL CASE COMPETITION 2021",
+    description:
+      "Team Falcon E, a group of students from the Department of Mechanical Engineering, representing the University of Moratuwa has emerged as one out of best 20 teams in VinUniversity Global Case Competition (VGCC) hosted by VinUniversity, Hanoi, Vietnam. The awards ceremony was held on 4th of December ",
+    image:
+      "https://images.unsplash.com/photo-1640697687394-d02650d7ecc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  },
+  {
+    id:2,
+    title:
+      "TEAM FALCON E REACHES TOP 20 IN VINUNIVERSITY GLOBAL CASE COMPETITION 2021",
+    description:
+      "Team Falcon E, a group of students from the Department of Mechanical Engineering, representing the University of Moratuwa has emerged as one out of best 20 teams in VinUniversity Global Case Competition (VGCC) hosted by VinUniversity, Hanoi, Vietnam. The awards ceremony was held on 4th of December ",
+    image:
+      "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80",
+  },
+  {
+    id:3,
+    title:
+      "TEAM FALCON E REACHES TOP 20 IN VINUNIVERSITY GLOBAL CASE COMPETITION 2021",
+    description:
+      "Team Falcon E, a group of students from the Department of Mechanical Engineering, representing the University of Moratuwa has emerged as one out of best 20 teams in VinUniversity Global Case Competition (VGCC) hosted by VinUniversity, Hanoi, Vietnam. The awards ceremony was held on 4th of December ",
+    image:
+      "https://images.unsplash.com/photo-1640590890297-64fd796496f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80",
+  },
+];
 
 export default function AchievementView() {
     const { fonts } = useContext(ThemeContext);
+    const { id } = useParams();
+
+    const data = value[id-1];
+    console.log(data)
 
   return (
     <AchContainer font={fonts}> 
@@ -94,10 +129,10 @@ export default function AchievementView() {
                 {data.title}
               </Title>
               <Content>
-                {data?.description[0]}
+                {data?.description}
               </Content>
               <Content>
-                {data?.description[1]}
+                {data?.description}
               </Content>
             </Col>
           </CustomRow>
