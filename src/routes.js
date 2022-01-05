@@ -23,7 +23,10 @@ const SelectJob = React.lazy(()=>import('./components/SelectJob'));
 const AdminDashboard = React.lazy(()=>import('./components/AdminDashboard'));
 const UserListOfAdmin = React.lazy(()=>import("./containers/Dashboard/Admin/Users/UserList"));
 const JobListOfAdmin = React.lazy(()=>import("./containers/Dashboard/Admin/Jobs/JobList"));
+const JobListOfCompany = React.lazy(()=>import("./containers/Dashboard/Company/Jobs/JobListCompany"));
 const NewsListOfAdmin = React.lazy(()=>import("./containers/Dashboard/Admin/News/NewsList"));
+const NewsListOfCompany = React.lazy(()=>import("./containers/Dashboard/Company/News/NewsListCompany"));
+const NewsListOfAdminNonApproved = React.lazy(()=>import("./containers/Dashboard/Admin/News/NewsListNonApproved"));
 const CompanyListOfAdmin = React.lazy(()=>import('./containers/Dashboard/Admin/Company/CompanyList'));
 const StudentRegister = React.lazy(()=>import('./components/StudentRegister'));
 const CompanyRegister = React.lazy(()=>import('./components/CompanyRegister'));
@@ -94,6 +97,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "user", element: <View><UserListOfAdmin/></View> },
       { path: "news", element: <View><SelectNews/></View> },
       { path: "news/list", element: <View><NewsListOfAdmin/></View> },
+      { path: "news/non-approved-list", element: <View><NewsListOfAdminNonApproved/></View> },
       { path: 'editNews/:id', element: <View><EditNews/></View> },
       { path: "news/addNews", element: <View><AddNewsPost/></View> },
       { path: "news/preview", element: <View><NewsView /> </View> },
@@ -132,11 +136,22 @@ const routes = (isAuthenticated,userRole) => [
     element: (isAuthenticated && userRole === "ROLE_COMPANY" ) || true ? <CompanyLayout /> : <Navigate to="/login" />,
     children: [
       {path: "dashboard", element: <h1>Profile view of company</h1>},
-      {path: "news", element: <h1>News List of company</h1>},
-      {path: "job", element: <h1>Job list of student</h1> },
-      {path: "settings", element: <h1>Student Settings</h1>},
-      {path: "/company", element: <Navigate to="/404" />},
-      {path: "*", element: <Navigate to="/404" />},
+      {path: "profile", element: <h1>Profile view of company</h1>},
+      { path: "news", element: <View><SelectNews/></View> },
+      { path: "news/list", element: <View><NewsListOfCompany/></View> },
+      { path: 'editNews/:id', element: <View><EditNews/></View> },
+      { path: "news/addNews", element: <View><AddNewsPost/></View> },
+      { path: "news/preview", element: <View><NewsView /> </View> },
+      { path: "news/:id", element: <View><NewsView/></View> },
+      { path: "job", element: <View><SelectJob/></View> },
+      { path: "job/:id", element: <View><PostJob /></View> },
+      { path: "job/preview", element: <View><PostJob /></View> },
+      { path: "job/list", element: <View><JobListOfCompany/></View> },
+      { path: 'editJob/:id', element: <h1>Edit Job</h1>},
+      { path: "job/addJob", element: <View><AddJobPost/></View> },
+      { path: "settings", element: <h1>Student Settings</h1>},
+      { path: "/company", element: <Navigate to="/404" />},
+      { path: "*", element: <Navigate to="/404" />},
     ],
   },
 ];

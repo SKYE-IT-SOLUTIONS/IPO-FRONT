@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const rowWidth = 200;
 
-const NewsList = () => {
+const NewsListCompany = () => {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(8);
 
@@ -25,7 +25,7 @@ const NewsList = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetAllNews();
+      const { status, data, error } = await dataService.handleGetAllNewsUser();
       if (status) {
         console.log("In Admin : ", data);
         setNewsList(data);
@@ -186,4 +186,4 @@ const NewsList = () => {
   );
 };
 
-export default NewsList;
+export default NewsListCompany;

@@ -4,16 +4,21 @@ import {
   onSubmit,
   onUpdate,
   onDelete,
-  onSubmitNoAuth
+  onSubmitNoAuth,
+  onApproved,
 } from "../api/data/dataAPI";
 
 const NEWS_DATA_URL = "/news";
 const GLOBAL_NEWS_DATA_URL = "news?visibility=global";
+const NON_APPROVAL_NEWS_DATA_URL = "news?approval=false";
+const APPROVAL_NEWS_DATA_URL = "news/approval";
 const JOB_DATA_URL = "/job";
 const CONTACT_US ='/content'
 const SUBSCRIBE_URL ='/email/add'
 const REQUEST_OTHER_URL ='request?type=other'
-const GET_STAT_DATA ='/stat/'
+const GET_STAT_DATA ='/stat'
+const NEWS_DATA_USER_URL ="news/user";
+const JOB_DATA_USER_URL ="jobs/user";
 
 
 export default class DataService {
@@ -33,6 +38,16 @@ export default class DataService {
     return result;
   };
 
+  handleGetAllNewsUser = async () => {
+    const result = await onGetAll(NEWS_DATA_USER_URL);
+    return result;
+  };
+
+  handleGetAllJobsUser = async () => {
+    const result = await onGetAll(JOB_DATA_USER_URL);
+    return result;
+  }
+
   handleGetAllJobs = async () => {
     const result = await onGetAll(JOB_DATA_URL);
     return result;
@@ -42,6 +57,16 @@ export default class DataService {
     const result = await onGetAll(GLOBAL_NEWS_DATA_URL);
     return result;
   };
+
+  handleNonApprovedNews = async () => {
+    const result = await onGetAll(NON_APPROVAL_NEWS_DATA_URL);
+    return result;
+  };
+
+  handleApprovedNews = async (id) => {
+    const result = await onApproved(APPROVAL_NEWS_DATA_URL,id);
+    return result;
+  }
 
   //handle job and news submit
   handleSubmitNews = async (data) => {

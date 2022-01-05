@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
+import AuthService from "../../../services/AuthServices";
 
 let heighty=window.scrollY;
 
@@ -256,6 +257,8 @@ const AdminSideNav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const authService = new AuthService();
+
   const [active, setActive] = useState(true);
 
   function handleResize() {
@@ -332,6 +335,7 @@ const AdminSideNav = () => {
 
             <NavListItem>
               <NavListLink  onClick={ () => {
+                          authService.handleLogoutLocally();
                           dispatch(setUserLoggedIn("SSNB"));
                           dispatch(setUserRole(""));
                           dispatch(setUserId(""));
