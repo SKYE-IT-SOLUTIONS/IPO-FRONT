@@ -55,7 +55,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "/", element: <View><HomeContent/></View> },
       { path: "404", element: <View><NotFound/></View> },
       { path: "home", element: <View><HomeContent/></View> },
-      { path: "login", element: <View><LoginPage/></View> },
+      { path: "login", element: !isAuthenticated ? <View><LoginPage/></View> : userRole === "ROLE_ADMIN" ? <Navigate to="/admin/dashboard"/> : userRole === "ROLE_COMPANY" ? <Navigate to="/company/dashboard"/> : <Navigate to="/student/dashboard"/> },  
       { path: "jobs", element: <View><JobList/></View> },
       { path: "job/:id", element: <View><NewsView/></View> },
       { path: "editJob/:id", element: <View><EditJob/></View> },
