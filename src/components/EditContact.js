@@ -41,8 +41,12 @@ function EditContact() {
     const { fonts } = useContext(ThemeContext);
     const [contact,setContact]=useState();
     const [contactInfo,setContactInfo]=useState({ error: null, status: false });
+    const [fax,setFax]=useState();
+    const [faxInfo,setFaxInfo]=useState({ error: null, status: false });
     const [email,setEmail]=useState();
     const [emailInfo,setEmailInfo]=useState({ error: null, status: false });
+    const [officer,setOfficer]=useState();
+    const [officerInfo,setOfficerInfo]=useState({ error: null, status: false });
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (credentials) => {
@@ -84,11 +88,45 @@ function EditContact() {
                     <Col md={8} sm={12}>
                     <Input2 type="email" name="email" 
                                 placeholder="abc@gmail.com"
+                                value={email}
                                 onChange={(e) => {
                                 setEmail(e.target.value)
                                 setEmailInfo(Validator(e.target.value,patternMail,"Mail"));
                                 }}/><br/>
                          {emailInfo.error && <Error>{emailInfo.error}</Error>}
+                    </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                    <Col md={4} sm={12}>
+                        Officer
+                    </Col>
+                    <Col md={8} sm={12}>
+                        <Input2 type="text" name="officer" value={officer} placeholder="Name***"
+                        onChange={(e) => {
+                            let val = e.target.value;
+                            setOfficer(val);
+                            setOfficerInfo({ error: "Required Officer name", status: true });
+                          }}/>
+                           {officerInfo.error && <Error>{officerInfo.error}</Error>}
+                    </Col>
+                    </Row>
+                    <br/>
+                    
+                    <Row>
+                    <Col md={4} sm={12}>
+                        Fax
+                    </Col>
+                    <Col md={8} sm={12}>
+                    <Input2 type="text" name="fax" 
+                                placeholder="03********"
+                                onChange={(e) => {
+                                  let val = e.target.value;
+                                  setFax(val);
+                                  setFaxInfo(Validator(val,patternContact, "Contact Number"));
+                                }}
+                               /><br/>
+                         {faxInfo.error && <Error>{faxInfo.error}</Error>}
                     </Col>
                     </Row>
                     <br/>
