@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
 
 let heighty=window.scrollY;
 
@@ -21,10 +22,13 @@ const Body = styled.div`
     width: ${(props) => (props.active ? "285px" : "85px")};
   }
   @media (min-width: 500px) and (max-width: 700px) {
-    width: ${(props) => (props.active ? "285px" : "85px")};
+    width: ${(props) => (props.active ? "285px" : "100px")};
   }
-  @media (min-width: 300px) and (max-width: 500px) {
-    width: ${(props) => (props.active ? "285px" : "80px")};
+  @media (min-width: 400px) and (max-width: 500px) {
+    width: ${(props) => (props.active ? "500px" : "150px")};
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    width: ${(props) => (props.active ? "500px" : "150px")};
   }
   @media (max-width: 300px) {
     width: ${(props) => (props.active ? "285px" : "40px")};
@@ -79,8 +83,11 @@ const NavHeaderName = styled.div`
   @media (min-width: 700px) and (max-width: 1024px) {
     font-size: 13px;
   }
-  @media (min-width: 300px) and (max-width: 700px) {
-    font-size: 12px;
+  @media (min-width: 500px) and (max-width: 700px) {
+    font-size: 10px;
+  }
+  @media (min-width: 300px) and (max-width: 500px) {
+    font-size: 8px;
   }
   @media (max-width: 300px) {
     font-size: 0px;
@@ -116,10 +123,18 @@ const MenuIcon = styled.i`
   width: 100px;
   line-height: 50px;
   }
-  @media (min-width: 300px) and (max-width: 500px) {
-    left: ${(props) => (props.active ? "50%" : "40%")};
+  @media (min-width: 400px) and (max-width: 500px) {
+    left: ${(props) => (props.active ? "43%" : "40%")};
   top: 6px;
-  font-size: 20px;
+  font-size: 15px;
+  height: 0px;
+  width: 100px;
+  line-height: 50px;
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    left: ${(props) => (props.active ? "43%" : "40%")};
+  top: 6px;
+  font-size: 0px;
   height: 0px;
   width: 100px;
   line-height: 50px;
@@ -127,7 +142,7 @@ const MenuIcon = styled.i`
   @media (max-width: 300px) {
     left: ${(props) => (props.active ? "40%" : "50%")};
   top: 6px;
-  font-size: 15px;
+  font-size: 0px;
   height: 20px;
   width: 20px;
   line-height: 50px;
@@ -203,8 +218,11 @@ const NavListItemName = styled.span`
   @media (min-width: 700px) and (max-width: 1024px) {
     font-size: 13px;
   }
-  @media (min-width: 300px) and (max-width: 700px) {
+  @media (min-width: 400px) and (max-width: 700px) {
     font-size: 12px;
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    font-size: 10px;
   }
   @media (max-width: 300px) {
     font-size: 8px;
@@ -252,7 +270,7 @@ const CompanySideNav = () => {
   return (
     <React.Fragment>
       <Body active={active}>
-        <SideNavBarContainer active={true}>
+        <SideNavBarContainer active={active}>
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
             <NavHeaderName>Dashboard</NavHeaderName>
@@ -272,18 +290,9 @@ const CompanySideNav = () => {
               <NavListItemTooltip active={active}>Home</NavListItemTooltip>
             </NavListItem>
 
-            <NavListItem>
-              <NavListLink
-                onClick={() => navigate("/company/dashboard/profile")}
-              >
-                <NavListItemIcon className="bx bx-user"></NavListItemIcon>
-                <NavListItemName active={active}>Profile</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Profile</NavListItemTooltip>
-            </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/company/dashboard/news")}>
+              <NavListLink onClick={() => navigate("/company/news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -291,7 +300,7 @@ const CompanySideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/company/dashboard/job")}>
+              <NavListLink onClick={() => navigate("/company/job")}>
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
@@ -300,13 +309,28 @@ const CompanySideNav = () => {
 
             <NavListItem>
               <NavListLink
-                onClick={() => navigate("/company/dashboard/settings")}
+                onClick={() => navigate("/company/settings")}
               >
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>
               </NavListLink>
               <NavListItemTooltip active={active}>Settings</NavListItemTooltip>
             </NavListItem>
+
+            <NavListItem>
+              <NavListLink  onClick={ () => {
+                          dispatch(setUserLoggedIn("SSNB"));
+                          dispatch(setUserRole(""));
+                          dispatch(setUserId(""));
+                          navigate("/home");
+                      }}>
+                <NavListItemIcon className="bx bx-log-out"></NavListItemIcon>
+                <NavListItemName active={active}  href="/"
+                     >Logout</NavListItemName>
+              </NavListLink>
+              <NavListItemTooltip active={active}>Logout</NavListItemTooltip>
+            </NavListItem>
+
           </NavBody>
         </SideNavBarContainer>
       </Body>

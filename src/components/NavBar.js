@@ -383,9 +383,21 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <DropItems id="bg-custom-3">Reserve a Conference Hall</DropItems>
-              <DropItems id="bg-custom-3">Reserve a Playground</DropItems>
-              <DropItems id="bg-custom-3">General Feedback</DropItems>
+              <DropItems id="bg-custom-3" 
+              onClick={() => {
+                  navigate("/requesthall");
+                }}
+                >Reserve a Conference Hall</DropItems>
+
+              <DropItems id="bg-custom-3"
+              onClick={() => {
+                  navigate("/requestground");
+                }}>Reserve a Playground</DropItems>
+
+              <DropItems id="bg-custom-3"
+              onClick={() => {
+                  navigate("/feedback");
+                }}>General Feedback</DropItems>
               <DropItems
                 id="bg-custom-3"
                 onClick={() => {
