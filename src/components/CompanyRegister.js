@@ -142,16 +142,15 @@ function CompanyRegister() {
     if (files.length !== 0) {
       setFiles(files);
       console.log(files[0]);
-      
-      const {status,error,data} = await fileService.handleCreate(files[0]);
-      
-    if (status) {
-      console.log("fileURL", data?.fileUrl);
-      setImageUrl(data?.fileUrl);
-    }else{
-      console.log("error", error);
-    }
-      
+
+      const { status, error, data } = await fileService.handleCreate(files[0]);
+
+      if (status) {
+        console.log("fileURL", data?.fileUrl);
+        setImageUrl(data?.fileUrl);
+      } else {
+        console.log("error", error);
+      }
     }
   };
 
@@ -159,8 +158,7 @@ function CompanyRegister() {
   const navigate = useNavigate();
 
   const handleSubmit = async (credentials) => {
-
-    console.log(credentials)
+    console.log(credentials);
     setIsLoading(true);
     const { status, data, error } = await authServices.handleCompanySignUp(
       credentials
@@ -259,13 +257,20 @@ function CompanyRegister() {
 
             <Lable>Image</Lable>
             <FileUpload
-                style={{ backgroundColor: "#ededed" }}
-                accept=".jpg,.png,.jpeg"
-                label="News Image(s)"
-                files={filesU}
-                setFiles={setFilesU}
-                updateFilesCb={updateUploadedFiles}
-              />
+              style={{ backgroundColor: "#ededed" }}
+              accept=".jpg,.png,.jpeg"
+              label="News Image(s)"
+              files={filesU}
+              setFiles={setFilesU}
+              updateFilesCb={updateUploadedFiles}
+            />
+            {files[0] && (
+              <p>
+                {"name : " + files[0].name}
+                <br />
+                {"size : " + (files[0].size / 1000000).toFixed(2)}MB
+              </p>
+            )}
 
             <Lable>Password</Lable>
             <Input
