@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import Feedback from "../assets/Feedback.svg";
 import { Paper, Grid, Box,TextField,TextareaAutosize } from "@mui/material";
 import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
 import { Simple_Validator, Validator } from "../utils/validation";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const StyledImg = styled.img`
   padding: auto;
@@ -29,6 +30,7 @@ const LoginCol = styled(Col)`
 const SubBttn = styled(CustomButton)`
   width: 150px;
   margin: 15px 0px;
+  background: ${({ bgColor }) => bgColor};
 `;
 const Error = styled.p`
   color: #dc281e;
@@ -53,6 +55,8 @@ const handleSubmit = async () => {
   
 }
 export default function HoverRating() {
+  const { theme, light, dark,fonts } = useContext(ThemeContext);
+  const them = theme ? light.button : dark.button;
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
   const [name, setName] = useState("");
@@ -114,8 +118,8 @@ export default function HoverRating() {
                     setCommentInfo(Simple_Validator(com,"Comment"))
                   }}/>
                   {commentInfo.error && <Error>{commentInfo.error}</Error>}
-                  <SubBttn submit disabled={!commentInfo.status || isLoading} 
-                  
+                  <SubBttn disabled={!commentInfo.status || isLoading} 
+                  bgColor={!isLoading ? them.login : them.disable}
                   onClick={()=>{
                     if(commentInfo.status){
                       handleSubmit({
