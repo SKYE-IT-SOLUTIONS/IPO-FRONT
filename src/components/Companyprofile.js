@@ -11,6 +11,7 @@ const OuterDiv = styled(Container)`
   margin: auto;
 `;
 const Separatecol = styled(Col)`
+  margin-left: 1px;
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -31,7 +32,7 @@ const Separaterow = styled(Row)`
     margin: auto;
 `;
 const Separaterow2 = styled(Row)`
-    padding:2px;
+  margin: 2px;
   display: flex;
   justify-content: center; 
   text-align: center;
@@ -181,7 +182,7 @@ function Companyprofile() {
                                 <h6>Contact Person: <b>{value.contactperson}</b><br/>Number:<b>{value.contactpersonnumb}</b></h6>
                                
                             </Separatecol>
-                        <Col md={8} sm={12} xs={12}>
+                        <Col md={7} sm={12} xs={12}>
                             <Separaterow >
                                 <Rowdiv img={value.coverimg}>
                                

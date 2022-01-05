@@ -293,9 +293,8 @@ const CompanySideNav = () => {
               <NavListItemTooltip active={active}>Home</NavListItemTooltip>
             </NavListItem>
 
-
             <NavListItem>
-              <NavListLink onClick={() => navigate("/company/news")}>
+              <NavListLink onClick={() => navigate("news")}>
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -303,21 +302,13 @@ const CompanySideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink onClick={() => navigate("/company/job")}>
+              <NavListLink onClick={() => navigate("job")}>
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
               <NavListItemTooltip active={active}>Jobs</NavListItemTooltip>
             </NavListItem>
-            <NavListItem>
-              <NavListLink
-                onClick={() => navigate("/company/settings")}
-              >
-                <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
-                <NavListItemName active={active}>Settings</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Logout</NavListItemTooltip>
-            </NavListItem>
+            
 
             <NavListItem>
               <NavListLink  onClick={ () => {
