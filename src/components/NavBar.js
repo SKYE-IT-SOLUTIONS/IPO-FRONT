@@ -178,22 +178,19 @@ function NavBar(props) {
                 navigate("/home");
               }}
             >
-              <DropItems href="" id="bg-custom-3">
+              <DropItems href="#visionMission" id="bg-custom-3">
                 Vision and Mission
               </DropItems>
-              <DropItems href="" id="bg-custom-3">
+              <DropItems href="#partners" id="bg-custom-3">
                 Our Proud Partners
               </DropItems>
-              <DropItems
-                id="bg-custom-3"
-                onClick={() => {
-                  console.log("Clicked News");
-                  navigate("allNews");
-                }}
-              >
+              {/* onClick={()=>{
+                console.log("Clicked News");
+                navigate("/allNews")}} */}
+              <DropItems href="/allNews" id="bg-custom-3" >
                 News
               </DropItems>
-              <DropItems href="/#contact" id="bg-custom-3">
+              <DropItems href="#contactUS" id="bg-custom-3">
                 Contact Us
               </DropItems>
             </NavDropdown>

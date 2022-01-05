@@ -51,7 +51,7 @@ function NewsList() {
               RenderComponent={NewsCard}
               title="Posts"
               pageLimit={1}
-              dataLimit={6}
+              dataLimit={4}
             />
           </Container>
         )

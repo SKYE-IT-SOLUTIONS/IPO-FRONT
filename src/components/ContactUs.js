@@ -157,7 +157,7 @@ function ContactUs(props) {
   return isLoading ? (
     <Spinner />
   ) : (
-    <ContainerDiv bg={them.ui} font={fonts} md={4} sm={12}>
+    <ContainerDiv id="contactUS" bg={them.ui} font={fonts} md={4} sm={12}>
       <div>
         <ContactIcon icon="ic:round-contact-phone" />
         <ContactHeader font={fonts}>CONTACT US</ContactHeader>

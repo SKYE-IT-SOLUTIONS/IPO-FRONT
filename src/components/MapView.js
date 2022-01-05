@@ -35,8 +35,6 @@ function MapView() {
       height:hei/3.8,
     }
   }
-  
-  
   const displayMarkers = () => {
     return (
       

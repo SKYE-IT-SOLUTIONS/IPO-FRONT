@@ -12,6 +12,7 @@ const GLOBAL_NEWS_DATA_URL = "news?visibility=global";
 const JOB_DATA_URL = "/job";
 const CONTACT_US ='/content'
 const SUBSCRIBE_URL ='/email/add'
+const REQUEST_OTHER_URL ='request?type=other'
 
 
 export default class DataService {
@@ -89,6 +90,13 @@ export default class DataService {
   //handle subscribe email
   handleSubscription = async (data) => {
     const result = await onSubmitNoAuth(SUBSCRIBE_URL, data);
+    return result;
+  }
+
+  //requests from outside
+  handleRequestTypeOther = async (data) => {
+    console.log(data)
+    const result = await onSubmit(REQUEST_OTHER_URL, data);
     return result;
   }
 }
