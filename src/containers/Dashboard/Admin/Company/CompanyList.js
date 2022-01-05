@@ -3,7 +3,6 @@ import React, { useState,useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewIcon from "@mui/icons-material/Visibility";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import AuthServices from "../../../../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../../../components/Spinner";
@@ -52,6 +51,13 @@ const CompanyList = () => {
       headerAlign: "center",
       align: "left",
       width: rowWidth * 2,
+    },
+    {
+      field: "active",
+      headerName: "Status",
+      headerAlign: "center",
+      align: "center",
+      width: rowWidth * .5,
     },
     {
       field: "view",
