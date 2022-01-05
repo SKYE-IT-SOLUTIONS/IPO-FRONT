@@ -92,7 +92,9 @@ function SelectNews() {
                   <NavButton onClick={()=>{
                     navigate("list")
                   }}>View News List</NavButton>
-                  <NavButton>View Non Approved List</NavButton>
+                  <NavButton onClick={()=>{
+                    navigate("non-approved-list")
+                  }}>View Non Approved List</NavButton>
           </InnerDiv>
         </Column>
         <Col md={7}>

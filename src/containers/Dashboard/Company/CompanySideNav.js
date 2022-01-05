@@ -256,7 +256,7 @@ const CompanySideNav = () => {
   return (
     <React.Fragment>
       <Body active={active}>
-        <SideNavBarContainer active={true}>
+        <SideNavBarContainer active={active}>
           <NavHeder active={active}>
             <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
             <NavHeaderName>Dashboard</NavHeaderName>

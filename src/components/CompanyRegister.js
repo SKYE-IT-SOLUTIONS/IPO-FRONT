@@ -63,6 +63,7 @@ const LoginCol = styled(Col)`
 const LoginBttn = styled(CustomButton)`
   width: 150px;
   margin: 15px 0px;
+  background: ${({ bgColor }) => bgColor};
 `;
 
 const SeparateDiv = styled.div`
@@ -86,7 +87,8 @@ const Error = styled.p`
 `;
 
 function CompanyRegister() {
-  const { fonts } = useContext(ThemeContext);
+  const { theme, light, dark,fonts } = useContext(ThemeContext);
+  const them = theme ? light.button : dark.button;
   const fileService = new FileService();
 
   const [name, setName] = useState("");
@@ -304,7 +306,6 @@ function CompanyRegister() {
             )}
             <Recaptcha onChange={onChange} />
             <LoginBttn
-              submit
               disabled={
                 !recaptcha ||
                 isLoading ||
@@ -316,6 +317,7 @@ function CompanyRegister() {
                 !passwordInfo.status ||
                 !matchPassword.isMatching
               }
+              bgColor={!isLoading ? them.submit : them.disable}
               onClick={() => {
                 if (
                   nameInfo.status &&
