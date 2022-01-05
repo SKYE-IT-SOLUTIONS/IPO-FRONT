@@ -218,6 +218,41 @@ export const onDelete = async (DATA_URL, id) => {
   return result;
 };
 
+export const handleGetUser =async (REQUEST_URL)=>{
+  var config = {
+    method: "GET",
+    url: REQUEST_URL,
+    headers: {
+      Authorization: `Bearer ${getAccessToken()}`,
+      "Content-Type": "application/json",
+    },
+  };
+  await authRequest(config)
+    .then(async ({ data, error }) => {
+      if (!error) {
+        if (data.status === 200) {
+          result = { status: true,data:data?.data, error: null };
+        } else if (data.status === 401) {
+          const { status, error } = await refreshAccessToken(
+            REFRESH_URL,
+            postRequest
+          );
+          if (status) {
+            handleGetUser(REQUEST_URL);
+          } else {
+            result = { status: false,data:null, error: getErrorMessage(error) };
+          }
+        }
+      } else {
+        result = { status: false,data:null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      result = { status: false,data:null, error: getErrorMessage(error) };
+    });
+  return result;
+}
+
 export const logOutLocally=()=>{
   setAccessToken(null);
   setRefreshToken(null);
