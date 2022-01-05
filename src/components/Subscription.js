@@ -62,6 +62,8 @@ const Title =  styled.h1`
 `
 const RECAPTCHA =styled(Recaptcha)`
   margin: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 
