@@ -274,8 +274,18 @@ function NavBar(props) {
               >
                 Send a CV
               </DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requestTraining");
+                }}
+              >
+                Request a training
+                <br />
+                session
+              </DropItems>
 
-              <NavDropdown
+              {/* <NavDropdown
                 title={
                   <NavSubTitle
                     onClick={() => {
@@ -353,7 +363,7 @@ function NavBar(props) {
                 >
                   <NavSubTitle> Plot the career path</NavSubTitle>
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
 
               <DropItems
                 href="/product"
@@ -376,14 +386,16 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <DropItems href="/requesthall" id="bg-custom-3">
-                Reserve a Conference Hall
-              </DropItems>
-              <DropItems href="/requestground" id="bg-custom-3">
-                Reserve a Playground
-              </DropItems>
-              <DropItems href="/feedback" id="bg-custom-3">
-                General Feedback
+              <DropItems id="bg-custom-3">Reserve a Conference Hall</DropItems>
+              <DropItems id="bg-custom-3">Reserve a Playground</DropItems>
+              <DropItems id="bg-custom-3">General Feedback</DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/achievements");
+                }}
+              >
+                Achievements
               </DropItems>
             </NavDropdown>
 

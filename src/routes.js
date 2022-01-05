@@ -74,7 +74,7 @@ const routes = (isAuthenticated,userRole) => [
       { path: "requestWorkshop", element: <View><Requestworkshop/></View>},
       { path: 'requesthall', element: <View><Requesthall/></View> },
       { path: 'requestground', element: <View><Requestground/></View> },
-      { path: 'moreOpt', element: <View><NavBarListView/></View> },
+      { path: 'requestTraining', element: <View><NavBarListView/></View> },
       { path: 'developers', element: <View><OurTeam/></View> },
       // { path: 'test', element: <UploadImage/> },
       { path: 'feedback', element: <View><Feedback/></View> },
