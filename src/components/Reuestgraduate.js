@@ -332,12 +332,9 @@ function Requestgraduate() {
                                 {uploadInfo.error != null && <Error>{uploadInfo.error}</Error>}
                             </Form.Group>
                             </>
-                            <span  style={{margin:"5px"}}>
-                                <Recaptcha onChange={onchange}/>
-                            </span>
                         </Grid>
                     </Grid>
-
+                    <Recaptcha onChange={onchange}/>
                     <CustomButton type="submit" submit 
                      disabled={!nameInfo.status || !descriptionInfo.status || !countInfo.status || !mailInfo.status || !numberInfo.status || !cityInfo.status || !uploadInfo.status}
                         onClick={handleSubmit}
