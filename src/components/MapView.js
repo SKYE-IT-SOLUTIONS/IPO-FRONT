@@ -24,9 +24,10 @@ function MapView() {
 
   if(wid>770){
      containerStyle = {
-      width:wid/3.1,
+      width:wid/3.038,
       height:hei/1.66,
     }
+    
   }
   else{
     containerStyle = {
