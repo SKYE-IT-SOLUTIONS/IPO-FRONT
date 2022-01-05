@@ -115,14 +115,10 @@ function Mission() {
             <Col lg={5} md={7} sm={10} xs={10}>
               <Title>Mission</Title>
               <Para>
-                "Empower our undergraduates and alumni with the knowledge,
-                skills, and experiences to:
+                  Educate and support students as they explore and introspect to decide prudent career
+                  pathways, gain valuable experience, develop professionalism, and embark on their
+                  post-graduation career plans as global citizens
                 <br/>
-                <P1>
-                    a) Make sound career and academic decisions<br/>
-                    b) Prepare for satisfying employment<br/>, and<br/>
-                    c) Develop successful lifelong career plans in an evolving global world of work"
-                </P1>
               </Para>
             </Col>
             <Col lg={3} md={3} sm={0} xs={0}>

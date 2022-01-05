@@ -106,7 +106,8 @@ function Vision(){
                     <Col lg={5} md={7} sm={10} xs={10}>
                     <Title>Vision</Title>
                         <Para>
-                        To be the central resource center that actively engages with undergraduates in exploring and pursuing meaningful career development, while inspiring the university and its stake holders to consistently integrate career into their efforts
+                        To be the central resource center that actively engages with undergraduates in exploring and
+meticulously sculpting their career development by blending university and industry resources
                         </Para>
                     </Col>
                     <Col lg={3} md={3}>
