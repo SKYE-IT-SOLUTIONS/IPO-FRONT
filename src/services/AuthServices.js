@@ -1,7 +1,9 @@
-import { loginIn, logOut,isUser,signUp,logOutLocally } from "../api/auth/authAPI";
+import { loginIn, logOut,isUser,signUp,logOutLocally,onGetAll,onDelete } from "../api/auth/authAPI";
 
 const COMPANY_SIGNUP = "/auth/signup?profile=company";
 const STUDENT_SIGNUP = "/auth/signup?profile=student";
+const GET_ALL_COMPANIES = "/auth?filter=company";
+const USER_DELETE = "auth/delete";
 
 export default class AuthServices {
 
@@ -38,4 +40,17 @@ export default class AuthServices {
   handleLogoutLocally = async () => {
     logOutLocally();
   }
+
+  handleGetAllCompanyUsers = async () => {
+    console.log("handleGetAllCompanyUsers");
+    const response = await onGetAll(GET_ALL_COMPANIES);
+    return response;
+  }
+
+  handleDeleteCompanyUser = async (id) => {
+    console.log("handleDeleteCompanyUser");
+    const response = await onDelete(USER_DELETE,id);
+    return response;
+  }
+
 }
