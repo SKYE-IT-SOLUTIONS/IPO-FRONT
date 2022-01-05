@@ -135,21 +135,21 @@ function ImageSlider() {
           <Carousel.Item>
             <ImageTag 
               // src="https://drive.google.com/uc?id=1ORDr_fXlqRWeAq_cQrJQBemEpo157zdv&export=download"
-              src={pic4}
-              alt="Third slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <ImageTag
-              // src="https://drive.google.com/uc?id=1rNhV-yIsDoeEHw2AKu5n9M0iWLx00JCJ&export=download"
               src={pic3}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              // src="https://drive.google.com/uc?id=154keKHftP8LWQAmAb2AREH44rPJhVCEA&export=download"
+              // src="https://drive.google.com/uc?id=1rNhV-yIsDoeEHw2AKu5n9M0iWLx00JCJ&export=download"
               src={pic2}
+              alt="Third slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <ImageTag
+              // src="https://drive.google.com/uc?id=154keKHftP8LWQAmAb2AREH44rPJhVCEA&export=download"
+              src={pic4}
               alt="Third slide"
             />
           </Carousel.Item>
