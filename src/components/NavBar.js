@@ -434,6 +434,13 @@ function NavBar(props) {
               >
                 Government Gazzet
               </DropItems>
+              <DropItems
+                href="https://dceu.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Technology Transfer Office
+              </DropItems>
             </NavDropdown>
           </Nav>
           <Nav>
