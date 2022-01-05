@@ -53,15 +53,29 @@ const JobList = () => {
       field: "title",
       headerName: "Title",
       headerAlign: "center",
-      align: "center",
+      align: "left",
       width: 2 * rowWidth,
     },
     {
-      field: "description",
-      headerName: "Description",
+      field: "deadline",
+      headerName: "Deadline",
       headerAlign: "center",
-      align: "left",
-      width: 2 * rowWidth,
+      align: "center",
+      width: 0.75 * rowWidth,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      headerAlign: "center",
+      align: "center",
+      width: 0.5 * rowWidth,
+    },
+    {
+      field: "createdBy",
+      headerName: "Created By",
+      headerAlign: "center",
+      align: "center",
+      width: 1.5*rowWidth,
     },
     {
       field: "updatedDate",
@@ -81,6 +95,7 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ViewIcon
+          style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/job/${id}`);
@@ -100,6 +115,7 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ModeEditOutlineIcon
+          style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/editJob/${id}`);
@@ -119,6 +135,7 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
+          style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={async () => {
               const { status, error } = await dataService.handleDeleteJob(id);
@@ -139,7 +156,9 @@ const JobList = () => {
     return {
       id: job?.id,
       title: job?.title,
-      description: job?.description,
+      status: job?.approval ? "Approved" : "Pending",
+      deadline: job?.deadline,
+      createdBy: job?.addedBy,
       updatedDate: job?.howLong + "  ago",
     };
   });

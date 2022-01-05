@@ -53,7 +53,7 @@ const columns = [
     width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <ViewIcon sx={{ fontSize: 30 }} />;
+      return <ViewIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
   {
@@ -65,7 +65,7 @@ const columns = [
     width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <ModeEditOutlineIcon sx={{ fontSize: 30 }} />;
+      return <ModeEditOutlineIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
   {
@@ -77,7 +77,7 @@ const columns = [
     width: 70 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <DeleteIcon sx={{ fontSize: 30 }} />;
+      return <DeleteIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
 ];
