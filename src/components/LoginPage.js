@@ -128,8 +128,12 @@ function LoginPage(props) {
           break;
       }
     } else {
-      setIsErrorMsgOpen(true);
-      setSubmitError(error);
+      if(error === 423){
+        navigate("/423");
+      }else{
+        setIsErrorMsgOpen(true);
+        setSubmitError(error);
+      }
     }
   };
 

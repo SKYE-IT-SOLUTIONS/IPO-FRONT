@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import React, { useContext } from "react";
-
-import NoFound from "../assets/404 Error.svg";
+import { Container, Row, Col } from "../components/CommonComponents";
+import Locked from "../assets/Security-pana.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-const FluidContainer = styled.div`
+const FluidContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@ const Subtitle = styled.div`
   }
 `;
 
-const StyledImg =styled.img`
+const StyledImg = styled.img`
   padding: auto;
   height: 450px;
   width: 100%;
@@ -39,23 +39,28 @@ const StyledImg =styled.img`
   @media (max-width: 768px) {
     height: 300px;
   }
-`
+`;
 
-const NotFound = () => {
+const Blocked = styled.span`
+  color: red;
+`;
+
+const LockedUser = () => {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
 
   return (
     <FluidContainer>
-      <StyledImg
-        alt=""
-        src={NoFound}
-      />
-      <Subtitle color={them.syntax} fontFamily={fonts.general}>
-        The page you are look in for doesn't exist.
-      </Subtitle>
+      <div>
+        <StyledImg alt="" src={Locked} />
+        {/* <p>Your profile is temparily <Blocked>blocked</Blocked>.Please verify the mail</p> */}
+        <Subtitle color={them.syntax} fontFamily={fonts.general}>
+          Your profile is temporarily <Blocked>blocked</Blocked>.Please verify the
+          mail
+        </Subtitle>
+      </div>
     </FluidContainer>
   );
 };
 
-export default NotFound;
+export default LockedUser;

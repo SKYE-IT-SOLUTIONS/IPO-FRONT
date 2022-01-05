@@ -146,7 +146,7 @@ function Achievement() {
                     : value.description
                 }
                 <Read onClick={() => {
-                        navigate('/achievement/1')
+                        navigate(`/achievement/${value.id}`)
                     }}> Read more</Read>
               </Content>
             </Col>
