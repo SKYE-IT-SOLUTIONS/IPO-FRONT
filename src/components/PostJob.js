@@ -242,8 +242,7 @@ function PostJob({ dataFromProp }) {
             qualifications: data.qualifications,
             experience: data?.experiences,
             salary: data?.salary,
-            deadline: data?.deadline,
-            date: data?.uploadTime,
+            date: data?.deadline,
           })
         } else {
           setError(error);
