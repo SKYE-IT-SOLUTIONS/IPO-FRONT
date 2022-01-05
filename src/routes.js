@@ -8,6 +8,7 @@ import StudentLayout from './containers/Dashboard/StudentLayout';
 import CompanyLayout from './containers/Dashboard/CompanyLayout';
 
 const NotFound = React.lazy(()=>import('./containers/404'));
+const LockedUser = React.lazy(()=>import('./containers/LockedUser'));
 const HomeContent = React.lazy(()=>import('./containers/HomeContent'));
 const AddJobPost = React.lazy(()=>import('./components/AddJobPost'));
 const PostJob = React.lazy(()=>import('./components/PostJob'));
@@ -54,6 +55,7 @@ const routes = (isAuthenticated,userRole) => [
     children: [
       { path: "/", element: <View><HomeContent/></View> },
       { path: "404", element: <View><NotFound/></View> },
+      { path: "423", element: <View><LockedUser/></View> },
       { path: "home", element: <View><HomeContent/></View> },
       { path: "login", element: !isAuthenticated ? <View><LoginPage/></View> : userRole === "ROLE_ADMIN" ? <Navigate to="/admin/dashboard"/> : userRole === "ROLE_COMPANY" ? <Navigate to="/company/dashboard"/> : <Navigate to="/student/dashboard"/> },  
       { path: "jobs", element: <View><JobList/></View> },
