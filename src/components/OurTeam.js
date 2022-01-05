@@ -322,7 +322,7 @@ function OurTeam() {
       </RowDiv>
 
       <DetailDiv>
-        <TableTitle>SKYE IT Solution</TableTitle>
+        <TableTitle>SKYE IT Solutions</TableTitle>
         <table style={{ margin: "auto", marginBottom: "15px" }}>
           <tbody>
             <tr>
