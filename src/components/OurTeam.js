@@ -161,6 +161,22 @@ const Description = styled.p`
   }
 `;
 
+const Proffesional = styled.p`
+  font-size: 10px;
+
+  @media (min-width: 769px) and (max-width: 1040px) {
+    font-size: 7px;
+  }
+
+  @media (max-width: 768px) and (min-width: 576px) {
+    font-size: 9px;
+  }
+  
+  @media (max-width: 575px) {
+    font-size: 9px;
+  }
+`;
+
 const Td = styled.td`
   text-align: left;
   padding-left: 20px;
@@ -283,6 +299,7 @@ function OurTeam() {
               <Name>{value.name}</Name>
               <Position>{value.position}</Position>
               <Description>{value.description}</Description>
+              <Proffesional>Bachelor of Computer Science(Ug)<br/>University of Ruhuna</Proffesional>
               <IconSet>
                 <LinkA href={value.fb} target="_blank">
                   <SocialIcon icon="bi:facebook" />
