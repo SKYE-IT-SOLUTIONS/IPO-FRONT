@@ -3,6 +3,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import editContact from '../assets/edit-contact.svg';
+import { Simple_Validator, Validator } from "../utils/validation";
+import { patternMail,patternContact } from "../config/pattern"
 
 const Contactcontainer=styled(Container)`
     font-family: ${({ font }) => font.general};
@@ -25,20 +27,27 @@ const Input2=styled(Input)`
     font-size:16px;
     width: 100%;
 `;
+const Error = styled.p`
+  color: #dc281e;
+  font-size: 13px;
+  margin: 0px;
+  text-align: left;
+  padding: 5px 0 5px 2px;
+`;
 const Button=styled(CustomButton)`
 
 `;
 function EditContact() {
     const { fonts } = useContext(ThemeContext);
-    const [addressNo,setAddressNo]=useState();
-    const [address1,setAddress1]=useState();
-    const [address2,setAddress2]=useState();
-    const [address3,setAddress3]=useState();
-    const [city,setCity]=useState();
     const [contact,setContact]=useState();
-    const [fax,setFax]=useState();
+    const [contactInfo,setContactInfo]=useState({ error: null, status: false });
     const [email,setEmail]=useState();
-    const [name,setName]=useState();
+    const [emailInfo,setEmailInfo]=useState({ error: null, status: false });
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async (credentials) => {
+        
+      };
 
     return (
         <Contactcontainer font={fonts}>
@@ -51,60 +60,55 @@ function EditContact() {
                     />
                 </Col>
                 <Col md={6} sm={12}>
-                    <Row>
-                        <Col md={4} sm={12}>
-                            <tr>Address</tr>
-                        </Col>
-                    <Col md={8} sm={12}>
-                        <table>
-                            <Inputaddress type="text" name="name" value={addressNo} placeholder="Apart No"/>
-                            <Inputaddress type="text" name="name" value={address1} placeholder="Line1"/>
-                            <Inputaddress type="text" name="name" value={address2} placeholder="Line2"/>
-                            <Inputaddress type="text" name="name" value={address3} placeholder="Line3"/>
-                            <Inputaddress type="text" name="name" value={city} placeholder="City"/>
-                        </table>
-                    </Col>
-                    </Row>
                     <br/>
                     <Row>
                     <Col md={4} sm={12}>
-                        Telephone
+                        Contact Number
                     </Col>
                     <Col md={8} sm={12}>
-                        <Input2 type="text" name="name" value={contact} placeholder="07********"/>
+                        <Input2 type="text" name="contactNumber" value={contact} placeholder="07********"
+                        onChange={(e) => {
+                            let val = e.target.value;
+                            setContact(val);
+                            setContactInfo(Validator(val,patternContact, "Contact Number"));
+                          }}/>
+                           {contactInfo.error && <Error>{contactInfo.error}</Error>}
                     </Col>
                     </Row>
                     <br/>
-                    <Row>
-                    <Col md={4} sm={12}>
-                        Fax
-                    </Col>
-                    <Col md={8} sm={12}>
-                        <Input2 type="fax" name="Fax" value={fax} placeholder="Fax No"/>
-                    </Col>
-                    </Row>
-                    <br/>
+                    
                     <Row>
                     <Col md={4} sm={12}>
                         Email
                     </Col>
                     <Col md={8} sm={12}>
-                        <Input2 type="email" name="Email" value={email} placeholder="Email"/>
+                    <Input2 type="email" name="email" 
+                                placeholder="abc@gmail.com"
+                                onChange={(e) => {
+                                setEmail(e.target.value)
+                                setEmailInfo(Validator(e.target.value,patternMail,"Mail"));
+                                }}/><br/>
+                         {emailInfo.error && <Error>{emailInfo.error}</Error>}
                     </Col>
                     </Row>
                     <br/>
-                    <Row>
-                    <Col md={4} sm={12}>
-                        Industrial Placement <br/>Officer
-                    </Col>
-                    <Col md={8} sm={12}>
-                        <Input2 type="text" name="name" value={name} placeholder="Name"/>
-                    </Col>
-                    </Row><br/>
+                   
                     <Row>
                     <Col md={6} sm={12}/>
                     <Col md={6} sm={12}>
-                    <Button type="submit" submit>Submit</Button>
+                    <Button type="submit" submit disabled={!contactInfo.status || !emailInfo.status }
+                    onClick={() => {
+                        if (
+                          contactInfo.status &&
+                          emailInfo.status 
+                        ) {
+                          handleSubmit({
+                            contactnumber: contact,
+                            Email: email,
+                          });
+                        }
+                      }}
+                    >Submit</Button>
                     </Col>
                     </Row>
                         

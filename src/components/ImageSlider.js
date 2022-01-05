@@ -31,10 +31,10 @@ const ImageTag = styled.img`
     height:200px;
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    height:150px;
+    height:200px;
   }
   @media (max-width: 300px) {
-    height:100px;
+    height:150px;
     
   }
     `;
@@ -53,7 +53,6 @@ const AnimatedText = styled.span`
   -webkit-text-fill-color: transparent;
   background-repeat: no-repeat;
   animation: text 10s infinite;
-
   text-align: center;
   position: absolute;
   
@@ -61,6 +60,7 @@ const AnimatedText = styled.span`
   transform: translate(-50%, -50%);
   width: 100%;
   @keyframes text {
+    
     0% {
       color: black;
       margin-bottom: -40px;
