@@ -34,7 +34,7 @@ export default function MediaCard({img,value,title,count}) {
                 {title}
                 </Col>
                 <Col md={4} sm={5} xs={8}>
-                    {/* <CircularProgress variant="determinate" value={100} size={68}/> */}
+                    {/* <CircularProgress variant="determinate" value={count} size={68}/> */}
                     <Rounddiv>{count}</Rounddiv>
                 </Col>
             </Row>
