@@ -64,7 +64,7 @@ export const Input = styled.input`
 export const Recaptcha = (props) => {
   return (
     <RECAPTCHA
-      sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
+      sitekey="6Ld0jO0dAAAAAGmY_dzPwzMzCluzMmP5Mk_MhV0R"
       onChange={props.onChange}
     />
   );
