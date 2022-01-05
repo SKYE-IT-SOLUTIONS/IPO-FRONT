@@ -3,6 +3,10 @@ import { Container, Row, Col } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
+import supun from "../assets/supun.jpg";
+import nadun from "../assets/nadun.jpg";
+import buddhika from "../assets/buddhika.jpeg";
+import sandaruwan from "../assets/sandaruwan.jpg";
 
 const OuterDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -19,32 +23,32 @@ const InnerDiv = styled.div`
 `;
 
 const Column = styled(Col)`
-    padding: 5px 5px;
-`
+  padding: 5px 5px;
+`;
 
 const RowDiv = styled(Row)`
-   margin:0;
+  margin: 0;
 
-   @media (max-width: 575px) {
-    margin:15px;
+  @media (max-width: 575px) {
+    margin: 15px;
   }
-`
+`;
 
 const LinkA = styled.a`
   color: inherit;
 `;
 
 const Title = styled.h1`
- @media (min-width: 769px) and (max-width: 1040px) {
+  @media (min-width: 769px) and (max-width: 1040px) {
     font-size: 26px;
   }
 
   @media (max-width: 768px) and (min-width: 576px) {
     font-size: 25px;
   }
-    @media (max-width: 575px) {
-        font-size: 22px;
-    }
+  @media (max-width: 575px) {
+    font-size: 22px;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -131,7 +135,7 @@ const Name = styled.h3`
 `;
 
 const Position = styled.p`
-    @media (min-width: 769px) and (max-width: 1040px) {
+  @media (min-width: 769px) and (max-width: 1040px) {
     font-size: 11px;
   }
 
@@ -140,9 +144,9 @@ const Position = styled.p`
   }
 
   @media (max-width: 575px) {
-    font-size: 15px;    
+    font-size: 15px;
   }
-`
+`;
 
 const Description = styled.p`
   color: #696969;
@@ -155,7 +159,7 @@ const Description = styled.p`
   @media (max-width: 768px) and (min-width: 576px) {
     font-size: 12px;
   }
-  
+
   @media (max-width: 575px) {
     font-size: 12px;
   }
@@ -171,7 +175,7 @@ const Proffesional = styled.p`
   @media (max-width: 768px) and (min-width: 576px) {
     font-size: 9px;
   }
-  
+
   @media (max-width: 575px) {
     font-size: 9px;
   }
@@ -221,6 +225,7 @@ const DetailDiv = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin: auto;
 
   @media (min-width: 769px) and (max-width: 1040px) {
     width: 45%;
@@ -228,12 +233,10 @@ const DetailDiv = styled.div`
 
   @media (max-width: 768px) and (min-width: 576px) {
     width: 65%;
-    margin: auto;
   }
 
   @media (max-width: 575px) {
     width: 90%;
-    margin: auto;
   }
 `;
 
@@ -243,8 +246,7 @@ const team = [
     position: "COO",
     description:
       "Effortlessly cool with a high degree of curiosity to achieve excellence.",
-    image:
-      "https://drive.google.com/uc?id=1NlluIEnUwV0RdTdnSdNQhOgt8ot4Qefz&export=download",
+    image: supun,
     fb: "https://www.facebook.com/supun.tharuka.14",
     linkedin: "https://www.linkedin.com/in/supun-wijegunwardhana/",
     twitter: "https://twitter.com/Supun9749",
@@ -254,8 +256,7 @@ const team = [
     position: "COO",
     description:
       "A constant. In a sea of variables. Will amaze you with the final product.",
-    image:
-      "https://drive.google.com/uc?id=1vraHJbzKelVx0Y_rBBtP4bR74xFkUlkZ&export=download",
+    image: buddhika,
     fb: "https://www.facebook.com/buddhika.halangoda.3",
     linkedin: "https://www.linkedin.com/in/buddhika-halangoda-729043210/",
     twitter: "https://twitter.com/BuddhikaHalang1",
@@ -263,9 +264,9 @@ const team = [
   {
     name: "Nadun Nethsara",
     position: "COO",
-    description: "With the aim of becoming Sri Lanka’s Top in High-Tech Solutions.",
-    image:
-      "https://drive.google.com/uc?id=181Ywy4nbwl9dAxkjtUa9wE8XS9z-vAxz&export=download",
+    description:
+      "With the aim of becoming Sri Lanka’s Top in High-Tech Solutions.",
+    image: nadun,
     fb: "https://www.facebook.com/nadun.nethsara.9/",
     linkedin: "https://www.linkedin.com/in/nadun-nethsara-a81369195/",
     twitter: "https://twitter.com/NethsaraNadun",
@@ -274,8 +275,7 @@ const team = [
     name: "Sandaruwan Lakshitha",
     position: "COO",
     description: "A software Engineer with Marketing skills at your service.",
-    image:
-      "https://drive.google.com/uc?id=1J-W98qcBAsxY4r9KqDPm7ixtQyBvCqrs&export=download",
+    image: sandaruwan,
     fb: "https://www.facebook.com/sandaruwan.lakshitha.5",
     linkedin: "https://www.linkedin.com/in/sandaruwan-lakshitha-a18909187/",
     twitter: "https://twitter.com/Sandaruwanlaks5",
@@ -299,7 +299,11 @@ function OurTeam() {
               <Name>{value.name}</Name>
               <Position>{value.position}</Position>
               <Description>{value.description}</Description>
-              <Proffesional>Bachelor of Computer Science(Ug)<br/>University of Ruhuna</Proffesional>
+              <Proffesional>
+                Bachelor of Computer Science(Ug)
+                <br />
+                University of Ruhuna
+              </Proffesional>
               <IconSet>
                 <LinkA href={value.fb} target="_blank">
                   <SocialIcon icon="bi:facebook" />
@@ -319,7 +323,7 @@ function OurTeam() {
 
       <DetailDiv>
         <TableTitle>SKYE IT Solution</TableTitle>
-        <table style={{margin: "auto",marginBottom:"15px" }}>
+        <table style={{ margin: "auto", marginBottom: "15px" }}>
           <tbody>
             <tr>
               <Td>
