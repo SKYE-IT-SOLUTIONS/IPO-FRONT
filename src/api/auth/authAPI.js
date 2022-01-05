@@ -21,16 +21,24 @@ export const loginIn = async (credentials) => {
   console.log("loginIn");
   await postRequest(LOGIN_URL, credentials)
     .then(({ data, error }) => {
+      console.log(data);
       // console.log("data" + data.data);
       if (!error) {
-        const { token, refreshToken, id } = data?.data;
-        setAccessToken(token);
-        setRefreshToken(refreshToken);
-        setUserId(id);
-        console.log("login success");
-        result = { status: true,data: data?.data, error: null };
+        if(data.status === 200) {
+          const { token, refreshToken, id } = data?.data;
+          setAccessToken(token);
+          setRefreshToken(refreshToken);
+          setUserId(id);
+          console.log("login success");
+          result = { status: true,data: data?.data, error: null };
+        }
       } else {
-        result = { status: false,data: null, error: getErrorMessage(error) };
+        if(error.status === 423) {
+          console.log("login locked");
+          result = { status: false,data: null, error: 423 };
+        }else{
+          result = { status: false,data: null, error: getErrorMessage(error) };
+        }
       }
     })
     .catch((error) => {
