@@ -73,7 +73,7 @@ function NavBar(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const authService = new AuthServices();
+  const authService = new AuthServices();
 
   const current_theme = theme ? light : dark;
 
@@ -495,6 +495,7 @@ function NavBar(props) {
                     <NavDropdown.Item
                       href="/"
                       onClick={async () => {
+                        authService.handleLogoutLocally();
                         dispatch(setUserLoggedIn("SSNB"));
                         dispatch(setUserRole(""));
                         dispatch(setUserId(""));

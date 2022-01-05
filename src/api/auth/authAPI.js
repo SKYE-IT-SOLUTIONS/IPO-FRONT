@@ -156,3 +156,9 @@ export const isUser = async () => {
 //   result = await logOut({ username: "supun97", password: "qweasdzxc" });
 //   console.log(result);
 // };
+
+export const logOutLocally=()=>{
+  setAccessToken(null);
+  setRefreshToken(null);
+  setUserId(null);
+}

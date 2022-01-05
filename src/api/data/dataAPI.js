@@ -234,3 +234,39 @@ export const onGetOne = async (DATA_URL, id) => {
     });
   return result;
 };
+
+export const onApproved = async (DATA_URL, id) => {
+  var config = {
+    method: "PUT",
+    url: DATA_URL + `/${id}`,
+    headers: {
+      Authorization: `Bearer ${getAccessToken()}`,
+      "Content-Type": "application/json",
+    },
+  };
+  await authRequest(config)
+    .then(async ({ data, error }) => {
+      console.log("data", data);
+      if (!error) {
+        if (data.status === 200) {
+          result = { status: true,data:data?.data, error: null };
+        } else if (data.status === 401) {
+          const { status, error } = await refreshAccessToken(
+            REFRESH_URL,
+            postRequest
+          );
+          if (status) {
+            onApproved(config);
+          } else {
+            result = { status: false,data:null, error: getErrorMessage(error) };
+          }
+        }
+      } else {
+        result = { status: false,data:null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      result = { status: false,data:null, error: getErrorMessage(error) };
+    });
+  return result;
+};

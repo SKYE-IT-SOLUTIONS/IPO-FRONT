@@ -21,6 +21,8 @@ import AuthServices from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import CustomSnackBar from "./CustomSnackBar";
 import { Recaptcha } from "./CommonComponents";
+import FileUpload from "./fileupload/FileUpload";
+import FileService from "../services/FileService";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
@@ -85,6 +87,7 @@ const Error = styled.p`
 
 function CompanyRegister() {
   const { fonts } = useContext(ThemeContext);
+  const fileService = new FileService();
 
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
@@ -118,6 +121,9 @@ function CompanyRegister() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [recaptcha, setRecaptcha] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [files, setFiles] = useState([]);
+  const [filesU, setFilesU] = useState({});
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -132,10 +138,27 @@ function CompanyRegister() {
     setRecaptcha(!recaptcha);
   }
 
+  const updateUploadedFiles = async (files) => {
+    if (files.length !== 0) {
+      setFiles(files);
+      console.log(files[0]);
+
+      const { status, error, data } = await fileService.handleCreate(files[0]);
+
+      if (status) {
+        console.log("fileURL", data?.fileUrl);
+        setImageUrl(data?.fileUrl);
+      } else {
+        console.log("error", error);
+      }
+    }
+  };
+
   const authServices = new AuthServices();
   const navigate = useNavigate();
 
   const handleSubmit = async (credentials) => {
+    console.log(credentials);
     setIsLoading(true);
     const { status, data, error } = await authServices.handleCompanySignUp(
       credentials
@@ -232,6 +255,23 @@ function CompanyRegister() {
             />
             {cityInfo.error && <Error>{cityInfo.error}</Error>}
 
+            <Lable>Image</Lable>
+            <FileUpload
+              style={{ backgroundColor: "#ededed" }}
+              accept=".jpg,.png,.jpeg"
+              label="News Image(s)"
+              files={filesU}
+              setFiles={setFilesU}
+              updateFilesCb={updateUploadedFiles}
+            />
+            {files[0] && (
+              <p>
+                {"name : " + files[0].name}
+                <br />
+                {"size : " + (files[0].size / 1000000).toFixed(2)}MB
+              </p>
+            )}
+
             <Lable>Password</Lable>
             <Input
               type="password"
@@ -284,7 +324,8 @@ function CompanyRegister() {
                   contactInfo.status &&
                   cityInfo.status &&
                   passwordInfo.status &&
-                  matchPassword.isMatching
+                  matchPassword.isMatching &&
+                  imageUrl !== ""
                 ) {
                   handleSubmit({
                     email: email,
@@ -293,7 +334,7 @@ function CompanyRegister() {
                     conatctperson: person,
                     conatctnumber: contact,
                     address: `${no},<br/>${street},<br/>${city}`,
-                    imgUrl: "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+                    imgUrl: imageUrl,
                     role: ["company"],
                   });
                 }

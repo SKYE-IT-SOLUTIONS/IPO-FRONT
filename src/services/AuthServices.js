@@ -1,4 +1,4 @@
-import { loginIn, logOut,isUser,signUp } from "../api/auth/authAPI";
+import { loginIn, logOut,isUser,signUp,logOutLocally } from "../api/auth/authAPI";
 
 const COMPANY_SIGNUP = "/auth/signup?profile=company";
 const STUDENT_SIGNUP = "/auth/signup?profile=student";
@@ -33,5 +33,9 @@ export default class AuthServices {
     console.log("handleIsUserLoggedIn");
     const response = await isUser();
     return response;
+  }
+
+  handleLogoutLocally = async () => {
+    logOutLocally();
   }
 }

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const rowWidth = 200;
 
-const NewsList = () => {
+const JobListCompany = () => {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(8);
 
@@ -19,16 +19,17 @@ const NewsList = () => {
   const dataService = new DataService();
   const navigate = useNavigate();
 
-  const [newsList, setNewsList] = useState([]);
+  const [jobList, setJobList] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetAllNews();
+      const { status, data, error } = await dataService.handleGetAllJobsUser();
+      console.log("data : ", data);
       if (status) {
-        console.log("In Admin : ", data);
-        setNewsList(data);
+        console.log("In Admin job: ", data);
+        setJobList(data);
       } else {
         setError(error);
         console.log(error);
@@ -37,6 +38,7 @@ const NewsList = () => {
     };
     fetchNews();
   }, []);
+
 
   const columns = [
     {
@@ -51,29 +53,15 @@ const NewsList = () => {
       field: "title",
       headerName: "Title",
       headerAlign: "center",
-      align: "left",
+      align: "center",
       width: 2 * rowWidth,
     },
     {
-      field: "visibility",
-      headerName: "Visibility",
+      field: "description",
+      headerName: "Description",
       headerAlign: "center",
-      align: "center",
-      width: 0.5 * rowWidth,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      headerAlign: "center",
-      align: "center",
-      width: 0.5 * rowWidth,
-    },
-    {
-      field: "createdBy",
-      headerName: "Created By",
-      headerAlign: "center",
-      align: "center",
-      width: 1.5*rowWidth,
+      align: "left",
+      width: 2 * rowWidth,
     },
     {
       field: "updatedDate",
@@ -96,7 +84,7 @@ const NewsList = () => {
           style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={() => {
-              navigate(`/admin/news/${id}`);
+              navigate(`/admin/job/${id}`);
             }}
           />
         );
@@ -116,7 +104,7 @@ const NewsList = () => {
           style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={() => {
-              navigate(`/admin/editNews/${id}`);
+              navigate(`/admin/editJob/${id}`);
             }}
           />
         );
@@ -133,13 +121,13 @@ const NewsList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
-            style={{cursor: "pointer"}}
+          style={{cursor: "pointer"}}
             sx={{ fontSize: 30 }}
             onClick={async () => {
-              const { status, error } = await dataService.handleDeleteNews(id);
+              const { status, error } = await dataService.handleDeleteJob(id);
               if (status) {
-                setNewsList(newsList.filter((news) => news.id !== id));
-                navigate("/admin/news/list");
+                setJobList(jobList.filter((job) => job.id !== id));
+                navigate("/admin/job/list");
               } else {
                 console.log(error);
               }
@@ -150,40 +138,36 @@ const NewsList = () => {
     },
   ];
 
-  const rows = newsList.map((newsList) => {
+  const rows = jobList.map((job) => {
     return {
-      id: newsList?.id,
-      title: newsList?.title,
-      status: newsList?.approval ? "Approved" : "Pending",
-      visibility: newsList?.global ? "Public" : "Private",
-      createdBy: newsList?.addedBy,
-      updatedDate: newsList?.howLong + "  ago",
+      id: job?.id,
+      title: job?.title,
+      description: job?.description,
+      updatedDate: job?.howLong + "  ago",
     };
   });
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <div style={{ width: "100%" }}>
-          <DataGrid
-            columns={columns}
-            rows={rows}
-            components={{
-              Toolbar: GridToolbar,
-            }}
-            page={page}
-            onPageChange={(newPage) => setPage(newPage)}
-            pageSize={pageSize}
-            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[8, 10, 12]}
-            pagination
-          />
-        </div>
-      )}
+      <div style={{ width: "100%" }}>
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+          page={page}
+          onPageChange={(newPage) => setPage(newPage)}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[8, 10, 12]}
+          pagination
+        />
+      </div>
     </>
   );
 };
 
-export default NewsList;
+export default JobListCompany;

@@ -35,6 +35,7 @@ export const DragDropText = styled.p`
   letter-spacing: 1px;
   margin-top: 0;
   text-align: center;
+  font-size: 13px;
 `;
 
 export const UploadFileBtn = styled.button`

@@ -21,28 +21,21 @@ const columns = [
     headerName: "Company name",
     headerAlign: "center",
     align: "center",
-    width: rowWidth,
-  },
-  {
-    field: "lname",
-    headerName: "Description",
-    headerAlign: "center",
-    align: "center",
-    width: rowWidth,
+    width: rowWidth*1.5,
   },
   {
     field: "email",
     headerName: "Email",
     headerAlign: "center",
-    align: "center",
+    align: "left",
     width: rowWidth,
   },
   {
     field: "address",
     headerName: "Address",
     headerAlign: "center",
-    align: "center",
-    width: rowWidth + 150,
+    align: "left",
+    width: rowWidth * 2,
   },
   {
     field: "view",
@@ -53,7 +46,7 @@ const columns = [
     width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <ViewIcon sx={{ fontSize: 30 }} />;
+      return <ViewIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
   {
@@ -65,7 +58,7 @@ const columns = [
     width: 60 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <ModeEditOutlineIcon sx={{ fontSize: 30 }} />;
+      return <ModeEditOutlineIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
   {
@@ -77,7 +70,7 @@ const columns = [
     width: 70 + 20,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <DeleteIcon sx={{ fontSize: 30 }} />;
+      return <DeleteIcon style={{cursor: "pointer"}} sx={{ fontSize: 30 }} />;
     },
   },
 ];

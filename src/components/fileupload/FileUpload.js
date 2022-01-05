@@ -78,7 +78,7 @@ const FileUpload = ({
         <DragDropText>Drag and drop your file anywhere or Click to Upload(MAX SIZE-5MB)</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
            <Fileuploadbtn /> 
-          <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
+          <span style={{fontSize:"13px"}}> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </UploadFileBtn>
         <FormField
           type="file"

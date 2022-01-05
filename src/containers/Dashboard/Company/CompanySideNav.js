@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
+<<<<<<< HEAD
+=======
+import AuthService from "../../../services/AuthServices";
+>>>>>>> 0b62a442296ad8418e01a0ad1752905e0b3ee7be
 
 let heighty=window.scrollY;
 
@@ -256,6 +260,8 @@ const CompanySideNav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const authService = new AuthService();
+
   const [active, setActive] = useState(true);
 
   function handleResize() {
@@ -290,9 +296,24 @@ const CompanySideNav = () => {
               <NavListItemTooltip active={active}>Home</NavListItemTooltip>
             </NavListItem>
 
+<<<<<<< HEAD
 
             <NavListItem>
               <NavListLink onClick={() => navigate("/company/news")}>
+=======
+            <NavListItem>
+              <NavListLink
+                onClick={() => navigate("profile")}
+              >
+                <NavListItemIcon className="bx bx-user"></NavListItemIcon>
+                <NavListItemName active={active}>Profile</NavListItemName>
+              </NavListLink>
+              <NavListItemTooltip active={active}>Profile</NavListItemTooltip>
+            </NavListItem>
+
+            <NavListItem>
+              <NavListLink onClick={() => navigate("news")}>
+>>>>>>> 0b62a442296ad8418e01a0ad1752905e0b3ee7be
                 <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
                 <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
@@ -300,21 +321,37 @@ const CompanySideNav = () => {
             </NavListItem>
 
             <NavListItem>
+<<<<<<< HEAD
               <NavListLink onClick={() => navigate("/company/job")}>
+=======
+              <NavListLink onClick={() => navigate("job")}>
+>>>>>>> 0b62a442296ad8418e01a0ad1752905e0b3ee7be
                 <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
                 <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
               <NavListItemTooltip active={active}>Jobs</NavListItemTooltip>
             </NavListItem>
-
             <NavListItem>
+<<<<<<< HEAD
               <NavListLink
                 onClick={() => navigate("/company/settings")}
               >
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>
+=======
+              <NavListLink  onClick={ () => {
+                          authService.handleLogoutLocally();
+                          dispatch(setUserLoggedIn("SSNB"));
+                          dispatch(setUserRole(""));
+                          dispatch(setUserId(""));
+                          navigate("/home");
+                      }}>
+                <NavListItemIcon className="bx bx-log-out"></NavListItemIcon>
+                <NavListItemName active={active}  href="/"
+                     >Logout</NavListItemName>
+>>>>>>> 0b62a442296ad8418e01a0ad1752905e0b3ee7be
               </NavListLink>
-              <NavListItemTooltip active={active}>Settings</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Logout</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
