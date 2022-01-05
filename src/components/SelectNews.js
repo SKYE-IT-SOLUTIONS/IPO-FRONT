@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import news from "../assets/News-pana.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const NavButton = styled(CustomButton)`
   padding: 5px 15px;
@@ -79,6 +80,7 @@ const InnerDiv = styled.div`
 function SelectNews() {
   const { fonts } = useContext(ThemeContext);
   const navigate = useNavigate();
+  const role = useSelector(state => state.user.userRole)
 
   return (
     <OuterDiv  font={fonts}>
@@ -92,9 +94,10 @@ function SelectNews() {
                   <NavButton onClick={()=>{
                     navigate("list")
                   }}>View News List</NavButton>
-                  <NavButton onClick={()=>{
+                  {role === "ROLE_ADMIN" && <NavButton onClick={()=>{
                     navigate("non-approved-list")
-                  }}>View Non Approved List</NavButton>
+                  }}>View Non Approved List</NavButton>}
+                  
           </InnerDiv>
         </Column>
         <Col md={7}>
