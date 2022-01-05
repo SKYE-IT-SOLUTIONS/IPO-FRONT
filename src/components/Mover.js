@@ -204,36 +204,27 @@ function Mover(){
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
                   
-                      <Pdiv>
-                            University of Ruhuna which is envisaged to enhance the
-                            relationships with external organizations, Industries and
-                            community in view of expanding the scope of the Faculty
-                            and its activities.Paragraphs are the building blocks of
-                            papers. Many students define paragraphs in terms of
-                            length: a paragraph is a group of at least five sentences,
-                            a paragraph is half a page long, etc. In reality, though,
-                            the unity and coherence of ideas among sentences is what
-                            constitutes a paragraph. A paragraph is defined as “a
-                            group of sentences or a single sentence that forms a unit”
-                            (Lunsford and Connors 116).  
+                      <Pdiv><br/>
+                            The Professional Development Unit (PDU) is intended to develop effective and collaborative
+                            professional services through academic and industry involvement in curriculum development to
+                            meet the changing knowledge, skills, and technological requirements of the workplace. Our
+                            primary function is to improve the quality and relevance of higher education to produce a
+                            SMART industry workforce through applied research using the most recent technological
+                            innovations and industry practices.  
                             <br/><br/>
-                            Ultimately, a paragraph is a sentence or group of
-                            sentences that support one main idea. In this handout, we
-                            will refer to this as the “controlling idea,” because it
-                            controls what happens in the rest of the paragraph.  
+                            The PDU primarily intervenes in the provision of career
+                            development services, the establishment of university-industry relations, the development of
+                            alumni networks, and other professional-related services. We create an environment in which
+                            students can define their career interests while being prepared to handle the working norms of
+                            industry and commerce in both the public and private sectors.  
                       </Pdiv>    
                   </Paradiv>
                  
                 <Collapse in={open}>
                   <Pdiv><br/>
-                      From its inception in year 2004, it has been engaged in
-                      various activities which involves different fields and
-                      different people in the field of Agriculture. The office
-                      is ran by an Industrial Placement Officer, Under direct
-                      supervision of Dean, Faculty of Agriculture. Having
-                      fruitful relationships is all that matters in our
-                      services. Therefore, for us, you are important than
-                      anything else. Please feel free to contact us.<br/>
+                    We are on the verge of launching
+                    an effective collaboration between industry and faculty to solicit assistance for business
+                    start-ups, innovations through corporate venture capital, and corporate acceleration.<br/>
                   </Pdiv>
                 </Collapse>
                 <MoreButton apply onClick={() => {

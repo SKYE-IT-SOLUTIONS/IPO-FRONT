@@ -55,8 +55,7 @@ const LockedUser = () => {
         <StyledImg alt="" src={Locked} />
         {/* <p>Your profile is temparily <Blocked>blocked</Blocked>.Please verify the mail</p> */}
         <Subtitle color={them.syntax} fontFamily={fonts.general}>
-          Your profile is temparily <Blocked>blocked</Blocked>.Please verify the
-          mail
+          Your profile is temporarily <Blocked>blocked</Blocked>.Please verify the mail
         </Subtitle>
       </div>
     </FluidContainer>
