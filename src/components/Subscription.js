@@ -8,7 +8,7 @@ import { Simple_Validator, Validator } from "../utils/validation";
 import { patternMail } from "../config/pattern";
 import CustomSnackBar from "./CustomSnackBar";
 import DataService from "../services/DataService";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Recaptcha } from "./CommonComponents";
 
 const SubscriptDiv = styled(Col)`
   display: flex;
@@ -60,7 +60,7 @@ const Title =  styled.h1`
   font-size: 25px;
   color:#DC281E;
 `
-const RECAPTCHA =styled(ReCAPTCHA)`
+const RECAPTCHA =styled(Recaptcha)`
   margin: auto;
 `;
 
@@ -151,7 +151,6 @@ function Subscription() {
       {emailInfo !== null && <Error>{emailInfo.error}</Error>}
       <EmailInfo>We'll never share your email with anyone else.</EmailInfo>
       <RECAPTCHA
-            sitekey="6LdKyuYdAAAAALtVruhZDuwZg9mLKsdg8D7oC_01"
             onChange={onChange}
       />
       <SubBttn

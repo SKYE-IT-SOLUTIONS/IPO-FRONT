@@ -186,7 +186,7 @@ function SponsorList() {
     const { fonts } = useContext(ThemeContext);
 
   return (
-    <OuterDiv>
+    <OuterDiv id="partners">
     <Title font={fonts}>Our Proud Partners</Title>
     <ImageScroller/>
     </OuterDiv>

@@ -6,7 +6,10 @@ import {Paper,Grid,Box} from '@mui/material';
 import Request from '../assets/requestgraduate.svg';
 import { Form } from "react-bootstrap";
 import { Simple_Validator,Validator,upload_Validator} from "../utils/validation";
-import { patternMail,patternContact } from "../config/pattern"
+import { patternMail,patternContact } from "../config/pattern";
+import DataService from "../services/DataService";
+import {Recaptcha} from "./CommonComponents";
+import CustomSnackBar from "./CustomSnackBar";
 
 const Requestdiv=styled.div`
     font-family: ${({ font }) => font.general};
@@ -57,9 +60,12 @@ const Error = styled.p`
 
 function Requestgraduate() {
     const { fonts } = useContext(ThemeContext);
+    const dataService = new DataService();
 
     const [name,setName]=useState();
     const [nameInfo,setNameInfo]=useState({error: null,status: false});
+    const [companyOrInst,setCompanyOrInst]=useState();
+    const [designation,setDesignation]=useState();
     const [description,setDescription]=useState();
     const [descriptionInfo,setDescriptionInfo]=useState({error: null,status: false});
     const [count,setCount]=useState();
@@ -76,20 +82,74 @@ function Requestgraduate() {
     const [cityInfo,setCityInfo]=useState({error: null,status: false});
     const [upload,setUpload] =useState({});
     const [uploadInfo,setUploadInfo]=useState({error: null,status: false});
+    const [recaptcha,setRecaptcha]=useState(false);
 
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [message, setMessage] = useState(null);
+    const [severity, setSeverity] = useState("");
 
-    const output=[
-        {
-         Name:{name},
-         About:{description},   
-         RequestPerson:{reqperson},
-         RequestCount:{count},
-         Reason:{reason},
-         Mail:{mail},
-         MobileNumber:{number},
-         Address:{},
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
         }
-     ]
+    
+        setSnackbarOpen(false);
+      };
+
+    const onchanage = (value) => {setRecaptcha(value)};
+
+    const resetData = () => {
+        setName("");
+            setCompanyOrInst("");
+            setDesignation("");
+            setDescription("");
+            setCount("");
+            setReason("");
+            setMail("");
+            setNumber("");
+            setAddressNo("");
+            setAddressLine("");
+            setCity("");
+            setUpload("");
+            setRecaptcha(false);
+            setCityInfo({error: null,status: false});
+            setMailInfo({error: null,status: false});
+            setNumberInfo({error: null,status: false});
+            setDescriptionInfo({error: null,status: false});
+            setCountInfo({error: null,status: false});
+            setNameInfo({error: null,status: false});
+            setUploadInfo({error: null,status: false});
+    }
+
+    const handleSubmit = async () =>{
+        const payload = {
+            name:name,
+            companyname:companyOrInst,
+            institute:companyOrInst,
+            designation: designation,
+            contactNumber:number,
+            email:mail,
+            address: addressNo+","+addressLine+","+city,
+            selfIntroduction:description,
+            topic:reason,
+            graduate:"Graduate" ? true : false,
+            requestCount:count,
+            recommendationLetter:"file url"
+        }
+        const {status,error} = await dataService.handleRequestTypeOther(payload);
+        if(status){
+            setSnackbarOpen(true);
+            setMessage("Request sent successfully");
+            setSeverity("success");
+            //reset data
+            resetData();
+        }else{
+            setSnackbarOpen(true);
+            setMessage(error);
+            setSeverity("error");
+        }
+
+    }
 
     return (
         <Requestdiv font={fonts}>
@@ -243,7 +303,8 @@ function Requestgraduate() {
                                 onChange={(e) => {
                                 setAddressLine(e.target.value)
                                 }}/></><br/>
-                            <><InputAddress type="text" name="name" placeholder="City"  
+                            <><InputAddress type="text" name="name" placeholder="City"
+                                value={city}  
                                 onChange={(e) => {
                                 setCity(e.target.value)
                                 setCityInfo(Simple_Validator(e.target.value,"City"));
@@ -271,11 +332,15 @@ function Requestgraduate() {
                                 {uploadInfo.error != null && <Error>{uploadInfo.error}</Error>}
                             </Form.Group>
                             </>
+                            <span  style={{margin:"5px"}}>
+                                <Recaptcha onChange={onchange}/>
+                            </span>
                         </Grid>
                     </Grid>
 
                     <CustomButton type="submit" submit 
                      disabled={!nameInfo.status || !descriptionInfo.status || !countInfo.status || !mailInfo.status || !numberInfo.status || !cityInfo.status || !uploadInfo.status}
+                        onClick={handleSubmit}
                     
                     >
                     submit
@@ -286,6 +351,7 @@ function Requestgraduate() {
             </Row>
             </Box>
             </MPaper>
+            <CustomSnackBar isOpen={snackbarOpen}  severity={severity} handleClose={handleClose} message={message}/>
         </Requestdiv>
     )
 }
