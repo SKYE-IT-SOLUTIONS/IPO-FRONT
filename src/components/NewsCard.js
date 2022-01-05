@@ -20,7 +20,7 @@ const NewsCardView = styled(Card)`
   font-family: ${({ font }) => font.general};
   border-radius : 15px;
   background: linear-gradient(to right, #ece9e6, #ffffff);
-  
+  width:100%;
 `;
 
 const NewsImg = styled.div`
