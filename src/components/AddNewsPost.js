@@ -107,6 +107,7 @@ const TextArea = styled.textarea`
 
 const NewsButton = styled(CustomButton)`
   margin: 25px 20px 30px 0;
+  background: ${({ bgColor }) => bgColor};
 `;
 
 const Title = styled(Lable)`
@@ -130,7 +131,8 @@ function AddNewsPost() {
 
   const defaultNews = "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download"
 
-  const { fonts } = useContext(ThemeContext);
+  const { theme, light, dark,fonts } = useContext(ThemeContext);
+  const them = theme ? light.button : dark.button;
   // useS
   const [newTitle, setNewsTitle] = useState("");
   const [content, setContent] = useState("");
@@ -163,6 +165,7 @@ function AddNewsPost() {
   const [error, setError] = useState("");
 
   const handleNewsSubmit = async (payload) => {
+    setIsLoading(true)
     console.log("payload", payload);
     const { status,data, error } = await dataService.handleSubmitNews(payload);
     if (status) {
@@ -174,6 +177,7 @@ function AddNewsPost() {
       console.log("error", error);
       setError(error);
     }
+    setIsLoading(false)
   };
 
   useEffect(() => {
@@ -337,7 +341,12 @@ function AddNewsPost() {
                 Preview
               </NewsButton>
               <NewsButton
-                submit
+                disabled={
+                  !contentInfo.status ||
+                  isLoading ||
+                  !titleInfo.status
+                }
+                bgColor={!isLoading ? them.submit : them.disable}
                 onClick={() => {
                   console.log("submit");
                   if (contentInfo.status && titleInfo.status) {

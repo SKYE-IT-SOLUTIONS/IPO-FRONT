@@ -45,6 +45,7 @@ const GoogleCaptcha = React.lazy(()=>import("./components/Captcha"));
 const Feedback = React.lazy(()=>import("./components/Feedback"));
 const NavBarListView = React.lazy(()=>import("./components/NavBarListView"));
 const OurTeam = React.lazy(()=>import("./components/OurTeam"));
+const Companydashboard = React.lazy(()=>import("./components/Companyprofile"));
 
 //Include the view enhance the user experience, use suspense and fallback
 const View = (props)=>{
@@ -135,8 +136,7 @@ const routes = (isAuthenticated,userRole) => [
     path: "/company",
     element: (isAuthenticated && userRole === "ROLE_COMPANY" ) || true ? <CompanyLayout /> : <Navigate to="/login" />,
     children: [
-      {path: "dashboard", element: <h1>Profile view of company</h1>},
-      {path: "profile", element: <h1>Profile view of company</h1>},
+      {path: "dashboard", element: <View><Companydashboard/></View>},
       { path: "news", element: <View><SelectNews/></View> },
       { path: "news/list", element: <View><NewsListOfCompany/></View> },
       { path: 'editNews/:id', element: <View><EditNews/></View> },

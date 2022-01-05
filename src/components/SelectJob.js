@@ -4,6 +4,7 @@ import styled from "styled-components";
 import job from "../assets/Coworking-pana.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const NavButton = styled(CustomButton)`
   padding: 5px 15px;
@@ -78,6 +79,7 @@ const InnerDiv = styled.div`
 function SelectJob() {
   const { fonts } = useContext(ThemeContext);
   const navigate = useNavigate();
+  const role = useSelector(state => state.user.userRole)
 
   return (
     <OuterDiv  font={fonts}>
@@ -91,7 +93,8 @@ function SelectJob() {
                   <NavButton onClick={()=>{
                     navigate("list")
                   }}>View Job List</NavButton>
-                  <NavButton>View Non Approved List</NavButton>
+                   {role === "ROLE_ADMIN" && <NavButton>View Non Approved List</NavButton>}
+                  
           </InnerDiv>
         </Column>
         <Col md={7}>

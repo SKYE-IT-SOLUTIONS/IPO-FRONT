@@ -46,7 +46,7 @@ const RegisterTag = styled.span`
   color: white;
   font-weight: 1000;
   font-size: 16px;
-  padding-right: 15px;
+  /* padding-right: 15px; */
 
   @media (min-width: 768px) and (max-width: 977px) {
     font-size: 13px;
@@ -199,7 +199,7 @@ function NavBar(props) {
               {/* onClick={()=>{
                 console.log("Clicked News");
                 navigate("/allNews")}} */}
-              <DropItems href="/allNews" id="bg-custom-3" >
+              <DropItems href="/allNews" id="bg-custom-3">
                 News
               </DropItems>
               <DropItems href="#contactUS" id="bg-custom-3">
@@ -383,9 +383,32 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <DropItems id="bg-custom-3">Reserve a Conference Hall</DropItems>
-              <DropItems id="bg-custom-3">Reserve a Playground</DropItems>
-              <DropItems id="bg-custom-3">General Feedback</DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requesthall");
+                }}
+              >
+                Reserve a Conference Hall
+              </DropItems>
+
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requestground");
+                }}
+              >
+                Reserve a Playground
+              </DropItems>
+
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/feedback");
+                }}
+              >
+                General Feedback
+              </DropItems>
               <DropItems
                 id="bg-custom-3"
                 onClick={() => {
@@ -495,16 +518,32 @@ function NavBar(props) {
                   </NavDropdown>
                 </Nav1>
               ) : (
-                <span>
-                  <RegisterTag
-                    onClick={() => {
-                      navigate("/register");
-                    }}
-                  >
-                    Register
-                  </RegisterTag>
-                  <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
-                </span>
+                <Nav>
+                  <Nav.Link href="#deets">
+                    <RegisterTag
+                      onClick={() => {
+                        navigate("/register");
+                      }}
+                    >
+                      Register
+                    </RegisterTag>
+                  </Nav.Link>
+                  <Nav.Link eventKey={2} href="#memes">
+                    <LoginTag onClick={() => navigate("/login")}>
+                      Log In
+                    </LoginTag>
+                  </Nav.Link>
+                </Nav>
+                // <span>
+                //   <RegisterTag
+                //     onClick={() => {
+                //       navigate("/register");
+                //     }}
+                //   >
+                //     Register
+                //   </RegisterTag>
+                //   <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
+                // </span>
               )}
             </Nav.Link>
           </Nav>
