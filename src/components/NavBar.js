@@ -25,6 +25,10 @@ const NavTitle = styled.span`
   font-weight: 500;
   padding-left: 5px;
   font-size: 16px;
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
 `;
 
 const NavSubTitle = styled.span`
@@ -43,12 +47,20 @@ const RegisterTag = styled.span`
   font-weight: 1000;
   font-size: 16px;
   padding-right: 15px;
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
 `;
 
 const LoginTag = styled.span`
   color: white;
   font-weight: 500;
   font-size: 16px;
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
 `;
 
 const Nav1 = styled(Nav)`
