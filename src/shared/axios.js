@@ -7,7 +7,8 @@ const ipoAPIHostProd = "http://uipp.agri.ruh.ac.lk:8080/api"; //for production
 const ipoAPIHostDev = "https://ipobackendapi.herokuapp.com/api"; // for development
 
 
-const ipoAPIHost = process.env.NODE_ENV === "development" ? ipoAPIHostDev : ipoAPIHostProd;
+// const ipoAPIHost = process.env.NODE_ENV === "development" ?  ipoAPIHostProd:ipoAPIHostDev ;
+const ipoAPIHost = process.env.NODE_ENV === "development" ?  ipoAPIHostDev : ipoAPIHostProd ;
 
 const instance = axios.create({
     baseURL: ipoAPIHost
