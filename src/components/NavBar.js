@@ -365,7 +365,6 @@ function NavBar(props) {
               </NavDropdown> */}
 
               <DropItems
-                href="/product"
                 id="bg-custom-3"
                 onClick={() => {
                   navigate("login");
@@ -521,7 +520,7 @@ function NavBar(props) {
                 </Nav1>
               ) : (
                 <Nav>
-                  <Nav.Link href="#deets">
+                  <Nav.Link>
                     <RegisterTag
                       onClick={() => {
                         navigate("/register");
@@ -530,7 +529,7 @@ function NavBar(props) {
                       Register
                     </RegisterTag>
                   </Nav.Link>
-                  <Nav.Link eventKey={2} href="#memes">
+                  <Nav.Link eventKey={2}>
                     <LoginTag onClick={() => navigate("/login")}>
                       Log In
                     </LoginTag>

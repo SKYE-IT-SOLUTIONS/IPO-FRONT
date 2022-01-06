@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import { Stack,Paper } from '@mui/material'
 import styled from "styled-components";
 import Student from '../assets/student.svg';
@@ -6,6 +6,7 @@ import Company from '../assets/companyimg.svg';
 import {Row, Col, CustomButton} from "./CommonComponents";
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from "../contexts/ThemeContext";
+import CustomSnackBar from "./CustomSnackBar";
 
 const Mdiv=styled.div`
     padding: 100px;
@@ -118,6 +119,18 @@ const Button=styled(CustomButton)`
 function Register() {
   const { fonts } = useContext(ThemeContext);
   const navigate = useNavigate();
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [severity, setSeverity] = useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
     
     return (
         <div>
@@ -139,7 +152,12 @@ function Register() {
                 </Col>
                
                 <Col>
-                <Paper elevation={6} onClick={()=>{navigate("studentReg")}}>
+                <Paper elevation={6} onClick={()=>{
+                  //navigate("studentReg")
+                  setMessage("Student Registration is not available yet");
+                  setSeverity("error");
+                  setSnackbarOpen(true);
+                  }}>
                 <WrapperDiv>
                     <StyledImg
                     alt=""
@@ -153,6 +171,7 @@ function Register() {
             </Stack>
             
         </Mdiv>
+        <CustomSnackBar isOpen={snackbarOpen}  severity={severity} handleClose={handleClose} message={message}/>
         </div>
     )
 }
