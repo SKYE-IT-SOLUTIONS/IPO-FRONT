@@ -248,7 +248,9 @@ function NavBar(props) {
                 <br />
                 Training
               </DropItems>
-              <DropItems href="/add" id="bg-custom-3">
+              <DropItems  id="bg-custom-3" onClick={() => {
+                navigate("/under-counstructions")
+              }}>
                 Submit an Advertisement
               </DropItems>
             </NavDropdown>
