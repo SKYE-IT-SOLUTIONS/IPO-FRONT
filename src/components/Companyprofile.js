@@ -1,10 +1,12 @@
-import React,{ useContext } from 'react'
+import React,{ useContext,useEffect,useState } from 'react'
 import { Container, Row, Col, CustomButton,Input} from "./CommonComponents"
 import styled from "styled-components"
 import Avatar from '@mui/material/Avatar';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Icon } from "@iconify/react";
 import Card from './Statcard2';
+import AuthServices from '../services/AuthServices';
+import {useSelector} from 'react-redux'
 
 const OuterDiv = styled(Container)`
   text-align: center;
@@ -135,56 +137,65 @@ const IconSet = styled.div`
 const LinkA = styled.a`
   color: inherit;
 `;
-
-const Sponsorlist = [
-    {
-    coverimg:"https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-      image:
-        "https://images.unsplash.com/photo-1620288627223-53302f4e8c74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
-      companyname: "Lambogini",
-      email: "abc@gmail.com",
-      contactnumber:"0778542291",
-      addressline1:"147/1",
-      addressline2:"dikwalla,matara",
-      contactperson:"nadun nethsara",
-      contactpersonnumb:"071123456",
-    },
-    
-  ];
 function Companyprofile() {
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dataService = new AuthServices();
+
+  const [userData, setUserData] = useState({});
+  // const [newsLoaded, setNewsLoaded] = useState(false)
+  const [error, setError] = useState("");
+  const id = useSelector(state => state.user.userId);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchStatData = async () => {
+      const { status, data, error } = await dataService.handleGetCompany(id);
+      if (status) {
+        setUserData(data);
+      } else {
+        setError(error);
+        console.log(error);
+      }
+      setIsLoading(false);
+    };
+    fetchStatData();
+    
+  }, []);
+
     const { fonts } = useContext(ThemeContext);
     return (
         <OuterDiv >
-            {Sponsorlist.map((value, index) => (
                 <Row>
                         <Separatecol md={4} sm={12} xs={12}>
-                                <Avtdiv><ApplyImage image={value.image} /></Avtdiv>
-                                <h1>{value.companyname}</h1><hr/>
-                                <h5><Icons icon="dashicons:email-alt" />{value.email}</h5>
-                                <h5><Icons icon="fluent:call-20-filled" />{value.contactnumber}</h5>
-                                <h5><Icons icon="foundation:address-book" />{value.addressline1},{value.addressline2}</h5>
+                                <Avtdiv><ApplyImage image={userData?.imgUrl} /></Avtdiv>
+                                <h1>{userData.companyname}</h1><hr/>
+                                <h5><Icons icon="dashicons:email-alt" />{userData.email}</h5>
+                                <h5><Icons icon="fluent:call-20-filled" />{userData?.conatctnumber}</h5>
+                                <h5><Icons icon="foundation:address-book" />{userData.address?.replace(/(<br\/>)/g,"")}</h5>
                                 <hr/>
                                 <h3>About</h3>
                                 <div >
                                     <IconSet>
-                                        <LinkA href={value.fb} target="_blank">
+                                        <LinkA href={userData.fb} target="_blank">
                                         <Icons icon="bi:facebook" />
                                         </LinkA>
 
-                                        <LinkA href={value.linkedin} target="_blank">
+                                        <LinkA href={userData.linkedin} target="_blank">
                                         <Icons icon="akar-icons:linkedin-fill" />
                                         </LinkA>
-                                        <LinkA href={value.twitter} target="_blank">
+                                        <LinkA href={userData.twitter} target="_blank">
                                         <Icons icon="akar-icons:twitter-fill" />
                                         </LinkA>
                                     </IconSet>
                                 </div>
-                                <h6>Contact Person: <b>{value.contactperson}</b><br/>Number:<b>{value.contactpersonnumb}</b></h6>
+                                <h6>Contact Person: <b>{userData.conatctperson}</b><br/>Number:<b>{userData.conatctnumber}</b></h6>
                                
                             </Separatecol>
                         <Col md={7} sm={12} xs={12}>
                             <Separaterow >
-                                <Rowdiv img={value.coverimg}>
+                                <Rowdiv img={"https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"}>
                                
                                 </Rowdiv>
                                
@@ -202,7 +213,6 @@ function Companyprofile() {
                             </Separaterow2>
                         </Col>
                 </Row>
-                ))}
         </OuterDiv>
     )
 }
