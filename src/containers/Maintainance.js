@@ -52,7 +52,7 @@ const Maintainance = () => {
         src={Maintain}
       />
       <Subtitle color={them.syntax} fontFamily={fonts.general}>
-        Site is under maintenance and available soon.
+        This feature is under maintenance and available soon.
       </Subtitle>
     </FluidContainer>
   );
