@@ -1,7 +1,7 @@
+import { Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 
 export default function AListItem({ location, navigate, path, icon, text }) {
    return (
@@ -14,11 +14,12 @@ export default function AListItem({ location, navigate, path, icon, text }) {
             <ListItemIcon
                sx={{
                   minWidth: 45,
+                  color:"white"
                }}
             >
                {icon}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <Typography sx={{fontWeight:700}}>{text}</Typography>
          </ListItemButton>
       </ListItem>
    );

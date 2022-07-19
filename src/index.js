@@ -8,15 +8,17 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
-// import TestNavbar from './test/TestNavbar'
+import { ThemeProvider } from "@mui/material/styles";
+import {theme} from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
+        <ThemeProvider theme={theme}>
           <App />
-          {/* <TestNavbar/> */}
+          </ThemeProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>

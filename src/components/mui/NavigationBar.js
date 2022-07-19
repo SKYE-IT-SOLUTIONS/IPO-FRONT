@@ -16,7 +16,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 import Drawer from "./Drawer";
 import { Outlet } from "react-router-dom";
-import FooterContent from "../Footer";
+// import FooterContent from "../Footer";
 
 export default function SidebarLayout({ title, sideBarItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -116,6 +116,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
       <AppBar
         position="fixed"
         sx={{
+          "background-image": "linear-gradient(to right, #000428, #004e92)",
           boxShadow: "none",
           zIndex: (t) => t.zIndex.drawer + 1,
         }}
@@ -136,7 +137,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
             sx={{
               fontFamily: "monospace",
               fontSize: 20,
-              lineHeight: 3,
+              // lineHeight: 3,
               fontWeight: 700,
               cursor: "pointer",
             }}
@@ -203,10 +204,10 @@ export default function SidebarLayout({ title, sideBarItems }) {
         }}
       >
         <Toolbar />
-        <Box sx={{ p: 1, minHeight: "70vh" }}>
+        <Box sx={{ p: 1}}>
           <Outlet />
         </Box>
-        <FooterContent />
+        {/* <FooterContent /> */}
       </Box>
     </Box>
   );

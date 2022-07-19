@@ -1,4 +1,4 @@
-import Divider from "@mui/material/Divider";
+// import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,7 +11,6 @@ export default function SidebarList({ items }) {
 
    return (
       <>
-         <Divider />
          <List>
             {items.map((item, id) => (
                <ListItem
@@ -24,7 +23,6 @@ export default function SidebarList({ items }) {
                />
             ))}
          </List>
-         <Divider />
       </>
    );
 }
