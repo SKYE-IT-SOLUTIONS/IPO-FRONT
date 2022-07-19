@@ -42,9 +42,9 @@ function App() {
   );
 
   const parsedRoutes = routes(isUserLoggedIn === "NBSS", userRole).map(
-    (route) => ({
-      ...route,
-      children: route.children.map((child) =>
+    ({ children, ...rest }) => ({
+      ...rest,
+      children: children.map((child) =>
         String(child.element.type["$$typeof"]).includes("lazy")
           ? {
               ...child,
@@ -62,4 +62,3 @@ function App() {
 }
 
 export default App;
-

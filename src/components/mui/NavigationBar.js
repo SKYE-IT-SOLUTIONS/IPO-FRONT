@@ -20,23 +20,16 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 export default function SidebarLayout({ title, sideBarItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
     handleMobileMenuClose();
   };
 
@@ -45,11 +38,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
   };
 
   const handleProfile = () => {
-    navigate('profile');
-    handleMenuClose();
-  };
-
-  const handleLogout = () => {
+    navigate("profile");
     handleMenuClose();
   };
 
@@ -60,26 +49,6 @@ export default function SidebarLayout({ title, sideBarItems }) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </Menu>
-  );
 
   const renderMobileMenu = (
     <Menu
@@ -104,7 +73,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfile}>
         <IconButton size="large" color="inherit">
           <AccountCircle />
         </IconButton>
@@ -166,7 +135,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
             <IconButton
               size="large"
               edge="end"
-              onClick={handleProfileMenuOpen}
+              onClick={handleProfile}
               color="inherit"
             >
               <AccountCircle />
@@ -190,7 +159,6 @@ export default function SidebarLayout({ title, sideBarItems }) {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
       {sideBarItems && (
         <Drawer
           open={mobileOpen}
@@ -206,7 +174,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
         }}
       >
         <Toolbar />
-        <Box sx={{ p: 1}}>
+        <Box sx={{ p: 1 }}>
           <Outlet />
         </Box>
         {/* <FooterContent /> */}
