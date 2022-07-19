@@ -5,6 +5,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 // import TopLogoBar from "../../components/TopLogoBar";
 import NavigationBar from "../../components/mui/NavigationBar";
@@ -29,6 +30,11 @@ const sideBarItems = [
     path: "/student/cv-generate",
     icon: <PictureAsPdfIcon />,
     text: "CV Generate",
+  },
+  {
+    path: "/logout",
+    icon: <LogoutIcon />,
+    text: "Logout",
   },
 ];
 

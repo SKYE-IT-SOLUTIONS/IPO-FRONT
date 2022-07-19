@@ -3,11 +3,11 @@ import { adminRoutes } from "./admin";
 import { studentRoutes } from "./student";
 import { companyRoutes } from "./company";
 
-const routes = (isAuthenticated, userRole) => [
-  publicRoutes(isAuthenticated, userRole),
-  adminRoutes(isAuthenticated, userRole),
-  studentRoutes(isAuthenticated, userRole),
-  companyRoutes(isAuthenticated, userRole),
+const routes = (...args) => [
+  publicRoutes(...args),
+  adminRoutes(...args),
+  studentRoutes(...args),
+  companyRoutes(...args),
 ];
 
 export default routes;
