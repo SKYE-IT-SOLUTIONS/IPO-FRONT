@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import {
   Container,
@@ -25,16 +27,12 @@ import {
   setVisibility,
 } from "../store/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
 import { Simple_Validator } from "../utils/validation";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-const InputImage = muistyled("input")({
-  display: "none",
-});
 
 const NewContainer = styled(Container)`
   display: flex;
@@ -78,12 +76,7 @@ const ApplyImage = styled.div`
   }
 `;
 
-const Collection = styled.div`
-  /* background-color: red; */
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-`;
+
 
 const NewsInput = styled(Input)`
   width: 100%;

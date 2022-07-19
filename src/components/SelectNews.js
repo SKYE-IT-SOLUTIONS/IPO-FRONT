@@ -1,7 +1,6 @@
 import React,{useContext} from "react";
 import { Container, Row, Col ,CustomButton } from "./CommonComponents";
 import styled from "styled-components";
-import { Icon } from "@iconify/react";
 import news from "../assets/News-pana.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useNavigate } from 'react-router-dom';

@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import React, { useContext, useState, useEffect } from "react";
-import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, CustomButton } from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import submitCV from "../assets/submitcv.svg";
 import FileUpload from "./fileupload/FileUpload";
-import { useNavigate, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch, } from "react-redux";
 import setImageBuffer from "../utils/storeImage";
 import { Icon } from '@iconify/react';
 
@@ -21,15 +22,15 @@ const StyledImg = styled.img`
 const Title = styled.h1`
   text-align: center;
 `;
-const Inputaddress = styled(Input)`
-  margin-bottom: 10px;
-  color: #808b96;
-  font-size: 14px;
-`;
-const Input2 = styled(Input)`
-  color: #808b96;
-  font-size: 16px;
-`;
+// const Inputaddress = styled(Input)`
+//   margin-bottom: 10px;
+//   color: #808b96;
+//   font-size: 14px;
+// `;
+// const Input2 = styled(Input)`
+//   color: #808b96;
+//   font-size: 16px;
+// `;
 const Button = styled(CustomButton)`
     position: absolute;
     bottom: 0;
@@ -49,8 +50,8 @@ const Icondelete=styled(Icon)`
     height: 25px;
 `;
 function Submitcv() {
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // let navigate = useNavigate();
   const { fonts } = useContext(ThemeContext);
 
   // useS

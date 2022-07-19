@@ -1,21 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React,{ useContext, useState, useEffect } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend,
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
     Title,
     } from 'chart.js';
 
 import { Pie} from 'react-chartjs-2';
-import { Bar} from 'react-chartjs-2';
-import { Paper, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
 import { Container, Row, Col } from "../components/CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
-import editContact from '../assets/edit-contact.svg';
-import { Image } from 'react-bootstrap';
 import Card from './Statcard';
 import Users from '../assets/user.svg';
 import News from '../assets/News-rafiki.svg';
@@ -27,11 +22,7 @@ const Contactcontainer=styled(Container)`
     font-family: ${({ font }) => font.general};
     padding: 0px 10px;
 `;
-const StyledImg =styled('img')`
-  padding: auto;
-  height: 100%;
-  width: 100%;
-`;
+
 const Title1 =styled('h1')`
     text-align: center;
 `;
@@ -45,10 +36,7 @@ const MainCol=styled(Col)`
   justify-content: center;
   padding: 10px;
 `;
-const MainPaper=styled(Paper)`
-   justify-content: center;
-   
-`;
+
 const Statdiv=styled('div')`
    border: 4px solid;
   border-radius: 10px;

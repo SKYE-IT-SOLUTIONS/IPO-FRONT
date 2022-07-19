@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
@@ -29,16 +31,16 @@ const RequirementTitle = styled.h4`
   }
 `;
 
-const Logo = styled.div`
-  background-image: url("https://images.unsplash.com/photo-1555596899-d634257b55bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-  background-position: center;
-  background-repeat: no;
-  background-size: cover;
-  height: 55px;
-  width: 55px;
-  border-radius: 50px;
-  border: 2px solid black;
-`;
+// const Logo = styled.div`
+//   background-image: url("https://images.unsplash.com/photo-1555596899-d634257b55bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+//   background-position: center;
+//   background-repeat: no;
+//   background-size: cover;
+//   height: 55px;
+//   width: 55px;
+//   border-radius: 50px;
+//   border: 2px solid black;
+// `;
 
 const Title = styled.h4`
   margin: auto 0;
@@ -212,21 +214,21 @@ function AddJobPost() {
   
   const [error, setError] = useState("");
 
-  const handleJobSubmit = async (payload) => {
-    setIsLoading(true);
-    const {status,data,error} = await dataService.handleSubmitJob(payload);
-    if(status){
-      console.log("Job Post Successfully");
-      setIsLoading(false);
-      navigate(`/admin/job/${data}`);
+  // const handleJobSubmit = async (payload) => {
+  //   setIsLoading(true);
+  //   const {status,data,error} = await dataService.handleSubmitJob(payload);
+  //   if(status){
+  //     console.log("Job Post Successfully");
+  //     setIsLoading(false);
+  //     navigate(`/admin/job/${data}`);
       
-    }else{
-      setIsLoading(false);
-      console.log(error);
-    }
+  //   }else{
+  //     setIsLoading(false);
+  //     console.log(error);
+  //   }
  
     
-  }
+  // }
 
   useEffect(() => {
     setIsLoading(true);

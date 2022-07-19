@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import React, { useContext, useState, useEffect } from "react";
-import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
+import React, { useContext, useState } from "react";
+import { Row, Col, CustomButton,Input} from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Paper,Grid,Box} from '@mui/material';
 import Request from '../assets/requestgraduate.svg';

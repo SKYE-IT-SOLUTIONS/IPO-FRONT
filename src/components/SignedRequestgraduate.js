@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import React, { useContext, useState, useEffect } from "react";
-import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
+import React, { useContext, useState } from "react";
+import { Row, Col, CustomButton,Input} from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import {Paper,Grid,Box} from '@mui/material';
 import Request from '../assets/requestgraduate.svg';
 import { Form } from "react-bootstrap";
-import { Simple_Validator,Validator,upload_Validator} from "../utils/validation";
+import { Simple_Validator,Validator} from "../utils/validation";
 import { patternMail,patternContact } from "../config/pattern"
 
 const Requestdiv=styled.div`
@@ -74,17 +75,17 @@ function Requestgraduate() {
     const [upload,setUpload] =useState({});
     const [uploadInfo,setUploadInfo]=useState({error: null,status: false});
 
-   const output=[
-       {
-        RequestPerson:{reqperson},
-        RequestCount:{count},
-        Reason:{reason},
-        Other:{other},
-        Mail:{mail},
-        MobileNumber:{number},
-        Address:{},
-       }
-    ]
+//    const output=[
+//        {
+//         RequestPerson:{reqperson},
+//         RequestCount:{count},
+//         Reason:{reason},
+//         Other:{other},
+//         Mail:{mail},
+//         MobileNumber:{number},
+//         Address:{},
+//        }
+//     ]
     return (
         <Requestdiv font={fonts}>
             <MPaper>

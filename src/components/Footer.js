@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -53,7 +53,7 @@ const Copyright = styled(Container)`
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.footer : dark.footer;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <FooterWrapper font={fonts.general} bg={them.f_ic_bg}>

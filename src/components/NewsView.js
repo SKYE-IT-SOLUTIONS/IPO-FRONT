@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
@@ -5,7 +7,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { Container, Row, Col } from "./CommonComponents";
 import { useParams } from "react-router-dom";
 import DataService from "../services/DataService";
-import Snackbar from "./CustomSnackBar";
+// import Snackbar from "./CustomSnackBar";
 import { useSelector } from "react-redux";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";

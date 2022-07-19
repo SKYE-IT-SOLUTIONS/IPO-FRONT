@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { Header, Main, Footer,SideNav } from "../../components/DashboardLayout";
+import { Header, Footer,SideNav } from "../../components/DashboardLayout";
 
 import TopLogoBar from "../../components/TopLogoBar";
 // import NavBar from "../../components/NavBar";

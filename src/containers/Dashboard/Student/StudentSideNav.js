@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUserLoggedIn, setUserRole, setUserId } from "../../../store/userSlice";
 import AuthService from "../../../services/AuthServices";
 
-let heighty=window.scrollY;
+// let heighty=window.scrollY;
 
 const Body = styled.div`
   box-sizing: border-box;

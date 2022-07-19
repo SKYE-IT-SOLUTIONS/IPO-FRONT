@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useContext } from "react";
-import { Container, Row, Col } from "../components/CommonComponents";
+import { Container } from "../components/CommonComponents";
 import Locked from "../assets/Security-pana.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 

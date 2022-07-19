@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React,{useState,useContext} from 'react';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import styled from "styled-components";
 import Feedback from "../assets/Feedback.svg";
-import { Paper, Grid, Box,TextField,TextareaAutosize } from "@mui/material";
-import { Container, Row, Col, CustomButton, Input } from "./CommonComponents";
-import { Simple_Validator, Validator } from "../utils/validation";
+import { Paper, Box,TextField } from "@mui/material";
+import { Container, Row, Col, CustomButton } from "./CommonComponents";
+import { Simple_Validator } from "../utils/validation";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const StyledImg = styled.img`
@@ -13,20 +14,20 @@ const StyledImg = styled.img`
   size:100%;
   
 `;
-const Paper1=styled(Paper)`
-    justify-content: center;
-    padding: 32px;
-`;
+// const Paper1=styled(Paper)`
+//     justify-content: center;
+//     padding: 32px;
+// `;
 const Paper2=styled(Paper)`
     justify-content: center;
     padding: 32px;
     
 `;
-const LoginCol = styled(Col)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+// const LoginCol = styled(Col)`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// `;
 const SubBttn = styled(CustomButton)`
   width: 150px;
   margin: 15px 0px;

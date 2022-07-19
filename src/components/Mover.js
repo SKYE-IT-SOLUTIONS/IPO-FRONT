@@ -9,7 +9,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import Row from 'react-bootstrap/Row'
 import  {Col} from './CommonComponents';
 // import { Icon } from "@iconify/react";
-import { CustomButton,Icon } from "./CommonComponents";
+import { CustomButton } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -162,14 +162,14 @@ const MoreButton = styled(CustomButton)`
   font-size: 12px;
   width:80px;
 `;
-const MoverIcon = styled(Icon)`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  ::hover {
-    color: red;
-  }
-`;
+// const MoverIcon = styled(Icon)`
+//   cursor: pointer;
+//   width: 20px;
+//   height: 20px;
+//   ::hover {
+//     color: red;
+//   }
+// `;
 
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);

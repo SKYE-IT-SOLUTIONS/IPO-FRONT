@@ -96,9 +96,9 @@ const Image = styled("img")`
     visibility: hidden;
   }
 `;
-const P1=styled.p`
-    color:#000000;
-`;
+// const P1=styled.p`
+//     color:#000000;
+// `;
 function Mission() {
   //theme, light, dark,
   const { fonts } = useContext(ThemeContext);

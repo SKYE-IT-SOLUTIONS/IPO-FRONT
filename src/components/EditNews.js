@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from "react";
 import {
   Container,
@@ -22,9 +24,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import DataService from "../services/DataService";
 
-const InputImage = muistyled("input")({
-  display: "none",
-});
+// const InputImage = muistyled("input")({
+//   display: "none",
+// });
 
 const NewContainer = styled(Container)`
   display: flex;
@@ -61,12 +63,12 @@ const ApplyImage = styled.div`
   }
 `;
 
-const Collection = styled.div`
-  /* background-color: red; */
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-`;
+// const Collection = styled.div`
+//   /* background-color: red; */
+//   display: flex;
+//   flex-direction: column;
+//   /* justify-content: center; */
+// `;
 
 const NewsInput = styled(Input)`
   width: 100%;

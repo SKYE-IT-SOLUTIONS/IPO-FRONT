@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useContext,useState,useEffect} from 'react'
 import styled from 'styled-components';
 import {Container} from "./CommonComponents";
   import sendMail from '../assets/sendMail.svg'
   import { ThemeContext } from "../contexts/ThemeContext";
+import { useLocation } from 'react-router-dom';
+  
 
   const OuterDiv = styled(Container)`
     display: flex;
@@ -34,12 +37,13 @@ const Email = styled.span`
 `
 
 function SendMail() {
+    const {state}=useLocation();
+    console.log(state);
     const { fonts } = useContext(ThemeContext);
     const [email, setEmail] = useState("")
 
     useEffect(() => {
-        setEmail(sessionStorage.getItem("email"))
-        sessionStorage.removeItem("email")
+        setEmail(state?.email);
     }, [])
 
     return (

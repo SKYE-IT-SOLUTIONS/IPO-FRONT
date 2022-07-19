@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, CustomButton,Input} from "./CommonComponents";
 import { ThemeContext } from "../contexts/ThemeContext";
 import editContact from '../assets/edit-contact.svg';
-import { Simple_Validator, Validator } from "../utils/validation";
+import { Validator } from "../utils/validation";
 import { patternMail,patternContact } from "../config/pattern"
 
 const Contactcontainer=styled(Container)`
@@ -47,7 +48,6 @@ function EditContact() {
     const [emailInfo,setEmailInfo]=useState({ error: null, status: false });
     const [officer,setOfficer]=useState();
     const [officerInfo,setOfficerInfo]=useState({ error: null, status: false });
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (credentials) => {
         

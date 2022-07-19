@@ -117,8 +117,9 @@ function StudentRegister() {
       credentials
     );
     if (status) {
-      sessionStorage.setItem("email", data?.email);
-      navigate("/register/sendMail");
+      // sessionStorage.setItem("email", data?.email);
+      console.log(data,1);
+      navigate("/register/sendMail", {state: {email: data}});
     } else {
       setError(error);
       setIsErrorMsgOpen(true);

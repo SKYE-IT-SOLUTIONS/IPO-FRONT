@@ -30,11 +30,11 @@ const NavTitle = styled.span`
   }
 `;
 
-const NavSubTitle = styled.span`
-  color: black;
-  font-size: 14px;
-  padding-left: 8px;
-`;
+// const NavSubTitle = styled.span`
+//   color: black;
+//   font-size: 14px;
+//   padding-left: 8px;
+// `;
 
 const DropItems = styled(NavDropdown.Item)`
   font-size: 14px;
@@ -85,16 +85,16 @@ function NavBar(props) {
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
 
-  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
-  const [error, setError] = useState(null);
+  // const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+  // const [error, setError] = useState(null);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
 
-    setIsErrorMsgOpen(false);
-  };
+  //   setIsErrorMsgOpen(false);
+  // };
 
   const userLogged = useSelector((state) => state.user.iuli);
   const userRole = useSelector((state) => state.user.userRole);

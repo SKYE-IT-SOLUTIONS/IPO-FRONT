@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // third party imports
 import React,{useEffect} from "react";
 import { useRoutes } from "react-router-dom";

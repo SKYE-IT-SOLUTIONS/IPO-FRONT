@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton } from "./CommonComponents";
@@ -122,9 +124,9 @@ const SalaryValue = styled.p`
     font-size: 13px;
   }
 `;
-const Date = styled.span`
-  color: #ff0f0f;
-`;
+// const Date = styled.span`
+//   color: #ff0f0f;
+// `;
 
 const List = styled.li`
   font-size: 15px;

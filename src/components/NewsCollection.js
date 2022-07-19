@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "../components/CommonComponents";
 import DataService from "../services/DataService";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import NewsCard from "./NewsCard";
 import Spinner from "./Spinner";
 
 function NewsCollection() {
   const dataService = new DataService();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [newsData, setNewsData] = useState([]);

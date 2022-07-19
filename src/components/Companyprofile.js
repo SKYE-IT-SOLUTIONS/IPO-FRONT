@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{ useContext,useEffect,useState } from 'react'
-import { Container, Row, Col, CustomButton,Input} from "./CommonComponents"
+import { Container, Row, Col} from "./CommonComponents"
 import styled from "styled-components"
 import Avatar from '@mui/material/Avatar';
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -65,10 +67,7 @@ const Separatecol2 = styled(Col)`
     border-radius: 15px;
  
 `;
-const Avtr=styled(Avatar)`
-    width:100px;
-    text-align: center;
-`;
+
 const Avtdiv=styled.div`
     display: flex;
     justify-content: center;
@@ -119,15 +118,7 @@ const Icons = styled(Icon)`
     font-size: 22px;
   }
 `;
-const contactdiv=styled(Container)`
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
-    border: 3px solid black;
-    border-radius: 15px;
-    z-index: 999;
-    background-color: red;
-`;
+
 const IconSet = styled.div`
   padding: 12px 0;
   display: flex;
@@ -164,7 +155,6 @@ function Companyprofile() {
     
   }, []);
 
-    const { fonts } = useContext(ThemeContext);
     return (
         <OuterDiv >
                 <Row>

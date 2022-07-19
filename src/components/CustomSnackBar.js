@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React from "react";
 
 import Snackbar from "@mui/material/Snackbar";

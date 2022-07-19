@@ -1,6 +1,4 @@
 import React,{useContext} from "react";
-import { Container, Row } from "./CommonComponents";
-import LogoCard from "./LogoCard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import styled from "styled-components";
 import "./style.css";

@@ -1,19 +1,9 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 import { Paper } from '@mui/material';
 import { Container, Row, Col } from "../components/CommonComponents";
-import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/material/styles';
-import { Icon } from '@iconify/react';
 
-const MainCol=styled(Col)`
-  justify-content: center;
-`;
 const Paper1=styled(Paper)`
   border: 4px solid;
   border-radius: 10px;
