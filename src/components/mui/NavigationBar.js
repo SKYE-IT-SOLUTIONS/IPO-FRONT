@@ -118,7 +118,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
       <AppBar
         position="fixed"
         sx={{
-          "background-image": "linear-gradient(to right, #000428, #004e92)",
+          "backgroundImage": "linear-gradient(to right, #000428, #004e92)",
           boxShadow: "none",
           zIndex: (t) => t.zIndex.drawer + 1,
         }}
