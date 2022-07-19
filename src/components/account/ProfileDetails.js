@@ -75,7 +75,7 @@ const ProfileDetails = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={10} sm={6}>
                 <CardHeader
                   subheader="The information can be edited"
                   title="Profile"
@@ -83,7 +83,7 @@ const ProfileDetails = (props) => {
               </Grid>
               <Grid
                 item
-                xs={12}
+                xs={2}
                 sm={6}
                 sx={{ justifyContent: "right", flexGrow: 1, display: "flex" }}
               >
