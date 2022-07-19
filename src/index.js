@@ -6,9 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store,persistor} from "./store/store";
-import {PersistGate} from "redux-persist/integration/react";
-import TestNavbar from './test/TestNavbar'
+import { store, persistor } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
+// import TestNavbar from './test/TestNavbar'
 
 ReactDOM.render(
   <React.StrictMode>

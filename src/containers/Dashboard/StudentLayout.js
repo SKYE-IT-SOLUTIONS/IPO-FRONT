@@ -1,34 +1,32 @@
-import React from "react";
-
-import styled from "styled-components";
-import { Outlet } from "react-router-dom";
-import { Header, Main, Footer,SideNav } from "../../components/DashboardLayout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 import TopLogoBar from "../../components/TopLogoBar";
-// import NavBar from "../../components/NavBar";
-import FooterContent from "../../components/Footer";
-import StudentSideNav from "./Student/StudentSideNav";
+import NavigationBar from "../../components/mui/NavigationBar";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+const sideBarItems = [
+  { path: "/student/dashboard", icon: <AccountBoxIcon />, text: "Dashboard" },
+  { path: "/student/news", icon: <AccountBoxIcon />, text: "News" },
+  { path: "/student/job", icon: <AccountBoxIcon />, text: "Job" },
+  { path: "/student/feedback", icon: <AccountBoxIcon />, text: "Feedback" },
+  { path: "/student/profile", icon: <AccountBoxIcon />, text: "Profile" },
+  {
+    path: "/student/training-session",
+    icon: <AccountBoxIcon />,
+    text: "Training Session",
+  },
+  { path: "/student/internship", icon: <AccountBoxIcon />, text: "Internship" },
+  {
+    path: "/student/cv-generate",
+    icon: <AccountBoxIcon />,
+    text: "CV Generate",
+  },
+];
+
 const StudentLayout = () => {
   return (
     <>
-      <Header>
-        <TopLogoBar />
-        {/* <NavBar /> */}
-      </Header>
-      <SideNav>
-        <Container>
-          <StudentSideNav/>
-          <Outlet />
-        </Container>
-      </SideNav>
-      <Footer>
-        <FooterContent />
-      </Footer>
+      {/* <TopLogoBar /> */}
+      <NavigationBar title="ERC System" sideBarItems={sideBarItems} />
     </>
   );
 };
