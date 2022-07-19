@@ -1,4 +1,9 @@
-import { authRequest, getErrorMessage, postRequest,  getRequest } from "../utils";
+import {
+  authRequest,
+  getErrorMessage,
+  postRequest,
+  getRequest,
+} from "../utils";
 import {
   getRefreshToken,
   getAccessToken,
@@ -24,58 +29,58 @@ export const loginIn = async (credentials) => {
       console.log(data);
       // console.log("data" + data.data);
       if (!error) {
-        if(data.status === 200) {
+        if (data.status === 200) {
           const { token, refreshToken, id } = data?.data;
           setAccessToken(token);
           setRefreshToken(refreshToken);
           setUserId(id);
           console.log("login success");
-          result = { status: true,data: data?.data, error: null };
+          result = { status: true, data: data?.data, error: null };
         }
       } else {
-        if(error.status === 423) {
+        if (error.status === 423) {
           console.log("login locked");
-          result = { status: false,data: null, error: 423 };
-        }else{
-          result = { status: false,data: null, error: getErrorMessage(error) };
+          result = { status: false, data: null, error: 423 };
+        } else {
+          result = { status: false, data: null, error: getErrorMessage(error) };
         }
       }
     })
     .catch((error) => {
       console.log("error " + error);
-      result = { status: false,data: null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   console.log(result);
   return result;
 };
 
-export const signUp = async (credentials,SIGNUP_URL) => {
+export const signUp = async (credentials, SIGNUP_URL) => {
   console.log("signUp");
   await postRequest(SIGNUP_URL, credentials)
     .then(({ data, error }) => {
       if (!error) {
-        if(data.status === 201){
+        if (data.status === 201) {
           // console.log("signup-data" + data.data);
           console.log("signUp success");
-          result = { status: true,data: data?.data, error: null };
-        }else{
+          result = { status: true, data: data?.data, error: null };
+        } else {
           console.log("signUp failed");
-          result = { status: false,data: null, error: "error" };
+          result = { status: false, data: null, error: "error" };
         }
       } else {
         console.log(error);
-        if(error.status === 404){
+        if (error.status === 404) {
           console.log("signUp failed-error");
-          result = { status: false,data: null, error: getErrorMessage(error) };
-        }else if(error.status === 400){
+          result = { status: false, data: null, error: getErrorMessage(error) };
+        } else if (error.status === 400) {
           console.log("signUp failed-errorByAuth");
-          result = { status: false,data: null, error: error.data.message };
+          result = { status: false, data: null, error: error.data.message };
         }
       }
     })
     .catch((error) => {
       console.log("error " + error);
-      result = { status: false,data: null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   console.log(result);
   return result;
@@ -94,13 +99,13 @@ export const logOut = async () => {
         setAccessToken(null);
         setRefreshToken(null);
         setUserId(null);
-        result = { status: true,data: data?.data, error: null };
+        result = { status: true, data: data?.data, error: null };
       } else {
-        result = { status: false,data: null, error: getErrorMessage(error) };
+        result = { status: false, data: null, error: getErrorMessage(error) };
       }
     })
     .catch((error) => {
-      result = { status: false,data: null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   return result;
 };
@@ -109,7 +114,7 @@ export const isUser = async () => {
   console.log("isUser");
   const refresh = getRefreshToken();
   if (refresh === "") {
-    return { status: false,data: null, error: "Refresh Token Not Found" };
+    return { status: false, data: null, error: "Refresh Token Not Found" };
   }
   const access = getAccessToken();
   var config = {
@@ -125,13 +130,17 @@ export const isUser = async () => {
     .then(async ({ data, error }) => {
       if (!error) {
         if (data.status === 200) {
-          result = { status: true,data: null, error: null };
+          result = { status: true, data: null, error: null };
         } else {
-          result = { status: false,data: null, error: "Undefined Status Code" };
+          result = {
+            status: false,
+            data: null,
+            error: "Undefined Status Code",
+          };
         }
       } else {
         if (error.status === 401) {
-          console.log("Access Token Expired")
+          console.log("Access Token Expired");
           const { status, error } = await refreshAccessToken(
             REFRESH_URL,
             postRequest
@@ -139,15 +148,19 @@ export const isUser = async () => {
           if (status) {
             result = await isUser();
           } else {
-            result = { status: status,data: data?.data, error: getErrorMessage(error) };
+            result = {
+              status: status,
+              data: data?.data,
+              error: getErrorMessage(error),
+            };
           }
         } else {
-          result = { status: false,data: null, error: getErrorMessage(error) };
+          result = { status: false, data: null, error: getErrorMessage(error) };
         }
       }
     })
     .catch((error) => {
-      result = { status: false,data: null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   return result;
 }; //must await for the result
@@ -193,10 +206,11 @@ export const onDelete = async (DATA_URL, id) => {
     .then(async ({ data, error }) => {
       console.log("data", data);
       if (data.status === 200) {
-        result = { status: true,data:data?.data, error: null };
-      }if (!error) {
+        result = { status: true, data: data?.data, error: null };
+      }
+      if (!error) {
         if (data.status === 202) {
-          result = { status: true,data:data?.data, error: null };
+          result = { status: true, data: data?.data, error: null };
         } else if (data.status === 401) {
           const { status, error } = await refreshAccessToken(
             REFRESH_URL,
@@ -205,20 +219,24 @@ export const onDelete = async (DATA_URL, id) => {
           if (status) {
             onDelete(config);
           } else {
-            result = { status: false,data:null, error: getErrorMessage(error) };
+            result = {
+              status: false,
+              data: null,
+              error: getErrorMessage(error),
+            };
           }
         }
       } else {
-        result = { status: false,data:null, error: getErrorMessage(error) };
+        result = { status: false, data: null, error: getErrorMessage(error) };
       }
     })
     .catch((error) => {
-      result = { status: false,data:null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   return result;
 };
 
-export const handleGetUser =async (REQUEST_URL)=>{
+export const handleGetUser = async (REQUEST_URL) => {
   var config = {
     method: "GET",
     url: REQUEST_URL,
@@ -231,7 +249,7 @@ export const handleGetUser =async (REQUEST_URL)=>{
     .then(async ({ data, error }) => {
       if (!error) {
         if (data.status === 200) {
-          result = { status: true,data:data?.data, error: null };
+          result = { status: true, data: data?.data, error: null };
         } else if (data.status === 401) {
           const { status, error } = await refreshAccessToken(
             REFRESH_URL,
@@ -240,21 +258,25 @@ export const handleGetUser =async (REQUEST_URL)=>{
           if (status) {
             handleGetUser(REQUEST_URL);
           } else {
-            result = { status: false,data:null, error: getErrorMessage(error) };
+            result = {
+              status: false,
+              data: null,
+              error: getErrorMessage(error),
+            };
           }
         }
       } else {
-        result = { status: false,data:null, error: getErrorMessage(error) };
+        result = { status: false, data: null, error: getErrorMessage(error) };
       }
     })
     .catch((error) => {
-      result = { status: false,data:null, error: getErrorMessage(error) };
+      result = { status: false, data: null, error: getErrorMessage(error) };
     });
   return result;
-}
+};
 
-export const logOutLocally=()=>{
+export const logOutLocally = () => {
   setAccessToken(null);
   setRefreshToken(null);
   setUserId(null);
-}
+};
