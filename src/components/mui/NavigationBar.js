@@ -15,13 +15,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
 import Drawer from "./Drawer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 // import FooterContent from "../Footer";
 
 export default function SidebarLayout({ title, sideBarItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const navigate=useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -44,6 +45,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
   };
 
   const handleProfile = () => {
+    navigate('profile');
     handleMenuClose();
   };
 
