@@ -7,7 +7,6 @@ import Subscription from '../components/Subscription'
 import { Container,Row,Col } from '../components/CommonComponents'
 import SponsorList from '../components/SponsorList'
 import MapView from '../components/MapView'
-import Grid from '@material-ui/core/Grid'
 import { styled } from '@mui/material/styles';
 
 const Colm = styled(Col)`

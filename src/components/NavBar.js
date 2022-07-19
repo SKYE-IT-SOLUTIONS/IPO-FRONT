@@ -13,7 +13,6 @@ import { setUserLoggedIn, setUserRole, setUserId } from "../store/userSlice";
 // import Cookies from 'js-cookie'
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
-import CustomSnackBar from "./CustomSnackBar";
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};

@@ -12,9 +12,9 @@ import  {Col} from './CommonComponents';
 import { CustomButton,Icon } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 
 const Moverdiv = styled.div`
     width:100%;

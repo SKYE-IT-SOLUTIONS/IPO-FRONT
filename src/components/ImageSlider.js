@@ -162,12 +162,10 @@ function ImageSlider() {
           </Carousel.Item>
         </Carousel>
        
-        <AnimatedText>
+        {/* <AnimatedText>
            <span>Welcome to IPO</span>
-         {/* </AnimatedText>
-         <AnimatedText> */}
             <br />
-        </AnimatedText>
+        </AnimatedText> */}
         </Himage>
          
          
