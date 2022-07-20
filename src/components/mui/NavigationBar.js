@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { logo } from "../CommonComponents";
 
 import Drawer from "./Drawer";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -87,7 +88,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
       <AppBar
         position="fixed"
         sx={{
-          "backgroundImage": "linear-gradient(to right, #000428, #004e92)",
+          backgroundImage: "linear-gradient(to right, #000428, #004e92)",
           boxShadow: "none",
           zIndex: (t) => t.zIndex.drawer + 1,
         }}
@@ -103,17 +104,30 @@ export default function SidebarLayout({ title, sideBarItems }) {
               <MenuIcon />
             </IconButton>
           )}
-
+          <Box sx={{ height: "40px", width: "30px",mr:1,display: { xs: "none",sm:"block" } }} component="img" src={logo} />
           <Typography
             sx={{
               fontFamily: "monospace",
               fontSize: 20,
-              // lineHeight: 3,
               fontWeight: 700,
               cursor: "pointer",
+              display: { xs: "none",sm:"block" } 
             }}
+            onClick={() => navigate("/")}
           >
-            {title}
+            Industrial PLacement Office
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "monospace",
+              fontSize: 20,
+              fontWeight: 700,
+              cursor: "pointer",
+              display: { sm: "none" } 
+            }}
+            onClick={() => navigate("/")}
+          >
+            IPO
           </Typography>
 
           <Box
