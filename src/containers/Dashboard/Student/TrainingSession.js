@@ -41,6 +41,7 @@ const TrainingSession = () => {
         <Grid item xs={12} md={6}>
           <Autocomplete
             disablePortal
+            freeSolo
             options={typeOptions}
             renderInput={(params) => (
               <TextField {...params} label="Type" fullWidth />
@@ -61,7 +62,7 @@ const TrainingSession = () => {
         <Grid item xs={12}>
           <TextField label="Details" fullWidth multiline minRows={2} />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               label="Date"
@@ -72,7 +73,7 @@ const TrainingSession = () => {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <TimePicker
               label="Time"
@@ -81,6 +82,15 @@ const TrainingSession = () => {
               renderInput={(params) => <TextField {...params} fullWidth />}
             />
           </LocalizationProvider>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Autocomplete
+            disablePortal
+            options={["Online", "Physical", "Both"]}
+            renderInput={(params) => (
+              <TextField {...params} label="Conducting media" fullWidth />
+            )}
+          />
         </Grid>
         <Grid item xs={12}>
           <Divider>
