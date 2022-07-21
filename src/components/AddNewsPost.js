@@ -223,7 +223,7 @@ function AddNewsPost() {
               <NewsInput
                 type="text"
                 placeholder="Enter News Title"
-                value={newTitle}
+                value={newTitle||""}
                 onChange={(e) => {
                   setNewsTitle(e.target.value);
                   dispatch(setTitle(e.target.value));

@@ -2,6 +2,9 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
+import AddNewsPost from '../components/AddNewsPost';
+import PostJob from "../components/PostJob";
+
 
 const AdminDashboard = lazy(() => import("../containers/Dashboard/Admin/AdminDashboard"));
 const UserListOfAdmin = lazy(() =>
@@ -15,10 +18,11 @@ const NewsListOfAdminNonApproved = lazy(() =>
   import("../containers/Dashboard/Admin/News/NewsListNonApproved")
 );
 const EditNews = lazy(() => import("../components/EditNews"));
-const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
+// const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
+
 const NewsView = lazy(() => import("../components/NewsView"));
 const SelectJob = lazy(() => import("../components/SelectJob"));
-const PostJob = lazy(() => import("../components/PostJob"));
+// const PostJob = lazy(() => import("../components/PostJob"));
 const JobListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Jobs/JobList")
 );
