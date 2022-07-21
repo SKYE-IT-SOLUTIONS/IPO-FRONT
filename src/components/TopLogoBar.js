@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { logo } from "./CommonComponents";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Navbar } from "./CommonComponents";
 
@@ -136,6 +137,7 @@ const AnimatedText = styled.span`
 export default function TopLogoBar() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light : dark;
+  const navigate = useNavigate();
 
   return (
     <CustomDiv bg={them.ui} fonts={fonts}>
@@ -146,7 +148,7 @@ export default function TopLogoBar() {
               <thead>
                 <tr>
                   <td>
-                  <IconImage alt="" src={logo} />
+                  <IconImage alt="" src={logo} onClick={()=>navigate("/")}/>
                   </td>
                   <th>
                     <TopTitle className="text">

@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, CustomButton } from "./CommonComponents";
 // import JobPhoto from "../assets/Joboffersbro.svg"
 import JobPhoto from "../assets/JobApply.svg";
 import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useParams } from "react-router-dom";
+import DataService from "../services/DataService";
+import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
+import { useSelector } from "react-redux";
 
 const JobContainer = styled(Container)`
   /* display: flex;
@@ -57,7 +64,7 @@ const Description = styled.p`
   @media (max-width: 1040px) {
     font-size: 15px;
   }
-`
+`;
 
 const ApplyImage = styled.div`
   height: 512px;
@@ -117,140 +124,246 @@ const SalaryValue = styled.p`
     font-size: 13px;
   }
 `;
-const Date = styled.span`
-  color: #ff0f0f;
-`;
+// const Date = styled.span`
+//   color: #ff0f0f;
+// `;
 
 const List = styled.li`
   font-size: 15px;
-`
+`;
 
 const Deadline = styled.h6`
-   @media (max-width: 1040px) {
+  @media (max-width: 1040px) {
     font-size: 15px;
   }
-`
+`;
+const AnimatedText = styled.span`
+  font-weight: 800;
+  font-family: sans-serif;
+  background: red;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: no-repeat;
+  text-align: center;
+  position: absolute;
+  text-align: center;
+  animation: pop 5s ease-in-out infinite;
+  animation-delay: 2s infinite;
+  @keyframes pop{
+  50%  {
+    transform: scale(1.25);
+  }
+}
 
-const data = {
-  title: "Sample Job Title xxx xxxx xxxxx xxxxx xxxxxx",
-  position: "Software Engineer",
-  description: `Try to think about paragraphs in terms of thematic unity: a paragraph is
-  a sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.Try to
-  think about paragraphs in terms of thematic unity: a paragraph is a
-  sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.Try to
-  think about paragraphs in terms of thematic unity: a paragraph is a
-  sentence or a group of sentences that supports one central, unified
-  idea. Paragraphs add one idea at a time to your broader argument.`,
-  specifications: [
-    "Applicant age should be with in range 25 - 35",
-    "Area of residence : Negambo",
-  ],
-  qualifications: [
-    "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-  ],
-  experience: [
-    "Requirement 1 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 2 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 3 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 4 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 5 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-    "Requirement 6 xxxxx xxxxxx xxxxxx xxxxx xxxx xxxxxx xxxxxx",
-  ],
-  salary: 100000,
-  date: "2021/12/10",
-};
+  @media only screen and (min-width: 1160px) {
+    font-size: 30px;
+    margin-top: -10px;
+    
+  }
 
-function PostJob() {
+  @media (min-width: 1024px) and (max-width: 1160px) {
+    font-size: 25px;
+    margin-top: -10px;
+    
+  }
+
+  @media (min-width: 848px) and (max-width: 1024px) {
+    font-size: 20px;
+    margin-top: -5px;
+    
+  }
+  @media (min-width: 767px) and (max-width: 848px) {
+    font-size: 15px;
+    
+  }
+  @media (min-width: 500px) and (max-width: 767px) {
+    font-size: 12px;
+
+  }
+  @media (min-width: 400px) and (max-width: 500px) {
+    font-size: 10px;
+  
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    font-size: 9px;
+  
+  }
+  @media (max-width: 300px) {
+    font-size: 8px;  
+  }
+`;
+
+function PostJob({ dataFromProp }) {
+  const navigate = useNavigate();
+
+  const dataService = new DataService();
+
+  const { id } = useParams();
+
+  const [jobData, setJobData] = useState({
+    id: "",
+    title: "",
+    position: "",
+    description: "",
+    specifications: [],
+    qualifications: [],
+    experience: [],
+    salary: "",
+    date: "",
+  });
+  const [error, setError] = useState("");
+  const [isLoading, setisLoading] = useState(false);
+
+  const storeTitle = useSelector((state) => state.job.title);
+  const storePosition = useSelector((state) => state.job.position);
+  const storeDescription = useSelector((state) => state.job.description);
+  const storeSpecifications = useSelector((state) => state.job.specifications);
+  const storeQualifications = useSelector((state) => state.job.qualifications);
+  const storeExperience = useSelector((state) => state.job.experience);
+  const storeSalary = useSelector((state) => state.job.salary);
+  const storeDeadline = useSelector((state) => state.job.deadline );
+
+  useEffect(() => {
+    setisLoading(true);
+    const fetchJob = async () => {
+      if (id !== undefined && id !== null) {
+        console.log(id);
+        const { status, data, error } = id
+          ? await dataService.handleGetJob(id)
+          : null;
+        if (status) {
+          console.log("data", data);
+          // setJobData(data);
+          setJobData({
+            id: data?.id,
+            title: data?.title,
+            position: data?.position,
+            description: data?.description,
+            specifications: data?.specifications,
+            qualifications: data.qualifications,
+            experience: data?.experiences,
+            salary: data?.salary,
+            date: data?.deadline,
+          })
+        } else {
+          setError(error);
+          navigate("/404");
+        }
+        
+      } else {
+        setJobData({
+          id: "",
+          title: storeTitle,
+          position: storePosition,
+          description: storeDescription,
+          specifications: storeSpecifications,
+          qualifications: storeQualifications,
+          experience: storeExperience,
+          salary: storeSalary,
+          deadline: storeDeadline,
+          date: "Not Posted Yet",
+        })
+      }
+      setisLoading(false);
+    };
+    fetchJob();
+  }, []);
+
   const { fonts } = useContext(ThemeContext);
   return (
-    <JobContainer font={fonts}>
-      {data && (
-        <>
-          <Table>
-            <tbody>
-              <tr>
-                <Td>
-                  <Logo></Logo>
-                </Td>
-                <Td>
-                  <MainTitle>{data.title}</MainTitle>
-                </Td>
-              </tr>
-            </tbody>
-          </Table>
-          <Title>Job Position : {data.position}</Title>
-          <Description>{data.description}</Description>
-          <Row style={{ paddingTop: "15px" }}>
-            <Col md={6} sm={12}>
-              <ApplyImage image={JobPhoto} />
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <JobContainer font={fonts}>
+          {jobData && (
+            <>
+              <Table>
+                <tbody>
+                  <tr>
+                    <Td>
+                      <Logo></Logo>
+                    </Td>
+                    <Td>
+                      {jobData.title && <MainTitle>{jobData.title}</MainTitle>}
+                    </Td>
+                  </tr>
+                </tbody>
+              </Table>
+              {jobData.position && <Title>Job Position : {jobData.position}</Title>}
+              <Description>{jobData?.description}</Description>
+              <Row style={{ paddingTop: "15px" }}>
+                <Col md={6} sm={12}>
+                  <ApplyImage image={JobPhoto} />
+                  {jobData.salary && (
+                    <>
+                      <SalaryDiv>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td rowSpan={2}>
+                                <Icon icon="emojione:money-bag" height="60" />
+                              </td>
+                              <td>
+                                <Salary>Salary</Salary>
+                                <SalaryValue>
+                                  Rs.{jobData?.salary}/=
+                                </SalaryValue>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </SalaryDiv>
+                    </>
+                  )}
+                </Col>
+                <Col md={6} sm={12}>
+                  {jobData?.specifications?.length !== 0 && (
+                    <>
+                      <RequirementTitle>Specifications</RequirementTitle>
+                      <ul>
+                        {jobData?.specifications.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              <SalaryDiv>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td rowSpan={2}>
-                        <Icon icon="emojione:money-bag" height="60" />
-                      </td>
-                      <td>
-                        <Salary>Salary</Salary>
-                        <SalaryValue>Rs.{data.salary}/=</SalaryValue>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </SalaryDiv>
-            </Col>
-            <Col md={6} sm={12}>
-              {data.specifications && (
-                <>
-                  <RequirementTitle>Specifications</RequirementTitle>
-                  <ul>
-                    {data.specifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
+                  {jobData?.qualifications?.length !== 0  && (
+                    <>
+                      <RequirementTitle>Qualifications</RequirementTitle>
+                      <ul>
+                        {jobData?.qualifications?.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
 
-              {data.qualifications && (
-                <>
-                  <RequirementTitle>Qualifications</RequirementTitle>
-                  <ul>
-                    {data.qualifications.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {data.experience && (
-                <>
-                  <RequirementTitle>Experience</RequirementTitle>
-                  <ul>
-                    {data.experience.map((value, index) => (
-                      <List key={index}>{value}</List>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </Col>
-          </Row>
-          <div style={{ textAlign: "right" }}>
-            <CustomButton apply>Apply</CustomButton>
-          </div>
-          <Deadline>
-            Application Deadline : <Date>{data.date}</Date>
-          </Deadline>
-        </>
+                  {jobData.experience.length !== 0 && (
+                    <>
+                      <RequirementTitle>Experience</RequirementTitle>
+                      <ul>
+                        {jobData?.experience.map((value, index) => (
+                          <List key={index}>{value}</List>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </Col>
+              </Row>
+              <div style={{ textAlign: "right" }}>
+                <CustomButton apply>Apply</CustomButton>
+              </div>
+              <Deadline>
+              Application Deadline :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <AnimatedText>{jobData?.date}</AnimatedText>
+              </Deadline>
+            </>
+          )}
+        </JobContainer>
       )}
-    </JobContainer>
+    </>
   );
 }
 

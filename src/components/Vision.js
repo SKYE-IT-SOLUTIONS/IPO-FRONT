@@ -11,6 +11,7 @@ import Visionimg from '../assets/Visionimagee.jpg'
 const Mdiv=styled(Row)`
     font-family:${({fontFamily})=> fontFamily};
     padding: 10px 10px 10px 20px;
+    margin:0;
 `;
 const Vdiv=styled(Col)`
     
@@ -105,10 +106,8 @@ function Vision(){
                     <Col lg={5} md={7} sm={10} xs={10}>
                     <Title>Vision</Title>
                         <Para>
-                            Ultimately, a paragraph is a sentence or group of
-                            sentences that support one main idea. In this handout, we
-                            will refer to this as the “controlling idea,” because it
-                            controls what happens in the rest of the paragraph.
+                        To be the central resource center that actively engages with undergraduates in exploring and
+meticulously sculpting their career development by blending university and industry resources
                         </Para>
                     </Col>
                     <Col lg={3} md={3}>

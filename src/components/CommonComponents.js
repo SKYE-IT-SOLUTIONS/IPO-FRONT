@@ -3,8 +3,9 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Navbar from "react-bootstrap/Navbar";
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 import { Icon } from "@iconify/react";
+import RECAPTCHA from "react-google-recaptcha";
 
 //assets
 import twitter from "../assets/twitter.png";
@@ -16,9 +17,8 @@ import youtube from "../assets/youtube.png";
 import logo from "../assets/logo.png";
 import vision from "../assets/vision.jpg";
 
-
-export  {Container,Row,Col,Navbar,Icon};
-export {twitter,insta,fb,whatsapp,linkedin,youtube,logo,vision };
+export { Container, Row, Col, Navbar, Icon };
+export { twitter, insta, fb, whatsapp, linkedin, youtube, logo, vision };
 
 export const CustomButton = styled.button`
   background: linear-gradient(to right, #000428, #004e92);
@@ -33,12 +33,14 @@ export const CustomButton = styled.button`
     props.cancle &&
     css`
       background: red;
+      border: 1px solid red;
     `}
 
   ${(props) =>
     props.apply &&
     css`
       background: linear-gradient(to left, #41295a, #2f0743);
+      border: 1px solid #41295a;
     `}
 
   ${(props) =>
@@ -58,3 +60,12 @@ export const Input = styled.input`
   border: 2px solid black;
   padding: 5px;
 `;
+
+export const Recaptcha = (props) => {
+  return (
+    <RECAPTCHA
+      sitekey="6Ld0jO0dAAAAAGmY_dzPwzMzCluzMmP5Mk_MhV0R"
+      onChange={props.onChange}
+    />
+  );
+};

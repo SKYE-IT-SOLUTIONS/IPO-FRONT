@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { Input, Lable, CustomButton } from "./CommonComponents";
 import { Icon } from "@iconify/react";
 import AuthServices from "../services/AuthServices";
-import { AuthContext } from "../contexts/AuthContext";
-import { Simple_Validator} from "../services/ValidationService";
+import { Simple_Validator} from "../utils/validation";
+import {useDispatch} from 'react-redux'
+import { setUserId, setUserLoggedIn, setUserRole } from "../store/userSlice"
+import CustomSnackBar from "./CustomSnackBar";
+
 
 const LoginBody = styled(Modal.Body)`
   font-family: ${({ fonts }) => fonts.general};
@@ -49,22 +52,68 @@ const LoginButton = styled(CustomButton)`
 `;
 
 function Login(props) {
-  const [email, setEmail] = useState("");
-  const [emailInfo, setEmailInfo] = useState({ error: null, status: false });
+  const [username, setUsername] = useState("");
+  const [usernameInfo, setUsernameInfo] = useState({ error: null, status: false });
 
   const [password, setPassword] = useState("");
   const [passwordInfo, setPasswordInfo] = useState({error: null,status: false});
 
   const [isLoading, setisLoading] = useState(false);
+
+  const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
   const [submitError, setSubmitError] = useState(null);
 
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorMsgOpen(false);
+  };
+
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const { setIsAuthenticated } = useContext(AuthContext);
   const them = theme ? light.button : dark.button;
+
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
 
   const user = new AuthServices();
+
+  const handleLogin = async () => {
+      setisLoading(true);
+      const { status, data, error } = await user.handleLogin(
+        {username: username,password: password},
+      );
+      console.log(status);
+      setisLoading(false);
+      if (status) {
+        dispatch(setUserId(data?.id))
+        dispatch(setUserLoggedIn("NBSS"))
+        dispatch(setUserRole(data?.roles[0]))
+        props.onHide();
+        console.log("Role",data?.roles[0])
+        switch (data?.roles[0]) {
+          case "ROLE_ADMIN":
+            navigate("/admin/dashboard");
+            break;
+          case "ROLE_STUDENT":
+            navigate("/student/dashboard");
+            break;
+          case "ROLE_COMPANY":
+            navigate("/company/dashboard");
+            break;
+          default:
+            navigate("/");
+            break;
+        }
+      }else {
+        setIsErrorMsgOpen(true)
+        setSubmitError(error);
+      }
+      
+  }
 
   return (
     <Modal
@@ -88,53 +137,37 @@ function Login(props) {
             </tr>
           </tbody>
         </table>
-        <Lable>Email</Lable>
+        <Lable>Username</Lable>
         <LogInput
-          type="email"
-          value={email}
+          type="text"
+          value={username}
           onChange={(e) => {
-            setEmail(e.target.value);
-            setEmailInfo(Simple_Validator(e.target.value));
+            setUsername(e.target.value);
+            setUsernameInfo(Simple_Validator(e.target.value,"Username"));
           }}
         />
-        {emailInfo.error != null && <Error>{emailInfo.error}</Error>}
+        {usernameInfo.error != null && <Error>{usernameInfo.error}</Error>}
         <Lable>Password</Lable>
         <LogInput
           type="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            setPasswordInfo(Simple_Validator(e.target.value));
+            setPasswordInfo(Simple_Validator(e.target.value,"Password"));
           }}
         />
         {passwordInfo.error != null && <Error>{passwordInfo.error}</Error>}
         <LoginButton
-          disabled={isLoading}
-          bgColor={!isLoading ? them.enable : them.disable}
+          disabled={isLoading || !usernameInfo.status || !passwordInfo.status}
+          bgColor={!isLoading ? them.login : them.disable}
           onClick={async () => {
-            if (emailInfo.status && passwordInfo.status) {
-              setSubmitError(null);
-              setisLoading(true);
-              const { status, error } = await user.handleLogin(
-                {username: email,password: password,},
-                setIsAuthenticated
-              );
-              setisLoading(false);
-              if (status) {
-                props.onHide();
-              }
-              if (status) {
-                console.log(props);
-                navigate("admin");
-              } else {
-                setSubmitError(error);
-              }
+            if(usernameInfo.status && passwordInfo.status){
+              handleLogin();
             }
           }}
         >
           Log In
         </LoginButton>
-        {submitError != null && <Error>{submitError}</Error>}
         <table>
           <tbody>
             <tr>
@@ -148,6 +181,7 @@ function Login(props) {
           </tbody>
         </table>
       </LoginBody>
+      <CustomSnackBar isOpen={isErrorMsgOpen}  severity="error" handleClose={handleClose} message={submitError}/>
     </Modal>
   );
 }

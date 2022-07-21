@@ -9,9 +9,12 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import Row from 'react-bootstrap/Row'
 import  {Col} from './CommonComponents';
 // import { Icon } from "@iconify/react";
-import { CustomButton,Icon } from "./CommonComponents";
+import { CustomButton } from "./CommonComponents";
 import Vision from "./Vision";
 import Mission from "./Mission";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 
 const Moverdiv = styled.div`
     width:100%;
@@ -23,45 +26,52 @@ background-image: ${({ bg }) => bg};
 const Moveritem = styled(Nav.Item)`
     width:33.33%;
     text-align: center;
+    
+    @media (min-width: 500px) and (max-width: 767px) {
+        height: 50px;
+    }
+    @media (min-width: 300px) and (max-width: 500px) {
+        height: 40px;
+    }
+    @media (max-width: 300px) {
+        height: 30px;
+    }
 `;
 const MoverNavlink = styled(Nav.Link)`
     padding-top: 60px;
     height: 100px;
     color: white;
-    font-size: 15px;
-    @media only screen and (min-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
+    @media only screen and (min-width: 1024px) {
+        padding-top: 30px;
+        height: 80px;
+        font-size: 15px;
     }
-
-    @media (min-width: 1024px) and (max-width: 1160px) {
-        padding-top: 45px;
-        height: 100px;
-    }
-
-    @media (min-width: 700px) and (max-width: 1024px) {
-        padding-top: 40px;
-        height: 90px;
-    }
-    @media (min-width: 500px) and (max-width: 700px) {
+    @media (min-width: 767px) and (max-width: 1024px) {
         padding-top: 35px;
         height: 80px;
-        font-size: 9px;
+        font-size: 12px;
+    }
+    @media (min-width: 500px) and (max-width: 767px) {
+        padding-top: 8px;
+        height: 80px;
+        font-size: 10px;
     }
     @media (min-width: 300px) and (max-width: 500px) {
-        padding-top: 32px;
+        padding-top: 5px;
         height: 70px;
         font-size: 7px;
     }
     @media (max-width: 300px) {
-        padding-top: 20px;
+        padding-top: 0px;
         height: 50px;
         font-size: 6px;
     }
 `;
 const Maindiv=styled.div`
-    margin: 10px;
+    /* margin: 10px; */
     font-family:${({fontFamily})=> fontFamily};
+    background: linear-gradient(to right, #8e9eab, #eef2f3);
+    padding:20px 10px;
 `;
 const Welcomep=styled.h1`
     font-family: 'Gluten', cursive;
@@ -87,10 +97,11 @@ const Welcomep=styled.h1`
     }
 `;
 const Contentdiv= styled(Row)`
-
+    margin:0;
 `;
 const Imagediv=styled(Col)`
-
+    position:absoulte;
+    z-index:99;
 `;
 const Image = styled.img`
     float: right;
@@ -122,9 +133,10 @@ const Image = styled.img`
    
 `;
 const Paradiv=styled(Col)`
-
+  
 `;
 const Pdiv=styled.div`
+    
     @media only screen and (min-width: 1160px) {
         font-size: 15px;
     }
@@ -150,14 +162,14 @@ const MoreButton = styled(CustomButton)`
   font-size: 12px;
   width:80px;
 `;
-const MoverIcon = styled(Icon)`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  ::hover {
-    color: red;
-  }
-`;
+// const MoverIcon = styled(Icon)`
+//   cursor: pointer;
+//   width: 20px;
+//   height: 20px;
+//   ::hover {
+//     color: red;
+//   }
+// `;
 
 function Mover(){
     const { theme, light, dark, fonts } = useContext(ThemeContext);
@@ -167,16 +179,16 @@ function Mover(){
     const [open, setOpen] = useState(false);
     const [button_name, setName] = useState("More");
     return(
-        <Moverdiv> 
+        <Moverdiv id="visionMission"> 
             <MoverNav bg={current_theme.ui} defaultActiveKey="/"  >
             <Moveritem >
-                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}} ><MoverIcon icon= "openmoji:overview"/><br/>OverView</MoverNavlink>
+                <MoverNavlink  eventKey="link-0" onClick={()=>{setIndex(0)}}><DashboardIcon fontSize="small"/><br/>OverView</MoverNavlink>
             </Moveritem>
             <Moveritem>
-                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><MoverIcon icon= "bi:eye-fill"/><br/>Vision</MoverNavlink>
+                <MoverNavlink eventKey="link-1" onClick={()=>{setIndex(1)}}><VisibilityIcon fontSize="small"/><br/>Vision</MoverNavlink>
             </Moveritem>
             <Moveritem>
-            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><MoverIcon icon= "ant-design:aim-outlined"/><br/>Mission</MoverNavlink>
+            <MoverNavlink eventKey="link-2" onClick={()=>{setIndex(2)}}><TrackChangesIcon fontSize="small"/><br/>Mission</MoverNavlink>
             </Moveritem>
             </MoverNav>
             <div hidden={Index !== 0}>
@@ -188,39 +200,31 @@ function Mover(){
                     src="https://images.unsplash.com/photo-1498079022511-d15614cb1c02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
                     fluid
                     />
-                    {/* Map Section */}
+                    
                   </Imagediv>
                   <Paradiv md={7}  sm={12} xs={12} mt={2}>
-                      <Pdiv>
-                            University of Ruhuna which is envisaged to enhance the
-                            relationships with external organizations, Industries and
-                            community in view of expanding the scope of the Faculty
-                            and its activities.Paragraphs are the building blocks of
-                            papers. Many students define paragraphs in terms of
-                            length: a paragraph is a group of at least five sentences,
-                            a paragraph is half a page long, etc. In reality, though,
-                            the unity and coherence of ideas among sentences is what
-                            constitutes a paragraph. A paragraph is defined as “a
-                            group of sentences or a single sentence that forms a unit”
-                            (Lunsford and Connors 116).  
+                  
+                      <Pdiv><br/>
+                            The Professional Development Unit (PDU) is intended to develop effective and collaborative
+                            professional services through academic and industry involvement in curriculum development to
+                            meet the changing knowledge, skills, and technological requirements of the workplace. Our
+                            primary function is to improve the quality and relevance of higher education to produce a
+                            SMART industry workforce through applied research using the most recent technological
+                            innovations and industry practices.  
                             <br/><br/>
-                            Ultimately, a paragraph is a sentence or group of
-                            sentences that support one main idea. In this handout, we
-                            will refer to this as the “controlling idea,” because it
-                            controls what happens in the rest of the paragraph.  
+                            The PDU primarily intervenes in the provision of career
+                            development services, the establishment of university-industry relations, the development of
+                            alumni networks, and other professional-related services. We create an environment in which
+                            students can define their career interests while being prepared to handle the working norms of
+                            industry and commerce in both the public and private sectors.  
                       </Pdiv>    
                   </Paradiv>
-                  <br />
+                 
                 <Collapse in={open}>
-                  <Pdiv>
-                      From its inception in year 2004, it has been engaged in
-                      various activities which involves different fields and
-                      different people in the field of Agriculture. The office
-                      is ran by an Industrial Placement Officer, Under direct
-                      supervision of Dean, Faculty of Agriculture. Having
-                      fruitful relationships is all that matters in our
-                      services. Therefore, for us, you are important than
-                      anything else. Please feel free to contact us.
+                  <Pdiv><br/>
+                    We are on the verge of launching
+                    an effective collaboration between industry and faculty to solicit assistance for business
+                    start-ups, innovations through corporate venture capital, and corporate acceleration.<br/>
                   </Pdiv>
                 </Collapse>
                 <MoreButton apply onClick={() => {

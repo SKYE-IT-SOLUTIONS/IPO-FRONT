@@ -1,10 +1,17 @@
 // third party imports
-import React, {  useContext } from "react";
+import React from "react";
 import { Carousel } from "react-bootstrap";
 
 //in app imports-presentational
 import styled from "styled-components";
-import { ThemeContext } from "../contexts/ThemeContext";
+// import { ThemeContext } from "../contexts/ThemeContext";
+// import Image1 from "https://drive.google.com/uc?id=1qiuj5yXJsj4jTo6a5plFrE8JwZ_3FUK7&export=download"
+// import Image2 from "../assets/Faculty 001.jpg"
+import pic1 from "../assets/pic1.jpg"
+import pic2 from "../assets/pic2.jpg"
+import pic3 from "../assets/pic3.jpg"
+import pic4 from "../assets/pic4.jpg"
+import pic5 from "../assets/pic5.jpg"
 
 const ImageTag = styled.img`
     display:block;
@@ -28,80 +35,84 @@ const ImageTag = styled.img`
     height:200px;
   }
   @media (min-width: 300px) and (max-width: 500px) {
-    height:150px;
+    height:200px;
   }
   @media (max-width: 300px) {
-    height:100px;
+    height:150px;
     
   }
     `;
 const Himage = styled.div`
   width: 100%;
 `;
-const AnimatedText = styled.span`
-  font-weight: 800;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  background: white;
-  letter-spacing: 6px;
-  margin-bottom: 20px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-repeat: no-repeat;
-  animation: text 10s infinite;
-
-  text-align: center;
-  position: absolute;
+// const AnimatedText = styled.span`
+//   font-weight: 800;
+//   font-family: sans-serif;
+//   text-transform: uppercase;
+//   background: white;
+//   letter-spacing: 6px;
+//   margin-bottom: 20px;
+//   -webkit-background-clip: text;
+//   background-clip: text;
+//   -webkit-text-fill-color: transparent;
+//   background-repeat: no-repeat;
+//   animation: text 10s infinite;
+//   text-align: center;
+//   position: absolute;
   
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  @keyframes text {
-    0% {
-      color: black;
-      margin-bottom: -40px;
-    }
-    30% {
-      letter-spacing: 20px;
-      margin-bottom: -40px;
-    }
-    65% {
-      letter-spacing: 6px;
-      margin-bottom: -40px;
-    }
-  }
-  @media only screen and (min-width: 1160px) {
-    font-size: 50px;
-    top: 475px;
-  }
-
-  @media (min-width: 1024px) and (max-width: 1160px) {
-    font-size: 45px;
-    top: 423px;
-  }
-
-  @media (min-width: 767px) and (max-width: 1024px) {
-    font-size: 35px;
-    top: 394px;
-  }
-  @media (min-width: 500px) and (max-width: 767px) {
-    font-size: 25px;
-    top: 320px;
-    visibility: hidden;
-  }
-  @media (min-width: 300px) and (max-width: 500px) {
-    font-size: 20px;
-    top: 270px;
-    visibility: hidden;
-  }
-  @media (max-width: 300px) {
-    font-size: 8px;
-    top:220px;
-    visibility: hidden;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 100%;
+//   @keyframes text {
     
-  }
-`;
+//     0% {
+//       color: black;
+//       margin-bottom: -40px;
+//     }
+//     30% {
+//       letter-spacing: 20px;
+//       margin-bottom: -40px;
+//     }
+//     65% {
+//       letter-spacing: 6px;
+//       margin-bottom: -40px;
+//     }
+//   }
+//   @media only screen and (min-width: 1160px) {
+//     font-size: 50px;
+//     top: 475px;
+//   }
+
+//   @media (min-width: 1024px) and (max-width: 1160px) {
+//     font-size: 45px;
+//     top: 423px;
+//   }
+
+//   @media (min-width: 848px) and (max-width: 1024px) {
+//     font-size: 35px;
+//     top: 370px;
+//   }
+//   @media (min-width: 767px) and (max-width: 848px) {
+//     font-size: 35px;
+//     top: 394px;
+//   }
+//   @media (min-width: 500px) and (max-width: 767px) {
+//     font-size: 20px;
+//     top: 370px;
+//     visibility: hidden;
+//   }
+//   @media (min-width: 300px) and (max-width: 500px) {
+//     font-size: 20px;
+//     top: 270px;
+//     visibility: hidden;
+//   }
+//   @media (max-width: 300px) {
+//     font-size: 8px;
+//     top:220px;
+//     visibility: hidden;
+    
+//   }
+// `;
 
 function ImageSlider() {
   // const { theme, light, dark } = useContext(ThemeContext);
@@ -116,36 +127,45 @@ function ImageSlider() {
           
           <Carousel.Item>
             <ImageTag
-              src="https://images.unsplash.com/photo-1594686948539-2709857f7066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+              // src="https://drive.google.com/uc?id=1qiuj5yXJsj4jTo6a5plFrE8JwZ_3FUK7&export=download"
+              src={pic5}
               alt="Second slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag 
-              src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+              // src="https://drive.google.com/uc?id=1ORDr_fXlqRWeAq_cQrJQBemEpo157zdv&export=download"
+              src={pic3}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://images.unsplash.com/photo-1506377872008-6645d9d29ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+              // src="https://drive.google.com/uc?id=1rNhV-yIsDoeEHw2AKu5n9M0iWLx00JCJ&export=download"
+              src={pic2}
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <ImageTag
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+              // src="https://drive.google.com/uc?id=154keKHftP8LWQAmAb2AREH44rPJhVCEA&export=download"
+              src={pic4}
+              alt="Third slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <ImageTag
+              // src="https://drive.google.com/uc?id=1bhrSyDG0vJS8lXpKIr83foWV9cNr-EE_&export=download"
+              src={pic1}
               alt="Third slide"
             />
           </Carousel.Item>
         </Carousel>
        
-        <AnimatedText>
+        {/* <AnimatedText>
            <span>Welcome to IPO</span>
-         {/* </AnimatedText>
-         <AnimatedText> */}
             <br />
-        </AnimatedText>
+        </AnimatedText> */}
         </Himage>
          
          

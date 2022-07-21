@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import styled, { keyframes} from "styled-components";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Body = styled.div`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  position: absolute;
-  height: 81vh;
-  width: 100%;
+  position: relative;
+  height: 590px;
+  width: ${(props) => (props.active ? "285px" : "82px")};
   overflow: hidden;
+  transition: all 0.5s ease;
 `;
 const SideNavBarContainer = styled.div`
-  position: absolute;
+  position: relative;
   left: 0;
   height: 100%;
   width: ${(props) => (props.active ? "240px" : "82px")};
-  background-color: #11101d;
+  background-color: ${(props) => (props.color ? props.color : "#11101d")};
   padding: 6px 16px;
   transition: all 0.5s ease;
 `;
@@ -71,7 +73,7 @@ const NavListLink = styled.a`
   border-radius: 12px;
   white-space: nowrap;
   :hover {
-    color: #11101d;
+    color: ${(props) => (props.color ? props.color : "#11101d")};
     background-color: #fff;
   }
 `;
@@ -111,123 +113,25 @@ const NavListItemTooltip = styled.span`
     top: 50%;
   }
 `;
-const SubMenu = styled.ul`
-  margin-top: 0px;
-  font-size: 15px;
-  position: relative;
-  text-align: center;
-  transform: translate(-10%, 5%);
-  height: ${(props) => (props.expand ? "208px" : "0px")};
-  color: #fff;
-  overflow: hidden;
-  transition: height 0.5s;
-  display: ${(props) => (props.active ? "208px" : "none")};
-`;
-const SubMenuItem = styled.li`
-  position: relative;
-  text-align: left;
-  text-indent: 15px;
-  padding-right: 2px;
-  height: 50px;
-  width: 100%;
-  list-style: none;
-  line-height: 50px;
-  border-radius: 12px;
-  color: #fff;
-  background-color: #11101d;
-  transition: all 0.7s ease;
-  :hover {
-    background-color: #fff;
-    color: #11101d;
-  }
-`;
-const ArrowDown = keyframes`
-  0% {
-    transform: translate(505%, 0%) rotate(0deg);
-  }
-  10% {
-    transform: translate(505%, 0%) rotate(10deg);
-  }
-  20% {
-    transform: translate(505%, 0%) rotate(20deg);
-  }
-  30% {
-    transform: translate(505%, 0%) rotate(30deg);
-  }
-  40% {
-    transform: translate(505%, 0%) rotate(40deg);
-  }
-  50% {
-    transform: translate(505%, 0%) rotate(50deg);
-  }
-  60% {
-    transform: translate(505%, 0%) rotate(60deg);
-  }
-  70% {
-    transform: translate(505%, 0%) rotate(70deg);
-  }
-  80% {
-    transform: translate(505%, 0%) rotate(80deg);
-  }
-  90% {
-    transform: translate(505%, 0%) rotate(85deg);
-  }
-  100% {
-    transform: translate(505%, 0%) rotate(90deg);
-  }
-`;
-const ArrowUp = keyframes`
-0% {
-    transform: translate(505%, 0%) rotate(90deg);
-  }
-  10% {
-    transform: translate(505%, 0%) rotate(80deg);
-  }
-  20% {
-    transform: translate(505%, 0%) rotate(70deg);
-  }
-  30% {
-    transform: translate(505%, 0%) rotate(60deg);
-  }
-  40% {
-    transform: translate(505%, 0%) rotate(50deg);
-  }
-  50% {
-    transform: translate(505%, 0%) rotate(50deg);
-  }
-  60% {
-    transform: translate(505%, 0%) rotate(40deg);
-  }
-  70% {
-    transform: translate(505%, 0%) rotate(30deg);
-  }
-  80% {
-    transform: translate(505%, 0%) rotate(20deg);
-  }
-  90% {
-    transform: translate(505%, 0%) rotate(10deg);
-  }
-  100% {
-    transform: translate(505%, 0%) rotate(0deg);
-  }
-`;
-const SubMenuDropDownArrow = styled.i`
-  transform: translate(505%, 0%)
-    rotate(${(props) => (props.expand ? "90deg" : "0deg")});
-  font-size: 18px;
-  display: ${(props) => (props.active ? "inherit" : "none")};
-  animation: ${(props) => (props.expand ? ArrowDown : ArrowUp)} 0.3s;
-`;
-
 const SideNav = () => {
+  const navigate = useNavigate();
   const [active, setActive] = useState(true);
-  const [homeExpand, setHomeExpand] = useState(false);
+
+  function handleResize() {
+    console.log("Inner", window.innerHeight);
+    if (window.innerWidth < 1214) {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
+  }
+  window.addEventListener("resize", handleResize);
   return (
     <React.Fragment>
-      <Body>
+      <Body active={active}>
         <SideNavBarContainer active={active}>
           <NavHeder active={active}>
-            <NavHeaderIcon className="bx bxs-dashboard"></NavHeaderIcon>
+            <NavHeaderIcon className="bx bx-grid-alt"></NavHeaderIcon>
             <NavHeaderName>Dashboard</NavHeaderName>
           </NavHeder>
           <MenuIcon
@@ -243,75 +147,43 @@ const SideNav = () => {
 
           <NavBody>
             <NavListItem>
-              <NavListLink
-                active={active}
-                onClick={() => (active ? setHomeExpand(!homeExpand) : "")}
-              >
+              <NavListLink onClick={() => navigate("/home")}>
                 <NavListItemIcon className="bx bx-home"></NavListItemIcon>
                 <NavListItemName active={active}>Home</NavListItemName>
-                <SubMenuDropDownArrow
-                  className="bx bx-right-arrow"
-                  active={active}
-                  expand={homeExpand}
-                ></SubMenuDropDownArrow>
               </NavListLink>
               <NavListItemTooltip active={active}>Home</NavListItemTooltip>
-                <SubMenu expand={homeExpand} active={active}>
-                  <SubMenuItem>Home</SubMenuItem>
-                  <SubMenuItem>Related Links</SubMenuItem>
-                  <SubMenuItem>Student Services</SubMenuItem>
-                  <SubMenuItem>Industrial Relationship</SubMenuItem>
-                </SubMenu>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink active={active}>
+              <NavListLink onClick={() => navigate("/admin/dashboard/users")}>
                 <NavListItemIcon className="bx bx-user"></NavListItemIcon>
-                <NavListItemName active={active}>User</NavListItemName>
+                <NavListItemName active={active}>Users</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>User</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Users</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink active={active}>
-                <NavListItemIcon className="bx bx-chat"></NavListItemIcon>
-                <NavListItemName active={active}>Messages</NavListItemName>
+              <NavListLink onClick={() => navigate("/admin/dashboard/news")}>
+                <NavListItemIcon className="bx bx-mail-send"></NavListItemIcon>
+                <NavListItemName active={active}>News</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Messages</NavListItemTooltip>
+              <NavListItemTooltip active={active}>News</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink active={active}>
-                <NavListItemIcon className="bx bx-pie-chart-alt-2"></NavListItemIcon>
-                <NavListItemName active={active}>Analytics</NavListItemName>
+              <NavListLink>
+                <NavListItemIcon className="bx bx-shopping-bag"></NavListItemIcon>
+                <NavListItemName active={active}>Jobs</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>Analytics</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Jobs</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>
-              <NavListLink active={active}>
-                <NavListItemIcon className="bx bx-folder"></NavListItemIcon>
-                <NavListItemName active={active}>File Manager</NavListItemName>
+              <NavListLink>
+                <NavListItemIcon className="bx bx-building-house"></NavListItemIcon>
+                <NavListItemName active={active}>Company</NavListItemName>
               </NavListLink>
-              <NavListItemTooltip active={active}>
-                File Manager
-              </NavListItemTooltip>
-            </NavListItem>
-
-            <NavListItem>
-              <NavListLink active={active}>
-                <NavListItemIcon className="bx bx-cart-alt"></NavListItemIcon>
-                <NavListItemName active={active}>Order</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Order</NavListItemTooltip>
-            </NavListItem>
-
-            <NavListItem>
-              <NavListLink active={active}>
-                <NavListItemIcon className="bx bx-heart"></NavListItemIcon>
-                <NavListItemName active={active}>Saved</NavListItemName>
-              </NavListLink>
-              <NavListItemTooltip active={active}>Saved</NavListItemTooltip>
+              <NavListItemTooltip active={active}>Company</NavListItemTooltip>
             </NavListItem>
 
             <NavListItem>

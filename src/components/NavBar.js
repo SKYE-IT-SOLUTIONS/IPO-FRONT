@@ -1,14 +1,18 @@
 // third party imports
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 //in app imports-presentational
 import { Container } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import Login from "./Login";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserLoggedIn, setUserRole, setUserId } from "../store/userSlice";
+// import Cookies from 'js-cookie'
+import { Icon } from "@iconify/react";
+import AuthServices from "../services/AuthServices";
 
 const CustomNavBar = styled(Navbar)`
   background: ${({ navcolor }) => navcolor};
@@ -20,31 +24,55 @@ const NavTitle = styled.span`
   font-weight: 500;
   padding-left: 5px;
   font-size: 16px;
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
 `;
 
-const NavSubTitle = styled.span`
-  color: black;
-  font-size: 14px;
-  padding-left: 8px;
-`;
+// const NavSubTitle = styled.span`
+//   color: black;
+//   font-size: 14px;
+//   padding-left: 8px;
+// `;
 
 const DropItems = styled(NavDropdown.Item)`
   font-size: 14px;
   padding-top: 7px;
   padding-bottom: 7px;
 `;
+const RegisterTag = styled.span`
+  color: white;
+  font-weight: 1000;
+  font-size: 16px;
+  /* padding-right: 15px; */
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
+`;
 
 const LoginTag = styled.span`
   color: white;
   font-weight: 500;
   font-size: 16px;
+
+  @media (min-width: 768px) and (max-width: 977px) {
+    font-size: 13px;
+  }
 `;
 
+const Nav1 = styled(Nav)`
+  margin-top: -20px;
+  /* margin-Right:100px; */
+`;
 function NavBar(props) {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [isLogged, setisLogged] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authService = new AuthServices();
 
   const current_theme = theme ? light : dark;
 
@@ -57,6 +85,26 @@ function NavBar(props) {
   const [showIRR, setShowIRR] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
 
+  // const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
+  // const [error, setError] = useState(null);
+
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+
+  //   setIsErrorMsgOpen(false);
+  // };
+
+  const userLogged = useSelector((state) => state.user.iuli);
+  const userRole = useSelector((state) => state.user.userRole);
+
+  useEffect(() => {
+    setisLogged(userLogged === "NBSS");
+  }, [userLogged]);
+
+  // const userLogged=false;
+  const icon = <Icon icon="carbon:user-avatar-filled-alt" width="30" />;
   const showDropdown = (title) => {
     switch (title) {
       case "Home":
@@ -141,78 +189,20 @@ function NavBar(props) {
                 navigate("/home");
               }}
             >
-              <DropItems href="/#VandM" id="bg-custom-3">
+              <DropItems href="#visionMission" id="bg-custom-3">
                 Vision and Mission
               </DropItems>
-              <DropItems href="/#contact" id="bg-custom-3">
-                Contact Us
+              <DropItems href="#partners" id="bg-custom-3">
+                Our Proud Partners
               </DropItems>
-              <DropItems href="/#news" id="bg-custom-3">
+              {/* onClick={()=>{
+                console.log("Clicked News");
+                navigate("/allNews")}} */}
+              <DropItems href="/allNews" id="bg-custom-3">
                 News
               </DropItems>
-            </NavDropdown>
-
-            <NavDropdown
-              title={<NavTitle>Related Links</NavTitle>}
-              id="collasible-nav-dropdown"
-              show={showRL}
-              onMouseEnter={() => showDropdown("Related Links")}
-              onMouseLeave={() => hideDropdown("Related Links")}
-              onClick={() => {
-                console.log("show");
-              }}
-            >
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Faculty of Agriculture
-              </DropItems>
-              <DropItems
-                href="https://www.ruh.ac.lk/"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                University of Ruhuna
-              </DropItems>
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/ipo/cgu/index.html"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Career Guidance Unit
-              </DropItems>
-              <DropItems
-                href="https://www.agri.ruh.ac.lk/alumni/index.html"
-                target="_blank"
-                id="bg-custom-3"
-              >
-                Alumini Online
-              </DropItems>
-              <DropItems href="" id="bg-custom-3">
-                Useful Links
-              </DropItems>
-            </NavDropdown>
-
-            <NavDropdown
-              title={<NavTitle>Student Services</NavTitle>}
-              id="collasible-nav-dropdown"
-              show={showSS}
-              onMouseEnter={() => showDropdown("Student Services")}
-              onMouseLeave={() => hideDropdown("Student Services")}
-              onClick={() => {
-                console.log("show");
-              }}
-            >
-              <DropItems href="/jobs" id="bg-custom-3">
-                Job Opertunities
-              </DropItems>
-              <DropItems href="/jobs" id="bg-custom-3">
-                Training Programs
-              </DropItems>
-              <DropItems href="/jobs" id="bg-custom-3">
-                Other Events
+              <DropItems href="#contactUS" id="bg-custom-3">
+                Contact Us
               </DropItems>
             </NavDropdown>
 
@@ -226,7 +216,7 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <NavDropdown
+              {/* <NavDropdown
                 title={<NavSubTitle>Request a Graduates/s</NavSubTitle>}
                 drop="end"
                 show={showIRR}
@@ -242,12 +232,147 @@ function NavBar(props) {
                 <DropItems href="/survey" id="bg-custom-3">
                   A Survey
                 </DropItems>
-              </NavDropdown>
-              <DropItems href="/add" id="bg-custom-3">
+              </NavDropdown> */}
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requestPerson");
+                }}
+              >
+                Request a Graduate/s or
+                <br /> Undergraduate/s
+              </DropItems>
+              <DropItems href="/requestWorkshop" id="bg-custom-3">
+                Organize a Workshop/
+                <br />
+                Training
+              </DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/under-constructions");
+                }}
+              >
                 Submit an Advertisement
               </DropItems>
-              <DropItems href="/book" id="bg-custom-3">
-                Reserve Conferance Hall
+            </NavDropdown>
+
+            <NavDropdown
+              title={<NavTitle>Student Services</NavTitle>}
+              id="collasible-nav-dropdown"
+              show={showSS}
+              onMouseEnter={() => showDropdown("Student Services")}
+              onMouseLeave={() => hideDropdown("Student Services")}
+              onClick={() => {
+                console.log("show");
+              }}
+            >
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Send a CV
+              </DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/requestTraining");
+                }}
+              >
+                Request a training
+                <br />
+                session
+              </DropItems>
+
+              {/* <NavDropdown
+                title={
+                  <NavSubTitle
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Request a training
+                    <br />
+                    &nbsp;&nbsp;session
+                  </NavSubTitle>
+                }
+                id="collasible-nav-dropdown"
+                drop="end"
+                show={showIRR}
+                onMouseEnter={() => showDropdown("Request a Graduates/s for")}
+                onMouseLeave={() => hideDropdown("Request a Graduates/s for")}
+                onClick={() => {
+                  console.log("show");
+                }}
+                style={{ fontSize: "10px", paddingLeft: "2px" }}
+              >
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <NavSubTitle>How to prepare a CV</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <NavSubTitle>Facing an interview</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle>Findinng a job</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle>Personal development</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Finding scholarships</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Foreign Employment</NavSubTitle>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  id="bg-custom-3"
+                  onClick={() => {
+                    navigate("login");
+                  }}
+                >
+                  <NavSubTitle> Plot the career path</NavSubTitle>
+                </NavDropdown.Item>
+              </NavDropdown> */}
+
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("login");
+                }}
+              >
+                Register to Internship
               </DropItems>
             </NavDropdown>
 
@@ -261,41 +386,172 @@ function NavBar(props) {
                 console.log("show");
               }}
             >
-              <NavDropdown
-                title={<NavSubTitle>Organize</NavSubTitle>}
-                drop="end"
-                show={showOSW}
-                onMouseEnter={() => showDropdown("Organize a")}
-                onMouseLeave={() => hideDropdown("Organize a")}
+              <DropItems
+                id="bg-custom-3"
                 onClick={() => {
-                  console.log("show");
+                  navigate("/request-hall");
                 }}
               >
-                <DropItems href="/workshop" id="bg-custom-3">
-                  WorkShop
-                </DropItems>
-                <DropItems href="/traning" id="bg-custom-3">
-                  Training Program
-                </DropItems>
-              </NavDropdown>
-              <DropItems href="/product" id="bg-custom-3">
-                Order A Product
+                Reserve a Conference Hall
+              </DropItems>
+
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/request-ground");
+                }}
+              >
+                Reserve a Playground
+              </DropItems>
+
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/feedback");
+                }}
+              >
+                General Feedback
+              </DropItems>
+              <DropItems
+                id="bg-custom-3"
+                onClick={() => {
+                  navigate("/achievements");
+                }}
+              >
+                Achievements
+              </DropItems>
+            </NavDropdown>
+
+            <NavDropdown
+              title={<NavTitle>Related Links</NavTitle>}
+              id="collasible-nav-dropdown"
+              show={showRL}
+              onMouseEnter={() => showDropdown("Related Links")}
+              onMouseLeave={() => hideDropdown("Related Links")}
+              onClick={() => {
+                console.log("show");
+              }}
+            >
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/alumni/index.html"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Alumini Association
+              </DropItems>
+              <DropItems
+                href="https://www.agri.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Faculty of Agriculture
+              </DropItems>
+              <DropItems
+                href="https://www.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                University of Ruhuna
+              </DropItems>
+              <DropItems
+                href="http://documents.gov.lk/en/gazette.php"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Government Gazzet
+              </DropItems>
+              <DropItems
+                href="https://dceu.ruh.ac.lk/"
+                target="_blank"
+                id="bg-custom-3"
+              >
+                Technology Transfer Office
               </DropItems>
             </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link>
-              <LoginTag onClick={() => setModalShow(true)}>Log In</LoginTag>
+              {isLogged ? (
+                <Nav1>
+                  <NavDropdown
+                    align={{ lg: "start" }}
+                    drop="start"
+                    title={icon}
+                    show={showIcon}
+                    onMouseEnter={() => showDropdown("Icon")}
+                    onMouseLeave={() => hideDropdown("Icon")}
+                    onClick={() => {
+                      console.log("show");
+                    }}
+                  >
+                    <NavDropdown.Item
+                      onClick={() => {
+                        console.log("userRole", userRole);
+                        switch (userRole) {
+                          case "ROLE_ADMIN":
+                            navigate("/admin/dashboard");
+                            break;
+                          case "ROLE_STUDENT":
+                            navigate("/student/dashboard");
+                            break;
+                          case "ROLE_COMPANY":
+                            navigate("/company/dashboard");
+                            break;
+                          default:
+                            navigate("/");
+                            break;
+                        }
+                      }}
+                    >
+                      Dashboard
+                    </NavDropdown.Item>
+
+                    <NavDropdown.Item
+                      href="/"
+                      onClick={async () => {
+                        authService.handleLogoutLocally();
+                        dispatch(setUserLoggedIn("SSNB"));
+                        dispatch(setUserRole(""));
+                        dispatch(setUserId(""));
+                        navigate("/");
+                      }}
+                    >
+                      Log Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav1>
+              ) : (
+                <Nav>
+                  <Nav.Link>
+                    <RegisterTag
+                      onClick={() => {
+                        navigate("/register");
+                      }}
+                    >
+                      Register
+                    </RegisterTag>
+                  </Nav.Link>
+                  <Nav.Link eventKey={2}>
+                    <LoginTag onClick={() => navigate("/login")}>
+                      Log In
+                    </LoginTag>
+                  </Nav.Link>
+                </Nav>
+                // <span>
+                //   <RegisterTag
+                //     onClick={() => {
+                //       navigate("/register");
+                //     }}
+                //   >
+                //     Register
+                //   </RegisterTag>
+                //   <LoginTag onClick={() => navigate("/login")}>Log In</LoginTag>
+                // </span>
+              )}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Login
-        history={props.history}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-      
     </CustomNavBar>
   );
 }

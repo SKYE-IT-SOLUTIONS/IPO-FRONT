@@ -26,16 +26,19 @@ export const setRefreshToken = (refresh) => {
 };
 
 export const refreshAccessToken = async (REFRESH_URL, postRequest) => {
+  console.log("refreshAccessToken function");
   var result;
-  const refresh = await getRefreshToken();
-  if (refresh !== "") {
+  const refresh = getRefreshToken();
+  if (refresh === "") {
     return { status: false, error: { message: "Refresh Token Not Found" } };
   }
   await postRequest(REFRESH_URL, { refreshToken: refresh })
     .then(({ data, error }) => {
+      console.log("function triggered");
       if (!error) {
         const { accessToken } = data.data;
         setAccessToken(accessToken);
+        console.log("refresh success");
         result = { status: true, error: { message: null } };
       } else {
         result = {

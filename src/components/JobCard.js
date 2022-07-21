@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import { CustomButton } from "./CommonComponents";
 import styled from "styled-components";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { Col } from "./CommonComponents";
+import { Row,Col } from "./CommonComponents";
+import { useNavigate } from "react-router-dom";
 
 const JobDiv = styled(Col)`
   &: hover {
@@ -46,6 +47,13 @@ const JobTitle = styled(Card.Title)`
   margin-bottom: 0px;
   min-height : 60px;
 `;
+const Jobposition = styled(Card.Subtitle)`
+  font-family: ${({ font }) => font};
+  font-size: 14px;
+  min-height : 60px;
+  margin-bottom: -50px;
+  margin-top: -15px;
+`;
 
 const JobButton = styled(CustomButton)`
   margin: 0px 0px 10px 0px;
@@ -61,17 +69,25 @@ const JobFooter = styled.span`
 
 function JobCard({ news }) {
   const { fonts } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   return (
     <JobDiv md={4} sm={4} lg={3} xl={3} xxl={2} xs={10}>
       <JobCardView font={fonts}>
         <Card.Body>
-          <Avatar image={news.logo} />
-          <JobTitle font={fonts.title}>{news.title}</JobTitle>
+          <Row>
+            <Col md={4} sm={4} lg={3} >
+              <Avatar image={news.logo} />
+            </Col>
+            <Col md={8} sm={8} lg={9} >
+              <JobTitle font={fonts.title}>{news.title}</JobTitle>
+            </Col>
+            <Jobposition font={fonts.title}>{news.position}</Jobposition>
+          </Row>    
         </Card.Body>
         <JobImg image={news.url} />
         <Card.Body>
-          <JobButton apply> Read </JobButton>
+          <JobButton apply onClick={()=>{navigate("/job/1")}}> Read </JobButton>
           <JobFooter> Last updated {news.time} ago </JobFooter>
         </Card.Body>
       </JobCardView>

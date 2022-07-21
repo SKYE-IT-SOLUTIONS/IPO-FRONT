@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -52,6 +53,7 @@ const Copyright = styled(Container)`
 export default function FooterContent() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.footer : dark.footer;
+  // const navigate = useNavigate();
 
   return (
     <FooterWrapper font={fonts.general} bg={them.f_ic_bg}>
@@ -78,7 +80,7 @@ export default function FooterContent() {
           Industrial Placement Office, Faculty of
           Agriculture, University of Ruhuna.
         </a><br/>
-        Developed By: <a href=" ">SKYE IT SOLUTIONS</a>
+        Developed By: <a href="/developers" target="_blank">SKYE IT SOLUTIONS</a>
       </Copyright>
     </FooterWrapper>
   );
