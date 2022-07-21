@@ -6,6 +6,7 @@ import AddJobPost from './components/AddJobPost';
 import PostJob from './components/PostJob'
 import NewsView from './components/NewsView';
 import AddNewsPost from './components/AddNewsPost';
+import AdvertismentSubmit from './components/AdvertismentSubmit';
 import { isUser } from './api/auth/authAPI';
 
 const auth = async () => {
@@ -34,6 +35,7 @@ const routes = () => [
         { path: '/jobPost', element: <PostJob/> },
         { path: '/news', element: <NewsView/> },
         { path: '/addnews', element: <AddNewsPost/> },
+        { path: '/addsubmit', element: <AdvertismentSubmit/> },
         { path: '*', element: <Navigate to='/404' /> }
       ]
     },{
