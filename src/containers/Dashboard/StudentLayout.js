@@ -12,8 +12,8 @@ import NavigationBar from "../../components/mui/NavigationBar";
 
 const sideBarItems = [
   { path: "/student/dashboard", icon: <DashboardIcon />, text: "Dashboard" },
-  { path: "/student/news", icon: <NewspaperIcon />, text: "News" },
-  { path: "/student/job", icon: <WorkIcon />, text: "Job" },
+  { path: "/student/updates", icon: <NewspaperIcon />, text: "Updates" },
+  { path: "/student/jobs", icon: <WorkIcon />, text: "Jobs" },
   { path: "/student/feedback", icon: <FeedbackIcon />, text: "Feedback" },
 
   {

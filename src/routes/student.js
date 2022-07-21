@@ -16,7 +16,9 @@ const Internship = lazy(() =>
 const CvGenerate = lazy(() =>
   import("../containers/Dashboard/Student/CvGenerate")
 );
-const News = lazy(() => import("../containers/Dashboard/common/News"));
+const Updates = lazy(() => import("../containers/Dashboard/common/Updates"));
+const Update = lazy(() => import("../containers/Dashboard/common/Update"));
+const Jobs = lazy(() => import("../containers/Dashboard/common/Jobs"));
 const Job = lazy(() => import("../containers/Dashboard/common/Job"));
 const Feedback = lazy(() => import("../containers/Dashboard/common/Feedback"));
 
@@ -35,12 +37,18 @@ export const studentRoutes = (isAuthenticated, userRole) => ({
       element: <StudentDashboard />,
     },
     {
-      path: "news",
-      element: <News />,
+      path: "updates",
+      children: [
+        { index: true, element: <Updates /> },
+        { path: ":id", element: <Update /> },
+      ],
     },
     {
-      path: "job",
-      element: <Job />,
+      path: "jobs",
+      children: [
+        { index: true, element: <Jobs /> },
+        { path: ":id", element: <Job /> },
+      ],
     },
     {
       path: "feedback",

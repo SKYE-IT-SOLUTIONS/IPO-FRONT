@@ -93,7 +93,7 @@ const TrainingSession = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Divider>
+          <Divider textAlign="left">
             <Typography variant="h6">Duration</Typography>
           </Divider>
         </Grid>
@@ -114,7 +114,7 @@ const TrainingSession = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Divider>
+          <Divider textAlign="left">
             <Typography variant="h6">Contact Details</Typography>
           </Divider>
         </Grid>
