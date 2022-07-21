@@ -1,5 +1,4 @@
 import {
-  CardContent,
   Container,
   Divider,
   Grid,
@@ -27,11 +26,8 @@ const Step1 = ({
   return (
 
     <Container component="main" maxWidth="md">
-
-      <Divider />
-      <CardContent>
         <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} sx={{mt:1}}>
           <Divider textAlign="left">
             <Typography variant="h6">FIRST YEAR GPA</Typography>
           </Divider>
@@ -159,7 +155,6 @@ const Step1 = ({
             />
           </Grid>
         </Grid>
-      </CardContent>
       <Divider />
     </Container>
   );

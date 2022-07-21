@@ -1,5 +1,4 @@
 import {
-  CardContent,
   Container,
   Divider,
   FormControl,
@@ -24,22 +23,12 @@ const Step1 = ({
 }) => {
   return (
     <Container component="main" maxWidth="md">
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+        <Grid container spacing={3} sx={{mt:1}}>
         <Grid item xs={12} sm={12}>
           <Divider>
             <Typography variant="h6">PERSONAL DETAILS</Typography>
           </Divider>
         </Grid>
-      </Grid>
-
-      <Divider />
-      <CardContent>
-        <Grid container spacing={3}>
           <Grid item md={12} xs={12}>
             <TextField
               fullWidth
@@ -49,7 +38,7 @@ const Step1 = ({
               name="fullName"
               id="fullName"
               onBlur={handleBlur}
-              onChange={handleChange}
+              onChange={async(e)=>{handleChange(e)}}
               value={values.fullName}
               variant="outlined"
             />
@@ -203,7 +192,7 @@ const Step1 = ({
             />
           </Grid>
         </Grid>
-      </CardContent>
+
       <Divider />
     </Container>
   );

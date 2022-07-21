@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 

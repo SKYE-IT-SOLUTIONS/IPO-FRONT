@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 

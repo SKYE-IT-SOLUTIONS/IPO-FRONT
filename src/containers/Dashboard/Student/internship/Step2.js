@@ -1,6 +1,6 @@
 import {
   Autocomplete,
-  CardContent,
+  Box,
   Container,
   Divider,
   FormControl,
@@ -30,22 +30,13 @@ const Step2 = ({
   ];
   return (
     <Container component="main" maxWidth="md">
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+
+        <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Divider>
             <Typography variant="h6">CHOICE LIST</Typography>
           </Divider>
         </Grid>
-      </Grid>
-
-      <Divider />
-      <CardContent>
-        <Grid container spacing={3}>
           <Grid item md={12} xs={12}>
             <Autocomplete
               freeSolo
@@ -142,9 +133,8 @@ const Step2 = ({
               </Select>
             </FormControl>
           </Grid>
-
+          <Box sx={{display:"flex",flexDirection:"column",flexGrow:1}}></Box>
         </Grid>
-      </CardContent>
       <Divider />
     </Container>
   );
