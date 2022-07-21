@@ -23,7 +23,6 @@ export default function SidebarLayout({ title, sideBarItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const navigate = useNavigate();
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -115,7 +114,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
             }}
             onClick={() => navigate("/")}
           >
-            Industrial PLacement Office
+            Industrial PLacement Office - {title}
           </Typography>
           <Typography
             sx={{
@@ -127,7 +126,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
             }}
             onClick={() => navigate("/")}
           >
-            IPO
+            IPO - {title}
           </Typography>
 
           <Box

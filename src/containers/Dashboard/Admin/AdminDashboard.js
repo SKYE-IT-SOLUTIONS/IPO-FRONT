@@ -6,17 +6,16 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend,
     LinearScale,
     Title,
     } from 'chart.js';
-
 import { Pie} from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
-import { Container, Row, Col } from "../components/CommonComponents";
-import { ThemeContext } from "../contexts/ThemeContext";
-import Card from './Statcard';
-import Users from '../assets/user.svg';
-import News from '../assets/News-rafiki.svg';
+import { Container, Row, Col } from "../../../components/CommonComponents";
+import { ThemeContext } from "../../../contexts/ThemeContext";
+import Card from '../../../components/Statcard';
+import Users from '../../../assets/user.svg';
+import News from '../../../assets/News-rafiki.svg';
 import { Icon } from '@iconify/react';
-import DataService from "../services/DataService";
-import Spinner from '../components/Spinner';
+import DataService from "../../../services/DataService";
+import Spinner from '../../../components/Spinner';
 
 const Contactcontainer=styled(Container)`
     font-family: ${({ font }) => font.general};
@@ -195,13 +194,13 @@ const data2 = {
         </MainRow>
         <MainRow style={{ paddingTop: "15px" }}>
             <MainCol md={4} sm={6} xs={8}>
-              <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users" count={parseInt(statData?.studentCount)+parseInt(statData?.companyCount)}/>
+              <Card img={Users} value={<Icon icon="bx:bxs-user" width="50" height="50" />} title="Users" count={parseInt(statData?statData.studentCount:0)+parseInt(statData?statData.companyCount:0)}/>
             </MainCol>
             <MainCol md={4} sm={6} xs={8}>    
-            <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events" count={parseInt(statData?.sessionCount)+parseInt(statData?.otherCount)+parseInt(statData?.workshopCount)}/> 
+            <Card img={News}  value={<Icon icon="bi:calendar-event" width="50" height="50" />} title="Events" count={parseInt(statData?statData.sessionCount:0)+parseInt(statData?statData.otherCount:0)+parseInt(statData?statData.workshopCount:0)}/> 
             </MainCol>
             <MainCol md={4} sm={6} xs={8}>    
-            <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Jobs" count={parseInt(statData?.newsCount)+parseInt(statData?.jobCount)}/>    
+            <Card img={News}  value={<Icon icon="bx:bx-news" width="50" height="50" />} title="News/Jobs" count={parseInt(statData?statData.newsCount:0)+parseInt(statData?statData.jobCount:0)}/>    
             </MainCol>
         </MainRow>
        
