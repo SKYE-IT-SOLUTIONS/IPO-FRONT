@@ -23,7 +23,6 @@ export default function SidebarLayout({ title, sideBarItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const navigate = useNavigate();
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -48,7 +47,9 @@ export default function SidebarLayout({ title, sideBarItems }) {
   };
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    if (window.innerWidth < 600) {
+      setMobileOpen(!mobileOpen);
+    }
   };
 
   const renderMobileMenu = (
@@ -104,18 +105,27 @@ export default function SidebarLayout({ title, sideBarItems }) {
               <MenuIcon />
             </IconButton>
           )}
-          <Box sx={{ height: "40px", width: "30px",mr:1,display: { xs: "none",sm:"block" } }} component="img" src={logo} />
+          <Box
+            sx={{
+              height: "40px",
+              width: "30px",
+              mr: 1,
+              display: { xs: "none", sm: "block" },
+            }}
+            component="img"
+            src={logo}
+          />
           <Typography
             sx={{
               fontFamily: "monospace",
               fontSize: 20,
               fontWeight: 700,
               cursor: "pointer",
-              display: { xs: "none",sm:"block" } 
+              display: { xs: "none", sm: "block" },
             }}
             onClick={() => navigate("/")}
           >
-            Industrial PLacement Office
+            Industrial Placement Office - {title}
           </Typography>
           <Typography
             sx={{
@@ -123,11 +133,11 @@ export default function SidebarLayout({ title, sideBarItems }) {
               fontSize: 20,
               fontWeight: 700,
               cursor: "pointer",
-              display: { sm: "none" } 
+              display: { sm: "none" },
             }}
             onClick={() => navigate("/")}
           >
-            IPO
+            IPO - {title}
           </Typography>
 
           <Box

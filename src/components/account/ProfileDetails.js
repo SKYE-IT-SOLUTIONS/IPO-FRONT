@@ -109,7 +109,7 @@ const ProfileDetails = (props) => {
               <Grid container spacing={3}>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    disabled={isDisabled}
+                    inputProps={{readOnly: isDisabled}}
                     fullWidth
                     error={Boolean(touched.firstName && errors.firstName)}
                     helperText={touched.firstName && errors.firstName}
@@ -124,7 +124,7 @@ const ProfileDetails = (props) => {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    disabled={isDisabled}
+                    inputProps={{readOnly: isDisabled}}
                     fullWidth
                     error={Boolean(touched.lastName && errors.lastName)}
                     helperText={touched.lastName && errors.lastName}
@@ -138,7 +138,7 @@ const ProfileDetails = (props) => {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    disabled={isDisabled}
+                    inputProps={{readOnly: isDisabled}}
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
                     helperText={touched.email && errors.email}
@@ -152,7 +152,7 @@ const ProfileDetails = (props) => {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    disabled={isDisabled}
+                    inputProps={{readOnly: isDisabled}}
                     fullWidth
                     error={Boolean(touched.phone && errors.phone)}
                     helperText={touched.phone && errors.phone}
@@ -167,7 +167,7 @@ const ProfileDetails = (props) => {
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <TextField
-                    disabled={isDisabled}
+                    inputProps={{readOnly: isDisabled}}
                     fullWidth
                     error={Boolean(touched.address && errors.address)}
                     helperText={touched.address && errors.address}

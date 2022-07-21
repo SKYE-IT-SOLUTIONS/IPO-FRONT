@@ -44,21 +44,27 @@ function App() {
   const parsedRoutes = routes(isUserLoggedIn === "NBSS", userRole).map(
     ({ children, ...rest }) => ({
       ...rest,
-      children: children.map((child) =>
-        String(child.element.type["$$typeof"]).includes("lazy")
-          ? {
-              ...child,
-              element: (
-                <Suspense fallback={<Spinner />}>{child.element}</Suspense>
-              ),
-            }
-          : child
-      ),
+      children: parse(children),
     })
   );
 
   const routing = useRoutes(parsedRoutes);
   return <ThemeContextProvider>{routing}</ThemeContextProvider>;
 }
+
+const parse = (routes) =>
+  routes.map((route) =>
+    route.children
+      ? {
+          ...route,
+          children: parse(route.children),
+        }
+      : String(route.element.type["$$typeof"]).includes("lazy")
+      ? {
+          ...route,
+          element: <Suspense fallback={<Spinner />}>{route.element}</Suspense>,
+        }
+      : route
+  );
 
 export default App;

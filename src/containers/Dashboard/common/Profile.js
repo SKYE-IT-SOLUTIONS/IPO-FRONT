@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import AccountProfile from '../../../components/account/AccountProfile';
+import { PasswordChange } from '../../../components/account/PasswordChange';
 import ProfileDetails from '../../../components/account/ProfileDetails';
 
 
@@ -38,6 +39,12 @@ const Profile = () => (
             xs={12}
           >
             <ProfileDetails />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+          >
+            <PasswordChange />
           </Grid>
         </Grid>
       </Container>

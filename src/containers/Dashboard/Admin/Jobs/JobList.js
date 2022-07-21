@@ -27,7 +27,7 @@ const JobList = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetAllJobs();
+      const { status, data, error } = await dataService.getAllJobs();
       console.log("data : ", data);
       if (status) {
         console.log("In Admin job: ", data);
@@ -40,7 +40,6 @@ const JobList = () => {
     };
     fetchNews();
   }, []);
-
 
   const columns = [
     {
@@ -77,7 +76,7 @@ const JobList = () => {
       headerName: "Created By",
       headerAlign: "center",
       align: "center",
-      width: 1.5*rowWidth,
+      width: 1.5 * rowWidth,
     },
     {
       field: "updatedDate",
@@ -97,7 +96,7 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ViewIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/job/${id}`);
@@ -117,7 +116,7 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ModeEditOutlineIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/editJob/${id}`);
@@ -137,10 +136,10 @@ const JobList = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={async () => {
-              const { status, error } = await dataService.handleDeleteJob(id);
+              const { status, error } = await dataService.deleteJob(id);
               if (status) {
                 setJobList(jobList.filter((job) => job.id !== id));
                 navigate("/admin/job/list");

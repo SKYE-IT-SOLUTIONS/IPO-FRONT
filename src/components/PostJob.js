@@ -150,47 +150,40 @@ const AnimatedText = styled.span`
   text-align: center;
   animation: pop 5s ease-in-out infinite;
   animation-delay: 2s infinite;
-  @keyframes pop{
-  50%  {
-    transform: scale(1.25);
+  @keyframes pop {
+    50% {
+      transform: scale(1.25);
+    }
   }
-}
 
   @media only screen and (min-width: 1160px) {
     font-size: 30px;
     margin-top: -10px;
-    
   }
 
   @media (min-width: 1024px) and (max-width: 1160px) {
     font-size: 25px;
     margin-top: -10px;
-    
   }
 
   @media (min-width: 848px) and (max-width: 1024px) {
     font-size: 20px;
     margin-top: -5px;
-    
   }
   @media (min-width: 767px) and (max-width: 848px) {
     font-size: 15px;
-    
   }
   @media (min-width: 500px) and (max-width: 767px) {
     font-size: 12px;
-
   }
   @media (min-width: 400px) and (max-width: 500px) {
     font-size: 10px;
-  
   }
   @media (min-width: 300px) and (max-width: 400px) {
     font-size: 9px;
-  
   }
   @media (max-width: 300px) {
-    font-size: 8px;  
+    font-size: 8px;
   }
 `;
 
@@ -222,7 +215,7 @@ function PostJob({ dataFromProp }) {
   const storeQualifications = useSelector((state) => state.job.qualifications);
   const storeExperience = useSelector((state) => state.job.experience);
   const storeSalary = useSelector((state) => state.job.salary);
-  const storeDeadline = useSelector((state) => state.job.deadline );
+  const storeDeadline = useSelector((state) => state.job.deadline);
 
   useEffect(() => {
     setisLoading(true);
@@ -230,7 +223,7 @@ function PostJob({ dataFromProp }) {
       if (id !== undefined && id !== null) {
         console.log(id);
         const { status, data, error } = id
-          ? await dataService.handleGetJob(id)
+          ? await dataService.getJob(id)
           : null;
         if (status) {
           console.log("data", data);
@@ -245,12 +238,11 @@ function PostJob({ dataFromProp }) {
             experience: data?.experiences,
             salary: data?.salary,
             date: data?.deadline,
-          })
+          });
         } else {
           setError(error);
           navigate("/404");
         }
-        
       } else {
         setJobData({
           id: "",
@@ -263,7 +255,7 @@ function PostJob({ dataFromProp }) {
           salary: storeSalary,
           deadline: storeDeadline,
           date: "Not Posted Yet",
-        })
+        });
       }
       setisLoading(false);
     };
@@ -291,7 +283,9 @@ function PostJob({ dataFromProp }) {
                   </tr>
                 </tbody>
               </Table>
-              {jobData.position && <Title>Job Position : {jobData.position}</Title>}
+              {jobData.position && (
+                <Title>Job Position : {jobData.position}</Title>
+              )}
               <Description>{jobData?.description}</Description>
               <Row style={{ paddingTop: "15px" }}>
                 <Col md={6} sm={12}>
@@ -330,7 +324,7 @@ function PostJob({ dataFromProp }) {
                     </>
                   )}
 
-                  {jobData?.qualifications?.length !== 0  && (
+                  {jobData?.qualifications?.length !== 0 && (
                     <>
                       <RequirementTitle>Qualifications</RequirementTitle>
                       <ul>
@@ -357,7 +351,8 @@ function PostJob({ dataFromProp }) {
                 <CustomButton apply>Apply</CustomButton>
               </div>
               <Deadline>
-              Application Deadline :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <AnimatedText>{jobData?.date}</AnimatedText>
+                Application Deadline :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                <AnimatedText>{jobData?.date}</AnimatedText>
               </Deadline>
             </>
           )}

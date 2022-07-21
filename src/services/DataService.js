@@ -1,6 +1,7 @@
 import {
-  onGetOne,
+  onGetOneAuthenticated,
   onGetAll,
+  onGetAllAuthenticated,
   onSubmit,
   onUpdate,
   onDelete,
@@ -8,126 +9,103 @@ import {
   onApproved,
 } from "../api/data/dataAPI";
 
-const NEWS_DATA_URL = "/news";
-const GLOBAL_NEWS_DATA_URL = "news?visibility=global";
-const NON_APPROVAL_NEWS_DATA_URL = "news?approval=false";
-const APPROVAL_NEWS_DATA_URL = "news/approval";
-const JOB_DATA_URL = "/job";
-const CONTACT_US ='/content'
-const SUBSCRIBE_URL ='/email/add'
-const REQUEST_OTHER_URL ='request?type=other'
-const GET_STAT_DATA ='/stat'
-const NEWS_DATA_USER_URL ="news/user";
-const JOB_DATA_USER_URL ="jobs/user";
-
-
 export default class DataService {
-  //get news and job data
-  handleGetNews = async (id) => {
-    const result = await onGetOne(NEWS_DATA_URL, id);
-    return result;
-  };
-
-  handleGetJob = async (id) => {
-    const result = await onGetOne(JOB_DATA_URL, id);
-    return result;
-  };
-
-  handleGetAllNews = async () => {
-    const result = await onGetAll(NEWS_DATA_URL);
-    return result;
-  };
-
-  handleGetAllNewsUser = async () => {
-    const result = await onGetAll(NEWS_DATA_USER_URL);
-    return result;
-  };
-
-  handleGetAllJobsUser = async () => {
-    const result = await onGetAll(JOB_DATA_USER_URL);
-    return result;
+  // NEWS
+  async getAllNewsByAdmin() {
+    return await onGetAllAuthenticated("/news");
   }
 
-  handleGetAllJobs = async () => {
-    const result = await onGetAll(JOB_DATA_URL);
-    return result;
-  };
-  
-  handleGetGlobalNews = async () => {
-    const result = await onGetAll(GLOBAL_NEWS_DATA_URL);
-    return result;
-  };
-
-  handleNonApprovedNews = async () => {
-    const result = await onGetAll(NON_APPROVAL_NEWS_DATA_URL);
-    return result;
-  };
-
-  handleApprovedNews = async (id) => {
-    const result = await onApproved(APPROVAL_NEWS_DATA_URL,id);
-    return result;
+  async getNews(id) {
+    return await onGetOneAuthenticated("/news", id);
   }
 
-  //handle job and news submit
-  handleSubmitNews = async (data) => {
-    const result = await onSubmit(NEWS_DATA_URL, data);
-    return result;
-  };
-
-  handleSubmitJob = async (data) => {
-    const result = await onSubmit(JOB_DATA_URL, data);
-    return result;
-  };
-
-  //handle job and news update
-  handleUpdateNews = async (id, data) => {
-    const result = await onUpdate(NEWS_DATA_URL, id, data);
-    return result;
-  };
-
-  handleUpdateJob = async (id, data) => {
-    const result = await onUpdate(JOB_DATA_URL, id, data);
-    return result;
-  };
-
-  //handle job and news delete
-  handleDeleteNews = async (id) => {
-    const result = await onDelete(NEWS_DATA_URL, id);
-    return result;
-  };
-
-  handleDeleteJob = async (id) => {
-    const result = await onDelete(JOB_DATA_URL, id);
-    return result;
-  };
-
-  //handle get contact us details
-  handleGetContactDetails = async () => {
-    const result = await onGetAll(CONTACT_US);
-    return result;
-  };
-
-  //handle update contact us details
-  handleUpdateContactDetails = async (data) => {
-    const result = await onUpdate(CONTACT_US, data);
-    return result;
-  };
-
-  //handle subscribe email
-  handleSubscription = async (data) => {
-    const result = await onSubmitNoAuth(SUBSCRIBE_URL, data);
-    return result;
+  async addNews(data) {
+    return await onSubmit("/news", data);
   }
 
-  //requests from outside
+  async updateNews(id, data) {
+    return await onUpdate("/news", id, data);
+  }
+
+  async deleteNews(id) {
+    return await onDelete("/news", id);
+  }
+
+  async getAllAuthenticatedNews() {
+    return await onGetAllAuthenticated("/news/authenticated");
+  }
+
+  async getGlobalNews() {
+    return await onGetAll("/news?visibility=global");
+  }
+
+  async getAllNonApprovalNews() {
+    return await onGetAllAuthenticated("/news?approval=false");
+  }
+
+  async getAllApprovalNews() {
+    return await onGetAllAuthenticated("/news?approval=true");
+  }
+
+  async approveNewsByAdmin(id) {
+    return await onApproved("/news/approval", id);
+  }
+
+  async getAllNewsByUser() {
+    return await onGetAllAuthenticated("/news?filter=username");
+  }
+
+  // JOB
+  async getAllJobs() {
+    return await onGetAllAuthenticated("/job/all");
+  }
+
+  async getJob(id) {
+    return await onGetOneAuthenticated("/job", id);
+  }
+
+  async addJob(data) {
+    return await onSubmit("/job", data);
+  }
+
+  async updateJob(id, data) {
+    return await onUpdate("/job", id, data);
+  }
+
+  async deleteJob(id) {
+    return await onDelete("/job", id);
+  }
+
+  async approveJobByAdmin(id) {
+    return await onApproved("/job/approval", id);
+  }
+
+  async getJobsByUser() {
+    return await onGetAllAuthenticated("/job?filter=username");
+  }
+
+  // HOMEPAGE
+  async getHomepageContent() {
+    return await onGetAll("/content");
+  }
+
+  async updateHomepageContent(data) {
+    return await onUpdate("/content", data);
+  }
+
+  async subscribeMail(data) {
+    return await onSubmitNoAuth("/email/add", data);
+  }
+
+  // OTHER
   handleRequestTypeOther = async (data) => {
-    console.log(data)
-    const result = await onSubmit(REQUEST_OTHER_URL, data);
+    console.log(data);
+    const result = await onSubmit("/request?type=other", data);
     return result;
-  }
-  //dashboard data
+  };
+
   handleStatData = async () => {
-    const result = await onGetAll(GET_STAT_DATA);
+    const result = await onGetAll("/stat");
     return result;
-  }
+  };
 }
