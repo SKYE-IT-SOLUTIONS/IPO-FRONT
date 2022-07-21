@@ -155,7 +155,7 @@ const Internship = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", p: 5 }}>
+    <Box sx={{ width: "100%", p: 2 }}>
       <Stepper activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label, index) => {
           const stepProps = {};
