@@ -37,12 +37,12 @@ export default function HomeContent() {
             <SponsorList/>
             <NewsList/>
             <Container fluid>
-                <Row>
-                    <ContactUs/>
+                <Row style={{backgroundColor:"#F0FFFF",}}>
+                    {/* <ContactUs/> */}
                     <Subscription/>
-                    <Colm md={4} >
+                    {/* <Colm md={4} >
                         <MapView/>
-                    </Colm>
+                    </Colm> */}
                 </Row>
             </Container>
         </>

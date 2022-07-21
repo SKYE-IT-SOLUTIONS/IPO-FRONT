@@ -33,7 +33,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-
 const NewContainer = styled(Container)`
   display: flex;
   flex-direction: column;
@@ -75,8 +74,6 @@ const ApplyImage = styled.div`
     margin-top: -30px;
   }
 `;
-
-
 
 const NewsInput = styled(Input)`
   width: 100%;
@@ -122,9 +119,10 @@ function AddNewsPost() {
   let navigate = useNavigate();
   const fileService = new FileService();
 
-  const defaultNews = "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download"
+  const defaultNews =
+    "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download";
 
-  const { theme, light, dark,fonts } = useContext(ThemeContext);
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.button : dark.button;
   // useS
   const [newTitle, setNewsTitle] = useState("");
@@ -158,33 +156,30 @@ function AddNewsPost() {
   const [error, setError] = useState("");
 
   const handleNewsSubmit = async (payload) => {
-    setIsLoading(true)
+    setIsLoading(true);
     console.log("payload", payload);
-    const { status,data, error } = await dataService.handleSubmitNews(payload);
+    const { status, data, error } = await dataService.addNews(payload);
     if (status) {
       dispatch(removeDescription());
       dispatch(setImage(defaultNews));
       dispatch(setTitle(null));
       navigate(`/admin/news/${data}`);
-    }else{
+    } else {
       console.log("error", error);
       setError(error);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    if (
-      storeTitle !== null ||
-      storeDescription.length !== 0
-    ){
+    if (storeTitle !== null || storeDescription.length !== 0) {
       setNewsTitle(storeTitle);
       setContentList(storeDescription);
       setImageUrl(storeImage);
       setNewsVisibility(storeVisibility);
-      setTitleInfo(Simple_Validator(storeTitle,"Title"));
-      setContentInfo(Simple_Validator(storeDescription,"Description"));
+      setTitleInfo(Simple_Validator(storeTitle, "Title"));
+      setContentInfo(Simple_Validator(storeDescription, "Description"));
     }
     setIsLoading(false);
   }, []);
@@ -193,17 +188,16 @@ function AddNewsPost() {
     if (files.length !== 0) {
       setFiles(files);
       console.log(files[0]);
-      
-      const {status,error,data} = await fileService.handleCreate(files[0]);
-      
-    if (status) {
-      console.log("fileURL", data?.fileUrl);
-      dispatch(setImage(data?.fileUrl));
-      setImageUrl(data?.fileUrl);
-    }else{
-      console.log("error", error);
-    }
-      
+
+      const { status, error, data } = await fileService.handleCreate(files[0]);
+
+      if (status) {
+        console.log("fileURL", data?.fileUrl);
+        dispatch(setImage(data?.fileUrl));
+        setImageUrl(data?.fileUrl);
+      } else {
+        console.log("error", error);
+      }
     }
   };
 
@@ -227,11 +221,10 @@ function AddNewsPost() {
                 onChange={(e) => {
                   setNewsTitle(e.target.value);
                   dispatch(setTitle(e.target.value));
-                  setTitleInfo(Simple_Validator(e.target.value,"Title"));
+                  setTitleInfo(Simple_Validator(e.target.value, "Title"));
                 }}
               />
               {!titleInfo.status && <Error>{titleInfo.error}</Error>}
-
 
               <Title>Image</Title>
               <FileUpload
@@ -262,7 +255,7 @@ function AddNewsPost() {
                           );
                           setContentList(list);
                           dispatch(setDescription(list));
-                          setContentInfo(Simple_Validator(list,"Description"));
+                          setContentInfo(Simple_Validator(list, "Description"));
                         }}
                       />
                     </li>
@@ -295,7 +288,7 @@ function AddNewsPost() {
                   }}
                 />
               </OuterTextArea>
-              {!contentInfo.status && <Error>{contentInfo.error}</Error>}  
+              {!contentInfo.status && <Error>{contentInfo.error}</Error>}
 
               <Title>News Visibility</Title>
               <RadioGroup
@@ -334,11 +327,7 @@ function AddNewsPost() {
                 Preview
               </NewsButton>
               <NewsButton
-                disabled={
-                  !contentInfo.status ||
-                  isLoading ||
-                  !titleInfo.status
-                }
+                disabled={!contentInfo.status || isLoading || !titleInfo.status}
                 bgColor={!isLoading ? them.submit : them.disable}
                 onClick={() => {
                   console.log("submit");

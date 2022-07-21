@@ -73,10 +73,10 @@ function NewsView() {
         console.log("Database Call");
         console.log(id);
         const { status, data, error } = id
-          ? await dataService.handleGetNews(id)
+          ? await dataService.getNews(id)
           : null;
         if (status) {
-          console.log("After add : ",data)
+          console.log("After add : ", data);
           setNewsData({
             title: data.title,
             url: data.url,
@@ -128,9 +128,7 @@ function NewsView() {
                   })}
                 </Col>
               </Row>{" "}
-              <Date font={fonts}>
-                  Last updated - {newsData.uploadTime}
-              </Date>
+              <Date font={fonts}>Last updated - {newsData.uploadTime}</Date>
             </>
           )}
         </NewContainer>
