@@ -8,9 +8,16 @@ const drawerWidth = 240;
 
 export default function Drawer({ open, onClose, items }) {
   const drawer = (
-    <Box  style={{"backgroundImage": "linear-gradient(to bottom, #000428, #004e92)",height:"100%",color:"white",p:1}}>
+    <Box
+      style={{
+        backgroundImage: "linear-gradient(to bottom, #000428, #004e92)",
+        height: "100%",
+        color: "white",
+        p: 1,
+      }}
+    >
       <Toolbar />
-      <SidebarList items={items} />
+      <SidebarList items={items} onClose={onClose} />
     </Box>
   );
 
