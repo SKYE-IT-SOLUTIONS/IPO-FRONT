@@ -15,6 +15,10 @@ import StepConnector, {
 } from "@mui/material/StepConnector";
 import { Formik } from "formik";
 import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
+import * as Yup from "yup";
+import { phoneRegExp } from "../../../../config/pattern";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -101,9 +105,9 @@ ColorlibStepIcon.propTypes = {
 };
 
 const steps = [
-  "Personal Infomation",
-  "Create an ad group",
-  "Create an ad",
+  "Personal Information",
+  "Company Preferences",
+  "Current Overall Performance",
 ];
 
 const Internship = () => {
@@ -133,21 +137,6 @@ const Internship = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -157,9 +146,9 @@ const Internship = () => {
       case 0:
         return <Step1 {...data} />;
       case 1:
-        return <h1>Step 1</h1>;
+        return <Step2 {...data} />;
       case 2:
-        return <h1>Step 1</h1>;
+        return <Step3 {...data} />;
       default:
         break;
     }
@@ -200,12 +189,13 @@ const Internship = () => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Box sx={{mb:5}}/>
+          <Box sx={{ mb: 5 }} />
           {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
           <Formik
             initialValues={{
               nameWithInit: "",
               fullName: "",
+              gender: "male",
               regNo: "",
               mobile1: "",
               mobile2: "",
@@ -215,32 +205,125 @@ const Internship = () => {
               gName: "",
               gMobile: "",
               gAddress: "",
+              company1: "",
+              company2: "",
+              degree: "",
+              gpaL11: 0.0,
+              gpaL12: 0.0,
+              gpaL21: 0.0,
+              gpaL22: 0.0,
+              gpaL31: 0.0,
+              gpaL32: 0.0,
+              overall: 0.0,
             }}
+            validationSchema={Yup.object().shape({
+              nameWithInit: Yup.string().required("Required"),
+              fullName: Yup.string().required("Required"),
+              gender: Yup.string().required("Required"),
+              regNo: "",
+              mobile1: Yup.string()
+                .matches(phoneRegExp, "Phone number is not valid")
+                .min(9)
+                .max(10)
+                .required("Phone is required"),
+              mobile2: Yup.string()
+                .matches(phoneRegExp, "Phone number is not valid")
+                .min(9)
+                .max(10)
+                .required("Phone is required"),
+              email: Yup.string()
+                .email("Must be a valid email")
+                .max(255)
+                .required("Email is required"),
+              address: Yup.string().required("Required"),
+              gName: Yup.string().required("Required"),
+              gMobile: Yup.string()
+                .matches(phoneRegExp, "Phone number is not valid")
+                .min(9)
+                .max(10)
+                .required("Phone is required"),
+              gAddress: Yup.string().required("Required"),
+              company1: Yup.string().required("Required"),
+              company2: Yup.string().required("Required"),
+              company3: Yup.string().required("Required"),
+              degree: Yup.string().required("Required"),
+              gpaL11: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+              gpaL12: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+              gpaL21: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+              gpaL22: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+              gpaL31: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+              gpaL32: Yup.number("value must be a number")
+                .min(0)
+                .max(4.0)
+                .required("Required"),
+            })}
           >
             {(data) => {
-              console.log("data-"+data)
-              return switchTab(activeStep, data)}}
-          </Formik>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
+              console.log("data-" + data);
+              return (
+                <>
+                  <form onSubmit={data.handleSubmit}>
+                    {switchTab(activeStep, data)}
+                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                      <Button
+                        color="inherit"
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        sx={{ mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                      <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Box>
+                      <Button
+                        type="submit"
+                        onClick={() => {
+                          console.log("data", data.isValid);
+                          switch (activeStep) {
+                            case 0:
+                              if (!data.errors.fullName) {
+                                data.errors = {};
+                                handleNext();
+                              }
+                              break;
+                            case 1:
+                              if (!data.errors.company1) {
+                                handleNext();
+                              }
+                              break;
+                            case 2:
+                              if (true) {
+                                handleNext();
+                              }
+                              break;
+                            default:
+                              break;
+                          }
+                        }}
+                      >
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      </Button>
+                    </Box>
+                  </form>
+                </>
+              );
+            }}
+          </Formik>
         </React.Fragment>
       )}
     </Box>
