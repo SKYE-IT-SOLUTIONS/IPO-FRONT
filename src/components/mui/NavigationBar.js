@@ -114,7 +114,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
             }}
             onClick={() => navigate("/")}
           >
-            Industrial PLacement Office - {title}
+            Industrial Placement Office - {title}
           </Typography>
           <Typography
             sx={{
