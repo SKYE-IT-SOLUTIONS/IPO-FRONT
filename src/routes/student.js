@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-import StudentLayout from "../containers/Dashboard/StudentLayout";
+import StudentLayout from "../containers/Dashboard/Student/StudentLayout";
 
 const StudentDashboard = lazy(() =>
   import("../containers/Dashboard/Student/Dashboard")

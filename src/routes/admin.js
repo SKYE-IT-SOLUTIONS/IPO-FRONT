@@ -1,9 +1,9 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-import AdminLayout from "../containers/Dashboard/AdminLayout";
+import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
 
-const AdminDashboard = lazy(() => import("../components/AdminDashboard"));
+const AdminDashboard = lazy(() => import("../containers/Dashboard/Admin/AdminDashboard"));
 const UserListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Users/UserList")
 );

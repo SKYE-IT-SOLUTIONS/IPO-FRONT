@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-import CompanyLayout from "../containers/Dashboard/CompanyLayout";
+import CompanyLayout from "../containers/Dashboard/Company/CompanyLayout";
 
 const CompanyDashboard = lazy(() => import("../components/Companyprofile"));
 const SelectNews = lazy(() => import("../components/SelectNews"));
