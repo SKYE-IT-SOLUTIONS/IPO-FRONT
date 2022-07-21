@@ -5,24 +5,25 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import ListItem from "./ListItem";
 
-export default function SidebarList({ items }) {
-   const location = useLocation();
-   const navigate = useNavigate();
+export default function SidebarList({ items, onClose }) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-   return (
-      <>
-         <List>
-            {items.map((item, id) => (
-               <ListItem
-                  key={id}
-                  location={location}
-                  navigate={navigate}
-                  path={item.path}
-                  icon={item.icon}
-                  text={item.text}
-               />
-            ))}
-         </List>
-      </>
-   );
+  return (
+    <>
+      <List>
+        {items.map((item, id) => (
+          <ListItem
+            key={id}
+            location={location}
+            navigate={navigate}
+            onClose={onClose}
+            path={item.path}
+            icon={item.icon}
+            text={item.text}
+          />
+        ))}
+      </List>
+    </>
+  );
 }
