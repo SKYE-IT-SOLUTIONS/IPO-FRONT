@@ -389,7 +389,7 @@ function NavBar(props) {
               <DropItems
                 id="bg-custom-3"
                 onClick={() => {
-                  navigate("/requesthall");
+                  navigate("/request-hall");
                 }}
               >
                 Reserve a Conference Hall
@@ -398,7 +398,7 @@ function NavBar(props) {
               <DropItems
                 id="bg-custom-3"
                 onClick={() => {
-                  navigate("/requestground");
+                  navigate("/request-ground");
                 }}
               >
                 Reserve a Playground

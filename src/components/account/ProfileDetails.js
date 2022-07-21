@@ -65,6 +65,7 @@ const ProfileDetails = (props) => {
         handleSubmit,
         isSubmitting,
         touched,
+        resetForm,
         values,
       }) => (
         <form onSubmit={handleSubmit}>
@@ -88,7 +89,13 @@ const ProfileDetails = (props) => {
                 sx={{ justifyContent: "right", flexGrow: 1, display: "flex" }}
               >
                 <Button
-                  onClick={() => setIsDisabled(!isDisabled)}
+                  onClick={() => {
+                    if(!isDisabled){
+                      resetForm();
+                    }
+                    setIsDisabled(!isDisabled);
+                  }
+                  }
                   startIcon={isDisabled?<EditIcon />:<CancelIcon />}
                   sx={{ m: 2 }}
                 >

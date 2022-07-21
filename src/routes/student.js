@@ -11,7 +11,7 @@ const TrainingSession = lazy(() =>
   import("../containers/Dashboard/Student/TrainingSession")
 );
 const Internship = lazy(() =>
-  import("../containers/Dashboard/Student/Internship")
+  import("../containers/Dashboard/Student/internship")
 );
 const CvGenerate = lazy(() =>
   import("../containers/Dashboard/Student/CvGenerate")
