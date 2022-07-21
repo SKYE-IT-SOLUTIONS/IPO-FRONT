@@ -28,6 +28,8 @@ const CompanyListOfAdmin = lazy(() =>
 );
 const EditContact = lazy(() => import("../components/EditContact"));
 const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
+const UploadUserData = lazy(()=>import("../containers/Dashboard/Student/UploadUserData"))
+
 
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
@@ -111,6 +113,12 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
     {
       path: "requestWorkshop",
       element: <RequestWorkshop />,
+    },
+    {
+      path: "upload",
+      children:[
+        { path: "user-data", element: <UploadUserData/> },
+      ]
     },
     { path: "*", element: <Navigate to="/404" /> },
   ],

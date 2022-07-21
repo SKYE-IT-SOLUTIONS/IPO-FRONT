@@ -7,6 +7,7 @@ import EngineeringIcon from "@mui/icons-material/Engineering";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 // import TopLogoBar from "../../components/TopLogoBar";
 import NavigationBar from "../../../components/mui/NavigationBar";
@@ -28,6 +29,11 @@ const sideBarItems = [
     path: "/admin/internship",
     icon: <EngineeringIcon />,
     text: "Internship Requests",
+  },
+  {
+    path: "/admin/upload/user-data",
+    icon: <CloudUploadIcon />,
+    text: "Upload Userdata",
   },
   {
     path: "/logout",
