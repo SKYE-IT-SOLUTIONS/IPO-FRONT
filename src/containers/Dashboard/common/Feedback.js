@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography,Container } from "@mui/material";
 import { TextField, Box, Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -43,12 +43,7 @@ const Feedback = () => {
     >
       {(formik) => (
         <form onSubmit={formik.handleSubmit}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-            }}
-          >
+          <Container>
             <Paper elevation={24} sx={{ m: 2, px: 1,pt:3 }}>
               <Grid container>
                 <Grid
@@ -156,7 +151,7 @@ const Feedback = () => {
                 </Grid>
               </Grid>
             </Paper>
-          </Box>
+          </Container>
         </form>
       )}
     </Formik>
