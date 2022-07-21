@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewIcon from "@mui/icons-material/Visibility";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DataService from "../../../../services/DataService";
 import Spinner from "../../../../components/Spinner";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ const NewsListNonApproved = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleNonApprovedNews();
+      const { status, data, error } = await dataService.getAllNonApprovalNews();
       if (status) {
         console.log("In Admin : ", data);
         setNewsList(data);
@@ -42,48 +42,48 @@ const NewsListNonApproved = () => {
 
   const columns = [
     {
-        field: "id",
-        type: "number",
-        headerName: "ID",
-        headerAlign: "center",
-        align: "center",
-        width: 70,
-      },
-      {
-        field: "title",
-        headerName: "Title",
-        headerAlign: "center",
-        align: "left",
-        width: 2 * rowWidth,
-      },
-      {
-        field: "visibility",
-        headerName: "Visibility",
-        headerAlign: "center",
-        align: "center",
-        width: 0.5 * rowWidth,
-      },
-      {
-        field: "status",
-        headerName: "Status",
-        headerAlign: "center",
-        align: "center",
-        width: 0.5 * rowWidth,
-      },
-      {
-        field: "createdBy",
-        headerName: "Created By",
-        headerAlign: "center",
-        align: "center",
-        width: 1.5*rowWidth,
-      },
-      {
-        field: "updatedDate",
-        headerName: "Updated",
-        headerAlign: "center",
-        align: "center",
-        width: rowWidth - 50,
-      },
+      field: "id",
+      type: "number",
+      headerName: "ID",
+      headerAlign: "center",
+      align: "center",
+      width: 70,
+    },
+    {
+      field: "title",
+      headerName: "Title",
+      headerAlign: "center",
+      align: "left",
+      width: 2 * rowWidth,
+    },
+    {
+      field: "visibility",
+      headerName: "Visibility",
+      headerAlign: "center",
+      align: "center",
+      width: 0.5 * rowWidth,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      headerAlign: "center",
+      align: "center",
+      width: 0.5 * rowWidth,
+    },
+    {
+      field: "createdBy",
+      headerName: "Created By",
+      headerAlign: "center",
+      align: "center",
+      width: 1.5 * rowWidth,
+    },
+    {
+      field: "updatedDate",
+      headerName: "Updated",
+      headerAlign: "center",
+      align: "center",
+      width: rowWidth - 50,
+    },
     {
       field: "view",
       headerName: "View",
@@ -95,7 +95,7 @@ const NewsListNonApproved = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ViewIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/news/${id}`);
@@ -115,10 +115,10 @@ const NewsListNonApproved = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={async () => {
-              const { status, error } = await dataService.handleDeleteNews(id);
+              const { status, error } = await dataService.deleteNews(id);
               if (status) {
                 setNewsList(newsList.filter((news) => news.id !== id));
                 navigate("/admin/news/non-approved-list");
@@ -131,41 +131,43 @@ const NewsListNonApproved = () => {
       },
     },
     {
-        field: "Approve",
-        headerName: "Edit",
-        headerAlign: "center",
-        align: "center",
-        sortable: false,
-        width: 60 + 20,
-        disableClickEventBubbling: true,
-        renderCell: ({ id, ...params }) => {
-          return (
-            <CheckCircleIcon
-            style={{cursor: "pointer"}}
-              sx={{ fontSize: 30 }}
-              onClick={async () => {
-                const { status, error } = await dataService.handleApprovedNews(id);
-                if (status) {
-                  setNewsList(newsList.filter((news) => news.id !== id));
-                  navigate("/admin/news/non-approved-list");
-                } else {
-                  console.log(error);
-                }
-              }}
-            />
-          );
-        },
+      field: "Approve",
+      headerName: "Edit",
+      headerAlign: "center",
+      align: "center",
+      sortable: false,
+      width: 60 + 20,
+      disableClickEventBubbling: true,
+      renderCell: ({ id, ...params }) => {
+        return (
+          <CheckCircleIcon
+            style={{ cursor: "pointer" }}
+            sx={{ fontSize: 30 }}
+            onClick={async () => {
+              const { status, error } = await dataService.approveNewsByAdmin(
+                id
+              );
+              if (status) {
+                setNewsList(newsList.filter((news) => news.id !== id));
+                navigate("/admin/news/non-approved-list");
+              } else {
+                console.log(error);
+              }
+            }}
+          />
+        );
       },
+    },
   ];
 
   const rows = newsList.map((newsList) => {
     return {
-        id: newsList?.id,
-        title: newsList?.title,
-        status: newsList?.approval ? "Approved" : "Pending",
-        visibility: newsList?.global ? "Public" : "Private",
-        createdBy: newsList?.addedBy,
-        updatedDate: newsList?.howLong + "  ago",
+      id: newsList?.id,
+      title: newsList?.title,
+      status: newsList?.approval ? "Approved" : "Pending",
+      visibility: newsList?.global ? "Public" : "Private",
+      createdBy: newsList?.addedBy,
+      updatedDate: newsList?.howLong + "  ago",
     };
   });
 

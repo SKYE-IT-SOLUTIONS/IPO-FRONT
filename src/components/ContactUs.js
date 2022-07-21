@@ -121,8 +121,7 @@ function ContactUs(props) {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } =
-        await dataService.handleGetContactDetails();
+      const { status, data, error } = await dataService.getHomepageContent();
       if (status) {
         console.log("In Admin : ", data);
         const AddFormat2 = [

@@ -40,7 +40,7 @@ const SubInput = styled(Input)`
 
 const SubIcon = styled(Icon)`
   margin: auto;
-  color:#0f3443;
+  color: #0f3443;
 `;
 
 const SubBttn = styled(CustomButton)`
@@ -55,17 +55,16 @@ const Error = styled.p`
   padding: 5px 0 5px 2px;
 `;
 
-const Title =  styled.h1`
+const Title = styled.h1`
   font-family: ${({ fonts }) => fonts.title};
   font-size: 25px;
-  color:#DC281E;
-`
-const RECAPTCHA =styled(Recaptcha)`
+  color: #dc281e;
+`;
+const RECAPTCHA = styled(Recaptcha)`
   margin: auto;
   display: flex;
   justify-content: center;
 `;
-
 
 function Subscription() {
   const { fonts } = useContext(ThemeContext);
@@ -82,10 +81,10 @@ function Subscription() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const [severity, setSeverity] = useState("");
-  const [recaptcha,setRecaptcha] = useState(false);
+  const [recaptcha, setRecaptcha] = useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -95,25 +94,28 @@ function Subscription() {
   const dataService = new DataService();
 
   const handleSubscribe = async () => {
-    if(nameInfo.status && emailInfo.status){
-      setisLoading(true)
-      const {status,error} = await dataService.handleSubscription({ name:name, email:email });
-      if(status){
-        setMessage("Subscribed Successfully")
-        setSeverity("success")
-        setSnackbarOpen(true)
-        setName("")
-        setEmail("")
-        setNameInfo({error:null,status:false})
-        setEmailInfo({error:null,status:false})
-      }else{
-        setMessage(error)
-        setSeverity("error")
-        setSnackbarOpen(true)
+    if (nameInfo.status && emailInfo.status) {
+      setisLoading(true);
+      const { status, error } = await dataService.subscribeMail({
+        name: name,
+        email: email,
+      });
+      if (status) {
+        setMessage("Subscribed Successfully");
+        setSeverity("success");
+        setSnackbarOpen(true);
+        setName("");
+        setEmail("");
+        setNameInfo({ error: null, status: false });
+        setEmailInfo({ error: null, status: false });
+      } else {
+        setMessage(error);
+        setSeverity("error");
+        setSnackbarOpen(true);
       }
-      setisLoading(false)
+      setisLoading(false);
     }
-  }
+  };
 
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -152,17 +154,22 @@ function Subscription() {
       />
       {emailInfo !== null && <Error>{emailInfo.error}</Error>}
       <EmailInfo>We'll never share your email with anyone else.</EmailInfo>
-      <RECAPTCHA
-            onChange={onChange}
-      />
+      <RECAPTCHA onChange={onChange} />
       <SubBttn
         submit
-        disabled={isLoading || !nameInfo.status || !emailInfo.status || !recaptcha}
+        disabled={
+          isLoading || !nameInfo.status || !emailInfo.status || !recaptcha
+        }
         onClick={handleSubscribe}
       >
         SUBMIT
       </SubBttn>
-      <CustomSnackBar isOpen={snackbarOpen}  severity={severity} handleClose={handleClose} message={message}/>
+      <CustomSnackBar
+        isOpen={snackbarOpen}
+        severity={severity}
+        handleClose={handleClose}
+        message={message}
+      />
     </SubscriptDiv>
   );
 }
