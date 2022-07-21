@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { Grid, Typography, Container } from "@mui/material";
 import { TextField, Box, Button } from "@mui/material";
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import Paper from "@mui/material/Paper";
 import Autocomplete from "@mui/material/Autocomplete";
 import FeedbackImg from "../../../assets/Feedback.svg";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import styled from "styled-components";
+
+const Img = styled.img`
+  width: 450px;
+  height: 450px;
+
+  @media (min-width: 100px) and (max-width: 1263px) {
+    height: 360px;
+    width: 360px;
+  }
+`;
 
 const top100Films = [
   { label: "IR10563", year: 1994 },
@@ -39,7 +50,7 @@ const Feedback = () => {
     name: "Nadun Nethsara",
     email: "maximus9798@gmail.com",
     id: "",
-    ratingValue:5,
+    ratingValue: 5,
     feedback: "",
   });
 
@@ -65,7 +76,7 @@ const Feedback = () => {
       {(formik) => (
         <form onSubmit={formik.handleSubmit}>
           <Container>
-            <Paper elevation={24} sx={{ m: 2, px: 1, pt: 3 }}>
+            <Paper elevation={24} sx={{ my: 2, px: 1, py: 3 }}>
               <Grid container>
                 <Grid
                   item
@@ -135,8 +146,8 @@ const Feedback = () => {
                       width: 200,
                       display: "flex",
                       alignItems: "center",
-                      ml:1,
-                      mt:2.5
+                      ml: 1,
+                      mt: 2.5,
                     }}
                   >
                     <Rating
@@ -145,7 +156,7 @@ const Feedback = () => {
                       precision={0.5}
                       getLabelText={getLabelText}
                       onChange={(event, newValue) => {
-                        formik.setFieldValue("ratingValue",newValue)
+                        formik.setFieldValue("ratingValue", newValue);
                       }}
                       onChangeActive={(event, newHover) => {
                         setHover(newHover);
@@ -159,7 +170,11 @@ const Feedback = () => {
                     />
                     {formik.values.ratingValue !== null && (
                       <Box sx={{ ml: 2 }}>
-                        {labels[hover !== -1 ? hover :formik.values.ratingValue]}
+                        {
+                          labels[
+                            hover !== -1 ? hover : formik.values.ratingValue
+                          ]
+                        }
                       </Box>
                     )}
                   </Box>
@@ -196,11 +211,11 @@ const Feedback = () => {
                   md={6}
                   sx={{
                     display: { sm: "none", xs: "none", md: "flex" },
-                    flexDirection: "row",
+                    flexDirection: "column",
                     justifyContent: "center",
                   }}
                 >
-                  <img src={FeedbackImg} alt="" width="450px" height="450px" />
+                  <Img src={FeedbackImg} alt="" />
                 </Grid>
               </Grid>
             </Paper>
