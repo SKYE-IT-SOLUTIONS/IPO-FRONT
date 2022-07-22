@@ -9,10 +9,10 @@ const ipoAPIHostDev = "https://ipo-agri.herokuapp.com/api"; // for development
 
 // const ipoAPIHost = process.env.NODE_ENV === "development" ?  ipoAPIHostProd:ipoAPIHostDev ;
 const ipoAPIHost =
-  process.env.NODE_ENV === "development" ? ipoAPIHostDev : ipoAPIHostProd;
+   process.env.NODE_ENV === "development" ? ipoAPIHostDev : ipoAPIHostProd;
 
 const instance = axios.create({
-  baseURL: ipoAPIHost,
+   baseURL: ipoAPIHost,
 });
 
 export default instance;
