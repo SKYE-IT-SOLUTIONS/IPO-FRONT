@@ -37,10 +37,10 @@ const city = [
 const ProfileDetails = (props) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [userData, setUserData] = useState({
-    name: "Supun Tharuka",
-    email: "supun@gmail.com",
+    name: "Buddhika Halangoda",
+    email: "buddhika@gmail.com",
     phone: "729744112",
-    address: "201 D2 Thanayam place Ingiriya",
+    address: "201 D2 Thanayam place Mathale",
   });
   return (
     <Formik

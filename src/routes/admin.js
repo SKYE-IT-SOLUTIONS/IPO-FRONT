@@ -5,7 +5,7 @@ import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
 import AddNewsPost from "../components/AddNewsPost";
 import PostJob from "../components/PostJob";
 import SelectUsers from "../components/SelectUsers";
-
+import Profile from "../containers/Dashboard/common/Profile";
 
 const AdminDashboard = lazy(() =>
   import("../containers/Dashboard/Admin/AdminDashboard")
@@ -54,6 +54,10 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
     {
       path: "dashboard",
       element: <AdminDashboard />,
+    },
+    {
+      path: "profile",
+      element: <Profile />,
     },
     {
       path: "users",

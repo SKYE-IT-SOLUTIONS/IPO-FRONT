@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import Profile from "../containers/Dashboard/common/Profile";
 
 import CompanyLayout from "../containers/Dashboard/Company/CompanyLayout";
 
@@ -32,6 +33,10 @@ export const companyRoutes = (isAuthenticated, userRole) => ({
     {
       path: "dashboard",
       element: <CompanyDashboard />,
+    },
+    {
+      path: "profile",
+      element: <Profile />,
     },
     {
       path: "news",

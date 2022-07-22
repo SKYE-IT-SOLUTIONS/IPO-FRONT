@@ -10,9 +10,9 @@ import {
 
 const user = {
   avatar:
-    "https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/foagmis_pic/ag4744.jpg",
-  index: "AG/AT/4744",
-  name: "Monasha Charubhashi",
+    "https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc10659.jpg",
+  index: "SC/2018/10659",
+  name: "Buddhika Halangoda",
 };
 
 const handleChange = (e) => {
