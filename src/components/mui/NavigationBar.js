@@ -17,6 +17,7 @@ import { logo } from "../CommonComponents";
 
 import Drawer from "./Drawer";
 import { Outlet, useNavigate } from "react-router-dom";
+import AccountPopover from "../account/AccountPopover";
 // import FooterContent from "../Footer";
 
 export default function SidebarLayout({ title, sideBarItems }) {
@@ -82,6 +83,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
         <p>Profile</p>
       </MenuItem>
     </Menu>
+    // <AccountPopover /> */}
   );
 
   return (
@@ -145,6 +147,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
               display: { xs: "none", md: "flex" },
               flexGrow: 1,
               justifyContent: "right",
+              cursor: "pointer",
             }}
           >
             {/* <IconButton
@@ -156,14 +159,15 @@ export default function SidebarLayout({ title, sideBarItems }) {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="end"
               onClick={handleProfile}
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
+            <AccountPopover />
           </Box>
           <Box
             sx={{
