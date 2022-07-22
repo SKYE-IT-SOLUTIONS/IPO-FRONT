@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import AuthServices from "../services/AuthServices";
 
