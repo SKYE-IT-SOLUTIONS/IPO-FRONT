@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 
 import {
   Box,
@@ -13,8 +13,11 @@ import {
   CardHeader,
   Divider,
   Grid,
+  InputAdornment,
   TextField,
 } from "@mui/material";
+import { LocalPhone } from "@mui/icons-material";
+import { phoneRegExp } from "../../config/pattern";
 
 const city = [
   {
@@ -34,10 +37,9 @@ const city = [
 const ProfileDetails = (props) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [userData, setUserData] = useState({
-    firstName: "Supun Tharuka",
-    lastName: "Wijegunawardhana",
+    name: "Supun Tharuka",
     email: "supun@gmail.com",
-    phone: "0729744112",
+    phone: "729744112",
     address: "201 D2 Thanayam place Ingiriya",
   });
   return (
@@ -46,12 +48,15 @@ const ProfileDetails = (props) => {
         ...userData,
       }}
       validationSchema={Yup.object().shape({
-        firstName: Yup.string().required("First name is required"),
-        lastName: Yup.string().required("Last name is required"),
-        email: Yup.string()
-          .email("Email is invalid")
-          .required("Email is required"),
-        phone: Yup.string().required("Phone is required"),
+        // name: Yup.string().required("First name is required"),
+        // email: Yup.string()
+        //   .email("Email is invalid")
+        //   .required("Email is required"),
+        phone: Yup.string()
+          .matches(phoneRegExp, "Invalid Phone Number")
+          .min(9, "Phone number must contain 10 characters")
+          .max(9, "Phone number must contain 10 characters")
+          .required("Phone number is Required"),
         address: Yup.string().required("Address is required"),
       })}
       onSubmit={(values, { setSubmitting }) => {
@@ -90,16 +95,15 @@ const ProfileDetails = (props) => {
               >
                 <Button
                   onClick={() => {
-                    if(!isDisabled){
+                    if (!isDisabled) {
                       resetForm();
                     }
                     setIsDisabled(!isDisabled);
-                  }
-                  }
-                  startIcon={isDisabled?<EditIcon />:<CancelIcon />}
+                  }}
+                  startIcon={isDisabled ? <EditIcon /> : <CancelIcon />}
                   sx={{ m: 2 }}
                 >
-                  {isDisabled?"Edit":"Cancel"}
+                  {isDisabled ? "Edit" : "Cancel"}
                 </Button>
               </Grid>
             </Grid>
@@ -107,67 +111,49 @@ const ProfileDetails = (props) => {
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
+                <Grid item md={12} xs={12}>
                   <TextField
-                    inputProps={{readOnly: isDisabled}}
+                    inputProps={{ readOnly: true }}
                     fullWidth
-                    error={Boolean(touched.firstName && errors.firstName)}
-                    helperText={touched.firstName && errors.firstName}
                     label="First name"
-                    name="firstName"
-                    id="firstName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.firstName}
+                    name="name"
+                    value={values.name}
                     variant="outlined"
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    inputProps={{readOnly: isDisabled}}
+                    inputProps={{ readOnly: true }}
                     fullWidth
-                    error={Boolean(touched.lastName && errors.lastName)}
-                    helperText={touched.lastName && errors.lastName}
-                    label="Last name"
-                    name="lastName"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.lastName}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    inputProps={{readOnly: isDisabled}}
-                    fullWidth
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
                     label="Email Address"
                     name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                     value={values.email}
                     variant="outlined"
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    inputProps={{readOnly: isDisabled}}
+                    inputProps={{ readOnly: isDisabled }}
                     fullWidth
-                    error={Boolean(touched.phone && errors.phone)}
-                    helperText={touched.phone && errors.phone}
+                    id="outlined-error-helper-text"
                     label="Phone Number"
                     name="phone"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    type="text"
                     value={values.phone}
-                    variant="outlined"
+                    type="text"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">+94</InputAdornment>
+                      ),
+                    }}
+                    error={Boolean(touched.phone && errors.phone)}
+                    helperText={touched.phone && errors.phone}
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <TextField
-                    inputProps={{readOnly: isDisabled}}
+                    inputProps={{ readOnly: isDisabled }}
                     fullWidth
                     error={Boolean(touched.address && errors.address)}
                     helperText={touched.address && errors.address}

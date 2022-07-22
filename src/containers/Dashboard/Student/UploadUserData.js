@@ -11,16 +11,31 @@ import {
 import DataGrid from "../../../components/common/DataGrid";
 import React, { useState } from "react";
 import { useCSVReader, formatFileSize } from "react-papaparse";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 
 export default function CSV() {
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);
   const [rows, setRows] = useState([]);
-  const fields = {
-    name: "Name",
-    index: "Permanent Number",
-    email: "Email",
-  };
+
+  const fields = [
+    { type: "normal", width: 150, value: "name" },
+    { type: "normal", value: "index" },
+    { type: "normal", value: "email" },
+    {
+      type: "icon",
+      value: "remove",
+      icon: {
+        Icon: PersonRemoveIcon,
+        sx: { width: "30px", height: "30px", color: "red", cursor: "pointer" },
+        onclick: ({ id }) => {
+          setRows(rows.filter((r) => r.id !== id));
+        },
+      },
+    },
+  ];
+
+  const headerNames = ["Name", "Index", "Email", "Remove"];
 
   return (
     <CSVReader
@@ -134,8 +149,8 @@ export default function CSV() {
               </Grid>
               <Grid item xs={12} sx={{ mt: 2 }}>
                 <DataGrid
-                  fields={Object.keys(fields)}
-                  headerNames={Object.values(fields)}
+                  fields={fields}
+                  headerNames={headerNames}
                   rows={rows}
                 />
               </Grid>

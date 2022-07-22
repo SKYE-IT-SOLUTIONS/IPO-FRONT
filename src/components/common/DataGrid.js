@@ -1,22 +1,40 @@
 import React, { useState } from "react";
 
 import { DataGrid as BaseDataGrid } from "@mui/x-data-grid";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 
 class ColumnDefinition {
-  constructor(field, headerName, flex) {
-    this.field = field;
-    this.headerName = headerName;
-    this.headerAlign = "center";
-    this.align = "left";
-    this.width = 150;
-    this.flex = flex;
-    this.renderCell = ({ value }) => value;
+  constructor(type, icon, width, field, headerName, flex) {
+    if (type === "normal") {
+      this.field = field;
+      this.headerName = headerName;
+      this.headerAlign = "center";
+      this.align = "left";
+      this.minWidth = width ? width : 150;
+      this.flex = flex;
+      this.renderCell = ({ value }) => value;
+    }
+    if (type === "icon") {
+      this.field = field;
+      this.headerName = headerName;
+      this.headerAlign = "center";
+      this.align = "center";
+      this.minWidth = 100;
+      this.flex = flex;
+      this.renderCell = (param) =>
+        icon.onclick ? (
+          <Button onClick={() => icon.onclick(param.row)}>
+            <icon.Icon sx={icon.sx} />
+          </Button>
+        ) : (
+          <icon.Icon sx={icon.sx} />
+        );
+    }
   }
 }
 
-function createColumnNode(field, headerName, flex) {
-  return new ColumnDefinition(field, headerName, flex);
+function createColumnNode(type, icon, width, field, headerName, flex) {
+  return new ColumnDefinition(type, icon, width, field, headerName, flex);
 }
 
 const DataGrid = ({ fields, headerNames, rows, onRowClick, ...props }) => {
@@ -28,9 +46,16 @@ const DataGrid = ({ fields, headerNames, rows, onRowClick, ...props }) => {
     setWindowSize(window.screen.availWidth);
   };
 
-  fields.map((value, index) =>
+  fields.map(({ type, icon, width, value }, index) =>
     columns.push(
-      createColumnNode(value, headerNames[index], windowSize < 376 ? 0 : 1)
+      createColumnNode(
+        type,
+        icon,
+        width,
+        value,
+        headerNames[index],
+        windowSize < 376 ? 0 : 1
+      )
     )
   );
 
@@ -51,7 +76,8 @@ const DataGrid = ({ fields, headerNames, rows, onRowClick, ...props }) => {
             outline: 0,
           },
           ".MuiDataGrid-columnHeader": {
-            backgroundColor: "#b2dfdb",
+            backgroundColor: "#000428",
+            color: "white",
           },
           ...props.sx,
         }}
