@@ -152,16 +152,18 @@ const NewsList = () => {
     },
   ];
 
-  const rows = newsList.map((newsList) => {
+  const rows = newsList.map((news) => {
     return {
-      id: newsList?.id,
-      title: newsList?.title,
-      status: newsList?.approval ? "Approved" : "Pending",
-      visibility: newsList?.global ? "Public" : "Private",
-      createdBy: newsList?.addedBy,
-      updatedDate: newsList?.howLong + "  ago",
+      id: news?.id,
+      title: news?.title,
+      status: news?.approval ? "Approved" : "Pending",
+      visibility: news?.global ? "Public" : "Private",
+      createdBy: news?.addedBy,
+      updatedDate: news?.howLong + "  ago",
     };
   });
+
+  console.log(rows);
 
   return (
     <>
@@ -176,6 +178,7 @@ const NewsList = () => {
               Toolbar: GridToolbar,
             }}
             page={page}
+            autoHeight
             onPageChange={(newPage) => setPage(newPage)}
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}

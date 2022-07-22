@@ -90,7 +90,8 @@ export const logOut = async () => {
   const userId = getUserId("userid");
   var config = {
     method: "POST",
-    url: LOGOUT_URL + `/${userId}`,
+    url: LOGOUT_URL,
+    data: { userId },
   };
   await authRequest(config)
     .then(({ data, error }) => {

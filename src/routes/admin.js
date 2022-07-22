@@ -6,6 +6,7 @@ import AddNewsPost from "../components/AddNewsPost";
 import PostJob from "../components/PostJob";
 import SelectUsers from "../components/SelectUsers";
 
+
 const AdminDashboard = lazy(() =>
   import("../containers/Dashboard/Admin/AdminDashboard")
 );
@@ -43,7 +44,7 @@ const Maintenance = lazy(() => import("../containers/Maintainance"));
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
   element:
-    (isAuthenticated && userRole === "ROLE_ADMIN") || true ? (
+    isAuthenticated && userRole === "ROLE_ADMIN" ? (
       <AdminLayout />
     ) : (
       <Navigate to="/login" />

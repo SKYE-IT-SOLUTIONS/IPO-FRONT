@@ -8,9 +8,9 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
+// import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { logo } from "../CommonComponents";
@@ -33,9 +33,9 @@ export default function SidebarLayout({ title, sideBarItems }) {
     handleMobileMenuClose();
   };
 
-  const handleNotification = () => {
-    handleMenuClose();
-  };
+  // const handleNotification = () => {
+  //   handleMenuClose();
+  // };
 
   const handleProfile = () => {
     navigate("profile");
@@ -67,14 +67,14 @@ export default function SidebarLayout({ title, sideBarItems }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleNotification}>
+      {/* <MenuItem onClick={handleNotification}>
         <IconButton size="large" color="inherit">
           <Badge badgeContent={6} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfile}>
         <IconButton size="large" color="inherit">
           <AccountCircle />
@@ -147,7 +147,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
               justifyContent: "right",
             }}
           >
-            <IconButton
+            {/* <IconButton
               size="large"
               color="inherit"
               onClick={handleNotification}
@@ -155,7 +155,7 @@ export default function SidebarLayout({ title, sideBarItems }) {
               <Badge badgeContent={6} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
