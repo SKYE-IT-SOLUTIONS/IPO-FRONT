@@ -7,6 +7,7 @@ import StudentLayout from "../containers/Dashboard/Student/StudentLayout";
 //   import("../containers/Dashboard/Student/Dashboard")
 // );
 const Profile = lazy(() => import("../containers/Dashboard/common/Profile"));
+const Dashboard = lazy(() => import("../containers/Dashboard/Student/Dashboard"));
 const TrainingSession = lazy(() =>
   import("../containers/Dashboard/Student/TrainingSession")
 );
@@ -36,7 +37,7 @@ export const studentRoutes = (isAuthenticated, userRole) => ({
     {
       path: "dashboard",
       // element: <StudentDashboard />,
-      element: <Profile />,
+      element: <Dashboard />,
     },
     {
       path: "updates",
