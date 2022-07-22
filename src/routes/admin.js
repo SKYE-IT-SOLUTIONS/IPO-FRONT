@@ -3,7 +3,9 @@ import { Navigate } from "react-router-dom";
 
 import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
 
-const AdminDashboard = lazy(() => import("../containers/Dashboard/Admin/AdminDashboard"));
+const AdminDashboard = lazy(() =>
+  import("../containers/Dashboard/Admin/AdminDashboard")
+);
 const UserListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Users/UserList")
 );
@@ -32,7 +34,7 @@ const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
   element:
-    (isAuthenticated && userRole === "ROLE_ADMIN") || true ? (
+    isAuthenticated && userRole === "ROLE_ADMIN" ? (
       <AdminLayout />
     ) : (
       <Navigate to="/login" />

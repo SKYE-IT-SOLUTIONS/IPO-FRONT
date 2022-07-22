@@ -21,7 +21,7 @@ const AddJobPost = lazy(() => import("../components/AddJobPost"));
 export const companyRoutes = (isAuthenticated, userRole) => ({
   path: "/company",
   element:
-    (isAuthenticated && userRole === "ROLE_COMPANY") || true ? (
+    isAuthenticated && userRole === "ROLE_COMPANY" ? (
       <CompanyLayout />
     ) : (
       <Navigate to="/login" />

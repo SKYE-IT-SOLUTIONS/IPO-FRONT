@@ -25,7 +25,7 @@ const Feedback = lazy(() => import("../containers/Dashboard/common/Feedback"));
 export const studentRoutes = (isAuthenticated, userRole) => ({
   path: "/student",
   element:
-    (isAuthenticated && userRole === "ROLE_STUDENT") || true ? (
+    isAuthenticated && userRole === "ROLE_STUDENT" ? (
       <StudentLayout />
     ) : (
       <Navigate to="/login" />

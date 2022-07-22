@@ -8,6 +8,7 @@ const NotFound = lazy(() => import("../containers/404"));
 const LockedUser = lazy(() => import("../containers/LockedUser"));
 const Maintenance = lazy(() => import("../containers/Maintainance"));
 const LoginPage = lazy(() => import("../components/LoginPage"));
+const LogoutPage = lazy(() => import("../components/LogoutPage"));
 const JobList = lazy(() => import("../containers/JobList"));
 const NewsView = lazy(() => import("../components/NewsView"));
 const EditJob = lazy(() => import("../components/EditJob"));
@@ -64,6 +65,10 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
       ) : (
         <Navigate to="/student/dashboard" />
       ),
+    },
+    {
+      path: "logout",
+      element: isAuthenticated ? <LogoutPage /> : <Navigate to="/" />,
     },
     {
       path: "jobs",

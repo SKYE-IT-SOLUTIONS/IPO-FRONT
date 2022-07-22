@@ -31,10 +31,6 @@ export default class DataService {
     return await onDelete("/news", id);
   }
 
-  async getAllAuthenticatedNews() {
-    return await onGetAllAuthenticated("/news/authenticated");
-  }
-
   async getGlobalNews() {
     return await onGetAll("/news?visibility=global");
   }
@@ -81,7 +77,15 @@ export default class DataService {
   }
 
   async getJobsByUser() {
-    return await onGetAllAuthenticated("/job?filter=username");
+    return await onGetAllAuthenticated("/job/added");
+  }
+
+  async getAppliedJobs() {
+    return await onGetAllAuthenticated("/job/applied");
+  }
+
+  async applyJob(id) {
+    return await onUpdate("/job/apply", id);
   }
 
   // HOMEPAGE
