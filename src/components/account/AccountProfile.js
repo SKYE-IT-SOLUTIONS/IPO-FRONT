@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,16 +9,17 @@ import {
 } from "@mui/material";
 
 const user = {
-  avatar: "/static/avatar_3.png",
-  role: "Student",
-  name: "Supun Tharuka",
+  avatar:
+    "https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/foagmis_pic/ag4744.jpg",
+  index: "AG/AT/4744",
+  name: "Monasha Charubhashi",
 };
 
-const handleChange=(e) => {
+const handleChange = (e) => {
   const file = e.target.files[0];
   console.log(file);
   //todo: upload file to server
-}
+};
 
 const AccountProfile = (props) => (
   <Card {...props}>
@@ -34,28 +34,35 @@ const AccountProfile = (props) => (
         <Avatar
           id="avatar-user"
           src={user.avatar}
+          variant="rounded"
           sx={{
-            height: 64,
+            height: 100,
             mb: 2,
-            width: 64,
+            width: "auto",
           }}
         />
         <Typography color="textPrimary" gutterBottom variant="h5">
           {user.name}
         </Typography>
         <Typography color="textSecondary" variant="body2">
-          {user.role}
+          {user.index}
         </Typography>
       </Box>
     </CardContent>
     <Divider />
-    <CardActions sx={{justifyContent:"center"}}>
-    <input type="file" style={{ display: "none" }} id="raised-upload" accept="image/*" onChange={handleChange}/>
-      <label htmlFor="raised-upload">
+    <CardActions sx={{ justifyContent: "center" }}>
+      <input
+        type="file"
+        style={{ display: "none" }}
+        id="raised-upload"
+        accept="image/*"
+        onChange={handleChange}
+      />
+      {/* <label htmlFor="raised-upload">
         <Button color="primary" fullWidth variant="text" component="span">
           Upload picture
         </Button>
-      </label>
+      </label> */}
     </CardActions>
   </Card>
 );

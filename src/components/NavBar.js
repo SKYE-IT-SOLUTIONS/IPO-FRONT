@@ -201,7 +201,7 @@ function NavBar(props) {
               <DropItems href="/allNews" id="bg-custom-3">
                 News
               </DropItems>
-              <DropItems href="#contactUS" id="bg-custom-3">
+              <DropItems href="/contact-us" id="bg-custom-3">
                 Contact Us
               </DropItems>
             </NavDropdown>

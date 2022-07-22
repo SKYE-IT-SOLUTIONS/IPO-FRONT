@@ -2,6 +2,9 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
+import AddNewsPost from '../components/AddNewsPost';
+import PostJob from "../components/PostJob";
+
 
 const AdminDashboard = lazy(() =>
   import("../containers/Dashboard/Admin/AdminDashboard")
@@ -17,10 +20,11 @@ const NewsListOfAdminNonApproved = lazy(() =>
   import("../containers/Dashboard/Admin/News/NewsListNonApproved")
 );
 const EditNews = lazy(() => import("../components/EditNews"));
-const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
+// const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
+
 const NewsView = lazy(() => import("../components/NewsView"));
 const SelectJob = lazy(() => import("../components/SelectJob"));
-const PostJob = lazy(() => import("../components/PostJob"));
+// const PostJob = lazy(() => import("../components/PostJob"));
 const JobListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Jobs/JobList")
 );
@@ -30,6 +34,8 @@ const CompanyListOfAdmin = lazy(() =>
 );
 const EditContact = lazy(() => import("../components/EditContact"));
 const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
+const UploadUserData = lazy(()=>import("../containers/Dashboard/Student/UploadUserData"))
+
 
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
@@ -113,6 +119,12 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
     {
       path: "requestWorkshop",
       element: <RequestWorkshop />,
+    },
+    {
+      path: "upload",
+      children:[
+        { path: "user-data", element: <UploadUserData/> },
+      ]
     },
     { path: "*", element: <Navigate to="/404" /> },
   ],

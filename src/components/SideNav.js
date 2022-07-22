@@ -59,13 +59,14 @@ const NavBody = styled.ul`
 const NavListItem = styled.li`
   position: relative;
   height: 50%;
-  width: 100%;
+  width: 215px;
   list-style: none;
   line-height: 50px;
 `;
 const NavListLink = styled.a`
   color: #fff;
   display: flex;
+  width: ${(props) => (props.active ? "100%" : "50px")};
   align-items: center;
   text-decoration: none;
   transition: all 0.5s ease;
@@ -136,7 +137,12 @@ const SideNav = () => {
           <MenuIcon
             className="bx bx-menu"
             active={active}
-            onClick={() => setActive(!active)}
+            onClick={() => {
+              setActive(!active);
+              if (homeExpand) {
+                setHomeExpand(!homeExpand);
+              }
+            }}
           ></MenuIcon>
 
           <NavBody>
@@ -181,7 +187,7 @@ const SideNav = () => {
             </NavListItem>
 
             <NavListItem>
-              <NavListLink>
+              <NavListLink active={active}>
                 <NavListItemIcon className="bx bx-cog"></NavListItemIcon>
                 <NavListItemName active={active}>Settings</NavListItemName>
               </NavListLink>

@@ -29,6 +29,8 @@ const NavBarListView = lazy(() => import("../components/NavBarListView"));
 const OurTeam = lazy(() => import("../components/OurTeam"));
 const FeedbackGuest = lazy(() => import("../components/Feedback"));
 const GoogleCaptcha = lazy(() => import("../components/Captcha"));
+const AdvertisementSubmit =lazy(()=>import('../components/AdvertisementSubmit'))
+const ContactUs = lazy(() => import("../components/ContactUs"));
 
 export const publicRoutes = (isAuthenticated, userRole) => ({
   path: "/",
@@ -53,6 +55,10 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     {
       path: "home",
       element: <HomeContent />,
+    },
+    {
+      path: "add-submit",
+      element: <AdvertisementSubmit />,
     },
     {
       path: "login",
@@ -150,6 +156,10 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     {
       path: "feedback",
       element: <FeedbackGuest />,
+    },
+    {
+      path: "contact-us",
+      element: <ContactUs />,
     },
     {
       path: "captcha",
