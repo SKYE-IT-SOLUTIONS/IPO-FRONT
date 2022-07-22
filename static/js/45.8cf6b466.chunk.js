@@ -1,0 +1,2 @@
+(this["webpackJsonpipo-front"]=this["webpackJsonpipo-front"]||[]).push([[45],{723:function(n,t,e){"use strict";e.r(t);e(0);var o=e(298),c=e(1);function i(n){console.log("Captcha value:",n)}t.default=function(){return Object(c.jsx)("div",{children:Object(c.jsx)(o.a,{sitekey:"6Ld0jO0dAAAAAGmY_dzPwzMzCluzMmP5Mk_MhV0R",onChange:i})})}}}]);
+//# sourceMappingURL=45.8cf6b466.chunk.js.map
