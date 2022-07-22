@@ -8,16 +8,16 @@ const authServices = new AuthServices();
 
 const LogoutPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     setIsLoading(true);
     authServices.handleLogout().then(() => {
       localStorage.clear();
       authServices.handleLogoutLocally();
       setIsLoading(false);
-      navigate("/");
+      window.location.pathname = "/";
     });
-  }, [navigate]);
+  }, []);
 
   return isLoading ? <Spinner /> : <Navigate to="/" />;
 };

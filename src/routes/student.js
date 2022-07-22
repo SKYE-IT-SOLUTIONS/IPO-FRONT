@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 
 import StudentLayout from "../containers/Dashboard/Student/StudentLayout";
 
-const StudentDashboard = lazy(() =>
-  import("../containers/Dashboard/Student/Dashboard")
-);
+// const StudentDashboard = lazy(() =>
+//   import("../containers/Dashboard/Student/Dashboard")
+// );
 const Profile = lazy(() => import("../containers/Dashboard/common/Profile"));
 const TrainingSession = lazy(() =>
   import("../containers/Dashboard/Student/TrainingSession")
@@ -35,7 +35,8 @@ export const studentRoutes = (isAuthenticated, userRole) => ({
     { index: true, element: <Navigate to="/student/dashboard" /> },
     {
       path: "dashboard",
-      element: <StudentDashboard />,
+      // element: <StudentDashboard />,
+      element: <Profile />,
     },
     {
       path: "updates",
