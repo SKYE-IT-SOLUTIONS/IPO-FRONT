@@ -2,6 +2,7 @@ import React,{useContext} from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import styled from "styled-components";
 import "./style.css";
+import Tooltip from '@mui/material/Tooltip';
 
 const Title = styled.h3`
     font-family: ${({font}) => font.general};
@@ -146,6 +147,7 @@ function Slide({ slide, offset }) {
         "--dir": offset === 0 ? 0 : offset > 0 ? 1 : -1
       }}
     >
+      <Tooltip title={slide.title}>
       <div
         className="slideContent"
         style={{
@@ -158,6 +160,7 @@ function Slide({ slide, offset }) {
           <p className="slideDescription">{slide.description}</p>
         </div> */}
       </div>
+      </Tooltip>
     </div>
   );
 }
