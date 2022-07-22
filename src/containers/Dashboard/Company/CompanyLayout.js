@@ -11,9 +11,9 @@ const sideBarItems = [
   { path: "/company/news", icon: <NewspaperIcon />, text: "Updates" },
   { path: "/company/job", icon: <WorkIcon />, text: "Job" },
   {
-    path: "/company/training-session",
+    path: "/company/requests",
     icon: <FollowTheSignsIcon />,
-    text: "Training Session",
+    text: "IPO Requests",
   },
   {
     path: "/logout",

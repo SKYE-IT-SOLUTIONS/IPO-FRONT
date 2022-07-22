@@ -87,7 +87,7 @@ const Error = styled.p`
 `;
 
 function CompanyRegister() {
-  const { theme, light, dark,fonts } = useContext(ThemeContext);
+  const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.button : dark.button;
   const fileService = new FileService();
 
@@ -166,8 +166,7 @@ function CompanyRegister() {
       credentials
     );
     if (status) {
-      sessionStorage.setItem("email", data);
-      navigate("/register/sendMail");
+      navigate("/register/sendMail", { state: { email: data } });
     } else {
       setError(error);
       setIsErrorMsgOpen(true);
@@ -335,9 +334,8 @@ function CompanyRegister() {
                     companyname: name,
                     conatctperson: person,
                     conatctnumber: contact,
-                    address: `${no},<br/>${street},<br/>${city}`,
+                    address: `${no},${street},${city}`,
                     imgUrl: imageUrl,
-                    role: ["company"],
                   });
                 }
               }}

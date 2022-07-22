@@ -250,7 +250,7 @@ function NavBar(props) {
               <DropItems
                 id="bg-custom-3"
                 onClick={() => {
-                  navigate("/under-constructions");
+                  navigate("/adv-submit");
                 }}
               >
                 Submit an Advertisement

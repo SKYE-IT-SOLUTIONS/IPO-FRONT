@@ -2,11 +2,13 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
-import AddNewsPost from '../components/AddNewsPost';
+import AddNewsPost from "../components/AddNewsPost";
 import PostJob from "../components/PostJob";
+import SelectUsers from "../components/SelectUsers";
 
-
-const AdminDashboard = lazy(() => import("../containers/Dashboard/Admin/AdminDashboard"));
+const AdminDashboard = lazy(() =>
+  import("../containers/Dashboard/Admin/AdminDashboard")
+);
 const UserListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Users/UserList")
 );
@@ -32,8 +34,11 @@ const CompanyListOfAdmin = lazy(() =>
 );
 const EditContact = lazy(() => import("../components/EditContact"));
 const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
-const UploadUserData = lazy(()=>import("../containers/Dashboard/Student/UploadUserData"))
+const UploadUserData = lazy(() =>
+  import("../containers/Dashboard/Student/UploadUserData")
+);
 
+const Maintenance = lazy(() => import("../containers/Maintainance"));
 
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
@@ -50,12 +55,29 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
       element: <AdminDashboard />,
     },
     {
-      path: "user",
+      path: "users",
+      element: <SelectUsers />,
+    },
+
+    {
+      path: "students",
       element: <UserListOfAdmin />,
     },
     {
       path: "news",
       element: <SelectNews />,
+    },
+    {
+      path: "feedbacks",
+      element: <Maintenance />,
+    },
+    {
+      path: "training-session",
+      element: <Maintenance />,
+    },
+    {
+      path: "internship-requests",
+      element: <Maintenance />,
     },
     {
       path: "news/list",
@@ -103,7 +125,7 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
       element: <AddJobPost />,
     },
     {
-      path: "company",
+      path: "companies",
       element: <CompanyListOfAdmin />,
     },
     {
@@ -120,9 +142,7 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
     },
     {
       path: "upload",
-      children:[
-        { path: "user-data", element: <UploadUserData/> },
-      ]
+      children: [{ path: "user-data", element: <UploadUserData /> }],
     },
     { path: "*", element: <Navigate to="/404" /> },
   ],

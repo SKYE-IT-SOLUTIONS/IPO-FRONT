@@ -128,9 +128,9 @@ function LoginPage(props) {
           break;
       }
     } else {
-      if(error === 423){
+      if (error === 423) {
         navigate("/423");
-      }else{
+      } else {
         setIsErrorMsgOpen(true);
         setSubmitError(error);
       }
@@ -147,7 +147,7 @@ function LoginPage(props) {
           <SeparateDiv>
             <Heading2>Log in to an existing profile</Heading2>
 
-            <Lable>Email Address</Lable>
+            <Lable>Email Address/Index Number(AG/XX/2018/XXXX)*</Lable>
             <Input
               type="text"
               placeholder="Enter your email"

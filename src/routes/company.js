@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import CompanyLayout from "../containers/Dashboard/Company/CompanyLayout";
 
+const Maintenance = lazy(() => import("../containers/Maintainance"));
 const CompanyDashboard = lazy(() => import("../components/Companyprofile"));
 const SelectNews = lazy(() => import("../components/SelectNews"));
 const NewsListOfCompany = lazy(() =>
@@ -35,6 +36,10 @@ export const companyRoutes = (isAuthenticated, userRole) => ({
     {
       path: "news",
       element: <SelectNews />,
+    },
+    {
+      path: "requests",
+      element: <Maintenance />,
     },
     {
       path: "news/list",

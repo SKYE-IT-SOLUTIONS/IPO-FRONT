@@ -5,20 +5,18 @@ import WorkIcon from "@mui/icons-material/Work";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import LogoutIcon from "@mui/icons-material/Logout";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 // import TopLogoBar from "../../components/TopLogoBar";
 import NavigationBar from "../../../components/mui/NavigationBar";
 
 const sideBarItems = [
   { path: "/admin/dashboard", icon: <DashboardIcon />, text: "Dashboard" },
-  { path: "/admin/students", icon: <AccountCircleIcon />, text: "Students" },
-  { path: "/admin/company", icon: <SupervisedUserCircleIcon />, text: "Company" },
+  { path: "/admin/users", icon: <AccountCircleIcon />, text: "Users" },
   { path: "/admin/news", icon: <NewspaperIcon />, text: "Updates" },
   { path: "/admin/job", icon: <WorkIcon />, text: "Job" },
-  { path: "/admin/feedback", icon: <FeedbackIcon />, text: "Feedback" },
+  { path: "/admin/feedbacks", icon: <FeedbackIcon />, text: "Feedback" },
 
   {
     path: "/admin/training-session",
@@ -26,7 +24,7 @@ const sideBarItems = [
     text: "Training Session Requests",
   },
   {
-    path: "/admin/internship",
+    path: "/admin/internship-requests",
     icon: <EngineeringIcon />,
     text: "Internship Requests",
   },

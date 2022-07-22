@@ -118,8 +118,8 @@ function StudentRegister() {
     );
     if (status) {
       // sessionStorage.setItem("email", data?.email);
-      console.log(data,1);
-      navigate("/register/sendMail", {state: {email: data}});
+      console.log(data, 1);
+      navigate("/register/sendMail", { state: { email: data } });
     } else {
       setError(error);
       setIsErrorMsgOpen(true);
@@ -215,7 +215,6 @@ function StudentRegister() {
                   handleSubmit({
                     username: reg,
                     password: confirmPassword,
-                    role: ["student"],
                     name: name,
                   });
                 }

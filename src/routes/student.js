@@ -13,14 +13,15 @@ const TrainingSession = lazy(() =>
 const Internship = lazy(() =>
   import("../containers/Dashboard/Student/internship")
 );
-const CvGenerate = lazy(() =>
-  import("../containers/Dashboard/Student/CvGenerate")
-);
+// const CvGenerate = lazy(() =>
+//   import("../containers/Dashboard/Student/CvGenerate")
+// );
 const Updates = lazy(() => import("../containers/Dashboard/common/Updates"));
 const Update = lazy(() => import("../containers/Dashboard/common/Update"));
 const Jobs = lazy(() => import("../containers/Dashboard/common/Jobs"));
 const Job = lazy(() => import("../containers/Dashboard/common/Job"));
 const Feedback = lazy(() => import("../containers/Dashboard/common/Feedback"));
+const Maintenance = lazy(() => import("../containers/Maintainance"));
 
 export const studentRoutes = (isAuthenticated, userRole) => ({
   path: "/student",
@@ -68,7 +69,7 @@ export const studentRoutes = (isAuthenticated, userRole) => ({
     },
     {
       path: "cv-generate",
-      element: <CvGenerate />,
+      element: <Maintenance />,
     },
     { path: "*", element: <Navigate to="/404" /> },
   ],
