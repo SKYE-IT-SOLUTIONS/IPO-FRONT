@@ -23,7 +23,6 @@ import {
 } from "../store/jobSlice";
 import Spinner from "./Spinner";
 
-
 const JobContainer = styled(Container)`
   font-family: ${({ font }) => font.general};
   margin: 10px 0;
@@ -178,7 +177,6 @@ const SubmitBttn = styled(CustomButton)`
   margin: 35px 10px 15px 10px;
 `;
 
-
 function AddJobPost() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -223,20 +221,17 @@ function AddJobPost() {
 
   const handleJobSubmit = async (payload) => {
     setIsLoading(true);
-    const {status,data,error} = await dataService.handleSubmitJob(payload);
-    if(status){
+    const { status, data, error } = await dataService.addJob(payload);
+    if (status) {
       console.log("Job Post Successfully");
       dispatch(removeDataArray());
       setIsLoading(false);
       navigate(`/admin/job/${data}`);
-      
-    }else{
+    } else {
       setIsLoading(false);
       console.log(error);
     }
- 
-    
-  }
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -258,7 +253,7 @@ function AddJobPost() {
       setExpList(storeExperience);
       setJobSalary(storeSalary);
       setDate(storeDeadline);
-      setTitleInfo(Simple_Validator(storeTitle, "Title"))
+      setTitleInfo(Simple_Validator(storeTitle, "Title"));
       setPositionInfo(Simple_Validator(storePosition, "Job Position"));
     }
     setIsLoading(false);
@@ -495,29 +490,36 @@ function AddJobPost() {
                   </TableTr>
                 </tbody>
               </table>
-              <SubmitBttn onClick={() => {
-                navigate("/job/preview");
-              }}>Preview</SubmitBttn>
-          <SubmitBttn submit onClick={()=>{
-            console.log("Title : ",titleInfo.status)
-            if(titleInfo.status && positionInfo.status){
-              console.log("Working")
-              handleJobSubmit(
-                {
-                  "title": title,
-                  "position": position,
-                  "description": decription,
-                  "specifications": specList,
-                  "qualifications": qlfList,
-                  "experiences": expList,
-                  "salary":salary,
-                  "deadline": date
-              }
-              );
-            }
-          }}>Submit</SubmitBttn>
+              <SubmitBttn
+                onClick={() => {
+                  navigate("/job/preview");
+                }}
+              >
+                Preview
+              </SubmitBttn>
+              <SubmitBttn
+                submit
+                onClick={() => {
+                  console.log("Title : ", titleInfo.status);
+                  if (titleInfo.status && positionInfo.status) {
+                    console.log("Working");
+                    handleJobSubmit({
+                      title: title,
+                      position: position,
+                      description: decription,
+                      specifications: specList,
+                      qualifications: qlfList,
+                      experiences: expList,
+                      salary: salary,
+                      deadline: date,
+                    });
+                  }
+                }}
+              >
+                Submit
+              </SubmitBttn>
             </Col>
-          </Row>   
+          </Row>
         </JobContainer>
       )}
     </>

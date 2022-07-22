@@ -27,7 +27,7 @@ const JobListCompany = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetAllJobsUser();
+      const { status, data, error } = await dataService.getJobsByUser();
       console.log("data : ", data);
       if (status) {
         console.log("In Admin job: ", data);
@@ -40,7 +40,6 @@ const JobListCompany = () => {
     };
     fetchNews();
   }, []);
-
 
   const columns = [
     {
@@ -83,7 +82,7 @@ const JobListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ViewIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/job/${id}`);
@@ -103,7 +102,7 @@ const JobListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ModeEditOutlineIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/editJob/${id}`);
@@ -123,10 +122,10 @@ const JobListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={async () => {
-              const { status, error } = await dataService.handleDeleteJob(id);
+              const { status, error } = await dataService.deleteJob(id);
               if (status) {
                 setJobList(jobList.filter((job) => job.id !== id));
                 navigate("/admin/job/list");

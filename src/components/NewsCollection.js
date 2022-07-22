@@ -18,11 +18,11 @@ function NewsCollection() {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetGlobalNews();
+      const { status, data, error } = await dataService.getGlobalNews();
       if (status) {
         setNewsData(data);
       } else {
-          setError(error);
+        setError(error);
         //   navigate("/404");
       }
       setIsLoading(false);

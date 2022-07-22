@@ -27,7 +27,7 @@ const NewsListCompany = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetAllNewsUser();
+      const { status, data, error } = await dataService.getAllNewsByUser();
       if (status) {
         console.log("In Admin : ", data);
         setNewsList(data);
@@ -75,7 +75,7 @@ const NewsListCompany = () => {
       headerName: "Created By",
       headerAlign: "center",
       align: "center",
-      width: 1.5*rowWidth,
+      width: 1.5 * rowWidth,
     },
     {
       field: "updatedDate",
@@ -95,7 +95,7 @@ const NewsListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ViewIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/news/${id}`);
@@ -115,7 +115,7 @@ const NewsListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <ModeEditOutlineIcon
-          style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={() => {
               navigate(`/admin/editNews/${id}`);
@@ -135,10 +135,10 @@ const NewsListCompany = () => {
       renderCell: ({ id, ...params }) => {
         return (
           <DeleteIcon
-            style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
             onClick={async () => {
-              const { status, error } = await dataService.handleDeleteNews(id);
+              const { status, error } = await dataService.deleteNews(id);
               if (status) {
                 setNewsList(newsList.filter((news) => news.id !== id));
                 navigate("/admin/news/list");

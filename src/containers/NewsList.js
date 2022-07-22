@@ -18,9 +18,9 @@ function NewsList() {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-      const { status, data, error } = await dataService.handleGetGlobalNews();
+      const { status, data, error } = await dataService.getGlobalNews();
       if (status) {
-        setNewsList(data.sort((a,b)=>b.id-a.id));
+        setNewsList(data.sort((a, b) => b.id - a.id));
       } else {
         setError(error);
         console.log(error);
@@ -37,7 +37,6 @@ function NewsList() {
     //   }).catch(e=>console.log(e));
     // };
     fetchNews();
-    
   }, []);
   console.log("error", error);
   return (

@@ -1,70 +1,64 @@
-import React,{ useLayoutEffect, useState } from "react";
-import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
-import styled from "styled-components";
+import React, { useCallback } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-const Map1=styled(Map)`
+import { Grid } from "@mui/material";
+import { useRef } from "react";
 
-`;
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
+const mapContainerStyle = {
+  height: "250px",
+  width: "100%",
+};
+
+const defaultProps = {
+  center: {
+    lat: 6.06125,
+    lng: 80.56805,
+  },
+
+  zoom: 11,
+};
+
+const options = {
+  desableDefaultUI: true,
+  zoomControl: true,
+};
+
+
+
+export default function MapView() {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB8kU10whTTqpO0IALsXuoDhpNl_fRucYU",
+  });
+
+  const mapRef = useRef();
+
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
   }, []);
-  return size;
-}
 
-function MapView() {
-  const [wid, hei] = useWindowSize();
-  let containerStyle;
-
-  if(wid>770){
-     containerStyle = {
-      width:wid/3.038,
-      height:hei/1.66,
-    }
-    
-  }
-  else{
-    containerStyle = {
-      width:wid,
-      height:hei/3.8,
-    }
-  }
-  const displayMarkers = () => {
-    return (
-      
-      <Marker
-        title={"University of Agricultural"}
-        position={{
-          lat: 6.06029968425679,
-          lng: 80.5681055823947,
-        }}
-        label={"AGRI IPO"}
-      />
-    );
-  };
+  if (loadError) return "Error loading map";
+  if (!isLoaded) return "Loading map";
 
   return (
     <div>
-      {/* <span>Window size: {wid} x {hei}</span> */}
-    <Map1
-      google={window.google}
-      zoom={10}
-      containerStyle={containerStyle}
-      initialCenter={{ lat: 6.06029968425679, lng: 80.5681055823947 }}
-    >
-      {displayMarkers()}
-       
-    </Map1>
+      <Grid container direction="column" justifyContent="center">
+        <Grid item>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={defaultProps.zoom}
+            center={defaultProps.center}
+            options={options}
+            onLoad={onMapLoad}
+          >
+            <Marker
+              position={{
+                lat: defaultProps.center.lat,
+                lng: defaultProps.center.lng,
+              }}
+            />
+          </GoogleMap>
+        </Grid>
+      </Grid>
     </div>
   );
 }
-
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyB8kU10whTTqpO0IALsXuoDhpNl_fRucYU",
-})(MapView);

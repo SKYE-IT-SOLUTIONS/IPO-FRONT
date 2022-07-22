@@ -15,7 +15,7 @@ import { Icon } from "@iconify/react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { styled as muistyled } from "@mui/material/styles";
 import FileUpload from "./fileupload/FileUpload";
-import { useNavigate ,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import setImageBuffer from "../utils/storeImage";
 import Spinner from "./Spinner";
 import { Simple_Validator } from "../utils/validation";
@@ -137,12 +137,12 @@ function AddNewsPost() {
 
   const handleNewsUpdate = async (payload) => {
     console.log("payload", payload);
-    const { status,data, error } = await dataService.handleUpdateNews(id,payload);
+    const { status, data, error } = await dataService.updateNews(id, payload);
     console.log("status", status);
     if (status) {
       console.log("data", data);
       // navigate(`/admin/news/${data}`);
-    }else{
+    } else {
       console.log("error", error);
       setError(error);
     }
@@ -151,25 +151,26 @@ function AddNewsPost() {
   useEffect(() => {
     setIsLoading(true);
     const fetchNews = async () => {
-        if (id !== undefined && id !== null) {
-          console.log("Database Call");
-          console.log(id);
-          const { status, data, error } = id
-            ? await dataService.handleGetNews(id)
-            : null;
-          if (status) {
-            // setNewsData(data);
-        setNewsTitle(data.title)
-        setContentList(data.description)
-        setImageUrl(data.url)
-        setNewsVisibility(data.global)
-        setIsLoading(false);}
-          } else {
-            setError(error);
-            navigate("/404");
-          }
+      if (id !== undefined && id !== null) {
+        console.log("Database Call");
+        console.log(id);
+        const { status, data, error } = id
+          ? await dataService.getNews(id)
+          : null;
+        if (status) {
+          // setNewsData(data);
+          setNewsTitle(data.title);
+          setContentList(data.description);
+          setImageUrl(data.url);
+          setNewsVisibility(data.global);
+          setIsLoading(false);
         }
-      fetchNews();
+      } else {
+        setError(error);
+        navigate("/404");
+      }
+    };
+    fetchNews();
   }, []);
 
   const updateUploadedFiles = async (files) => {
@@ -186,136 +187,134 @@ function AddNewsPost() {
       {isLoading ? (
         <Spinner />
       ) : (
-          <>
-          {newTitle && 
-          <NewContainer font={fonts}>
-          <Row>
-            <Col md={5} sm={12}>
-              <ApplyImage image={newsImage} />
-            </Col>
-            <DetailCol md={7} sm={12}>
-              <Title>Title</Title>
+        <>
+          {newTitle && (
+            <NewContainer font={fonts}>
+              <Row>
+                <Col md={5} sm={12}>
+                  <ApplyImage image={newsImage} />
+                </Col>
+                <DetailCol md={7} sm={12}>
+                  <Title>Title</Title>
 
-              <NewsInput
-                type="text"
-                placeholder="Enter News Title"
-                value={newTitle}
-                onChange={(e) => {
-                  setNewsTitle(e.target.value);
-                  // setTitleInfo(Simple_Validator(e.target.value,"Title"));
-                }}
-              />
-              <Title>Image</Title>
-              <FileUpload
-                style={{ backgroundColor: "#ededed" }}
-                accept=".jpg,.png,.jpeg"
-                label="News Image(s)"
-                files={filesU}
-                setFiles={setFilesU}
-                updateFilesCb={updateUploadedFiles}
-              />
-              {/* <ImageInput type="file"/> */}
-              {imageUrl && <PalestherImage image={imageUrl} />}
-              <br />
-              <Title>Description</Title>
-              <ul>
-                {contentList &&
-                  contentList.map((value, index) => (
-                    <li key={index} style={{ textAlign: "justify" }}>
-                      {value}{" "}
-                      <Icon
-                        icon="ic:round-cancel"
-                        style={{ margin: "auto 3px" }}
-                        color="red"
-                        height="30"
-                        onClick={() => {
-                          let list = contentList.filter(
-                            (_, ind) => ind !== index
-                          );
+                  <NewsInput
+                    type="text"
+                    placeholder="Enter News Title"
+                    value={newTitle}
+                    onChange={(e) => {
+                      setNewsTitle(e.target.value);
+                      // setTitleInfo(Simple_Validator(e.target.value,"Title"));
+                    }}
+                  />
+                  <Title>Image</Title>
+                  <FileUpload
+                    style={{ backgroundColor: "#ededed" }}
+                    accept=".jpg,.png,.jpeg"
+                    label="News Image(s)"
+                    files={filesU}
+                    setFiles={setFilesU}
+                    updateFilesCb={updateUploadedFiles}
+                  />
+                  {/* <ImageInput type="file"/> */}
+                  {imageUrl && <PalestherImage image={imageUrl} />}
+                  <br />
+                  <Title>Description</Title>
+                  <ul>
+                    {contentList &&
+                      contentList.map((value, index) => (
+                        <li key={index} style={{ textAlign: "justify" }}>
+                          {value}{" "}
+                          <Icon
+                            icon="ic:round-cancel"
+                            style={{ margin: "auto 3px" }}
+                            color="red"
+                            height="30"
+                            onClick={() => {
+                              let list = contentList.filter(
+                                (_, ind) => ind !== index
+                              );
+                              setContentList(list);
+                            }}
+                          />
+                        </li>
+                      ))}
+                  </ul>
+                  <OuterTextArea>
+                    <TextArea
+                      rows="4"
+                      value={content}
+                      placeholder="Enter Description"
+                      onChange={(e) => {
+                        setContent(e.target.value);
+                        setContentInfo(
+                          Simple_Validator(e.target.value, "Description")
+                        );
+                      }}
+                    />
+                    <Icon
+                      icon="akar-icons:circle-plus-fill"
+                      height="34"
+                      color="#001e62"
+                      style={{ margin: "auto 3px" }}
+                      onClick={() => {
+                        if (content !== "") {
+                          let list = [...contentList, content];
                           setContentList(list);
-                        }}
-                      />
-                    </li>
-                  ))}
-              </ul>
-              <OuterTextArea>
-                <TextArea
-                  rows="4"
-                  value={content}
-                  placeholder="Enter Description"
-                  onChange={(e) => {
-                    setContent(e.target.value);
-                    setContentInfo(
-                      Simple_Validator(e.target.value, "Description")
-                    );
-                  }}
-                />
-                <Icon
-                  icon="akar-icons:circle-plus-fill"
-                  height="34"
-                  color="#001e62"
-                  style={{ margin: "auto 3px" }}
-                  onClick={() => {
-                    if (content !== "") {
-                      let list = [...contentList, content];
-                      setContentList(list);
-                      setContent("");
-                    }
-                  }}
-                />
-              </OuterTextArea>
+                          setContent("");
+                        }
+                      }}
+                    />
+                  </OuterTextArea>
 
-              <Title>News Visibility</Title>
-              <RadioGroup
-                row
-                aria-label="visibility"
-                value={visibility}
-                name="row-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="true"
-                  control={<Radio />}
-                  label="Public"
-                  onChange={(e) => {
-                    let val = e.target.value;
-                    setNewsVisibility(!!val);
-                  }}
-                />
-                <FormControlLabel
-                  value="false"
-                  control={<Radio />}
-                  label="Private"
-                  onChange={(e) => {
-                    let val = e.target.value;
-                    setNewsVisibility(!val);
-                  }}
-                />
-              </RadioGroup>
-              <div style={{textAlign:"right"}}>
-              <NewsButton
-                submit
-                onClick={() => {
-                  console.log("update");
-                  if (true) {
-                    handleNewsUpdate({
-                      title: newTitle,
-                      description: contentList,
-                      global: visibility,
-                      url: imageUrl,
-                    });
-                  }
-                }}
-              >
-                Update
-              </NewsButton>
-              </div>
-              
-            </DetailCol>
-          </Row>
-        </NewContainer>
-          }
-          </>
-
+                  <Title>News Visibility</Title>
+                  <RadioGroup
+                    row
+                    aria-label="visibility"
+                    value={visibility}
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="true"
+                      control={<Radio />}
+                      label="Public"
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        setNewsVisibility(!!val);
+                      }}
+                    />
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio />}
+                      label="Private"
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        setNewsVisibility(!val);
+                      }}
+                    />
+                  </RadioGroup>
+                  <div style={{ textAlign: "right" }}>
+                    <NewsButton
+                      submit
+                      onClick={() => {
+                        console.log("update");
+                        if (true) {
+                          handleNewsUpdate({
+                            title: newTitle,
+                            description: contentList,
+                            global: visibility,
+                            url: imageUrl,
+                          });
+                        }
+                      }}
+                    >
+                      Update
+                    </NewsButton>
+                  </div>
+                </DetailCol>
+              </Row>
+            </NewContainer>
+          )}
+        </>
       )}
     </>
   );
