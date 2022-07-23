@@ -45,7 +45,7 @@ const MaintainCompany = () => {
           });
           setrows(array);
           setid("");
-          values.name = "";
+          formik.resetForm();
           handleCloseEdit();
     }
   })
@@ -93,6 +93,7 @@ const MaintainCompany = () => {
 
   const handleCloseEdit = () => {
     setopenEdit(false);
+    formik.resetForm();
   };
 
   const handleClickOpenDelete = (Id) => {
@@ -175,7 +176,7 @@ const MaintainCompany = () => {
           <DeleteIcon
             style={{ cursor: "pointer" }}
             sx={{ fontSize: 30 }}
-            onClick={async () => {
+            onClick={() => {
               handleClickOpenDelete(id);
             }}
           />
