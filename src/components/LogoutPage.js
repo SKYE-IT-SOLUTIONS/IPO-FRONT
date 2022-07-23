@@ -8,7 +8,6 @@ const authServices = new AuthServices();
 
 const LogoutPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  // const navigate = useNavigate();
   useEffect(() => {
     setIsLoading(true);
     authServices.handleLogout().then(() => {

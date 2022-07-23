@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
   Paper,
+  InputAdornment,
 } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -33,9 +34,9 @@ const TrainingSession = () => {
 
   return (
     <Paper elevation={24} sx={{ m: 2, px: 1, py: 3 }}>
-      <Typography variant="h4" sx={{ textAlign: "center",mb:5 }}>
-                    Training Session Request Form
-                  </Typography>
+      <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
+        Training Session Request Form
+      </Typography>
       <Container component="main" maxWidth="md" sx={{ my: 3 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -130,7 +131,16 @@ const TrainingSession = () => {
             <TextField label="Email" fullWidth />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField label="Mobile number" fullWidth />
+            <TextField
+              fullWidth
+              id="outlined-error-helper-text"
+              label="Phone"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">+94</InputAdornment>
+                ),
+              }}
+            />
           </Grid>
           <Grid item xs={12} textAlign="end">
             <Button variant="contained" color="primary">
