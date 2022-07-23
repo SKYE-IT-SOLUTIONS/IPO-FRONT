@@ -40,6 +40,8 @@ const UploadUserData = lazy(() =>
 );
 
 const Maintenance = lazy(() => import("../containers/Maintainance"));
+const InternshipRequest = lazy(() => import("../components/InternshipRequest"));
+const MaintainCompany = lazy(() => import("../components/MaintainCompany"));
 
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",
@@ -82,7 +84,15 @@ export const adminRoutes = (isAuthenticated, userRole) => ({
     },
     {
       path: "internship-requests",
+      element: <InternshipRequest />,
+    },
+    {
+      path: "internship-requests/student-requests",
       element: <Maintenance />,
+    },
+    {
+      path: "internship-requests/maintain-company-list",
+      element: <MaintainCompany />,
     },
     {
       path: "news/list",
