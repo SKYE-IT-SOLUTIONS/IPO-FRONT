@@ -1,7 +1,7 @@
 {
   "name": "ipo-front",
   "version": "0.1.0",
-  "homepage": "https://skye-it-solutions.github.io/IPO-FRONT/",
+  "homepage": "https://skye-it-solutions.github.io/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
