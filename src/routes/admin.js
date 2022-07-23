@@ -2,9 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import AdminLayout from "../containers/Dashboard/Admin/AdminLayout";
-import AddNewsPost from "../components/AddNewsPost";
-import PostJob from "../components/PostJob";
-import SelectUsers from "../components/SelectUsers";
+import SelectUsers from "../components/users/admin/SelectUsers";
 import Profile from "../containers/Dashboard/common/Profile";
 
 const AdminDashboard = lazy(() =>
@@ -13,35 +11,43 @@ const AdminDashboard = lazy(() =>
 const UserListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Users/UserList")
 );
-const SelectNews = lazy(() => import("../components/SelectNews"));
+const SelectNews = lazy(() => import("../components/users/common/SelectNews"));
 const NewsListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/News/NewsList")
 );
 const NewsListOfAdminNonApproved = lazy(() =>
   import("../containers/Dashboard/Admin/News/NewsListNonApproved")
 );
-const EditNews = lazy(() => import("../components/EditNews"));
-// const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
+const EditNews = lazy(() => import("../components/users/common/EditNews"));
+const AddNewsPost = lazy(() =>
+  import("../components/users/common/AddNewsPost")
+);
 
-const NewsView = lazy(() => import("../components/NewsView"));
-const SelectJob = lazy(() => import("../components/SelectJob"));
-// const PostJob = lazy(() => import("../components/PostJob"));
+const NewsView = lazy(() => import("../components/common/NewsView"));
+const SelectJob = lazy(() => import("../components/users/common/SelectJob"));
+const PostJob = lazy(() => import("../components/users/common/PostJob"));
 const JobListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Jobs/JobList")
 );
-const AddJobPost = lazy(() => import("../components/AddJobPost"));
+const AddJobPost = lazy(() => import("../components/users/common/AddJobPost"));
 const CompanyListOfAdmin = lazy(() =>
   import("../containers/Dashboard/Admin/Company/CompanyList")
 );
-const EditContact = lazy(() => import("../components/EditContact"));
-const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
+const EditContact = lazy(() => import("../components/users/admin/EditContact"));
+const RequestWorkshop = lazy(() =>
+  import("../components/home/RequestWorkshop")
+);
 const UploadUserData = lazy(() =>
   import("../containers/Dashboard/Student/UploadUserData")
 );
 
-const Maintenance = lazy(() => import("../containers/Maintainance"));
-const InternshipRequest = lazy(() => import("../components/InternshipRequest"));
-const MaintainCompany = lazy(() => import("../components/MaintainCompany"));
+const Maintenance = lazy(() => import("../containers/Maintenance"));
+const InternshipRequest = lazy(() =>
+  import("../components/users/admin/InternshipRequest")
+);
+const MaintainCompany = lazy(() =>
+  import("../components/users/admin/MaintainCompany")
+);
 
 export const adminRoutes = (isAuthenticated, userRole) => ({
   path: "/admin",

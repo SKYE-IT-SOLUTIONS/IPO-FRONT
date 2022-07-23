@@ -4,21 +4,25 @@ import Profile from "../containers/Dashboard/common/Profile";
 
 import CompanyLayout from "../containers/Dashboard/Company/CompanyLayout";
 
-const Maintenance = lazy(() => import("../containers/Maintainance"));
-const CompanyDashboard = lazy(() => import("../components/Companyprofile"));
-const SelectNews = lazy(() => import("../components/SelectNews"));
+const Maintenance = lazy(() => import("../containers/Maintenance"));
+const CompanyDashboard = lazy(() =>
+  import("../components/users/company/Companyprofile")
+);
+const SelectNews = lazy(() => import("../components/users/common/SelectNews"));
 const NewsListOfCompany = lazy(() =>
   import("../containers/Dashboard/Company/News/NewsListCompany")
 );
-const EditNews = lazy(() => import("../components/EditNews"));
-const AddNewsPost = lazy(() => import("../components/AddNewsPost"));
-const NewsView = lazy(() => import("../components/NewsView"));
-const SelectJob = lazy(() => import("../components/SelectJob"));
-const PostJob = lazy(() => import("../components/PostJob"));
+const EditNews = lazy(() => import("../components/users/common/EditNews"));
+const AddNewsPost = lazy(() =>
+  import("../components/users/common/AddNewsPost")
+);
+const NewsView = lazy(() => import("../components/common/NewsView"));
+const SelectJob = lazy(() => import("../components/users/common/SelectJob"));
+const PostJob = lazy(() => import("../components/users/common/PostJob"));
 const JobListOfCompany = lazy(() =>
   import("../containers/Dashboard/Company/Jobs/JobListCompany")
 );
-const AddJobPost = lazy(() => import("../components/AddJobPost"));
+const AddJobPost = lazy(() => import("../components/users/common/AddJobPost"));
 
 export const companyRoutes = (isAuthenticated, userRole) => ({
   path: "/company",

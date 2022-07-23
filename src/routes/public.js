@@ -6,33 +6,42 @@ import MainLayout from "../containers/MainLayout";
 const HomeContent = lazy(() => import("../containers/HomeContent"));
 const NotFound = lazy(() => import("../containers/404"));
 const LockedUser = lazy(() => import("../containers/LockedUser"));
-const Maintenance = lazy(() => import("../containers/Maintainance"));
-const LoginPage = lazy(() => import("../components/LoginPage"));
-const LogoutPage = lazy(() => import("../components/LogoutPage"));
+const Maintenance = lazy(() => import("../containers/Maintenance"));
+const LoginPage = lazy(() => import("../components/home/LoginPage"));
+const LogoutPage = lazy(() => import("../components/home/LogoutPage"));
 const JobList = lazy(() => import("../containers/JobList"));
-const NewsView = lazy(() => import("../components/NewsView"));
-const EditJob = lazy(() => import("../components/EditJob"));
-const PostJob = lazy(() => import("../components/PostJob"));
-const RequestGraduate = lazy(() => import("../components/Reuestgraduate"));
-const RegistrationDashboard = lazy(() => import("../components/Register"));
-const CompanyRegister = lazy(() => import("../components/CompanyRegister"));
-const StudentRegister = lazy(() => import("../components/StudentRegister"));
-const SendMail = lazy(() => import("../components/SendMail"));
-const SelectNews = lazy(() => import("../components/SelectNews"));
-const NewsCollection = lazy(() => import("../components/NewsCollection"));
-const Achievement = lazy(() => import("../components/Achievement"));
-const AchievementView = lazy(() => import("../components/AchievementView"));
-const RequestWorkshop = lazy(() => import("../components/Requestworkshop"));
-const RequestHall = lazy(() => import("../components/Requesthall"));
-const RequestGround = lazy(() => import("../components/Requestground"));
-const NavBarListView = lazy(() => import("../components/NavBarListView"));
-const OurTeam = lazy(() => import("../components/OurTeam"));
-const FeedbackGuest = lazy(() => import("../components/Feedback"));
-const GoogleCaptcha = lazy(() => import("../components/Captcha"));
-const AdvertisementSubmit = lazy(() =>
-  import("../components/AdvertisementSubmit")
+const NewsView = lazy(() => import("../components/common/NewsView"));
+const EditJob = lazy(() => import("../components/users/common/EditJob"));
+const PostJob = lazy(() => import("../components/users/common/PostJob"));
+const RequestGraduate = lazy(() =>
+  import("../components/home/RequestGraduate")
 );
-const ContactUs = lazy(() => import("../components/ContactUs"));
+const RegistrationDashboard = lazy(() => import("../components/home/Register"));
+const CompanyRegister = lazy(() =>
+  import("../components/home/CompanyRegister")
+);
+const StudentRegister = lazy(() =>
+  import("../components/home/StudentRegister")
+);
+const SendMail = lazy(() => import("../components/common/SendMail"));
+const SelectNews = lazy(() => import("../components/users/common/SelectNews"));
+const NewsCollection = lazy(() => import("../components/home/NewsCollection"));
+const Achievement = lazy(() => import("../components/home/Achievement"));
+const AchievementView = lazy(() =>
+  import("../components/home/AchievementView")
+);
+const RequestWorkshop = lazy(() =>
+  import("../components/home/RequestWorkshop")
+);
+const RequestHall = lazy(() => import("../components/home/RequestHall"));
+const RequestGround = lazy(() => import("../components/home/RequestGround"));
+const NavBarListView = lazy(() => import("../components/NavBarListView"));
+const OurTeam = lazy(() => import("../components/home/OurTeam"));
+const FeedbackGuest = lazy(() => import("../components/home/GeneralFeedback"));
+const AdvertisementSubmit = lazy(() =>
+  import("../components/home/AdvertisementSubmit")
+);
+const ContactUs = lazy(() => import("../components/home/ContactUs"));
 
 export const publicRoutes = (isAuthenticated, userRole) => ({
   path: "/",
@@ -162,10 +171,6 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     {
       path: "contact-us",
       element: <ContactUs />,
-    },
-    {
-      path: "captcha",
-      element: <GoogleCaptcha />,
     },
     { path: "*", element: <Navigate to="/404" /> },
   ],

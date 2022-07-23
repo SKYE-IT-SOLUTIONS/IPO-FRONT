@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Container } from "../components/CommonComponents";
-import NewsCard from "../components/NewsCard";
-import Pagination from "../components/Pagination";
+import NewsCard from "../components/common/NewsCard";
+import Pagination from "../components/common/Pagination";
 import DataService from "../services/DataService";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/common/Spinner";
 
 function NewsList() {
   const [isLoading, setIsLoading] = useState(false);

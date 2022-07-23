@@ -139,9 +139,9 @@ const SideNav = () => {
             active={active}
             onClick={() => {
               setActive(!active);
-              if (homeExpand) {
-                setHomeExpand(!homeExpand);
-              }
+              // if (homeExpand) {
+              //   setHomeExpand(!homeExpand);
+              // }
             }}
           ></MenuIcon>
 

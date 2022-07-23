@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../components/common/Spinner";
 import DataService from "../../../services/DataService";
 
 function Job({ job }) {

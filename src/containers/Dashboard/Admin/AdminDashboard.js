@@ -10,12 +10,12 @@ import { Pie} from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Container, Row, Col } from "../../../components/CommonComponents";
 import { ThemeContext } from "../../../contexts/ThemeContext";
-import Card from '../../../components/Statcard';
+import Card from '../../../components/common/MediaCard';
 import Users from '../../../assets/user.svg';
 import News from '../../../assets/News-rafiki.svg';
 import { Icon } from '@iconify/react';
 import DataService from "../../../services/DataService";
-import Spinner from '../../../components/Spinner';
+import Spinner from '../../../components/common/Spinner';
 
 const Contactcontainer=styled(Container)`
     font-family: ${({ font }) => font.general};

@@ -19,7 +19,7 @@ import Step2 from "./Step2";
 import Step3 from "./Step3";
 import * as Yup from "yup";
 import { phoneRegExp } from "../../../../config/pattern";
-import { Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -161,27 +161,34 @@ const Internship = () => {
         <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
           Internship Application Form
         </Typography>
-        <Stepper activeStep={activeStep} connector={<ColorlibConnector />}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            if (isStepOptional(index)) {
-              labelProps.optional = (
-                <Typography variant="caption">Optional</Typography>
+        <Grid xs={12} sx={{ mx: 5 }}>
+          <Stepper activeStep={activeStep} connector={<ColorlibConnector />}>
+            {steps.map((label, index) => {
+              const stepProps = {};
+              const labelProps = {};
+              if (isStepOptional(index)) {
+                labelProps.optional = (
+                  <Typography variant="caption">Optional</Typography>
+                );
+              }
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel StepIconComponent={ColorlibStepIcon}>
+                    <Typography
+                      variant="h6"
+                      sx={{ display: { xs: "none", sm: "block" } }}
+                    >
+                      {label}
+                    </Typography>
+                  </StepLabel>{" "}
+                </Step>
               );
-            }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>
-                  <Typography variant="h6" sx={{display:{xs:"none",sm:"block"}}}>{label}</Typography>
-                </StepLabel>{" "}
-              </Step>
-            );
-          })}
-        </Stepper>
+            })}
+          </Stepper>
+        </Grid>
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }} variant="h4">
@@ -194,7 +201,7 @@ const Internship = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Box sx={{ mb: 1}} />
+            <Box sx={{ mb: 1 }} />
             {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
             <Formik
               initialValues={{

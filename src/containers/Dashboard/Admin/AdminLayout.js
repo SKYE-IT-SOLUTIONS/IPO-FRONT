@@ -9,7 +9,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 // import TopLogoBar from "../../components/TopLogoBar";
-import NavigationBar from "../../../components/mui/NavigationBar";
+import NavigationBar from "../../../components/navbar&drawer/NavigationBar";
 
 const sideBarItems = [
   { path: "/admin/dashboard", icon: <DashboardIcon />, text: "Dashboard" },

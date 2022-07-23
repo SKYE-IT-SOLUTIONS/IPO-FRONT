@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import AccountProfile from "../../../components/account/AccountProfile";
-import { PasswordChange } from "../../../components/account/PasswordChange";
-import ProfileDetails from "../../../components/account/ProfileDetails";
+import AccountProfile from "../../../components/users/account/AccountProfile";
+import { PasswordChange } from "../../../components/users/account/PasswordChange";
+import ProfileDetails from "../../../components/users/account/ProfileDetails";
 
 const Profile = () => (
   <>

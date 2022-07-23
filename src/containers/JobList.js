@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "../components/CommonComponents";
-import JobCard from "../components/JobCard"
+import JobCard from "../components/common/JobCard"
 
 function JobList() {
   const job1 = {

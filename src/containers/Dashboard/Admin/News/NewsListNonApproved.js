@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ViewIcon from "@mui/icons-material/Visibility";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DataService from "../../../../services/DataService";
-import Spinner from "../../../../components/Spinner";
+import Spinner from "../../../../components/common/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const rowWidth = 200;

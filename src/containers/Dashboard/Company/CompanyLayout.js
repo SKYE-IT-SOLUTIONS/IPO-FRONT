@@ -4,7 +4,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import LogoutIcon from "@mui/icons-material/Logout";
 // import TopLogoBar from "../../components/TopLogoBar";
-import NavigationBar from "../../../components/mui/NavigationBar";
+import NavigationBar from "../../../components/navbar&drawer/NavigationBar";
 
 const sideBarItems = [
   { path: "/company/dashboard", icon: <DashboardIcon />, text: "Dashboard" },

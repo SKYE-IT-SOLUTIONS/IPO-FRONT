@@ -5,7 +5,7 @@ import { useRoutes } from "react-router-dom";
 //in app imports-presentational
 import routes from "./routes";
 
-import Spinner from "./components/Spinner";
+import Spinner from "./components/common/Spinner";
 //in app imports-logical
 import ThemeContextProvider from "./contexts/ThemeContext";
 import { useSelector } from "react-redux";
