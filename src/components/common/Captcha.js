@@ -9,7 +9,7 @@ function Captcha() {
   return (
     <div>
       <ReCAPTCHA
-        sitekey="6Ldp_xghAAAAAG9UVHYT2qj9W0MxpipxEdVJtyga"
+        sitekey="6LelAhkhAAAAAK0wxP_orJ2JSnhAKLiN6SuOGoyw"
         onChange={onChange}
       />
     </div>
@@ -17,3 +17,6 @@ function Captcha() {
 }
 
 export default Captcha;
+
+//6LelAhkhAAAAAK0wxP_orJ2JSnhAKLiN6SuOGoyw
+//6Ldp_xghAAAAAG9UVHYT2qj9W0MxpipxEdVJtyga
