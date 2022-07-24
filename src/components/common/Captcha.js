@@ -7,19 +7,12 @@ function onChange(value) {
 
 function Captcha() {
   return (
-    <div>
-      {
-        <ReCAPTCHA
-          sitekey="6LdRBhkhAAAAAGku-pnVSat2HZ1ogUVf4rCheUcr"
-          onChange={onChange}
-          onError={onChange}
-        />
-      }
-    </div>
+    <ReCAPTCHA
+      sitekey="6LepNhkhAAAAACamaK8hNbjB2LSCO1mGxDw1r15Q"
+      onChange={onChange}
+      onError={onChange}
+    />
   );
 }
 
 export default Captcha;
-
-//6LelAhkhAAAAAK0wxP_orJ2JSnhAKLiN6SuOGoyw
-//6Ldp_xghAAAAAG9UVHYT2qj9W0MxpipxEdVJtyga
