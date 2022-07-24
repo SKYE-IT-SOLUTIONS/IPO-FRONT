@@ -1,12 +1,12 @@
 {
   "name": "ipo-front",
   "version": "0.1.0",
+  "homepage": "https://skye-it-solutions.github.io/",
   "private": true,
   "engines": {
     "node": "17.9.0",
     "npm": "8.5.1"
   },
-  "homepage": "https://skye-it-solutions.github.io/",
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
     "@emotion/react": "^11.7.0",
@@ -45,15 +45,14 @@
     "react-scripts": "4.0.3",
     "react-scroll-parallax": "^2.4.0",
     "redux-persist": "^6.0.0",
-    "serve": "^14.0.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "serve -s build",
-    "ustart": "PORT=$PORT react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts  start",
+    "ustart": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -79,8 +78,5 @@
   },
   "devDependencies": {
     "@iconify/react": "^3.0.1"
-  },
-  "optionalDependencies": {
-    "fsevents": "^2.3.2"
   }
 }
