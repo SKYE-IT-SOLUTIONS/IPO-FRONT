@@ -1,5 +1,8 @@
 import React from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import {
+  GoogleReCaptchaProvider,
+  GoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 
 function onChange(value) {
   console.log("Captcha value:", value);
@@ -8,10 +11,9 @@ function onChange(value) {
 function Captcha() {
   return (
     <div>
-      <ReCAPTCHA
-        sitekey="6LelAhkhAAAAAK0wxP_orJ2JSnhAKLiN6SuOGoyw"
-        onChange={onChange}
-      />
+      <GoogleReCaptchaProvider reCaptchaKey="6LelAhkhAAAAAK0wxP_orJ2JSnhAKLiN6SuOGoyw">
+        <GoogleReCaptcha onVerify={onChange} />
+      </GoogleReCaptchaProvider>
     </div>
   );
 }
