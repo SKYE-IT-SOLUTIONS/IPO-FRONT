@@ -45,14 +45,15 @@
     "react-scripts": "4.0.3",
     "react-scroll-parallax": "^2.4.0",
     "redux-persist": "^6.0.0",
+    "serve": "^14.0.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts  start",
+    "start": "serve -s build",
     "ustart": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

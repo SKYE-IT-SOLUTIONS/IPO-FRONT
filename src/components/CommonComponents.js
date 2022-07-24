@@ -21,51 +21,51 @@ export { Container, Row, Col, Navbar, Icon };
 export { twitter, insta, fb, whatsapp, linkedin, youtube, logo, vision };
 
 export const CustomButton = styled.button`
-   background: linear-gradient(to right, #000428, #004e92);
-   color: white;
-   border-radius: 20px;
-   font-weight: bolder;
-   padding: 5px 25px;
-   border: 1px solid black;
-   text-align: center;
-
-   ${(props) =>
-      props.cancle &&
-      css`
-         background: red;
-         border: 1px solid red;
-      `}
-
-   ${(props) =>
-      props.apply &&
-      css`
-         background: linear-gradient(to left, #41295a, #2f0743);
-         border: 1px solid #41295a;
-      `}
+  background: linear-gradient(to right, #000428, #004e92);
+  color: white;
+  border-radius: 20px;
+  font-weight: bolder;
+  padding: 5px 25px;
+  border: 1px solid black;
+  text-align: center;
 
   ${(props) =>
-      props.submit &&
-      css`
-         background: linear-gradient(to top, #000000, #434343);
-      `}
+    props.cancle &&
+    css`
+      background: red;
+      border: 1px solid red;
+    `}
+
+  ${(props) =>
+    props.apply &&
+    css`
+      background: linear-gradient(to left, #41295a, #2f0743);
+      border: 1px solid #41295a;
+    `}
+
+  ${(props) =>
+    props.submit &&
+    css`
+      background: linear-gradient(to top, #000000, #434343);
+    `}
 `;
 
 export const Lable = styled.label`
-   color: black;
-   padding-top: 5px;
-   padding-bottom: 10px;
+  color: black;
+  padding-top: 5px;
+  padding-bottom: 10px;
 `;
 export const Input = styled.input`
-   border-radius: 5px;
-   border: 2px solid black;
-   padding: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 5px;
 `;
 
-export const Recaptcha = (props) => {
-   return (
-      <ReCAPTCHA
-         sitekey="6Ld-JBkhAAAAAIOWcuA16w09IDkxeBDSzZFO-sHj"
-         onChange={props.onChange}
-      />
-   );
+export const Recaptcha = ({ onChange }) => {
+  return (
+    <ReCAPTCHA
+      sitekey="6Ld-JBkhAAAAAIOWcuA16w09IDkxeBDSzZFO-sHj"
+      onChange={onChange}
+    />
+  );
 };
