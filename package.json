@@ -49,7 +49,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "PORT=$PORT react-scripts --openssl-legacy-provider start",
+    "start": "serve -s build",
     "ustart": "PORT=$PORT react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
