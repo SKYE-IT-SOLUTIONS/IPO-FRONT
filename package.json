@@ -1,12 +1,12 @@
 {
   "name": "ipo-front",
   "version": "0.1.0",
+  "private": true,
   "engines": {
     "node": "17.9.0",
     "npm": "8.5.1"
   },
   "homepage": "https://skye-it-solutions.github.io/",
-  "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
     "@emotion/react": "^11.7.0",
@@ -49,7 +49,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts  start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "ustart": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
