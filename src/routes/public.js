@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import MainLayout from "../containers/MainLayout";
+import Test from "../test/Test";
 
 const HomeContent = lazy(() => import("../containers/HomeContent"));
 const NotFound = lazy(() => import("../containers/404"));
@@ -50,6 +51,10 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     {
       index: true,
       element: <HomeContent />,
+    },
+    {
+      path: "test",
+      element: <Test />,
     },
     {
       path: "404",
