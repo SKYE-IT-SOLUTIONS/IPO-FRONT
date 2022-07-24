@@ -1,6 +1,10 @@
 {
   "name": "ipo-front",
   "version": "0.1.0",
+  "engines": {
+    "node": "17.9.0",
+    "npm": "8.5.1"
+  },
   "homepage": "https://skye-it-solutions.github.io/",
   "private": true,
   "dependencies": {
