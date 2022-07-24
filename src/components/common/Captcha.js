@@ -8,7 +8,7 @@ function onChange(value) {
 function Captcha() {
   return (
     <ReCAPTCHA
-      sitekey="6LepNhkhAAAAACamaK8hNbjB2LSCO1mGxDw1r15Q"
+      sitekey="6LdRBhkhAAAAAGku-pnVSat2HZ1ogUVf4rCheUcr"
       onChange={onChange}
       onError={onChange}
     />
