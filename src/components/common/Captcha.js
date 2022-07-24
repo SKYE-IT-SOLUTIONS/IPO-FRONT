@@ -9,7 +9,7 @@ function Captcha() {
   return (
     <div>
       <ReCAPTCHA
-        sitekey="6LcBFxIhAAAAAFg_OfQq9DZ6e7dqk6V5Oi0SzjCs"
+        sitekey="6Ldp_xghAAAAAG9UVHYT2qj9W0MxpipxEdVJtyga"
         onChange={onChange}
       />
     </div>
