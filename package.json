@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "17.9.0",
-    "npm": "8.5.1"
+    "node": "14.17.1",
+    "npm": "6.14.13"
   },
   "homepage": "https://skye-it-solutions.github.io/",
   "dependencies": {
@@ -49,7 +49,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "ustart": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
