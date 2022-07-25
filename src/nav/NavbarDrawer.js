@@ -10,13 +10,22 @@ import {
   ListItem,
 } from "@mui/material"; //==============Components==================================
 import MenuIcon from "@mui/icons-material/Menu"; //============menuIcon=============
-import logo from "../../assets/logo.png";
+import logo from "../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 //===============Drawer Component starting==========================================
 //===============Drawer Component starting==========================================
-const PAGES = ["Home", "About", "Services", "Contact Us", "Login", "Sign Up"];
-function Drawercomp() {
+const PAGES = [
+  { title: "Home", to: "/" },
+  { title: "About", to: "/about" },
+  { title: "Services", to: "/services" },
+  { title: "Contact Us", to: "/contactus" },
+  { title: "Login", to: "/login" },
+  { title: "Sign Up", to: "/signup" },
+];
+function DrawerComponent() {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
       <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
@@ -36,13 +45,16 @@ function Drawercomp() {
           </ListItemButton>
           {PAGES.map((page, index) => (
             <ListItemButton
-              onClick={() => setOpenDrawer(false)}
+              onClick={() => {
+                setOpenDrawer(false);
+                navigate(page.to);
+              }}
               key={index}
               sx={{ width: 240 }}
             >
               <ListItemIcon>
                 <ListItemText sx={{ ml: { xs: 2, sm: 2 } }}>
-                  {page}
+                  {page.title}
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
@@ -72,4 +84,4 @@ function Drawercomp() {
 }
 //===============Drawer Component Ending==========================================
 //===============Drawer Component Ending==========================================
-export default Drawercomp;
+export default DrawerComponent;

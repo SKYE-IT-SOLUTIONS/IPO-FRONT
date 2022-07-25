@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 import MainLayout from "../containers/MainLayout";
-import Test from "../test/Test";
+// import Test from "../test/Test";
 
 const HomeContent = lazy(() => import("../containers/HomeContent"));
 const NotFound = lazy(() => import("../containers/404"));
@@ -36,7 +36,9 @@ const RequestWorkshop = lazy(() =>
 );
 const RequestHall = lazy(() => import("../components/home/RequestHall"));
 const RequestGround = lazy(() => import("../components/home/RequestGround"));
-const NavBarListView = lazy(() => import("../components/NavBarListView"));
+const TrainingSessionList = lazy(() =>
+  import("../components/home/TrainingSessionList")
+);
 const OurTeam = lazy(() => import("../components/home/OurTeam"));
 const FeedbackGuest = lazy(() => import("../components/home/GeneralFeedback"));
 const AdvertisementSubmit = lazy(() =>
@@ -52,10 +54,10 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
       index: true,
       element: <HomeContent />,
     },
-    {
-      path: "test",
-      element: <Test />,
-    },
+    // {
+    //   path: "test",
+    //   element: <Test />,
+    // },
     {
       path: "404",
       element: <NotFound />,
@@ -163,7 +165,7 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     },
     {
       path: "requestTraining",
-      element: <NavBarListView />,
+      element: <TrainingSessionList />,
     },
     {
       path: "developers",
