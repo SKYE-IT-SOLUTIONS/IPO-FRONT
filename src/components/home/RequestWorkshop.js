@@ -120,6 +120,8 @@ function Requestworkshop() {
                 label="Purpose of your programme"
                 variant="outlined"
                 fullWidth
+                multiline
+                rows={2}
                 helperText={formik.touched.purpose && formik.errors.purpose}
                 error={formik.touched.purpose && formik.errors.purpose}
                 {...formik.getFieldProps("purpose")}
@@ -130,6 +132,8 @@ function Requestworkshop() {
                 id="outlined-basic"
                 label="Introduce about your programme"
                 variant="outlined"
+                multiline
+                rows={3}
                 fullWidth
                 helperText={formik.touched.details && formik.errors.details}
                 error={formik.touched.details && formik.errors.details}
@@ -154,7 +158,7 @@ function Requestworkshop() {
             <Grid item xs={12} md={6}>
               <TextField
                 id="time"
-                label="Expected Time"
+                label="Start Time"
                 type="time"
                 defaultValue="07:30"
                 InputLabelProps={{
