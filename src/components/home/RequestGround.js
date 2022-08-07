@@ -6,12 +6,15 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { Paper, Grid, Box } from "@mui/material";
 import Ground from "../../assets/ground.svg";
 import { Form } from "react-bootstrap";
-import {
-  Simple_Validator,
-  Validator,
-  upload_Validator,
-} from "../../utils/validation";
-import { patternMail, patternContact } from "../../config/pattern";
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import DataService from "../../services/DataService";
+import { Recaptcha } from "../CommonComponents";
+
+//form validation
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { phoneRegExp } from "../../config/pattern";
 
 const Requestdiv = styled.div`
   font-family: ${({ font }) => font.general};
@@ -60,7 +63,17 @@ const Error = styled.p`
 
 function RequestGround() {
   const { fonts } = useContext(ThemeContext);
+  const dataService = new DataService();
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [severity, setSeverity] = useState("");
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
   const [name, setName] = useState();
   const [nameInfo, setNameInfo] = useState({ error: null, status: false });
   const [description, setDescription] = useState();
@@ -85,20 +98,119 @@ function RequestGround() {
   const [partNumb, setPartNumb] = useState();
   const [duration, setDuration] = useState();
 
-  // const output = [
-  //   {
-  //     Name: { name },
-  //     About: { description },
-  //     RequestPerson: { reqperson },
-  //     RequestCount: { count },
-  //     Reason: { reason },
-  //     Mail: { mail },
-  //     MobileNumber: { number },
-  //     Address: {},
-  //   },
-  // ];
-
   return (
+    <Formik
+    initialValues={{
+      name: "",
+      introPerson: "",
+      personCount: "",
+      duration:"",
+      time:"",
+      date:"",
+      purpose:"",
+      eventDetails:"",
+      email:"",
+      phone:"",
+      address:"",
+      file: "",
+      recaptcha: false,
+      systemUser: false,
+     
+    }}
+    validationSchema={Yup.object().shape({
+      name: Yup.string().required("Name is required"),
+      introPerson: Yup.string()
+        .required("Introduction is required")
+        .min(50, "Description must be at least 50 characters"),
+      personCount: Yup.number()
+        .required("Person Count is required"),
+      duration: Yup.number()
+        .required("Duration is required")
+        .min(0.1, "Duration must be greater than 0"),
+      date: Yup.date()
+      .min(
+        new Date(new Date().setDate(new Date().getDate() - 1)),
+        "Pickup date must be today or later"
+      )
+      .required("Date id required"),
+      purpose: Yup.string()
+        .required("Reason is required")
+        .min(50, "Reason must be at least 100 characters"),
+      eventDetails: Yup.string().required("EventDetails is required"),
+      email: Yup.string()
+        .email("Invalid email")
+        .required("Email is required"),
+      phone: Yup.string()
+          .matches(phoneRegExp, "Invalid phone number")
+          .required("Phone Number is required"),
+      address: Yup.string().required("Address is required"),
+      file: Yup.mixed()
+          .required("File is required")
+          .test(
+            "fileFormat",
+            "File format is not supported(supported format: pdf)",
+            (file) =>
+              file &&
+              ["pdf"].includes(
+                file.name.split(".")[file.name.split(".").length - 1]
+              )
+          )
+          .test(
+            "fileSize",
+            "File size must be less than 5MB",
+            (file) => file && file.size <= 5000000
+          ),
+      recaptcha: Yup.boolean().oneOf(
+          [true],
+          "Please verify that you are not a robot"
+        ),
+    })}
+    onSubmit={async (values, { setSubmitting, resetForm }) => {
+      var data = new FormData();
+      data.append("file", values.file);
+      data.append(
+        "request",
+        JSON.stringify({
+          name: values.name,
+          introPerson: values.introPerson,
+          personCount: values.personCount,
+          duration: values.duration,
+          time: values.time,
+          date: values.date,
+          purpose: values.purpose,
+          eventDetails: values.eventDetails,
+          email: values.email,
+          phone: values.phone,
+          address: values.address,
+          systemUser: false,
+        })
+      );
+      const { status, error } = await dataService.handleRequestPerson(data);
+
+      if (status) {
+        setSnackbarOpen(true);
+        setMessage("Request sent successfully");
+        setSeverity("success");
+        //reset data
+        resetForm();
+      } else {
+        setSnackbarOpen(true);
+        setMessage(error);
+        setSeverity("error");
+      }
+    }}
+    >
+       {({
+        errors,
+        touched,
+        getFieldProps,
+        setFieldValue,
+        handleSubmit,
+        handleBlur,
+        isSubmitting,
+        isValid,
+      }) => (
+    <form onSubmit={handleSubmit}>
     <Requestdiv font={fonts}>
       <MPaper>
         <Title>Request a Faculty Playground</Title>
@@ -127,15 +239,13 @@ function RequestGround() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={name}
                       placeholder="Enter Your Name"
-                      onChange={(e) => {
-                        setName(e.target.value);
-                        setNameInfo(Simple_Validator(e.target.value, "Name"));
-                      }}
-                    />
-                    <br />
-                    {!nameInfo.status && <Error>{nameInfo.error}</Error>}
+                      {...getFieldProps("name")}
+                      />
+                      <br />
+                      {touched.name && errors.name && (
+                        <Error>{touched.name && errors.name}</Error>
+                      )}
                   </>
                 </Grid>
                 <Grid item xs={4}>
@@ -145,18 +255,14 @@ function RequestGround() {
                   <>
                     <TextArea
                       rows="4"
-                      value={description}
                       placeholder="Enter Description"
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                        setDescriptionInfo(
-                          Simple_Validator(e.target.value, "Description")
-                        );
-                      }}
+                      {...getFieldProps("introPerson")}
                     />
                     <br />
-                    {!descriptionInfo.status && (
-                      <Error>{descriptionInfo.error}</Error>
+                    {touched.introPerson && errors.introPerson && (
+                        <Error>
+                          {touched.introPerson && errors.introPerson}
+                        </Error>
                     )}
                   </>
                 </Grid>
@@ -169,20 +275,15 @@ function RequestGround() {
                     <Inputs
                       type="text"
                       name="name"
-                      value={partNumb}
                       placeholder="Enter Request Participant Count"
-                      onChange={(e) => {
-                        setCount(e.target.value);
-                        setCountInfo(
-                          Simple_Validator(
-                            e.target.value,
-                            "Request Participant Count"
-                          )
-                        );
-                      }}
-                    />
-                    <br />
-                    {!countInfo.status && <Error>{countInfo.error}</Error>}
+                      {...getFieldProps("personCount")}
+                      />
+                      <br />
+                      {touched.personCount && errors.personCount && (
+                        <Error>
+                          {touched.personCount && errors.personCount}
+                        </Error>
+                      )}
                   </>
                 </Grid>
                 <Grid item xs={4}>
@@ -190,64 +291,53 @@ function RequestGround() {
                 </Grid>
                 <Grid item xs={8}>
                   <>
-                    <Inputs
-                      type="text"
-                      name="name"
-                      value={duration}
-                      placeholder="Enter Duration Time"
-                      onChange={(e) => {
-                        setCount(e.target.value);
-                        setCountInfo(
-                          Simple_Validator(e.target.value, "Duration Time")
-                        );
-                      }}
-                    />
-                    <br />
-                    {!countInfo.status && <Error>{countInfo.error}</Error>}
+                     <TextField
+                        label="Enter Days"
+                        id="filled-start-adornment"
+                        defaultValue="0"
+                        sx={{ m: 1, width: '25ch' }}
+                        InputProps={{
+                          endAdornment: <InputAdornment position="start">days</InputAdornment>,
+                        }}
+                        variant="filled"
+                      />
+                       <TextField
+                        label="Enter Hours"
+                        id="filled-start-adornment"
+                        defaultValue="0"
+                        sx={{ m: 1, width: '25ch' }}
+                        InputProps={{
+                          endAdornment: <InputAdornment position="start">hr</InputAdornment>,
+                        }}
+                        variant="filled"
+                        {...getFieldProps("duration")}
+                        />
+                        <br/>
+                        {touched.duration && errors.duration && (
+                        <Error>
+                          {touched.duration && errors.duration}
+                        </Error>
+                      )}
+                     
                   </>
                 </Grid>
                 <Grid item xs={4}>
-                  <>Expected Time Period</>
+                  <>Expected Date and time</>
                 </Grid>
                 <Grid item xs={8}>
                   <>
-                    <form action="/action_page.php">
-                      <input
-                        type="time"
-                        id="appt"
-                        name="appt"
-                        placeholder="Enter Request Person Count"
-                        onChange={(e) => {
-                          setCount(e.target.value);
-                          setCountInfo(
-                            Simple_Validator(e.target.value, "Count")
-                          );
-                        }}
+                  <TextField
+                      id="datetime-local"
+                      type="date"
+                      {...getFieldProps("date")}
                       />
-                      <input type="submit" />
-                    </form>
-                  </>
-                </Grid>
-                <Grid item xs={4}>
-                  <>Expected Date</>
-                </Grid>
-                <Grid item xs={8}>
-                  <>
-                    <form action="/action_page.php">
-                      <input
-                        type="date"
-                        id="day"
-                        name="day"
-                        placeholder="Enter Request Person Count"
-                        onChange={(e) => {
-                          setCount(e.target.value);
-                          setCountInfo(
-                            Simple_Validator(e.target.value, "Count")
-                          );
-                        }}
-                      />
-                      <input type="submit" />
-                    </form>
+                      <br/>
+                      {touched.date && errors.date && (
+                        <Error>
+                          {touched.date && errors.date}
+                        </Error>
+                      )}
+                   
                   </>
                 </Grid>
 
@@ -261,13 +351,15 @@ function RequestGround() {
                       name="name"
                       value={count}
                       placeholder="Enter Expected Resource Person/s"
-                      onChange={(e) => {
-                        setCount(e.target.value);
-                        setCountInfo(Simple_Validator(e.target.value, "Count"));
-                      }}
-                    />
-                    <br />
-                    {!countInfo.status && <Error>{countInfo.error}</Error>}
+                      {...getFieldProps("purpose")}
+                      />
+                      <br />
+                      {touched.purpose && errors.purpose && (
+                        <Error>
+                          {touched.purpose && errors.purpose}
+                        </Error>
+                      )}
+                   
                   </>
                 </Grid>
                 <Grid item xs={4}>
@@ -280,10 +372,14 @@ function RequestGround() {
                         rows="4"
                         value={reason}
                         placeholder="Enter "
-                        onChange={(e) => {
-                          setReason(e.target.value);
-                        }}
-                      />
+                        {...getFieldProps("eventDetails")}
+                        />
+                        <br/>
+                        {touched.eventDetails && errors.eventDetails && (
+                        <Error>
+                          {touched.eventDetails && errors.eventDetails}
+                        </Error>
+                      )}
                     </>
                   </>
                 </Grid>
@@ -305,15 +401,13 @@ function RequestGround() {
                       type="email"
                       name="email"
                       placeholder="abc@gmail.com"
-                      onChange={(e) => {
-                        setMail(e.target.value);
-                        setMailInfo(
-                          Validator(e.target.value, patternMail, "Mail")
-                        );
-                      }}
-                    />
-                    <br />
-                    {!mailInfo.status && <Error>{mailInfo.error}</Error>}
+                      {...getFieldProps("email")}
+                      />
+                      <br />
+                      {touched.email && errors.email && (
+                        <Error>{touched.email && errors.email}</Error>
+                      )}
+                  
                   </>
                 </Grid>
                 <Grid item xs={4}>
@@ -325,58 +419,32 @@ function RequestGround() {
                       type="text"
                       name="name"
                       placeholder="07***********"
-                      onChange={(e) => {
-                        setNumber(e.target.value);
-                        setNumberInfo(
-                          Validator(e.target.value, patternContact, "Number")
-                        );
-                      }}
+                      {...getFieldProps("phone")}
                     />
                     <br />
-                    {!numberInfo.status && <Error>{numberInfo.error}</Error>}
+                    {touched.phone && errors.phone && (
+                      <Error>{touched.phone && errors.phone}</Error>
+                    )}
+                  
                   </>
                 </Grid>
                 <Grid item xs={4}>
                   <>Address</>
                 </Grid>
                 <Grid item xs={8}>
-                  <>
-                    <InputAddress
-                      type="text"
-                      name="name"
-                      placeholder="Apart No"
-                      value={addressNo}
-                      onChange={(e) => {
-                        setAddressNo(e.target.value);
-                      }}
+                <>
+                    <TextArea
+                       placeholder="Enter a Address"
+                       rows="4"
+                       {...getFieldProps("address")}
+                    
                     />
-                  </>
-                  <br />
-                  <>
-                    <InputAddress
-                      type="text"
-                      name="name"
-                      placeholder="Line1"
-                      value={addressLine}
-                      onChange={(e) => {
-                        setAddressLine(e.target.value);
-                      }}
-                    />
-                  </>
-                  <br />
-                  <>
-                    <InputAddress
-                      type="text"
-                      name="name"
-                      placeholder="City"
-                      onChange={(e) => {
-                        setCity(e.target.value);
-                        setCityInfo(Simple_Validator(e.target.value, "City"));
-                      }}
-                    />
-                    {!cityInfo.status && <Error>{cityInfo.error}</Error>}
                     <br />
+                  {touched.address && errors.address && (
+                    <Error>{touched.address && errors.address}</Error>
+                  )}
                   </>
+                  <br />
                 </Grid>
               </Grid>
               <hr />
@@ -393,47 +461,41 @@ function RequestGround() {
                     <Form.Group controlId="formFile" className="mb-3">
                       <Form.Control
                         type="file"
-                        onChange={(e) => {
-                          console.log("onFileChange Triggered");
-                          setUpload(e.target.files[0]);
-                          console.log("selected file" + e.target.files[0]);
-                          setUploadInfo(
-                            upload_Validator(e.target.files[0], "File")
-                          );
+                        accept="application/pdf"
+                        onChange={(event) => {
+                          setFieldValue("file", event.target.files[0]);
                         }}
                       />
-                      {(upload.name && upload.size) != null ? (
-                        <p>({(upload.size / 1000000).toFixed(2)} mb)</p>
-                      ) : null}
-                      {uploadInfo.error != null && (
-                        <Error>{uploadInfo.error}</Error>
-                      )}
+                      <br />
+                      {errors.file && <Error>{errors.file}</Error>}
+                    
                     </Form.Group>
                   </>
                 </Grid>
+                <Grid container sx={{ justifyContent:"center", mt: 2 }}>
+                      <Recaptcha
+                        onChange={(value) =>
+                          setFieldValue("recaptcha", value ? true : false)
+                        }
+                      />
+                </Grid>
+                {errors.recaptcha && <Error>{errors.recaptcha}</Error>}
               </Grid>
-
-              <CustomButton
-                type="submit"
-                submit
-                disabled={
-                  !nameInfo.status ||
-                  !descriptionInfo.status ||
-                  !countInfo.status ||
-                  !mailInfo.status ||
-                  !numberInfo.status ||
-                  !cityInfo.status ||
-                  !uploadInfo.status
-                }
-              >
-                submit
-              </CustomButton>
+              <Grid container sx={{ justifyContent: "center", mt: 2 }}>
+                      <CustomButton disabled={!isValid} type="submit">
+                        submit
+                      </CustomButton>
+                      <br />
+              </Grid>
               <br />
             </Bordercol>
           </Row>
         </Box>
       </MPaper>
     </Requestdiv>
+    </form>
+      )}
+    </Formik>
   );
 }
 
