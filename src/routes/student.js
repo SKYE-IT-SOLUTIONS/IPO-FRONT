@@ -25,6 +25,7 @@ const Jobs = lazy(() => import("../containers/Dashboard/common/Jobs"));
 const Job = lazy(() => import("../containers/Dashboard/common/Job"));
 const Feedback = lazy(() => import("../containers/Dashboard/common/Feedback"));
 const Maintenance = lazy(() => import("../containers/Maintenance"));
+const RequestWorkshop = lazy(() =>import("../components/home/RequestWorkshop"));
 
 export const studentRoutes = (isAuthenticated, userRole) => ({
   path: "/student",
@@ -66,6 +67,10 @@ export const studentRoutes = (isAuthenticated, userRole) => ({
     {
       path: "training-session",
       element: <TrainingSession />,
+    },
+    {
+      path: "workshop-request",
+      element: <RequestWorkshop />,
     },
     {
       path: "internship",

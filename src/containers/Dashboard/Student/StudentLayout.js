@@ -6,6 +6,7 @@ import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import LogoutIcon from "@mui/icons-material/Logout";
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 // import TopLogoBar from "../../components/TopLogoBar";
 import NavigationBar from "../../../components/navbar&drawer/NavigationBar";
@@ -20,6 +21,11 @@ const sideBarItems = [
     path: "/student/training-session",
     icon: <FollowTheSignsIcon />,
     text: "Training Session",
+  },
+  {
+    path: "/student/workshop-request",
+    icon: <WorkspacePremiumIcon />,
+    text: "Workshop Request",
   },
   {
     path: "/student/internship",
