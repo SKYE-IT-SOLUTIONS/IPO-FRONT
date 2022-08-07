@@ -31,9 +31,6 @@ const Achievement = lazy(() => import("../components/home/Achievement"));
 const AchievementView = lazy(() =>
   import("../components/home/AchievementView")
 );
-const RequestWorkshop = lazy(() =>
-  import("../components/home/RequestWorkshop")
-);
 const RequestHall = lazy(() => import("../components/home/RequestHall"));
 const RequestGround = lazy(() => import("../components/home/RequestGround"));
 const TrainingSessionList = lazy(() =>
@@ -150,10 +147,6 @@ export const publicRoutes = (isAuthenticated, userRole) => ({
     {
       path: "achievement/:id",
       element: <AchievementView />,
-    },
-    {
-      path: "requestWorkshop",
-      element: <RequestWorkshop />,
     },
     {
       path: "request-hall",

@@ -242,7 +242,7 @@ function NavBar(props) {
                 Request a Graduate/s or
                 <br /> Undergraduate/s
               </DropItems>
-              <DropItems href="/requestWorkshop" id="bg-custom-3">
+              <DropItems href="/student/workshop-request" id="bg-custom-3">
                 Organize a Workshop/
                 <br />
                 Training
