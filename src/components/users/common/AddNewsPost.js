@@ -18,6 +18,7 @@ import FileUpload from "../../fileupload/FileUpload";
 import { useNavigate } from "react-router-dom";
 import DataService from "../../../services/DataService";
 import FileService from "../../../services/FileService";
+// import FileUpload from "react-mui-fileuploader";
 
 import {
   setTitle,
@@ -25,6 +26,7 @@ import {
   setImage,
   removeDescription,
   setVisibility,
+  setUrl,
 } from "../../../store/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../common/Spinner";
@@ -32,6 +34,9 @@ import { Simple_Validator } from "../../../utils/validation";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import CustomSnackBar from "../../common/CustomSnackBar";
 
 const NewContainer = styled(Container)`
   display: flex;
@@ -117,30 +122,13 @@ const PalestherImage = styled.img`
 function AddNewsPost() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const fileService = new FileService();
 
   const defaultNews =
     "https://drive.google.com/uc?id=1tfUdboMMMkR-t3miKiQMmyBNfhVFtCDs&export=download";
 
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.button : dark.button;
-  // useS
-  const [newTitle, setNewsTitle] = useState("");
-  const [content, setContent] = useState("");
   const [visibility, setNewsVisibility] = useState(true);
-
-  const [contentInfo, setContentInfo] = useState({
-    error: null,
-    status: false,
-  });
-  const [titleInfo, setTitleInfo] = useState({
-    error: null,
-    status: false,
-  });
-
-  const [contentList, setContentList] = useState([]);
-
-  const [imageUrl, setImageUrl] = useState(defaultNews);
 
   const [files, setFiles] = useState([]);
   const [filesU, setFilesU] = useState({});
@@ -151,55 +139,101 @@ function AddNewsPost() {
   const storeImage = useSelector((state) => state.news.image);
   const storeDescription = useSelector((state) => state.news.description);
   const storeVisibility = useSelector((state) => state.news.visibility);
+  const storeUrl = useSelector((state) => state.news.url);
 
   const dataService = new DataService();
-  const [error, setError] = useState("");
-
-  const handleNewsSubmit = async (payload) => {
-    setIsLoading(true);
-    console.log("payload", payload);
-    const { status, data, error } = await dataService.addNews(payload);
-    if (status) {
-      dispatch(removeDescription());
-      dispatch(setImage(defaultNews));
-      dispatch(setTitle(null));
-      navigate(`/admin/news/${data}`);
-    } else {
-      console.log("error", error);
-      setError(error);
-    }
-    setIsLoading(false);
+  const urlToObject = async (url) => {
+    const response = await fetch(url);
+    // here image is url/location of image
+    const blob = await response.blob();
+    const file = new File([blob], "news_image.jpg", { type: blob.type });
+    console.log(file);
+    return file;
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (storeTitle !== null || storeDescription.length !== 0) {
-      setNewsTitle(storeTitle);
-      setContentList(storeDescription);
-      setImageUrl(storeImage);
-      setNewsVisibility(storeVisibility);
-      setTitleInfo(Simple_Validator(storeTitle, "Title"));
-      setContentInfo(Simple_Validator(storeDescription, "Description"));
-    }
-    setIsLoading(false);
-  }, []);
+  const formik = useFormik({
+    initialValues: {
+      title: storeTitle ? storeTitle : "",
+      image: "",
+      description: storeDescription ? storeDescription : [""],
+      visibility: storeVisibility ? storeVisibility : true,
+      des_content: "",
+      url: storeUrl ? storeUrl : defaultNews,
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required("Name is Required"),
+    }),
+    validate: (values) => {
+      const d = values.description;
+      if (d.length === 0) {
+        formik.errors.description = "Description is required";
+        return;
+      } else {
+        formik.errors = {};
+      }
+      formik.errors = {};
+    },
+    onSubmit: async (values) => {
+      const formData = new FormData();
+      formData.append(
+        "request",
+        JSON.stringify({
+          title: values.title,
+          description: values.description,
+          global: values.visibility,
+        })
+      );
+      const image =
+        values.image === "" ? await urlToObject(values.url) : values.image;
+      console.log(image);
+      formData.append("file", image);
+      const { status, data, error } = await dataService.addNews(formData);
+      if (status) {
+        dispatch(removeDescription());
+        dispatch(setImage(null));
+        dispatch(setTitle(null));
+        dispatch(setVisibility(true));
+        dispatch(setUrl(defaultNews));
+        setMessage("News Added Successfully");
+        setIsError(false);
+        setSnackOpen(true);
+        formik.resetForm();
+        setTimeout(() => {
+          navigate("/admin/news/list");
+        }, 1000);
+      } else {
+        setMessage(error);
+        setIsError(true);
+        setSnackOpen(true);
+      }
+      setIsLoading(false);
+    },
+  });
 
   const updateUploadedFiles = async (files) => {
     if (files.length !== 0) {
-      setFiles(files);
       console.log(files[0]);
-
-      const { status, error, data } = await fileService.handleCreate(files[0]);
-
-      if (status) {
-        console.log("fileURL", data?.fileUrl);
-        dispatch(setImage(data?.fileUrl));
-        setImageUrl(data?.fileUrl);
-      } else {
-        console.log("error", error);
-      }
+      formik.setFieldValue("image", files[0]);
+      // dispatch(setImage(files[0]));
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        formik.setFieldValue("url", reader.result);
+        dispatch(setUrl(reader.result));
+      };
     }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
+  };
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const { onChange, ...restTitleChange } = formik.getFieldProps("title");
 
   return (
     <>
@@ -217,14 +251,15 @@ function AddNewsPost() {
               <NewsInput
                 type="text"
                 placeholder="Enter News Title"
-                value={newTitle || ""}
                 onChange={(e) => {
-                  setNewsTitle(e.target.value);
+                  formik.setFieldValue("title", e.target.value);
                   dispatch(setTitle(e.target.value));
-                  setTitleInfo(Simple_Validator(e.target.value, "Title"));
                 }}
+                {...restTitleChange}
               />
-              {!titleInfo.status && <Error>{titleInfo.error}</Error>}
+              {Boolean(formik.touched.title && formik.errors.title) && (
+                <Error>{formik.errors.title}</Error>
+              )}
 
               <Title>Image</Title>
               <FileUpload
@@ -236,12 +271,12 @@ function AddNewsPost() {
                 updateFilesCb={updateUploadedFiles}
               />
               {/* <ImageInput type="file"/> */}
-              <PalestherImage image={imageUrl} />
+              <PalestherImage image={formik.values.url} />
               <br />
               <Title>Description</Title>
               <ul>
-                {contentList &&
-                  contentList.map((value, index) => (
+                {formik.values.description &&
+                  formik.values.description.map((value, index) => (
                     <li key={index} style={{ textAlign: "justify" }}>
                       {value}{" "}
                       <Icon
@@ -250,12 +285,11 @@ function AddNewsPost() {
                         color="red"
                         height="30"
                         onClick={() => {
-                          let list = contentList.filter(
+                          let list = formik.values.description.filter(
                             (_, ind) => ind !== index
                           );
-                          setContentList(list);
+                          formik.setFieldValue("description", list);
                           dispatch(setDescription(list));
-                          setContentInfo(Simple_Validator(list, "Description"));
                         }}
                       />
                     </li>
@@ -264,31 +298,31 @@ function AddNewsPost() {
               <OuterTextArea>
                 <TextArea
                   rows="4"
-                  value={content}
                   placeholder="Enter Description"
-                  onChange={(e) => {
-                    setContent(e.target.value);
-                    setContentInfo(
-                      Simple_Validator(e.target.value, "Description")
-                    );
-                  }}
+                  {...formik.getFieldProps("des_content")}
                 />
                 <Icon
                   icon="akar-icons:circle-plus-fill"
                   height="34"
                   color="#001e62"
-                  style={{ margin: "auto 3px" }}
-                  onClick={() => {
-                    if (content !== "") {
-                      let list = [...contentList, content];
-                      setContentList(list);
+                  style={{ margin: "auto 3px", cusor: "pointer" }}
+                  onClick={async () => {
+                    if (formik.values.des_content !== "") {
+                      let list = [
+                        ...formik.values.description,
+                        formik.values.des_content,
+                      ];
+                      formik.setFieldValue("description", list);
                       dispatch(setDescription(list));
-                      setContent("");
+                      formik.setFieldValue("des_content", "");
+                      formik.setTouched("des_content", false);
                     }
                   }}
                 />
               </OuterTextArea>
-              {!contentInfo.status && <Error>{contentInfo.error}</Error>}
+              {Boolean(
+                formik.touched.des_content && formik.errors.description
+              ) && <Error>{formik.errors.description}</Error>}
 
               <Title>News Visibility</Title>
               <RadioGroup
@@ -327,25 +361,24 @@ function AddNewsPost() {
                 Preview
               </NewsButton>
               <NewsButton
-                disabled={!contentInfo.status || isLoading || !titleInfo.status}
-                bgColor={!isLoading ? them.submit : them.disable}
+                // disabled={formik.isSubmitting}
+                bgColor={!formik.isSubmitting ? them.submit : them.disable}
                 onClick={() => {
-                  console.log("submit");
-                  if (contentInfo.status && titleInfo.status) {
-                    console.log("submit inside");
-                    handleNewsSubmit({
-                      title: newTitle,
-                      description: contentList,
-                      global: visibility,
-                      url: imageUrl,
-                    });
-                  }
+                  console.log("clickes");
+                  formik.handleSubmit();
                 }}
+                type="submit"
               >
                 Submit
               </NewsButton>
             </DetailCol>
           </Row>
+          <CustomSnackBar
+            isOpen={snackOpen}
+            severity={isError ? "error" : "success"}
+            handleClose={handleClose}
+            message={message}
+          />
         </NewContainer>
       )}
     </>

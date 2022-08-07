@@ -35,6 +35,7 @@
       "react-google-recaptcha-v3": "^1.10.0",
       "react-loader-spinner": "^4.0.0",
       "react-moving-text": "0.0.7",
+      "react-mui-fileuploader": "^0.2.0",
       "react-papaparse": "^4.0.2",
       "react-redux": "^7.2.6",
       "react-router-dom": "^6.0.2",
