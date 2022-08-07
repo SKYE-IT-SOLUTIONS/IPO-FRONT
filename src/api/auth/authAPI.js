@@ -131,7 +131,7 @@ export const isUser = async () => {
     .then(async ({ data, error }) => {
       if (!error) {
         if (data.status === 200) {
-          result = { status: true, data: null, error: null };
+          result = { status: true, data: data?.data, error: null };
         } else {
           result = {
             status: false,
@@ -280,4 +280,36 @@ export const logOutLocally = () => {
   setAccessToken(null);
   setRefreshToken(null);
   setUserId(null);
+};
+
+export const onSubmitNoAuth = async (DATA_URL, data) => {
+  var config = {
+    method: "POST",
+    url: DATA_URL,
+    data: data,
+  };
+  console.log("onSubmitNoAuth");
+  await authRequest(config)
+    .then(async ({ data, error }) => {
+      if (!error) {
+        if (data.status === 201) {
+          console.log("success");
+          result = { status: true, data: data?.data, error: null };
+        } else if (data.status === 200) {
+          console.log("success");
+          result = { status: true, data: data?.data, error: null };
+        } else {
+          console.log("Error");
+          result = { status: false, data: null, error: getErrorMessage(error) };
+        }
+      } else {
+        console.log("error", error);
+        result = { status: false, data: null, error: getErrorMessage(error) };
+      }
+    })
+    .catch((error) => {
+      console.log("error");
+      result = { status: false, data: null, error: getErrorMessage(error) };
+    });
+  return result;
 };

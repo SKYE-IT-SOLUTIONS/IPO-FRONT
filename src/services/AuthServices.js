@@ -1,4 +1,14 @@
-import { loginIn, logOut,isUser,signUp,logOutLocally,onGetAll,onDelete,handleGetUser } from "../api/auth/authAPI";
+import {
+  loginIn,
+  logOut,
+  isUser,
+  signUp,
+  logOutLocally,
+  onGetAll,
+  onDelete,
+  handleGetUser,
+  onSubmitNoAuth,
+} from "../api/auth/authAPI";
 
 const COMPANY_SIGNUP = "/auth/signup?profile=company";
 const STUDENT_SIGNUP = "/auth/signup?profile=student";
@@ -6,25 +16,21 @@ const GET_ALL_COMPANIES = "/auth?filter=company";
 const USER_DELETE = "auth/delete";
 
 export default class AuthServices {
-
   handleCompanySignUp = async (credentials) => {
-    const response = await signUp(credentials,COMPANY_SIGNUP);
+    const response = await signUp(credentials, COMPANY_SIGNUP);
     return response;
-
   };
 
   handleStudentSignUp = async (credentials) => {
     console.log("handleStudentSignUp-AuthServices");
-    const response = await signUp(credentials,STUDENT_SIGNUP);
+    const response = await signUp(credentials, STUDENT_SIGNUP);
     return response;
-
   };
 
-    // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
+  // credentials = {username:"supun97", password:"qweasdzxc"}// -input payload sample
   handleLogin = async (credentials) => {
     const response = await loginIn(credentials);
     return response;
-
   };
   handleLogout = async () => {
     const result = await logOut();
@@ -35,28 +41,33 @@ export default class AuthServices {
     console.log("handleIsUserLoggedIn");
     const response = await isUser();
     return response;
-  }
+  };
 
   handleLogoutLocally = async () => {
     logOutLocally();
-  }
+  };
 
   handleGetAllCompanyUsers = async () => {
     console.log("handleGetAllCompanyUsers");
     const response = await onGetAll(GET_ALL_COMPANIES);
     return response;
-  }
+  };
 
   handleDeleteCompanyUser = async (id) => {
     console.log("handleDeleteCompanyUser");
-    const response = await onDelete(USER_DELETE,id);
+    const response = await onDelete(USER_DELETE, id);
     return response;
-  }
+  };
 
   handleGetCompany = async (id) => {
     console.log("handleGetCompany");
-    const request = await handleGetUser("/auth/"+id+"?filter=company");
+    const request = await handleGetUser("/auth/" + id + "?filter=company");
     return request;
-  }
+  };
 
+  verifyStudent = async (data) => {
+    console.log("verify User");
+    const request = await onSubmitNoAuth("/student-data/eligibility", data);
+    return request;
+  };
 }
