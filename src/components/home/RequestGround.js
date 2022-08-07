@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React, { useContext, useState } from "react";
 import { Row, Col, CustomButton, Input } from "../CommonComponents";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { Paper, Grid, Box } from "@mui/material";
+import { Paper, Grid, Box,Stack } from "@mui/material";
 import Ground from "../../assets/ground.svg";
 import { Form } from "react-bootstrap";
 import InputAdornment from '@mui/material/InputAdornment';
@@ -299,7 +299,7 @@ function RequestGround() {
                         InputProps={{
                           endAdornment: <InputAdornment position="start">days</InputAdornment>,
                         }}
-                        variant="filled"
+                        variant="standard"
                       />
                        <TextField
                         label="Enter Hours"
@@ -309,7 +309,7 @@ function RequestGround() {
                         InputProps={{
                           endAdornment: <InputAdornment position="start">hr</InputAdornment>,
                         }}
-                        variant="filled"
+                        variant="standard"
                         {...getFieldProps("duration")}
                         />
                         <br/>
@@ -472,15 +472,18 @@ function RequestGround() {
                     </Form.Group>
                   </>
                 </Grid>
-                <Grid container sx={{ justifyContent:"center", mt: 2 }}>
-                      <Recaptcha
+              </Grid>
+              <Grid container sx={{ justifyContent:"center", mt: 2 }}>
+                  <>
+                  <Recaptcha
                         onChange={(value) =>
                           setFieldValue("recaptcha", value ? true : false)
                         }
                       />
+                      <br/>
+                    </>
                 </Grid>
                 {errors.recaptcha && <Error>{errors.recaptcha}</Error>}
-              </Grid>
               <Grid container sx={{ justifyContent: "center", mt: 2 }}>
                       <CustomButton disabled={!isValid} type="submit">
                         submit
