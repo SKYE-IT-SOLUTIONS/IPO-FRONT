@@ -179,11 +179,10 @@ function StudentRegister() {
           <SeparateDiv>
             <Heading>STUDENT REGISTRATION</Heading>
 
-            <Lable>Student Registration Number</Lable>
+            <Lable>Index(AG/XX/2018/XXXX)</Lable>
             <CustInput type="text" {...formik.getFieldProps("index")} />
             {!isVerified ? (
               <VerifyButton
-                disabled={Boolean(formik.errors.index || !formik.touched.index)}
                 onClick={() => {
                   console.log("clicked-func");
                   if (!formik.errors.index) {
