@@ -5,6 +5,8 @@ import NewsCard from "../components/common/NewsCard";
 import Pagination from "../components/common/Pagination";
 import DataService from "../services/DataService";
 import Spinner from "../components/common/Spinner";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 function NewsList() {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +44,9 @@ function NewsList() {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Box sx={{ width: '100%',my:2 }}>
+        <LinearProgress sx={{ height: 10}}/>
+      </Box>
       ) : (
         newsList.length >= 1 && (
           <Container fluid>

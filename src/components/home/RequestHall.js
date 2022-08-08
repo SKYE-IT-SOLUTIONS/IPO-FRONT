@@ -269,7 +269,7 @@ function RequestHall() {
                         InputProps={{
                           endAdornment: <InputAdornment position="start">days</InputAdornment>,
                         }}
-                        variant="filled"
+                        variant="standard"
                       />
                        <TextField
                         label="Enter Hours"
@@ -279,7 +279,7 @@ function RequestHall() {
                         InputProps={{
                           endAdornment: <InputAdornment position="start">hr</InputAdornment>,
                         }}
-                        variant="filled"
+                        variant="standard"
                         {...getFieldProps("duration")}
                       />
                       <br/>
@@ -423,8 +423,6 @@ function RequestHall() {
                   <>Upload recommendation letter</>
                 </Grid>
                 <Grid item xs={8}>
-                  <>
-                  <Grid item xs={8}>
                         <>
                           <Inputs
                             type="file"
@@ -436,24 +434,22 @@ function RequestHall() {
                           <br />
                           {errors.file && <Error>{errors.file}</Error>}
                         </>
-                  </Grid>
-                  <Grid container sx={{ justifyContent:"flex-start", mt: 2 }}>
+                </Grid>
+              </Grid>
+              <Grid container sx={{ justifyContent: "center", mt: 2 }}>
                       <Recaptcha
                         onChange={(value) =>
                           setFieldValue("recaptcha", value ? true : false)
                         }
                       />
-                    </Grid>
-                    {errors.recaptcha && <Error>{errors.recaptcha}</Error>}
-                  </>
-                </Grid>
               </Grid>
+              {errors.recaptcha && <Error>{errors.recaptcha}</Error>}
 
               <Grid container sx={{ justifyContent: "center", mt: 2 }}>
-                      <CustomButton disabled={!isValid} type="submit">
-                        submit
-                      </CustomButton>
-                      <br />
+                  <CustomButton disabled={!isValid} type="submit">
+                    submit
+                  </CustomButton>
+                  <br />
               </Grid>
               <br />
             </Bordercol>
