@@ -10,8 +10,8 @@ import {
   Box,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Drawercomp from "./NavbarDrawer";
-import logo from "../../assets/logo.png";
+import Drawer from "./NavbarDrawer";
+import { logo } from "../CommonComponents";
 import { useNavigate } from "react-router-dom";
 
 const PAGES = [
@@ -38,11 +38,12 @@ const Navbar = () => {
       <AppBar
         elevation={0}
         sx={{
-          background: "transparent",
+          backgroundImage: "linear-gradient(to right, #000428, #004e92)",
+          boxShadow: "none",
         }}
       >
         <Toolbar sx={{ marginTop: { lg: 3, md: 2 } }}>
-          {/* <Box
+          <Box
             component="img"
             alt="Your logo."
             src={logo}
@@ -51,7 +52,7 @@ const Navbar = () => {
               display: { xs: "none", sm: "none", lg: "block", md: "block" },
               width: { lg: 80, md: 70 },
             }}
-          /> */}
+          />
           {/* =====Logo ====== */}
           <Typography
             variant="h6"
@@ -87,8 +88,8 @@ const Navbar = () => {
                 marginTop: { lg: 0.5, md: 0.5 },
                 marginLeft: { lg: 1, md: 1 },
                 display: { xs: "none", sm: "none", lg: "block", md: "block" },
-                width: { lg: 40, md: 70 },
-                height: { lg: 60, md: 50 },
+                width: { lg: 80, md: 70 },
+                height: { lg: 50, md: 50 },
               }}
             />
           </Typography>
@@ -96,7 +97,7 @@ const Navbar = () => {
 
           {isMatch ? (
             <>
-              <Drawercomp />
+              <Drawer />
             </>
           ) : (
             <>
@@ -131,10 +132,10 @@ const Navbar = () => {
                   backgroundColor: "warning.main",
                   color: "neutral.800",
                   borderRadius: 10,
-                  "&:hover":  {
+                  "&:hover": {
                     color: "warning.main",
-                  }
-                }}  
+                  },
+                }}
                 variant="contained"
                 onClick={() => {
                   navigate("/signin");
@@ -155,7 +156,7 @@ const Navbar = () => {
                   "&:hover": {
                     backgroundColor: "warning.main",
                     color: "neutral.800",
-                  }
+                  },
                 }}
                 variant="contained"
               >

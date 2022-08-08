@@ -21,7 +21,10 @@ export { Container, Row, Col, Navbar, Icon };
 export { twitter, insta, fb, whatsapp, linkedin, youtube, logo, vision };
 
 export const CustomButton = styled.button`
-  background: linear-gradient(to right, #000428, #004e92);
+  background: ${(props) =>
+    !props.disabled
+      ? `linear-gradient(to right, #000428, #004e92)`
+      : `linear-gradient(to right, #00d2ff, #928dab)`};
   color: white;
   border-radius: 20px;
   font-weight: bolder;
@@ -61,11 +64,16 @@ export const Input = styled.input`
   padding: 5px;
 `;
 
-export const Recaptcha = ({ onChange }) => {
+export const TextArea = styled.textarea`
+  border: 2px solid black;
+  border-radius: 5px;
+`;
+
+export const Recaptcha = (props) => {
   return (
     <ReCAPTCHA
       sitekey="6Ld-JBkhAAAAAIOWcuA16w09IDkxeBDSzZFO-sHj"
-      onChange={onChange}
+      onChange={props.onChange}
     />
   );
 };

@@ -25,7 +25,7 @@ function Update({ news }) {
             {news.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {news.description?.[0]} ...
+            {(news.description?.[0]).slice(0,150)} ...
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -50,8 +50,9 @@ const Updates = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    dataService.getAllNewsByUser().then(({ data, error }) => {
+    dataService.getAllApprovalNews().then(({ data, error }) => {
       if (data) {
+        console.log(data)
         setNews(data);
       } else {
         console.log(error);

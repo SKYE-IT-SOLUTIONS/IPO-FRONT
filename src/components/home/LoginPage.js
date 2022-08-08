@@ -92,6 +92,7 @@ function LoginPage(props) {
 
   const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [isError, setIsError] = useState(false)
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

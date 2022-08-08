@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Row, Col } from "./CommonComponents";
+import { Container, Row, Col } from "../CommonComponents";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
-import direct from "../assets/direction.svg";
+import direct from "../../assets/direction.svg";
 
 const NavList = styled(Container)`
   display: flex;
@@ -56,7 +56,7 @@ const Column = styled(Col)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 const navList = [
   "How to prepare a CV",
@@ -68,17 +68,18 @@ const navList = [
   "Plot the career path",
 ];
 
-function NavBarListView() {
+function TrainingSessionList() {
   return (
     <NavList>
       <Row>
         <Column md={4}>
-          <div style={{ margin: "auto"}}>
+          <div style={{ margin: "auto" }}>
             <CustomUl>
               {navList &&
                 navList.map((value, index) => (
                   <CustomLi key={index}>
-                    <Arrow icon="bi:arrow-right-circle-fill" />{value}
+                    <Arrow icon="bi:arrow-right-circle-fill" />
+                    {value}
                   </CustomLi>
                 ))}
             </CustomUl>
@@ -92,4 +93,4 @@ function NavBarListView() {
   );
 }
 
-export default NavBarListView;
+export default TrainingSessionList;

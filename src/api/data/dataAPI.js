@@ -74,6 +74,7 @@ export const onSubmitNoAuth = async (DATA_URL, data) => {
           result = { status: false, data: null, error: getErrorMessage(error) };
         }
       } else {
+        console.log("error", error);
         result = { status: false, data: null, error: getErrorMessage(error) };
       }
     })

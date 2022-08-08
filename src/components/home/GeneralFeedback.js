@@ -4,10 +4,11 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import styled from "styled-components";
 import Feedback from "../../assets/Feedback.svg";
-import { Paper, Box, TextField } from "@mui/material";
+import { Paper, Box, TextField, Typography } from "@mui/material";
 import { Container, Row, Col, CustomButton } from "../CommonComponents";
-import { Simple_Validator } from "../../utils/validation";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const StyledImg = styled.img`
   padding: auto;
@@ -54,15 +55,23 @@ const handleSubmit = async () => {};
 export default function HoverRating() {
   const { theme, light, dark, fonts } = useContext(ThemeContext);
   const them = theme ? light.button : dark.button;
-  const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
-  const [name, setName] = useState("");
-  const [comment, setComment] = useState("");
-  const [commentInfo, setCommentInfo] = useState({
-    error: null,
-    status: false,
-  });
-  const [isLoading, setIsLoading] = useState(false);
+
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      comment: "",
+      rating : 3
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Name is required"),
+      comment: Yup.string().required("Comment is required").min(150, "Must be 150 characters or above"),
+    }),
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  })
 
   return (
     <Container>
@@ -75,19 +84,20 @@ export default function HoverRating() {
 
         <Col md={7} sm={12}>
           <Paper2 elevation={6}>
-            <h4>Rating</h4>
+            <Typography variant="h4" sx={{textTransform:"uppercase"}}>Rating</Typography>
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
+                my:2
               }}
             >
               <Rating
                 name="hover-feedback"
-                value={value}
+                value={formik.values.rating}
                 precision={0.5}
                 onChange={(event, newValue) => {
-                  setValue(newValue);
+                  formik.setFieldValue("rating", newValue);
                 }}
                 onChangeActive={(event, newHover) => {
                   setHover(newHover);
@@ -96,52 +106,39 @@ export default function HoverRating() {
                   <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                 }
               />
-              {value !== null && (
-                <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+              {formik.values.rating !== null && (
+                <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : formik.values.rating]}</Box>
               )}
             </Box>
-            <>Your name</>
-            <br />
-            <br />
+            {/* <Typography variant="h5" sx={{mb:1}}>Name</Typography> */}
             <TextField
               id="outlined-basic"
-              label="name"
+              label="Name"
               variant="outlined"
-              value={name}
               type="text"
-              onChange={(e) => {
-                let val = e.target.value;
-                setName(val);
-              }}
+              fullWidth
+              helperText={formik.touched.name && formik.errors.name}
+              error={formik.touched.name && formik.errors.name}
+              {...formik.getFieldProps("name")}
             />
             <br />
             <br />
-            <h4>Comment</h4>
+            {/* <Typography variant="h5" sx={{mb:1}}>Comment</Typography> */}
             <TextField
               fullWidth
-              label="comment"
+              label="Comment"
               id="fullWidth"
-              value={comment}
               type="text"
-              onChange={(e) => {
-                let com = e.target.value;
-                setComment(com);
-                setCommentInfo(Simple_Validator(com, "Comment"));
-              }}
+              multiline
+              rows={3}
+              helperText={formik.touched.comment && formik.errors.comment}
+              error={formik.touched.comment && formik.errors.comment}
+              {...formik.getFieldProps("comment")}
             />
-            {commentInfo.error && <Error>{commentInfo.error}</Error>}
             <SubButton
-              disabled={!commentInfo.status || isLoading}
-              bgColor={!isLoading ? them.login : them.disable}
-              onClick={() => {
-                if (commentInfo.status) {
-                  handleSubmit({
-                    name: name,
-                    comment: comment,
-                  });
-                }
-              }}
-            >
+              // disabled={!commentInfo.status || isLoading}
+              // bgColor={!isLoading ? them.login : them.disable}
+              onClick={formik.handleSubmit}>
               Submit
             </SubButton>
           </Paper2>

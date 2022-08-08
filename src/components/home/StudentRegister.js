@@ -17,11 +17,15 @@ import AuthServices from "../../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 import CustomSnackBar from "../common/CustomSnackBar";
 import { Recaptcha } from "../CommonComponents";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const RegistrationDiv = styled(Container)`
   font-family: ${({ font }) => font.general};
 `;
-
+const CustInput = styled(Input)`
+  width: 50%;
+`;
 const LoginImg = styled.img`
   width: 100%;
 `;
@@ -42,6 +46,11 @@ const LoginCol = styled(Col)`
 `;
 
 const LoginBttn = styled(CustomButton)`
+  width: 150px;
+  margin: 15px 0px;
+`;
+
+const VerifyButton = styled(CustomButton)`
   width: 150px;
   margin: 15px 0px;
 `;
@@ -77,28 +86,9 @@ const SeparateDiv = styled.div`
 function StudentRegister() {
   const { fonts } = useContext(ThemeContext);
 
-  const [name, setName] = useState("");
-  const [reg, setReg] = useState("");
-  const [password, setpassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [nameInfo, setNameInfo] = useState({ error: null, status: false });
-  const [regInfo, setRegInfo] = useState({ error: null, status: false });
-  const [passwordInfo, setPasswordInfo] = useState({
-    error: null,
-    status: false,
-  });
-  const [matchPassword, setMatchPassword] = useState({
-    error: null,
-    isMatching: false,
-  });
-
   const [error, setError] = useState("");
   const [isErrorMsgOpen, setIsErrorMsgOpen] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [recaptcha, setRecaptcha] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -111,26 +101,73 @@ function StudentRegister() {
   const authServices = new AuthServices();
   const navigate = useNavigate();
 
-  const handleSubmit = async (credentials) => {
-    setIsLoading(true);
-    const { status, data, error } = await authServices.handleStudentSignUp(
-      credentials
-    );
-    if (status) {
-      // sessionStorage.setItem("email", data?.email);
-      console.log(data, 1);
-      navigate("/register/sendMail", { state: { email: data } });
-    } else {
-      setError(error);
-      setIsErrorMsgOpen(true);
-    }
-    setIsLoading(false);
-  };
-
   function onChange(value) {
     console.log("Captcha value:", value);
-    setRecaptcha(!recaptcha);
+    formik.setFieldValue("recaptcha", true);
   }
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      index: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      recaptcha: false,
+    },
+    validationSchema: Yup.object({
+      index: Yup.string()
+        .required("Index is required")
+        .min(10, "Index is too short"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(8, "Password is too short")
+        .matches(
+          patternPassword,
+          "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+        ),
+      confirmPassword: Yup.string()
+        .required("Confirm Password is required")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+      recaptcha: Yup.boolean().oneOf([true], "Captcha is required"),
+    }),
+    onSubmit: async (values) => {
+      const { status, data, error } = await authServices.handleStudentSignUp({
+        username: values.index,
+        password: values.password,
+        name: values.name,
+      });
+      if (status) {
+        console.log(data, 1);
+        navigate("/register/sendMail", { state: { email: data.email } });
+      } else {
+        setError(error);
+        setIsErrorMsgOpen(true);
+      }
+    },
+  });
+
+  const verify = async () => {
+    console.log("clicked");
+    setIsVerified(false);
+    const { status, data, error } = await authServices.verifyStudent({
+      id: formik.values.index,
+    });
+    if (status) {
+      var name = data?.email.substring(0, data?.email.lastIndexOf("@"));
+      var domain = data?.email.substring(data?.email.lastIndexOf("@") + 1);
+      if (name.length > 8) {
+        name = name.slice(0, name.length - 6) + "******";
+      } else {
+        name = name.slice(0, name.length - 4) + "****";
+      }
+      formik.setFieldValue("email", name + "@" + domain);
+      formik.setFieldValue("name", data.name);
+      setIsVerified(true);
+    } else {
+      setIsVerified(false);
+    }
+  };
 
   return (
     <RegistrationDiv font={fonts}>
@@ -143,82 +180,60 @@ function StudentRegister() {
             <Heading>STUDENT REGISTRATION</Heading>
 
             <Lable>Student Registration Number</Lable>
-            <Input
-              value={reg}
-              type="text"
-              onChange={(e) => {
-                let val = e.target.value;
-                setReg(val);
-                setRegInfo(Simple_Validator(val, "Registration Number"));
-              }}
-            />
-            {regInfo.error && <Error>{regInfo.error}</Error>}
+            <CustInput type="text" {...formik.getFieldProps("index")} />
+            {!isVerified ? (
+              <VerifyButton
+                disabled={Boolean(formik.errors.index || !formik.touched.index)}
+                onClick={() => {
+                  console.log("clicked-func");
+                  if (!formik.errors.index) {
+                    verify();
+                  }
+                }}
+              >
+                Verify Index
+              </VerifyButton>
+            ) : (
+              <LoginBttn
+                onClick={() => {
+                  setIsVerified(false);
+                  formik.resetForm();
+                }}
+              >
+                Clear
+              </LoginBttn>
+            )}
+            {Boolean(formik.errors.index && formik.touched.index) && (
+              <Error>{formik.errors.index}</Error>
+            )}
 
             <Lable>Name</Lable>
-            <Input
-              value={name}
-              type="text"
-              onChange={(e) => {
-                let val = e.target.value;
-                setName(val);
-                setNameInfo(Simple_Validator(val, "Company Name"));
-              }}
-            />
-            {nameInfo.error && <Error>{nameInfo.error}</Error>}
+            <Input type="text" {...formik.getFieldProps("name")} disabled />
+            <Lable>Email</Lable>
+            <Input type="text" {...formik.getFieldProps("email")} disabled />
 
             <Lable>Password</Lable>
-            <Input
-              value={password}
-              type="password"
-              onChange={(e) => {
-                let val = e.target.value;
-                setPasswordInfo(Validator(val, patternPassword, "Password"));
-                setpassword(e.target.value);
-                setMatchPassword(passwordMatcher(val, confirmPassword));
-              }}
-            />
-            {passwordInfo.error && <Error>{passwordInfo.error}</Error>}
+            <Input type="password" {...formik.getFieldProps("password")} />
+            {Boolean(formik.errors.password && formik.touched.password) && (
+              <Error>{formik.errors.password}</Error>
+            )}
 
             <Lable>Confirm Password</Lable>
             <Input
               type="password"
-              value={confirmPassword}
-              onChange={(e) => {
-                let value = e.target.value;
-                setConfirmPassword(value);
-                setMatchPassword(passwordMatcher(password, value));
-              }}
+              {...formik.getFieldProps("confirmPassword")}
             />
-            {!matchPassword.isMatching ? (
-              <Error>{matchPassword.error}</Error>
-            ) : (
-              <Success>Password is matching</Success>
-            )}
+            {Boolean(
+              formik.errors.confirmPassword && formik.touched.confirmPassword
+            ) && <Error>{formik.errors.confirmPassword}</Error>}
+
             <Recaptcha onChange={onChange} />
+            {Boolean(formik.errors.recaptcha && formik.touched.recaptcha) && (
+              <Error>{formik.errors.recaptcha}</Error>
+            )}
             <LoginBttn
-              submit
-              disabled={
-                !recaptcha ||
-                isLoading ||
-                !nameInfo.status ||
-                !regInfo.status ||
-                !passwordInfo.status ||
-                !matchPassword.isMatching
-              }
-              onClick={() => {
-                if (
-                  nameInfo.status &&
-                  regInfo.status &&
-                  passwordInfo.status &&
-                  matchPassword.isMatching
-                ) {
-                  handleSubmit({
-                    username: reg,
-                    password: confirmPassword,
-                    name: name,
-                  });
-                }
-              }}
+              disabled={formik.isSubmitting || !formik.isValid}
+              onClick={formik.handleSubmit}
             >
               Register
             </LoginBttn>

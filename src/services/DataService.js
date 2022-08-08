@@ -108,8 +108,19 @@ export default class DataService {
     return result;
   };
 
+  handleRequestPerson = async (data) => {
+    console.log(data);
+    const result = await onSubmitNoAuth("/request-person", data);
+    return result;
+  };
+
   handleStatData = async () => {
     const result = await onGetAll("/stat");
     return result;
   };
+
+  uploadUserData = async (data) => {
+    const result = await onSubmit("/student-data/add/all", data);
+    return result;
+  }
 }
