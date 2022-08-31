@@ -118,4 +118,9 @@ export default class DataService {
     const result = await onGetAll("/stat");
     return result;
   };
+
+  uploadUserData = async (data) => {
+    const result = await onSubmit("/student-data/add/all", data);
+    return result;
+  }
 }

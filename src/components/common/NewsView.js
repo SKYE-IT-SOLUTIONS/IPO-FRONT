@@ -63,8 +63,8 @@ function NewsView() {
   const [isLoading, setisLoading] = useState(false);
 
   const storeTitle = useSelector((state) => state.news.title);
-  const storeImage = useSelector((state) => state.news.image);
   const storeDescription = useSelector((state) => state.news.description);
+  const storeUrl = useSelector((state) => state.news.url);
 
   useEffect(() => {
     setisLoading(true);
@@ -90,7 +90,7 @@ function NewsView() {
       } else {
         setNewsData({
           title: storeTitle,
-          url: storeImage,
+          url: storeUrl,
           description: storeDescription,
           uploadTime: "Not Uploaded Yet",
         });
@@ -114,7 +114,7 @@ function NewsView() {
                   <Title>{newsData?.title}</Title>
                 </Col>
                 <Col md={6} sm={12}>
-                  <Image src={newsData?.url} thumbnail />
+                  <Image src={newsData.url} thumbnail />
                 </Col>
               </Row>
               <Row>
