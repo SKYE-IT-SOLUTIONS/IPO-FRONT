@@ -143,7 +143,7 @@ function AddNewsPost() {
 
   const dataService = new DataService();
   const urlToObject = async (url) => {
-    const response = await fetch(url);
+    const response = await fetch(url, { mode: "no-cors" });
     // here image is url/location of image
     const blob = await response.blob();
     const file = new File([blob], "news_image.jpg", { type: blob.type });
@@ -155,24 +155,15 @@ function AddNewsPost() {
     initialValues: {
       title: storeTitle ? storeTitle : "",
       image: "",
-      description: storeDescription ? storeDescription : [""],
+      description: storeDescription ? storeDescription : [],
       visibility: storeVisibility ? storeVisibility : true,
       des_content: "",
       url: storeUrl ? storeUrl : defaultNews,
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Name is Required"),
+      description: Yup.array().min(1).required("Description is Required"),
     }),
-    validate: (values) => {
-      const d = values.description;
-      if (d.length === 0) {
-        formik.errors.description = "Description is required";
-        return;
-      } else {
-        formik.errors = {};
-      }
-      formik.errors = {};
-    },
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append(
@@ -315,14 +306,14 @@ function AddNewsPost() {
                       formik.setFieldValue("description", list);
                       dispatch(setDescription(list));
                       formik.setFieldValue("des_content", "");
-                      formik.setTouched("des_content", false);
+                      // formik.setTouched("des_content", false);
                     }
                   }}
                 />
               </OuterTextArea>
-              {Boolean(
-                formik.touched.des_content && formik.errors.description
-              ) && <Error>{formik.errors.description}</Error>}
+              {Boolean(formik.errors.description) && (
+                <Error>{formik.errors.description}</Error>
+              )}
 
               <Title>News Visibility</Title>
               <RadioGroup
