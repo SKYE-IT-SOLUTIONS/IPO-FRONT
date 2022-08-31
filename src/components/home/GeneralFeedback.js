@@ -69,7 +69,7 @@ export default function HoverRating() {
       comment: Yup.string().required("Comment is required").min(150, "Must be 150 characters or above"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values);
     }
   })
 
